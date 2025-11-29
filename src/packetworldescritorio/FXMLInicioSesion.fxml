@@ -12,7 +12,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="800.0" style="-fx-background-radius: 15px; -fx-border-radius: 15px; -fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="packetworldescritorio.FXMLInicioSesionController">
     <children>
-        <Button layoutX="534.0" layoutY="366.0" mnemonicParsing="false" onAction="#clickIniciarSesion" prefHeight="42.0" prefWidth="155.0" style="-fx-background-color: #0030ab; -fx-border-radius: 8px; -fx-background-radius: 8px;" text="Iniciar sesion" textFill="WHITE" AnchorPane.bottomAnchor="92.0">
+        <Button layoutX="528.0" layoutY="371.0" mnemonicParsing="false" onAction="#clickIniciarSesion" prefHeight="42.0" prefWidth="155.0" style="-fx-background-color: #0030ab; -fx-border-radius: 8px; -fx-background-radius: 8px; -fx-cursor: HAND;" text="Iniciar sesion" textFill="WHITE">
             <font>
                 <Font size="19.0" />
             </font>
@@ -22,12 +22,12 @@
                 <Font size="19.0" />
             </font>
         </Label>
-        <PasswordField layoutX="463.0" layoutY="272.0" prefHeight="40.0" prefWidth="281.0" promptText="*******">
+        <PasswordField fx:id="pfPassword" layoutX="465.0" layoutY="280.0" prefHeight="40.0" prefWidth="238.0" promptText="*******">
             <font>
                 <Font size="17.0" />
             </font>
         </PasswordField>
-        <TextField layoutX="465.0" layoutY="182.0" prefHeight="41.0" prefWidth="281.0" promptText="Ej. A001">
+        <TextField fx:id="tfNoPersonal" layoutX="465.0" layoutY="182.0" prefHeight="41.0" prefWidth="281.0" promptText="Ej. A001">
             <font>
                 <Font size="17.0" />
             </font>
@@ -49,12 +49,12 @@
         </Rectangle>
         <ImageView fitHeight="209.0" fitWidth="286.0" layoutX="103.0" layoutY="49.0" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="@resources/images/isotipo.png" />
+                <Image url="@../../resources/images/isotipo.png" />
             </image>
         </ImageView>
         <ImageView fitHeight="55.0" fitWidth="281.0" layoutX="65.0" layoutY="263.0" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="@resources/images/logotipo.png" />
+                <Image url="@../../resources/images/logotipo.png" />
             </image>
         </ImageView>
         <Label layoutX="101.0" layoutY="328.0" text="Sistema de gestion" textFill="#464242">
@@ -67,7 +67,7 @@
                 <Font size="25.0" />
             </font>
         </Label>
-        <Label layoutX="463.0" layoutY="240.0" text="Contraseña">
+        <Label layoutX="465.0" layoutY="249.0" text="Contraseña">
             <font>
                 <Font size="19.0" />
             </font>
@@ -76,19 +76,22 @@
             <graphic>
                 <ImageView fitHeight="30.0" fitWidth="36.0" preserveRatio="true">
                     <image>
-                        <Image url="@resources/images/x.png" />
+                        <Image url="@../../resources/images/x.png" />
                     </image>
                 </ImageView>
             </graphic>
         </Button>
-        <ToggleButton layoutX="705.0" layoutY="277.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="29.0" >
+        <ToggleButton fx:id="tbVerPassword" layoutX="697.0" layoutY="280.0" mnemonicParsing="false" onAction="#clickVerPassword" prefHeight="31.0" prefWidth="29.0" style="-fx-cursor: HAND;">
             <graphic>
-                <ImageView fitHeight="30.0" fitWidth="36.0" preserveRatio="true">
+                <ImageView fx:id="ivVisible" fitHeight="30.0" fitWidth="36.0" preserveRatio="true">
                     <image>
-                        <Image url="@resources/images/x.png" />
+                        <Image url="@../../resources/images/visible.png" />
                     </image>
                 </ImageView>
             </graphic>
         </ToggleButton>
+      <Label fx:id="lbErrorNoPersonal" layoutX="465.0" layoutY="223.0" text="Campo obligatorio" textFill="RED" visible="false" />
+      <Label fx:id="lbErrorPassword" layoutX="465.0" layoutY="321.0" text="Campo obligatorio" textFill="RED" visible="false" />
+      <Label fx:id="lbErrorCredenciales" layoutX="465.0" layoutY="336.0" text="lbErrorCredenciales" textFill="RED" visible="false" />
     </children>
 </AnchorPane>
