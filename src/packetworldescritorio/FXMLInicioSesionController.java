@@ -32,6 +32,8 @@ public class FXMLInicioSesionController implements Initializable {
     private Label lbErrorPassword;
     @FXML
     private Label lbErrorCredenciales;
+    @FXML
+    private TextField tfPassword;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -60,10 +62,16 @@ public class FXMLInicioSesionController implements Initializable {
                 ivVisible.setImage(new Image(
                         getClass().getResource("/resources/images/oculto.png").toExternalForm()
                 ));
+                tfPassword.setText(pfPassword.getText());
+                tfPassword.setVisible(true);
+                pfPassword.setVisible(false);
             } else {
                 ivVisible.setImage(new Image(
-                        getClass().getResource("/resou+rces/images/visible.png").toExternalForm()
+                        getClass().getResource("/resources/images/visible.png").toExternalForm()
                 ));
+                pfPassword.setText(tfPassword.getText());
+                tfPassword.setVisible(false);
+                pfPassword.setVisible(true);
             }
         } catch (Exception ex) {
             ex.printStackTrace();

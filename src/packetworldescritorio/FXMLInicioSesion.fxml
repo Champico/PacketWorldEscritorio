@@ -22,11 +22,14 @@
                 <Font size="19.0" />
             </font>
         </Label>
-        <PasswordField fx:id="pfPassword" layoutX="465.0" layoutY="280.0" prefHeight="40.0" prefWidth="238.0" promptText="*******">
-            <font>
-                <Font size="17.0" />
-            </font>
-        </PasswordField>
+      <TextField fx:id="tfPassword" layoutX="465.0" layoutY="280.0" prefHeight="40.0" prefWidth="281.0" promptText="●●●●●●●●" visible="false">
+         <font>
+            <Font size="17.0" />
+         </font></TextField>
+        <PasswordField fx:id="pfPassword" layoutX="465.0" layoutY="280.0" prefHeight="40.0" prefWidth="281.0" promptText="●●●●●●●●" style="-fx-padding: 0 30 0 9;">
+         <font>
+            <Font size="16.0" />
+         </font></PasswordField>
         <TextField fx:id="tfNoPersonal" layoutX="465.0" layoutY="182.0" prefHeight="41.0" prefWidth="281.0" promptText="Ej. A001">
             <font>
                 <Font size="17.0" />
@@ -81,9 +84,9 @@
                 </ImageView>
             </graphic>
         </Button>
-        <ToggleButton fx:id="tbVerPassword" layoutX="697.0" layoutY="280.0" mnemonicParsing="false" onAction="#clickVerPassword" prefHeight="31.0" prefWidth="29.0" style="-fx-cursor: HAND;">
+        <ToggleButton fx:id="tbVerPassword" layoutX="697.0" layoutY="280.0" mnemonicParsing="false" onAction="#clickVerPassword" prefHeight="31.0" prefWidth="29.0" style="-fx-cursor: HAND; -fx-background-color: #00000000;">
             <graphic>
-                <ImageView fx:id="ivVisible" fitHeight="30.0" fitWidth="36.0" preserveRatio="true">
+                <ImageView fx:id="ivVisible" fitHeight="30.0" fitWidth="36.0" opacity="0.54" preserveRatio="true">
                     <image>
                         <Image url="@../../resources/images/visible.png" />
                     </image>
