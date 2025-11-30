@@ -93,7 +93,7 @@
       <VBox alignment="TOP_CENTER" layoutX="465.0" layoutY="335.0" maxWidth="281.0" prefWidth="281.0" AnchorPane.leftAnchor="465.0" AnchorPane.rightAnchor="54.0" AnchorPane.topAnchor="335.0">
          <children>
             <Label fx:id="lbErrorCredenciales" alignment="TOP_LEFT" contentDisplay="TOP" maxWidth="292.0" prefWidth="281.0" text="Mensaje de error" textFill="RED" visible="false" wrapText="true" />
-            <Label>
+            <Label text="   ">
                <font>
                   <Font size="10.0" />
                </font>

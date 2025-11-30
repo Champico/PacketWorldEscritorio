@@ -16,6 +16,8 @@ public class InicioSesionImp {
         String parametros = "noPersonal=" + noPersonal + "&password=" + password;
         String URL = Constantes.URL_WS + Constantes.WS_INICIO_SESION;
          
+            System.out.println(URL);
+            
         RespuestaHTTP respuestaAPI = ConexionAPI.peticionBody(URL, Constantes.PETICION_GET, parametros, Constantes.APPLICATION_FORM_URLENCODED);
 
         if (respuestaAPI.getCodigo() == HttpURLConnection.HTTP_OK) {

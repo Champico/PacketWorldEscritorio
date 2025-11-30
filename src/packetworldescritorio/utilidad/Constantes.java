@@ -3,7 +3,7 @@ package packetworldescritorio.utilidad;
 public class Constantes {
 
     //Servicios
-    public static final String URL_WS = "http://localhost:8084/APIRest/api/";
+    public static final String URL_WS = "http://localhost:8084/ProyectoWS/api/";
     public static final String WS_INICIO_SESION = "autenticacion/colaborador";
     
     //Peticiones

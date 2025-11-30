@@ -26,6 +26,15 @@
     -fx-cursor: HAND;
     -fx-background-radius: 8px;
     -fx-border-radius: 8px;
-    -fx-background-color:  #0030ab;
+    -fx-background-color:  #0d3fbf;
+}
+
+.btn_iniciar_sesion:hover{
+    -fx-background-color:  #164ede
+}
+
+.btn_iniciar_sesion:disabled, .btn_iniciar_sesion:hover:disabled{
+    -fx-cursor: null;
+    -fx-background-color:  #647ab3;
 }
 

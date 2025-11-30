@@ -128,6 +128,7 @@ public class FXMLInicioSesionController implements Initializable {
         }
 
         if(lbErrorCredenciales.isVisible()){
+            lbErrorCredenciales.setText("");
             lbErrorCredenciales.setVisible(false);
         }
         
@@ -146,8 +147,7 @@ public class FXMLInicioSesionController implements Initializable {
 
     private void limpiarErrorTextInputControl(TextInputControl field, Label label) {
         if (field != null) {
-            System.out.println("Se remueve el estilo no usado");
-            field.getStyleClass().remove("tf_error");
+           field.getStyleClass().remove("tf_error");
         }
 
         if (label != null) {
