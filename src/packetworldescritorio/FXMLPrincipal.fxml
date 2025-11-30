@@ -60,26 +60,7 @@
                   </VBox>
                </graphic>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="210.0" prefWidth="329.0" styleClass="btn_modulo" GridPane.columnIndex="2">
-               <graphic>
-                  <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
-                     <children>
-                        <Label text="    " />
-                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../resources/images/cliente.png" />
-                           </image>
-                        </ImageView>
-                        <Label text="Modulo de clientes ">
-                           <font>
-                              <Font size="21.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </VBox>
-               </graphic>
-            </Button>
-            <Button mnemonicParsing="false" prefHeight="210.0" prefWidth="329.0" styleClass="btn_modulo" GridPane.rowIndex="1">
+            <Button mnemonicParsing="false" prefHeight="210.0" prefWidth="329.0" styleClass="btn_modulo" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <graphic>
                   <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
                      <children>
@@ -117,17 +98,36 @@
                   </VBox>
                </graphic>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="210.0" prefWidth="329.0" styleClass="btn_modulo" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <Button mnemonicParsing="false" prefHeight="210.0" prefWidth="329.0" styleClass="btn_modulo" GridPane.columnIndex="2">
                <graphic>
                   <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
                      <children>
                         <Label text="    " />
                         <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../resources/images/hombre-conductor.png" />
+                              <Image url="@../../resources/images/sucursal.png" />
                            </image>
                         </ImageView>
-                        <Label text="Modulo de choferes ">
+                        <Label text="Modulo de sucursales ">
+                           <font>
+                              <Font size="21.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+               </graphic>
+            </Button>
+            <Button mnemonicParsing="false" prefHeight="210.0" prefWidth="329.0" styleClass="btn_modulo" GridPane.rowIndex="1">
+               <graphic>
+                  <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Label text="    " />
+                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../resources/images/cliente.png" />
+                           </image>
+                        </ImageView>
+                        <Label text="Modulo de clientes ">
                            <font>
                               <Font size="21.0" />
                            </font>
