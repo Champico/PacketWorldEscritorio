@@ -25,12 +25,16 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import packetworldescritorio.dominio.ColaboradorImp;
+import packetworldescritorio.interfaz.INavegableChild;
+import packetworldescritorio.interfaz.INavegacion;
 import packetworldescritorio.interfaz.INotificador;
 import packetworldescritorio.pojo.Colaborador;
 import packetworldescritorio.utilidad.Utilidades;
 
-public class FXMLModuloColaboradoresController implements Initializable, INotificador {
+public class FXMLModuloColaboradoresController implements Initializable, INotificador, INavegableChild  {
 
+    private INavegacion nav;
+    
     @FXML
     private TextField tfBusqueda;
     @FXML
@@ -59,6 +63,11 @@ public class FXMLModuloColaboradoresController implements Initializable, INotifi
         cargarInformaciónProfesores();
     }
 
+    @Override
+    public void setNavegador(INavegacion nav) {
+        this.nav = nav;
+    }
+    
     private void configurarTabla() {
         colNoPersonal.setCellValueFactory(new PropertyValueFactory("noPersonal"));
         colNombre.setCellValueFactory(new PropertyValueFactory("nombre"));
@@ -169,5 +178,7 @@ public class FXMLModuloColaboradoresController implements Initializable, INotifi
         }
 */
     }
+
+
 
 }

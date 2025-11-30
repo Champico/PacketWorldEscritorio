@@ -10,9 +10,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" maxHeight="700.0" maxWidth="1000.0" prefHeight="720.0" prefWidth="1280.0" styleClass="background" stylesheets="@../../resources/estilos/CSSAplicacion.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="packetworldescritorio.FXMLPrincipalController">
+<AnchorPane id="AnchorPane" minHeight="627.0" minWidth="1000.0" prefHeight="627.0" prefWidth="1280.0" styleClass="background" stylesheets="@/estilos/CSSAplicacion.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="packetworldescritorio.FXMLPrincipalController">
    <children>
-      <GridPane layoutX="152.0" layoutY="218.0" prefHeight="424.0" prefWidth="977.0" styleClass="gp_menu" AnchorPane.leftAnchor="152.0" AnchorPane.rightAnchor="151.0">
+      <GridPane layoutX="126.0" layoutY="134.0" prefHeight="424.0" prefWidth="977.0" styleClass="gp_menu" AnchorPane.leftAnchor="126.0" AnchorPane.rightAnchor="177.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -30,7 +30,7 @@
                         <Label text="    " />
                         <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../resources/images/colaboradores.png" />
+                              <Image url="@/images/colaboradores.png" />
                            </image>
                         </ImageView>
                         <Label text="Modulo de colaboradores ">
@@ -48,7 +48,7 @@
                         <Label text="    " />
                         <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../resources/images/camion-de-reparto.png" />
+                              <Image url="@/images/camion-de-reparto.png" />
                            </image>
                         </ImageView>
                         <Label text="Modulo de unidades ">
@@ -67,7 +67,7 @@
                         <Label text="    " />
                         <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../resources/images/entrega-de-paquetes.png" />
+                              <Image url="@/images/entrega-de-paquetes.png" />
                            </image>
                         </ImageView>
                         <Label text="Modulo de envios">
@@ -86,7 +86,7 @@
                         <Label text="    " />
                         <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../resources/images/paquete.png" />
+                              <Image url="@/images/paquete.png" />
                            </image>
                         </ImageView>
                         <Label text="Modulo de paquetes">
@@ -105,7 +105,7 @@
                         <Label text="    " />
                         <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../resources/images/sucursal.png" />
+                              <Image url="@/images/sucursal.png" />
                            </image>
                         </ImageView>
                         <Label text="Modulo de sucursales ">
@@ -124,7 +124,7 @@
                         <Label text="    " />
                         <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../resources/images/cliente.png" />
+                              <Image url="@/images/cliente.png" />
                            </image>
                         </ImageView>
                         <Label text="Modulo de clientes ">
@@ -138,49 +138,13 @@
             </Button>
          </children>
       </GridPane>
-      <HBox alignment="CENTER_LEFT" prefHeight="93.0" prefWidth="1280.0" styleClass="header" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <children>
-            <Label text="     " />
-            <ImageView fitHeight="54.0" fitWidth="428.0" pickOnBounds="true" preserveRatio="true" styleClass="header_logo">
-               <image>
-                  <Image url="@../../resources/images/logotipo-blanco.png" />
-               </image>
-            </ImageView>
-            <Region HBox.hgrow="ALWAYS" />
-            <VBox alignment="CENTER_LEFT" prefHeight="93.0" prefWidth="279.0" styleClass="vb_info_usuario">
-               <children>
-                  <Label fx:id="lbNombre" prefWidth="280.0" styleClass="lb_info_usuario" text="Nombre del usuario" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="18.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="lbRol" prefHeight="0.0" prefWidth="215.0" styleClass="lb_info_usuario" text="Rol: Administrador" textFill="WHITE">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Label>
-               </children>
-            </VBox>
-            <Button mnemonicParsing="false" styleClass="btn_cerrar_sesion" text=" Cerrar sesion" textFill="WHITE">
-               <graphic>
-                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../resources/images/cerrar-sesion-blanco.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-               <font>
-                  <Font size="19.0" />
-               </font>
-            </Button>
-         </children>
-      </HBox>
-      <Label layoutX="81.0" layoutY="108.0" prefHeight="50.0" prefWidth="197.0" text="Bienvenido!">
+      
+      <Label layoutX="80.0" layoutY="30.0" prefHeight="50.0" prefWidth="197.0" text="Bienvenido!" AnchorPane.leftAnchor="80.0" AnchorPane.rightAnchor="1003.0">
          <font>
             <Font name="System Bold" size="35.0" />
          </font>
       </Label>
-      <Label layoutX="81.0" layoutY="151.0" text="Selecciona una opción del menú para navegar por la aplicación">
+      <Label layoutX="80.0" layoutY="73.0" prefHeight="32.0" prefWidth="622.0" text="Selecciona una opción del menú para navegar por la aplicación" AnchorPane.leftAnchor="80.0" AnchorPane.rightAnchor="578.0">
          <font>
             <Font size="22.0" />
          </font>

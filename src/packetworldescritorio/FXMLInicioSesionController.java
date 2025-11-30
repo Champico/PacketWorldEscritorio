@@ -54,14 +54,14 @@ public class FXMLInicioSesionController implements Initializable {
 
     @FXML
     private void clickIniciarSesion(ActionEvent event) {
-        
+
         if (!hayCamposVacios()) {
             btn_iniciarSesion.setDisable(true);
             String noPersonal = tfNoPersonal.getText().trim();
             String password = pfPassword.getText().trim();
 
             verificarCredenciales(noPersonal, password);
-        }else{
+        } else {
             btn_iniciarSesion.setDisable(false);
         }
     }
@@ -127,11 +127,11 @@ public class FXMLInicioSesionController implements Initializable {
             limpiarErrorTextInputControl(tfPassword, lbErrorPassword);
         }
 
-        if(lbErrorCredenciales.isVisible()){
+        if (lbErrorCredenciales.isVisible()) {
             lbErrorCredenciales.setText("");
             lbErrorCredenciales.setVisible(false);
         }
-        
+
         return hayCamposVacios;
     }
 
@@ -147,7 +147,7 @@ public class FXMLInicioSesionController implements Initializable {
 
     private void limpiarErrorTextInputControl(TextInputControl field, Label label) {
         if (field != null) {
-           field.getStyleClass().remove("tf_error");
+            field.getStyleClass().remove("tf_error");
         }
 
         if (label != null) {
@@ -160,9 +160,9 @@ public class FXMLInicioSesionController implements Initializable {
         try {
 
             /* Cargar el FXML*/
-            FXMLLoader cargador = new FXMLLoader(getClass().getResource("FXMLPrincipal.fxml"));
+            FXMLLoader cargador = new FXMLLoader(getClass().getResource("FXMLAplicacion.fxml"));
             Parent vista = cargador.load();
-            FXMLPrincipalController controlador = cargador.getController();
+            FXMLAplicacionController controlador = cargador.getController();
             controlador.cargarInformacion(colaborador);
             Scene escenaPrincipal = new Scene(vista);
 
@@ -174,6 +174,8 @@ public class FXMLInicioSesionController implements Initializable {
             Stage stPrincipal = new Stage();
             stPrincipal.setScene(escenaPrincipal);
             stPrincipal.initStyle(StageStyle.DECORATED);
+            stPrincipal.setMinWidth(1000);
+            stPrincipal.setMinHeight(600);
             stPrincipal.setTitle("Inicio");
 
             /* Poner icono */
