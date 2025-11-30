@@ -1,0 +1,28 @@
+.background{
+    -fx-background-color: #f0f2f5;
+}
+
+.header{
+    -fx-background-color: #00a7ee;
+    /*-fx-background-radius: 0 0 10px 10px;*/
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 10, 0.3, 0, 2);
+}
+
+.btn_cerrar_sesion{
+    -fx-cursor: HAND;
+    -fx-background-color:  #00000000;
+}
+
+
+
+.btn_modulo{
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0.1, 0, 4);
+    -fx-background-radius: 8px;
+    -fx-border-radius: 8px;
+    -fx-background-color: #ffffff;
+}
+
+.grade_pane{
+    -fx-hgap: 15;
+    -fx-vgap: 28;
+}

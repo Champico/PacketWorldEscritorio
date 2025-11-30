@@ -178,7 +178,7 @@ public class FXMLInicioSesionController implements Initializable {
 
             /* Poner icono */
             try {
-                stPrincipal.getIcons().add(new Image(getClass().getResourceAsStream("/resources/images/isotipo.png")));
+                stPrincipal.getIcons().add(new Image(getClass().getResourceAsStream("/images/isotipo_low_definition.png")));
             } catch (Exception ex) {
             }
 
