@@ -1,0 +1,31 @@
+/** @authores  Pipe, Kevin, champ */
+
+.btn_cerrar{
+    -fx-cursor: HAND;
+    -fx-background-color:  #00000000;
+}
+
+.btn_ojo{
+    -fx-cursor: HAND;
+    -fx-background-color: #00000000;
+}
+
+.pf_password{
+    -fx-padding:  0 30 0 9;
+}
+
+.tf_error{
+    -fx-border-color: #ff3434;
+    -fx-border-width: 1.5px; 
+    -fx-border-radius: 4px; 
+    -fx-focus-color:#ff3434; 
+    -fx-faint-focus-color: #ff52524e
+}
+
+.btn_iniciar_sesion{
+    -fx-cursor: HAND;
+    -fx-background-radius: 8px;
+    -fx-border-radius: 8px;
+    -fx-background-color:  #0030ab;
+}
+

@@ -68,11 +68,12 @@ public class ConexionAPI {
         } catch (MalformedURLException e) {
             respuesta.setCodigo(Constantes.ERROR_MALFORMED_URL);
             respuesta.setContenido(e.getMessage());
-        } catch (IOException e) {
-            e.printStackTrace();
+        }catch (IOException e) {
             respuesta.setCodigo(Constantes.ERROR_PETICION);
             respuesta.setContenido(e.getMessage());
+            //e.printStackTrace();
         }
+            
 
         return respuesta;
 

@@ -1,12 +1,17 @@
 /** @authores  Pipe, Kevin, champ */
 package packetworldescritorio;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -15,6 +20,11 @@ import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+import packetworldescritorio.dominio.InicioSesionImp;
+import packetworldescritorio.dto.RSAutenticacionColaborador;
+import packetworldescritorio.pojo.Colaborador;
+import packetworldescritorio.utilidad.Utilidades;
 
 public class FXMLInicioSesionController implements Initializable {
 
@@ -34,6 +44,8 @@ public class FXMLInicioSesionController implements Initializable {
     private Label lbErrorCredenciales;
     @FXML
     private TextField tfPassword;
+    @FXML
+    private Button btn_iniciarSesion;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -42,11 +54,15 @@ public class FXMLInicioSesionController implements Initializable {
 
     @FXML
     private void clickIniciarSesion(ActionEvent event) {
+        
         if (!hayCamposVacios()) {
+            btn_iniciarSesion.setDisable(true);
             String noPersonal = tfNoPersonal.getText().trim();
             String password = pfPassword.getText().trim();
 
             verificarCredenciales(noPersonal, password);
+        }else{
+            btn_iniciarSesion.setDisable(false);
         }
     }
 
@@ -60,14 +76,14 @@ public class FXMLInicioSesionController implements Initializable {
         try {
             if (tbVerPassword.isSelected()) {
                 ivVisible.setImage(new Image(
-                        getClass().getResource("/resources/images/oculto.png").toExternalForm()
+                        getClass().getResource("/images/oculto.png").toExternalForm()
                 ));
                 tfPassword.setText(pfPassword.getText());
                 tfPassword.setVisible(true);
                 pfPassword.setVisible(false);
             } else {
                 ivVisible.setImage(new Image(
-                        getClass().getResource("/resources/images/visible.png").toExternalForm()
+                        getClass().getResource("/images/visible.png").toExternalForm()
                 ));
                 pfPassword.setText(tfPassword.getText());
                 tfPassword.setVisible(false);
@@ -80,14 +96,14 @@ public class FXMLInicioSesionController implements Initializable {
     }
 
     private void verificarCredenciales(String noPersonal, String password) {
-        /*RSAutenticacionAdmin respuesta = InicioSesionImp.verificarCredenciales(noPersonal, password);
+        RSAutenticacionColaborador respuesta = InicioSesionImp.verificarCredenciales(noPersonal, password);
         if (!respuesta.isError()) {
-            Utilidades.mostrarAlertaSimple("Credenciales verificadas", "Bienvenido(a) profesor(a) " + respuesta.getProfesor().getNombre() + " al sistemas", Alert.AlertType.INFORMATION);
-            irPantallaInicio(respuesta.getProfesor());
+            irPantallaInicio(respuesta.getColaborador());
         } else {
-            Utilidades.mostrarAlertaSimple("Credenciales incorrectas", respuesta.getMensaje(), Alert.AlertType.ERROR);
-        }*/
-        System.out.println("Verificando credenciales...");
+            lbErrorCredenciales.setText(respuesta.getMensaje());
+            lbErrorCredenciales.setVisible(true);
+            btn_iniciarSesion.setDisable(false);
+        }
     }
 
     private boolean hayCamposVacios() {
@@ -105,16 +121,22 @@ public class FXMLInicioSesionController implements Initializable {
         if (password.isEmpty()) {
             hayCamposVacios = true;
             marcarErrorTextInputControl(pfPassword, lbErrorPassword);
+            marcarErrorTextInputControl(tfPassword, lbErrorPassword);
         } else {
             limpiarErrorTextInputControl(pfPassword, lbErrorPassword);
+            limpiarErrorTextInputControl(tfPassword, lbErrorPassword);
         }
 
+        if(lbErrorCredenciales.isVisible()){
+            lbErrorCredenciales.setVisible(false);
+        }
+        
         return hayCamposVacios;
     }
 
     private void marcarErrorTextInputControl(TextInputControl field, Label label) {
         if (field != null) {
-            field.setStyle(field.getStyle() + "-fx-border-color: #ff3434; -fx-border-width: 1.5px; -fx-border-radius: 4px; -fx-focus-color:#ff3434; -fx-faint-focus-color: #ff52524e");
+            field.getStyleClass().add("tf_error");
         }
 
         if (label != null) {
@@ -124,19 +146,47 @@ public class FXMLInicioSesionController implements Initializable {
 
     private void limpiarErrorTextInputControl(TextInputControl field, Label label) {
         if (field != null) {
-            String estilo = field.getStyle();
-            String[] estilos = {"-fx-border-color[^;]*;", "-fx-border-width[^;]*;", "-fx-border-radius[^;]*;", "-fx-focus-color[^;]*;", "-fx-faint-focus-color[^;]*;"};
-            for (String estiloAQuitar : estilos) {
-                estilo = estilo.replaceAll(estiloAQuitar, "");
-            }
-            field.setStyle(estilo);
-
+            System.out.println("Se remueve el estilo no usado");
+            field.getStyleClass().remove("tf_error");
         }
 
         if (label != null) {
             label.setVisible(false);
         }
 
+    }
+
+    private void irPantallaInicio(Colaborador colaborador) {
+        try {
+
+            /* Cargar el FXML*/
+            FXMLLoader cargador = new FXMLLoader(getClass().getResource("FXMLPrincipal.fxml"));
+            Parent vista = cargador.load();
+            FXMLPrincipalController controlador = cargador.getController();
+            controlador.cargarInformacion(colaborador);
+            Scene escenaPrincipal = new Scene(vista);
+
+            /*Cerrar ventana de login*/
+            Stage stLogin = (Stage) tfNoPersonal.getScene().getWindow();
+            stLogin.close();
+
+            /*Abrir ventana principal*/
+            Stage stPrincipal = new Stage();
+            stPrincipal.setScene(escenaPrincipal);
+            stPrincipal.initStyle(StageStyle.DECORATED);
+            stPrincipal.setTitle("Inicio");
+
+            /* Poner icono */
+            try {
+                stPrincipal.getIcons().add(new Image(getClass().getResourceAsStream("/resources/images/isotipo.png")));
+            } catch (Exception ex) {
+            }
+
+            stPrincipal.show();
+
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 
 }

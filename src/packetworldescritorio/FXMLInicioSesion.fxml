@@ -10,36 +10,8 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="800.0" style="-fx-background-radius: 15px; -fx-border-radius: 15px; -fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="packetworldescritorio.FXMLInicioSesionController">
+<AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="800.0" style="-fx-background-radius: 15px; -fx-border-radius: 15px; -fx-background-color: #ffffff;" stylesheets="@/estilos/CSSInicioSesion.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="packetworldescritorio.FXMLInicioSesionController">
     <children>
-        <Button layoutX="528.0" layoutY="371.0" mnemonicParsing="false" onAction="#clickIniciarSesion" prefHeight="42.0" prefWidth="155.0" style="-fx-background-color: #0030ab; -fx-border-radius: 8px; -fx-background-radius: 8px; -fx-cursor: HAND;" text="Iniciar sesion" textFill="WHITE">
-            <font>
-                <Font size="19.0" />
-            </font>
-        </Button>
-        <Label layoutX="463.0" layoutY="150.0" text="Número de personal">
-            <font>
-                <Font size="19.0" />
-            </font>
-        </Label>
-      <TextField fx:id="tfPassword" layoutX="465.0" layoutY="280.0" prefHeight="40.0" prefWidth="281.0" promptText="●●●●●●●●" visible="false">
-         <font>
-            <Font size="17.0" />
-         </font></TextField>
-        <PasswordField fx:id="pfPassword" layoutX="465.0" layoutY="280.0" prefHeight="40.0" prefWidth="281.0" promptText="●●●●●●●●" style="-fx-padding: 0 30 0 9;">
-         <font>
-            <Font size="16.0" />
-         </font></PasswordField>
-        <TextField fx:id="tfNoPersonal" layoutX="465.0" layoutY="182.0" prefHeight="41.0" prefWidth="281.0" promptText="Ej. A001">
-            <font>
-                <Font size="17.0" />
-            </font>
-        </TextField>
-        <Label layoutX="479.0" layoutY="71.0" text="Inicio de sesion" textFill="#7c7c7c">
-            <font>
-                <Font name="SansSerif Bold" size="35.0" />
-            </font>
-        </Label>
         <Rectangle arcHeight="5.0" arcWidth="5.0" height="510.0" layoutX="-1.0" layoutY="1.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="411.0" AnchorPane.bottomAnchor="-10.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
             <fill>
                 <LinearGradient endX="0.6116504854368932" endY="1.0" startX="0.441747572815534">
@@ -52,12 +24,12 @@
         </Rectangle>
         <ImageView fitHeight="209.0" fitWidth="286.0" layoutX="103.0" layoutY="49.0" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="@../../resources/images/isotipo.png" />
+                <Image url="@/images/isotipo.png" />
             </image>
         </ImageView>
         <ImageView fitHeight="55.0" fitWidth="281.0" layoutX="65.0" layoutY="263.0" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="@../../resources/images/logotipo.png" />
+                <Image url="@/images/logotipo.png" />
             </image>
         </ImageView>
         <Label layoutX="101.0" layoutY="328.0" text="Sistema de gestion" textFill="#464242">
@@ -70,31 +42,68 @@
                 <Font size="25.0" />
             </font>
         </Label>
-        <Label layoutX="465.0" layoutY="249.0" text="Contraseña">
-            <font>
-                <Font size="19.0" />
-            </font>
-        </Label>
-        <Button layoutX="734.0" layoutY="14.0" mnemonicParsing="false" onAction="#clickCerrar" prefHeight="28.0" prefWidth="52.0" style="-fx-background-color: #00000000; -fx-cursor: HAND;">
+        <Button layoutX="734.0" layoutY="14.0" mnemonicParsing="false" onAction="#clickCerrar" prefHeight="28.0" prefWidth="52.0" styleClass="btn_cerrar">
             <graphic>
                 <ImageView fitHeight="30.0" fitWidth="36.0" preserveRatio="true">
                     <image>
-                        <Image url="@../../resources/images/x.png" />
+                        <Image url="@/images/x.png" />
                     </image>
                 </ImageView>
             </graphic>
         </Button>
-        <ToggleButton fx:id="tbVerPassword" layoutX="697.0" layoutY="280.0" mnemonicParsing="false" onAction="#clickVerPassword" prefHeight="31.0" prefWidth="29.0" style="-fx-cursor: HAND; -fx-background-color: #00000000;">
+        <Label layoutX="479.0" layoutY="71.0" text="Inicio de sesion" textFill="#7c7c7c">
+            <font>
+                <Font name="SansSerif Bold" size="35.0" />
+            </font>
+        </Label>
+        <Label layoutX="463.0" layoutY="150.0" text="Número de personal">
+            <font>
+                <Font size="19.0" />
+            </font>
+        </Label>
+        <TextField fx:id="tfNoPersonal" layoutX="465.0" layoutY="182.0" prefHeight="41.0" prefWidth="281.0" promptText="Ej. A001">
+            <font>
+                <Font size="17.0" />
+            </font>
+        </TextField>
+      <Label fx:id="lbErrorNoPersonal" layoutX="465.0" layoutY="223.0" text="Campo obligatorio" textFill="RED" visible="false" />
+        <Label layoutX="465.0" layoutY="246.0" text="Contraseña">
+            <font>
+                <Font size="19.0" />
+            </font>
+        </Label>
+      <TextField fx:id="tfPassword" layoutX="465.0" layoutY="277.0" prefHeight="40.0" prefWidth="281.0" promptText="●●●●●●●●" styleClass="pf_password" visible="false">
+         <font>
+            <Font size="17.0" />
+         </font></TextField>
+        <PasswordField fx:id="pfPassword" layoutX="465.0" layoutY="277.0" prefHeight="40.0" prefWidth="281.0" promptText="●●●●●●●●" styleClass="pf_password">
+         <font>
+            <Font size="17.0" />
+         </font></PasswordField>
+        <ToggleButton fx:id="tbVerPassword" layoutX="700.0" layoutY="277.0" mnemonicParsing="false" onAction="#clickVerPassword" prefHeight="31.0" prefWidth="29.0" styleClass="btn_ojo">
             <graphic>
                 <ImageView fx:id="ivVisible" fitHeight="30.0" fitWidth="36.0" opacity="0.54" preserveRatio="true">
                     <image>
-                        <Image url="@../../resources/images/visible.png" />
+                        <Image url="@/images/visible.png" />
                     </image>
                 </ImageView>
             </graphic>
         </ToggleButton>
-      <Label fx:id="lbErrorNoPersonal" layoutX="465.0" layoutY="223.0" text="Campo obligatorio" textFill="RED" visible="false" />
-      <Label fx:id="lbErrorPassword" layoutX="465.0" layoutY="321.0" text="Campo obligatorio" textFill="RED" visible="false" />
-      <Label fx:id="lbErrorCredenciales" layoutX="465.0" layoutY="336.0" text="lbErrorCredenciales" textFill="RED" visible="false" />
+      <Label fx:id="lbErrorPassword" layoutX="465.0" layoutY="318.0" text="Campo obligatorio" textFill="RED" visible="false" />
+      <VBox alignment="TOP_CENTER" layoutX="465.0" layoutY="335.0" maxWidth="281.0" prefWidth="281.0" AnchorPane.leftAnchor="465.0" AnchorPane.rightAnchor="54.0" AnchorPane.topAnchor="335.0">
+         <children>
+            <Label fx:id="lbErrorCredenciales" alignment="TOP_LEFT" contentDisplay="TOP" maxWidth="292.0" prefWidth="281.0" text="Mensaje de error" textFill="RED" visible="false" wrapText="true" />
+            <Label>
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Label>
+              <Button fx:id="btn_iniciarSesion" contentDisplay="CENTER" mnemonicParsing="false" onAction="#clickIniciarSesion" prefHeight="42.0" prefWidth="155.0" styleClass="btn_iniciar_sesion" text="Iniciar sesion" textAlignment="CENTER" textFill="WHITE">
+                  <font>
+                      <Font size="19.0" />
+                  </font>
+              </Button>
+         </children>
+      </VBox>
     </children>
 </AnchorPane>
