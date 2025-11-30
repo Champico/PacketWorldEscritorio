@@ -5,6 +5,7 @@ public class Constantes {
     //Servicios
     public static final String URL_WS = "http://localhost:8084/ProyectoWS/api/";
     public static final String WS_INICIO_SESION = "autenticacion/colaborador";
+    public static final String WS_COLABORADOR_OBTENER_TODOS = "colaborador/obtener";
     
     //Peticiones
     public static final String PETICION_GET = "GET";

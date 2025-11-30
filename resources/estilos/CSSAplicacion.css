@@ -22,7 +22,15 @@
     -fx-background-color: #ffffff;
 }
 
-.grade_pane{
+.gp_menu{
     -fx-hgap: 15;
     -fx-vgap: 28;
+}
+
+.lb_info_usuario {
+    -fx-padding: 0;
+}
+
+.vb_info_usuario {
+    -fx-spacing: 0;
 }
