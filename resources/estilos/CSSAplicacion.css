@@ -41,3 +41,35 @@
     -fx-cursor: HAND;
     -fx-background-color:  #00000000;
 }
+
+.hb_crud_menu {
+    -fx-spacing: 15;
+}
+
+
+
+
+
+
+.btn_general {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 8;
+    -fx-padding: 8 15;
+    -fx-cursor: HAND;
+}
+
+.btn_general:hover {
+    -fx-effect: dropshadow(three-pass-box, rgba(255, 255, 255, 0.6), 10, 0.3, 0, 0);
+}
+
+.btn_editar{
+    -fx-background-color: #2274e0;
+}
+
+.btn_eliminar{
+  -fx-background-color: #eb4034;
+}
+
+.btn_agregar{
+    -fx-background-color: #00ad20;
+}

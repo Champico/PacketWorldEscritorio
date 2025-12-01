@@ -21,11 +21,70 @@
             <TableColumn fx:id="colCorreo" prefWidth="299.0" text="Correo" />
         </columns>
       </TableView>
-      <HBox layoutX="632.0" layoutY="150.0" prefWidth="200.0">
+      <HBox layoutX="449.0" layoutY="135.0" prefHeight="40.0" prefWidth="394.0" styleClass="hb_crud_menu">
          <children>
-            <Button mnemonicParsing="false" onAction="#clickIrEditar" prefHeight="31.0" prefWidth="94.0" text="Editar" />
-            <Button mnemonicParsing="false" onAction="#clickEliminar" prefHeight="31.0" prefWidth="105.0" text="Eliminar" />
-            <Button mnemonicParsing="false" onAction="#clickIrRegistrar" prefHeight="31.0" prefWidth="94.0" text="Registrar" />
+            <Button mnemonicParsing="false" onAction="#clickIrRegistrar" prefHeight="40.0" prefWidth="120.0">
+               <graphic>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <ImageView fitHeight="21.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../resources/images/+.png" />
+                           </image>
+                        </ImageView>
+                        <Label text=" Nuevo" textFill="WHITE">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+               </graphic>
+               <styleClass>
+                  <String fx:value="btn_general" />
+                  <String fx:value="btn_agregar" />
+               </styleClass></Button>
+            <Button mnemonicParsing="false" onAction="#clickIrEditar" prefHeight="40.0" prefWidth="120.0">
+               <graphic>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <ImageView fitHeight="21.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../resources/images/lapiz.png" />
+                           </image>
+                        </ImageView>
+                        <Label text=" Editar" textFill="WHITE">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+               </graphic>
+               <styleClass>
+                  <String fx:value="btn_general" />
+                  <String fx:value="btn_editar" />
+               </styleClass></Button>
+            <Button mnemonicParsing="false" onAction="#clickEliminar" prefHeight="40.0" prefWidth="120.0">
+               <graphic>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <ImageView fitHeight="21.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../resources/images/eliminar.png" />
+                           </image>
+                        </ImageView>
+                        <Label text=" Eliminar" textFill="WHITE">
+                           <font>
+                              <Font size="18.0" />
+                           </font></Label>
+                     </children>
+                  </HBox>
+               </graphic>
+               <styleClass>
+                  <String fx:value="btn_general" />
+                  <String fx:value="btn_eliminar" />
+               </styleClass></Button>
          </children>
       </HBox>
       <Label layoutX="33.0" layoutY="54.0" prefHeight="51.0" prefWidth="440.0" text="Modulo de Colaboradores">
