@@ -10,9 +10,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" minHeight="627.0" minWidth="1000.0" prefHeight="627.0" prefWidth="1280.0" styleClass="background" stylesheets="@/estilos/CSSAplicacion.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="packetworldescritorio.FXMLPrincipalController">
+<AnchorPane id="AnchorPane" minWidth="1000.0" prefHeight="627.0" prefWidth="1280.0" styleClass="background" stylesheets="@/estilos/CSSAplicacion.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="packetworldescritorio.FXMLPrincipalController">
    <children>
-      <GridPane layoutX="126.0" layoutY="134.0" prefHeight="424.0" prefWidth="977.0" styleClass="gp_menu" AnchorPane.leftAnchor="126.0" AnchorPane.rightAnchor="177.0">
+      <GridPane layoutX="152.0" layoutY="139.0" prefHeight="424.0" prefWidth="977.0" styleClass="gp_menu" AnchorPane.bottomAnchor="64.0" AnchorPane.leftAnchor="152.0" AnchorPane.rightAnchor="151.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -23,7 +23,7 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button mnemonicParsing="false" prefHeight="210.0" prefWidth="329.0" styleClass="btn_modulo">
+            <Button fx:id="btnColaboradores" mnemonicParsing="false" onAction="#clickIrModuloColaboradores" prefHeight="210.0" prefWidth="329.0" styleClass="btn_modulo">
                <graphic>
                   <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
                      <children>
@@ -41,7 +41,7 @@
                      </children>
                   </VBox>
                </graphic></Button>
-            <Button mnemonicParsing="false" prefHeight="210.0" prefWidth="329.0" styleClass="btn_modulo" GridPane.columnIndex="1">
+            <Button fx:id="btnUnidades" mnemonicParsing="false" onAction="#clickIrModuloUnidades" prefHeight="210.0" prefWidth="329.0" styleClass="btn_modulo" GridPane.columnIndex="1">
                <graphic>
                   <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
                      <children>
@@ -60,7 +60,7 @@
                   </VBox>
                </graphic>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="210.0" prefWidth="329.0" styleClass="btn_modulo" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <Button fx:id="btnEnvios" mnemonicParsing="false" onAction="#clickIrModuloEnvios" prefHeight="210.0" prefWidth="329.0" styleClass="btn_modulo" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <graphic>
                   <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
                      <children>
@@ -79,7 +79,7 @@
                   </VBox>
                </graphic>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="210.0" prefWidth="329.0" styleClass="btn_modulo" GridPane.columnIndex="2" GridPane.rowIndex="1">
+            <Button fx:id="btnPaquetes" mnemonicParsing="false" onAction="#clickIrModuloPaquetes" prefHeight="210.0" prefWidth="329.0" styleClass="btn_modulo" GridPane.columnIndex="2" GridPane.rowIndex="1">
                <graphic>
                   <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
                      <children>
@@ -98,7 +98,7 @@
                   </VBox>
                </graphic>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="210.0" prefWidth="329.0" styleClass="btn_modulo" GridPane.columnIndex="2">
+            <Button fx:id="btnSucursales" mnemonicParsing="false" prefHeight="210.0" prefWidth="329.0" styleClass="btn_modulo" GridPane.columnIndex="2">
                <graphic>
                   <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
                      <children>
@@ -117,7 +117,7 @@
                   </VBox>
                </graphic>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="210.0" prefWidth="329.0" styleClass="btn_modulo" GridPane.rowIndex="1">
+            <Button fx:id="btnClientes" mnemonicParsing="false" onAction="#clickIrModuloClientes" prefHeight="210.0" prefWidth="329.0" styleClass="btn_modulo" GridPane.rowIndex="1">
                <graphic>
                   <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
                      <children>
@@ -139,12 +139,12 @@
          </children>
       </GridPane>
       
-      <Label layoutX="80.0" layoutY="30.0" prefHeight="50.0" prefWidth="197.0" text="Bienvenido!" AnchorPane.leftAnchor="80.0" AnchorPane.rightAnchor="1003.0">
+      <Label layoutX="80.0" layoutY="30.0" prefHeight="50.0" prefWidth="197.0" text="Bienvenido!" AnchorPane.leftAnchor="80.0">
          <font>
             <Font name="System Bold" size="35.0" />
          </font>
       </Label>
-      <Label layoutX="80.0" layoutY="73.0" prefHeight="32.0" prefWidth="622.0" text="Selecciona una opción del menú para navegar por la aplicación" AnchorPane.leftAnchor="80.0" AnchorPane.rightAnchor="578.0">
+      <Label layoutX="80.0" layoutY="73.0" prefHeight="32.0" prefWidth="622.0" text="Selecciona una opción del menú para navegar por la aplicación" AnchorPane.leftAnchor="80.0">
          <font>
             <Font size="22.0" />
          </font>

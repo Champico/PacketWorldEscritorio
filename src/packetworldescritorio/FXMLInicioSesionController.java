@@ -176,7 +176,7 @@ public class FXMLInicioSesionController implements Initializable {
             stPrincipal.initStyle(StageStyle.DECORATED);
             stPrincipal.setMinWidth(1000);
             stPrincipal.setMinHeight(600);
-            stPrincipal.setTitle("Inicio");
+            stPrincipal.setTitle("Packet World Admin");
 
             /* Poner icono */
             try {

@@ -26,9 +26,6 @@ public class FXMLAplicacionController implements Initializable, INavegacion {
     private Label lbRol;
 
     @FXML
-    private Label lbNumPersonal;
-
-    @FXML
     private StackPane contentArea;
 
     @Override

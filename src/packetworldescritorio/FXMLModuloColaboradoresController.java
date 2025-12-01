@@ -29,6 +29,7 @@ import packetworldescritorio.interfaz.INavegableChild;
 import packetworldescritorio.interfaz.INavegacion;
 import packetworldescritorio.interfaz.INotificador;
 import packetworldescritorio.pojo.Colaborador;
+import packetworldescritorio.utilidad.Constantes;
 import packetworldescritorio.utilidad.Utilidades;
 
 public class FXMLModuloColaboradoresController implements Initializable, INotificador, INavegableChild  {
@@ -53,10 +54,8 @@ public class FXMLModuloColaboradoresController implements Initializable, INotifi
     private TableColumn colRol;
 
     private ObservableList<Colaborador> colaboradores;
+    
 
-    /**
-     * Initializes the controller class.
-     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         configurarTabla();
@@ -67,6 +66,12 @@ public class FXMLModuloColaboradoresController implements Initializable, INotifi
     public void setNavegador(INavegacion nav) {
         this.nav = nav;
     }
+    
+        @FXML
+    private void clickRegresar(ActionEvent event) {
+        nav.navegar(Constantes.PAGINA_PRINCIPAL);
+    }
+
     
     private void configurarTabla() {
         colNoPersonal.setCellValueFactory(new PropertyValueFactory("noPersonal"));
@@ -151,15 +156,6 @@ public class FXMLModuloColaboradoresController implements Initializable, INotifi
         }*/
     }
 
-    @FXML
-    private void clickIrFoto(ActionEvent event) {
-        /*Profesor profesor = tvProfesores.getSelectionModel().getSelectedItem();
-        if (profesor != null) {
-            irSeleccionFoto(profesor);
-        } else {
-            Utilidades.mostrarAlertaSimple("Selecciona profesor", "Para seleccionar la foto de un profesor, debes seleciconarlo primero de la tabla", Alert.AlertType.WARNING);
-        }*/
-    }
 
     private void irSeleccionFoto(Colaborador colaborador) {
         /*try {
@@ -178,6 +174,7 @@ public class FXMLModuloColaboradoresController implements Initializable, INotifi
         }
 */
     }
+
 
 
 

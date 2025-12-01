@@ -6,7 +6,7 @@ public class Constantes {
     public static final String URL_WS = "http://localhost:8084/ProyectoWS/api/";
     public static final String WS_INICIO_SESION = "autenticacion/colaborador";
     public static final String WS_COLABORADOR_OBTENER_TODOS = "colaborador/obtener";
-    
+
     //Peticiones
     public static final String PETICION_GET = "GET";
     public static final String PETICION_POST = "POST";
@@ -16,21 +16,27 @@ public class Constantes {
     //Content type
     public static final String APPLICATION_JSON = "application/json";
     public static final String APPLICATION_FORM_URLENCODED = "application/x-www-form-urlencoded";
-    
-    //Errores
 
+    //Errores
     public static final int ERROR_MALFORMED_URL = 1001;
     public static final int ERROR_PETICION = 1002;
     public static final int ERROR_BAD_REQUEST = 1003;
     public static final String MSJ_ERROR_URL = "Lo sentimos su solicitud no puede ser realizada en este momento. porfavor inténtelo más tarde";
     public static final String MSJ_ERROR_PETICION = "Lo sentimos tenemos problemas de conexión en este momento, por favor inténtelo más tarde.";
- 
-   
+
     //Llaves Hash
     public static final String KEY_ERROR = "error";
     public static final String KEY_MENSAJE = "mensaje";
     public static final String KEY_LISTA = "lista_valores";
     public static final String KEY_OBJETO = "objeto";
 
+    //Archivos fxml
+    public static final String MODULO_COLABORADORES = "FXMLModuloColaboradores.fxml";
+    public static final String MODULO_SUCURSALES = "FXMLModuloSucursales.fxml";
+    public static final String MODULO_UNIDADES = "FXMLModuloUnidades.fxml";
+    public static final String MODULO_CLIENTES = "FXMLModuloClientes.fxml";
+    public static final String MODULO_PAQUETES = "FXMLModuloPaquetes.fxml";
+    public static final String MODULO_ENVIOS = "FXMLModuloEnvios.fxml";
+    public static final String PAGINA_PRINCIPAL = "FXMLPrincipal.fxml";
 
 }

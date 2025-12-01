@@ -1,26 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="720.0" prefWidth="1280.0" styleClass="background" stylesheets="@../../resources/estilos/CSSAplicacion.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="packetworldescritorio.FXMLPrincipalController">  <children>
-      <TextField fx:id="tfBusqueda" layoutX="14.0" layoutY="122.0" prefHeight="31.0" prefWidth="206.0" promptText="Buscar profesor..." />
-      <Button layoutX="357.0" layoutY="128.0" mnemonicParsing="false" onAction="#clickIrRegistrar" prefHeight="31.0" prefWidth="94.0" text="Registrar" />
-      <Button layoutX="461.0" layoutY="128.0" mnemonicParsing="false" onAction="#clickIrEditar" prefHeight="31.0" prefWidth="94.0" text="Editar" />
-      <Button layoutX="566.0" layoutY="128.0" mnemonicParsing="false" onAction="#clickEliminar" prefHeight="31.0" prefWidth="105.0" text="Eliminar" />
-      <TableView fx:id="tvProfesores" layoutX="25.0" layoutY="217.0" prefHeight="309.0" prefWidth="663.0">
+<AnchorPane id="AnchorPane" minWidth="1000.0" prefHeight="627.0" prefWidth="1280.0" styleClass="background" stylesheets="@../../resources/estilos/CSSAplicacion.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="packetworldescritorio.FXMLModuloColaboradoresController">  
+    <children>
+      <TextField fx:id="tfBusqueda" layoutX="33.0" layoutY="131.0" prefHeight="38.0" prefWidth="312.0" promptText="Buscar profesor..." />
+      <TableView fx:id="tvColaboradores" layoutX="25.0" layoutY="217.0" prefHeight="378.0" prefWidth="1058.0" AnchorPane.bottomAnchor="32.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="197.0">
         <columns>
-            <TableColumn fx:id="colApPaterno" prefWidth="125.0" text="Apellido paterno" />
-            <TableColumn fx:id="colApMaterno" prefWidth="139.0" text="Apellido Materno" />
-            <TableColumn fx:id="colFechaContratacion" prefWidth="119.0" text="Fecha de contratacion" />
-            <TableColumn fx:id="colRol" prefWidth="86.0" text="Rol" />
-          <TableColumn fx:id="colNombre" minWidth="0.0" prefWidth="67.0" text="Nombre" />
-          <TableColumn fx:id="colNoPersonal" prefWidth="126.0" text="No. de personal" />
+          <TableColumn fx:id="colNoPersonal" prefWidth="127.0" text="No. de personal" />
+          <TableColumn fx:id="colNombre" minWidth="0.0" prefWidth="111.0" text="Nombre" />
+            <TableColumn fx:id="colApPaterno" prefWidth="146.0" text="Apellido paterno" />
+            <TableColumn fx:id="colApMaterno" prefWidth="168.0" text="Apellido Materno" />
+            <TableColumn fx:id="colRol" prefWidth="206.0" text="Rol" />
+            <TableColumn fx:id="colCorreo" prefWidth="299.0" text="Correo" />
         </columns>
       </TableView>
-      <Button layoutX="245.0" layoutY="128.0" mnemonicParsing="false" onAction="#clickIrFoto" prefHeight="31.0" prefWidth="105.0" text="Foto" />
+      <HBox layoutX="632.0" layoutY="150.0" prefWidth="200.0">
+         <children>
+            <Button mnemonicParsing="false" onAction="#clickIrEditar" prefHeight="31.0" prefWidth="94.0" text="Editar" />
+            <Button mnemonicParsing="false" onAction="#clickEliminar" prefHeight="31.0" prefWidth="105.0" text="Eliminar" />
+            <Button mnemonicParsing="false" onAction="#clickIrRegistrar" prefHeight="31.0" prefWidth="94.0" text="Registrar" />
+         </children>
+      </HBox>
+      <Label layoutX="33.0" layoutY="54.0" prefHeight="51.0" prefWidth="440.0" text="Modulo de Colaboradores">
+         <font>
+            <Font name="System Bold" size="35.0" />
+         </font>
+      </Label>
+      <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#clickRegresar" prefHeight="40.0" prefWidth="139.0" styleClass="btn_regresar">
+         <graphic>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <ImageView fitHeight="30.0" fitWidth="32.0" opacity="0.48" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../resources/images/flecha-izquierda.png" />
+                     </image>
+                  </ImageView>
+                  <Label prefHeight="30.0" prefWidth="99.0" text=" Regresar" textFill="#4a4a4a">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+         </graphic>
+      </Button>
    </children>
 </AnchorPane>
