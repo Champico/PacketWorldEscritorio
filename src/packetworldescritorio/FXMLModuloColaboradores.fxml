@@ -8,7 +8,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" minWidth="1000.0" prefHeight="627.0" prefWidth="1280.0" styleClass="background" stylesheets="@../../resources/estilos/CSSAplicacion.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="packetworldescritorio.FXMLModuloColaboradoresController">  
+<AnchorPane id="AnchorPane" minWidth="1000.0" prefHeight="627.0" prefWidth="1280.0" styleClass="background" stylesheets="@/estilos/CSSAplicacion.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="packetworldescritorio.FXMLModuloColaboradoresController">  
     <children>
       <TextField fx:id="tfBusqueda" layoutX="468.0" layoutY="117.0" prefHeight="43.0" prefWidth="345.0" promptText="Buscar profesor...">
          <styleClass>

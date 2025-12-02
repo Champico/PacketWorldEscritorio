@@ -4,15 +4,19 @@ package packetworldescritorio;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.Initializable;
+import packetworldescritorio.interfaz.INavegableChild;
+import packetworldescritorio.interfaz.INavegacion;
 
-public class FXMLModuloSucursalesController implements Initializable {
+public class FXMLModuloSucursalesController implements Initializable, INavegableChild {
 
-    /**
-     * Initializes the controller class.
-     */
+        private INavegacion nav;
+        
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
     }    
     
+    @Override
+    public void setNavegador(INavegacion nav) {
+        this.nav = nav;
+    }
 }
