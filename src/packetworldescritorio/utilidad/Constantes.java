@@ -31,12 +31,16 @@ public class Constantes {
     public static final String KEY_OBJETO = "objeto";
 
     //Archivos fxml
+    public static final String PG_APLICACION = "FXMLAplicacion.fxml";
+    public static final String PG_INICIO_SESION = "FXMLInicioSesion.fxml";
     public static final String MODULO_COLABORADORES = "FXMLModuloColaboradores.fxml";
     public static final String MODULO_SUCURSALES = "FXMLModuloSucursales.fxml";
     public static final String MODULO_UNIDADES = "FXMLModuloUnidades.fxml";
     public static final String MODULO_CLIENTES = "FXMLModuloClientes.fxml";
     public static final String MODULO_PAQUETES = "FXMLModuloPaquetes.fxml";
     public static final String MODULO_ENVIOS = "FXMLModuloEnvios.fxml";
-    public static final String PAGINA_PRINCIPAL = "FXMLPrincipal.fxml";
+    public static final String PG_PRINCIPAL = "FXMLPrincipal.fxml";
+    public static final String PG_FORMULARIO_COLABORADOR = "FXMLFormularioColaborador.fxml";
 
+    
 }

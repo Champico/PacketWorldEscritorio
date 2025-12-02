@@ -36,7 +36,7 @@
                         </Label>
                     </children>
                 </VBox>
-                <Button mnemonicParsing="false" styleClass="btn_cerrar_sesion" text=" Cerrar sesion" textFill="WHITE">
+                <Button mnemonicParsing="false" onAction="#clickCerrarSesion" styleClass="btn_cerrar_sesion" text=" Cerrar sesion" textFill="WHITE">
                     <graphic>
                         <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                             <image>

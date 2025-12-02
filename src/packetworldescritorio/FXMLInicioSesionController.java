@@ -24,6 +24,7 @@ import javafx.stage.StageStyle;
 import packetworldescritorio.dominio.InicioSesionImp;
 import packetworldescritorio.dto.RSAutenticacionColaborador;
 import packetworldescritorio.pojo.Colaborador;
+import packetworldescritorio.utilidad.Constantes;
 import packetworldescritorio.utilidad.Utilidades;
 
 public class FXMLInicioSesionController implements Initializable {
@@ -160,7 +161,7 @@ public class FXMLInicioSesionController implements Initializable {
         try {
 
             /* Cargar el FXML*/
-            FXMLLoader cargador = new FXMLLoader(getClass().getResource("FXMLAplicacion.fxml"));
+            FXMLLoader cargador = new FXMLLoader(getClass().getResource(Constantes.PG_APLICACION));
             Parent vista = cargador.load();
             FXMLAplicacionController controlador = cargador.getController();
             controlador.cargarInformacion(colaborador);

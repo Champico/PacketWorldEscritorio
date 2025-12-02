@@ -10,8 +10,26 @@
 
 <AnchorPane id="AnchorPane" minWidth="1000.0" prefHeight="627.0" prefWidth="1280.0" styleClass="background" stylesheets="@../../resources/estilos/CSSAplicacion.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="packetworldescritorio.FXMLModuloColaboradoresController">  
     <children>
-      <TextField fx:id="tfBusqueda" layoutX="33.0" layoutY="131.0" prefHeight="38.0" prefWidth="312.0" promptText="Buscar profesor..." />
-      <TableView fx:id="tvColaboradores" layoutX="25.0" layoutY="217.0" prefHeight="378.0" prefWidth="1058.0" AnchorPane.bottomAnchor="32.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="197.0">
+      <TextField fx:id="tfBusqueda" layoutX="468.0" layoutY="117.0" prefHeight="43.0" prefWidth="345.0" promptText="Buscar profesor...">
+         <styleClass>
+            <String fx:value="input_general" />
+            <String fx:value="input_busqueda" />
+         </styleClass>
+      </TextField>
+      <Button fx:id="btnBusqueda" layoutX="754.0" layoutY="117.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="59.0">
+         <styleClass>
+            <String fx:value="btn_general" />
+            <String fx:value="btn_buscar" />
+         </styleClass>
+         <graphic>
+            <ImageView fitHeight="28.0" fitWidth="29.0" opacity="0.58" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@/images/lupa.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <TableView fx:id="tvColaboradores" layoutX="25.0" layoutY="217.0" prefHeight="414.0" prefWidth="1058.0" AnchorPane.bottomAnchor="32.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="197.0">
         <columns>
           <TableColumn fx:id="colNoPersonal" prefWidth="127.0" text="No. de personal" />
           <TableColumn fx:id="colNombre" minWidth="0.0" prefWidth="111.0" text="Nombre" />
@@ -21,7 +39,7 @@
             <TableColumn fx:id="colCorreo" prefWidth="299.0" text="Correo" />
         </columns>
       </TableView>
-      <HBox layoutX="449.0" layoutY="135.0" prefHeight="40.0" prefWidth="394.0" styleClass="hb_crud_menu">
+      <HBox layoutX="25.0" layoutY="117.0" prefHeight="43.0" prefWidth="408.0" styleClass="hb_crud_menu" AnchorPane.leftAnchor="25.0">
          <children>
             <Button mnemonicParsing="false" onAction="#clickIrRegistrar" prefHeight="40.0" prefWidth="120.0">
                <graphic>
@@ -29,7 +47,7 @@
                      <children>
                         <ImageView fitHeight="21.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../resources/images/+.png" />
+                              <Image url="@/images/+.png" />
                            </image>
                         </ImageView>
                         <Label text=" Nuevo" textFill="WHITE">
@@ -50,7 +68,7 @@
                      <children>
                         <ImageView fitHeight="21.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../resources/images/lapiz.png" />
+                              <Image url="@/images/lapiz.png" />
                            </image>
                         </ImageView>
                         <Label text=" Editar" textFill="WHITE">
@@ -71,7 +89,7 @@
                      <children>
                         <ImageView fitHeight="21.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../resources/images/eliminar.png" />
+                              <Image url="@/images/eliminar.png" />
                            </image>
                         </ImageView>
                         <Label text=" Eliminar" textFill="WHITE">
@@ -98,7 +116,7 @@
                <children>
                   <ImageView fitHeight="30.0" fitWidth="32.0" opacity="0.48" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../resources/images/flecha-izquierda.png" />
+                        <Image url="@/images/flecha-izquierda.png" />
                      </image>
                   </ImageView>
                   <Label prefHeight="30.0" prefWidth="99.0" text=" Regresar" textFill="#4a4a4a">
@@ -110,5 +128,15 @@
             </HBox>
          </graphic>
       </Button>
+      <HBox layoutX="851.0" layoutY="118.0" prefHeight="41.0" prefWidth="232.0">
+         <children>
+            <Label contentDisplay="CENTER" prefHeight="40.0" prefWidth="47.0" text="Rol:   ">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Label>
+            <ComboBox fx:id="cbRol" prefHeight="41.0" prefWidth="177.0" styleClass="input_general" />
+         </children>
+      </HBox>
    </children>
 </AnchorPane>

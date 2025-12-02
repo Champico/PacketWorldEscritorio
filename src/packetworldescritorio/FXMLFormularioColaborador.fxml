@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" minWidth="1000.0" prefHeight="627.0" prefWidth="1280.0" stylesheets="@../../resources/estilos/CSSAplicacion.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="packetworldescritorio.FXMLFormularioColaboradorController">
+   <children>
+      <Button layoutX="24.0" layoutY="24.0" mnemonicParsing="false" onAction="#clickRegresar" prefHeight="40.0" prefWidth="139.0" styleClass="btn_regresar">
+         <graphic>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <ImageView fitHeight="30.0" fitWidth="32.0" opacity="0.48" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../resources/images/flecha-izquierda.png" />
+                     </image>
+                  </ImageView>
+                  <Label prefHeight="30.0" prefWidth="99.0" text=" Regresar" textFill="#4a4a4a">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+         </graphic>
+      </Button>
+      <Label layoutX="43.0" layoutY="64.0" prefHeight="51.0" prefWidth="440.0" text="Registrar Colaborador">
+         <font>
+            <Font name="System Bold" size="35.0" />
+         </font>
+      </Label>
+      <AnchorPane layoutX="24.0" layoutY="115.0" prefHeight="506.0" prefWidth="1232.0">
+         <children>
+            <Label layoutX="53.0" layoutY="23.0" text="Número de personal *">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Label>
+            <TextField fx:id="tfNoPersonal" layoutX="55.0" layoutY="49.0" prefHeight="40.0" prefWidth="233.0" promptText="user0001" styleClass="input_general">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </TextField>
+            <Label layoutX="54.0" layoutY="101.0" text="Nombre *">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Label>
+            <TextField fx:id="tfNombre" layoutX="53.0" layoutY="127.0" prefHeight="40.0" prefWidth="233.0" promptText="Jose" styleClass="input_general" />
+            <Label layoutX="303.0" layoutY="101.0" text="Apellido Paterno *">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Label>
+            <TextField fx:id="tfApPaterno" layoutX="303.0" layoutY="127.0" prefHeight="40.0" prefWidth="233.0" promptText="Garcia" />
+            <TextField fx:id="tfApMaterno" layoutX="553.0" layoutY="127.0" prefHeight="40.0" prefWidth="233.0" promptText="Torres" />
+            <Label layoutX="553.0" layoutY="101.0" text="Apellido Materno">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Label>
+            <ComboBox fx:id="cbRol" layoutX="55.0" layoutY="205.0" prefHeight="40.0" prefWidth="233.0" styleClass="input_general" />
+            <Label layoutX="303.0" layoutY="179.0" text="Licencia *">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Label>
+            <TextField fx:id="tfNombre1" layoutX="303.0" layoutY="205.0" prefHeight="40.0" prefWidth="233.0" promptText="123456789" styleClass="input_general" />
+            <Label layoutX="54.0" layoutY="179.0" text="Rol en el sistema *">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Label>
+            <Label layoutX="55.0" layoutY="270.0" text="Contraseña">
+               <font>
+                  <Font size="19.0" />
+               </font>
+            </Label>
+            <PasswordField fx:id="pfPassword" layoutX="55.0" layoutY="300.0" prefHeight="40.0" prefWidth="281.0" promptText="●●●●●●●●" styleClass="pf_password">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </PasswordField>
+            <TextField fx:id="tfPassword" layoutX="55.0" layoutY="300.0" prefHeight="40.0" prefWidth="281.0" promptText="●●●●●●●●" styleClass="pf_password" visible="false">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </TextField>
+            <ToggleButton fx:id="tbVerPassword" layoutX="291.0" layoutY="300.0" mnemonicParsing="false" onAction="#clickVerPassword" prefHeight="31.0" prefWidth="29.0" styleClass="btn_ojo">
+               <graphic>
+                  <ImageView fx:id="ivVisible" fitHeight="30.0" fitWidth="36.0" opacity="0.54" preserveRatio="true">
+                     <image>
+                        <Image url="@/images/visible.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </ToggleButton>
+            <Label layoutX="354.0" layoutY="270.0" text="Confirmar contraseña">
+               <font>
+                  <Font size="19.0" />
+               </font>
+            </Label>
+            <TextField fx:id="tfPassword1" layoutX="354.0" layoutY="306.0" prefHeight="40.0" prefWidth="281.0" promptText="●●●●●●●●" styleClass="pf_password" visible="false">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </TextField>
+            <PasswordField fx:id="pfPassword1" layoutX="354.0" layoutY="300.0" prefHeight="40.0" prefWidth="281.0" promptText="●●●●●●●●" styleClass="pf_password">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </PasswordField>
+            <ToggleButton fx:id="tbVerPassword1" layoutX="590.0" layoutY="300.0" mnemonicParsing="false" onAction="#clickVerPassword" prefHeight="31.0" prefWidth="29.0" styleClass="btn_ojo">
+               <graphic>
+                  <ImageView fx:id="ivVisible1" fitHeight="30.0" fitWidth="36.0" opacity="0.54" preserveRatio="true">
+                     <image>
+                        <Image url="@/images/visible.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </ToggleButton>
+            <HBox layoutX="55.0" layoutY="365.0" prefHeight="37.0" prefWidth="344.0" styleClass="hb_crud_menu">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#clicBtnGuardar" prefHeight="31.0" prefWidth="150.0" text="Guardar" textFill="WHITE">
+                     <styleClass>
+                        <String fx:value="btn_general" />
+                        <String fx:value="btn_aceptar" />
+                     </styleClass>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#clicBtnCancelar" prefHeight="31.0" prefWidth="150.0" text="Cancelar" textFill="WHITE">
+                     <styleClass>
+                        <String fx:value="btn_general" />
+                        <String fx:value="btn_cancelar" />
+                     </styleClass>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

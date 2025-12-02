@@ -18,6 +18,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -54,6 +55,8 @@ public class FXMLModuloColaboradoresController implements Initializable, INotifi
     private TableColumn colRol;
 
     private ObservableList<Colaborador> colaboradores;
+    @FXML
+    private Button btnBusqueda;
     
 
     @Override
@@ -69,7 +72,7 @@ public class FXMLModuloColaboradoresController implements Initializable, INotifi
     
         @FXML
     private void clickRegresar(ActionEvent event) {
-        nav.navegar(Constantes.PAGINA_PRINCIPAL);
+        nav.navegar(Constantes.PG_PRINCIPAL);
     }
 
     
@@ -124,21 +127,7 @@ public class FXMLModuloColaboradoresController implements Initializable, INotifi
     }
 
     private void irFormulario(Colaborador colaborador) {
-       /* try {
-            FXMLLoader cargador = new FXMLLoader(getClass().getResource("FXMLFormularioProfesor.fxml"));
-            Parent vista = cargador.load();
-            FXMLFormularioProfesorController controlador = cargador.getController();
-            controlador.inicializarDatos(profesor, this);
-            Scene escena = new Scene(vista);
-            Stage escenario = new Stage();
-            escenario.setScene(escena);
-            escenario.setTitle("Formulario profesor");
-            escenario.initModality(Modality.APPLICATION_MODAL);
-            escenario.showAndWait();
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }*/
-
+        nav.navegar(Constantes.PG_FORMULARIO_COLABORADOR);
     }
 
     @Override
