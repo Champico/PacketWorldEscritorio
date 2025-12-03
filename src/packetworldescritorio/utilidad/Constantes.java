@@ -6,6 +6,7 @@ public class Constantes {
     public static final String URL_WS = "http://localhost:8084/ProyectoWS/api/";
     public static final String WS_INICIO_SESION = "autenticacion/colaborador";
     public static final String WS_COLABORADOR_OBTENER_TODOS = "colaborador/obtener";
+    public static final String WSA_CATALOGO_ROLES = "catalogo/obtener-roles";
 
     //Peticiones
     public static final String PETICION_GET = "GET";
@@ -42,5 +43,8 @@ public class Constantes {
     public static final String PG_PRINCIPAL = "FXMLPrincipal.fxml";
     public static final String PG_FORMULARIO_COLABORADOR = "FXMLFormularioColaborador.fxml";
 
+    
+    //Roles
+    public static final String ROL_CONDUCTOR = "Conductor";
     
 }

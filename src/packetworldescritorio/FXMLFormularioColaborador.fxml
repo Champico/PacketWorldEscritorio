@@ -10,7 +10,7 @@
 
 <AnchorPane id="AnchorPane" minWidth="1000.0" prefHeight="627.0" prefWidth="1280.0" stylesheets="@/estilos/CSSAplicacion.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="packetworldescritorio.FXMLFormularioColaboradorController">
    <children>
-      <Button layoutX="24.0" layoutY="24.0" mnemonicParsing="false" onAction="#clickRegresar" prefHeight="40.0" prefWidth="139.0" styleClass="btn_regresar">
+      <Button layoutX="24.0" layoutY="14.0" mnemonicParsing="false" onAction="#clickRegresar" prefHeight="40.0" prefWidth="139.0" styleClass="btn_regresar">
          <graphic>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
@@ -28,12 +28,12 @@
             </HBox>
          </graphic>
       </Button>
-      <Label layoutX="43.0" layoutY="64.0" prefHeight="51.0" prefWidth="440.0" text="Registrar Colaborador">
+      <Label layoutX="43.0" layoutY="54.0" prefHeight="51.0" prefWidth="440.0" text="Registrar Colaborador">
          <font>
             <Font name="System Bold" size="35.0" />
          </font>
       </Label>
-      <AnchorPane layoutX="24.0" layoutY="113.0" prefHeight="498.0" prefWidth="1232.0">
+      <AnchorPane layoutX="24.0" layoutY="99.0" prefHeight="498.0" prefWidth="1232.0">
          <children>
             <Label layoutX="54.0" layoutY="96.0" text="Nombre *">
                <font>
@@ -54,12 +54,12 @@
                </font>
             </Label>
             <ComboBox fx:id="cbRol" layoutX="53.0" layoutY="299.0" prefHeight="40.0" prefWidth="233.0" styleClass="input_general" />
-            <Label layoutX="306.0" layoutY="275.0" text="Licencia *">
+            <Label fx:id="lbLicencia" layoutX="306.0" layoutY="275.0" text="Licencia *" visible="false">
                <font>
                   <Font size="17.0" />
                </font>
             </Label>
-            <TextField fx:id="tfLicencia" layoutX="304.0" layoutY="299.0" prefHeight="40.0" prefWidth="233.0" promptText="123456789" styleClass="input_general" />
+            <TextField fx:id="tfLicencia" layoutX="304.0" layoutY="299.0" prefHeight="40.0" prefWidth="233.0" promptText="123456789" styleClass="input_general" visible="false" />
             <Label layoutX="53.0" layoutY="275.0" text="Rol en el sistema *">
                <font>
                   <Font size="17.0" />
@@ -137,7 +137,7 @@
                   </Button>
                </children>
             </HBox>
-            <Label layoutX="894.0" layoutY="23.0" text="Foto de perfil">
+            <Label layoutX="894.0" layoutY="11.0" text="Foto de perfil">
                <font>
                   <Font size="17.0" />
                </font>
