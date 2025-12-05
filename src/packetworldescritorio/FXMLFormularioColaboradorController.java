@@ -15,8 +15,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextFormatter;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.control.ToggleButton;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import packetworldescritorio.dominio.CatalogoImp;
 import packetworldescritorio.interfaz.INavegableChild;
@@ -46,15 +48,11 @@ public class FXMLFormularioColaboradorController implements Initializable, INave
     @FXML
     private ToggleButton tbVerPassword;
     @FXML
-    private ImageView ivVisible;
-    @FXML
     private TextField tfConfirmarPassword;
     @FXML
     private PasswordField pfConfirmarPassword;
     @FXML
     private ToggleButton tbVerConfirmarPassword;
-    @FXML
-    private ImageView ivVisible1;
     @FXML
     private Label lbErrorNoPersonal;
     @FXML
@@ -86,12 +84,16 @@ public class FXMLFormularioColaboradorController implements Initializable, INave
 
     @FXML
     private Label lbLicencia;
+    @FXML
+    private ImageView ivVerPassword;
+    @FXML
+    private ImageView ivVerConfirmarPassword;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         configurarComboBoxRoles();
         cargarRolesProfesor();
-
+        configurarMaximoNumeroCaracteres();
     }
 
     @Override
@@ -113,6 +115,16 @@ public class FXMLFormularioColaboradorController implements Initializable, INave
 
     @FXML
     private void clicCancelar(ActionEvent event) {
+    }
+
+    @FXML
+    private void clickVerPassword() {
+        tbVerPassword.setOnAction(event -> verPassword(tfPassword, pfPassword, ivVerPassword, tbVerPassword));
+    }
+
+    @FXML
+    private void clickVerConfirmarPassword() {
+        tbVerConfirmarPassword.setOnAction(event -> verPassword(tfConfirmarPassword, pfConfirmarPassword, ivVerConfirmarPassword, tbVerConfirmarPassword));
     }
 
     private void configurarComboBoxRoles() {
@@ -145,11 +157,42 @@ public class FXMLFormularioColaboradorController implements Initializable, INave
                 }
             }
         });
+    }
+
+    private void configurarMaximoNumeroCaracteres() {
+        TextInputControl[] tf = {tfNombre, tfApPaterno, tfApMaterno, tfCurp, tfCorreo, tfNoPersonal, pfPassword, pfConfirmarPassword};
+        Integer maxNumCaracteres[] = {254, 254, 254, 18, 254, 50, 25, 25};
+
+        for (int i = 0; i < tf.length; i++) {
+            limitarCaracteres(tf[i], maxNumCaracteres[i]);
+        }
+    }
+
+    private void verPassword(TextField tf, PasswordField pf, ImageView iv, ToggleButton tb) {
+        try {
+            if (tb.isSelected()) {
+                iv.setImage(new Image(
+                        getClass().getResource("/images/oculto.png").toExternalForm()
+                ));
+                tf.setText(pf.getText());
+                tf.setVisible(true);
+                pf.setVisible(false);
+            } else {
+                iv.setImage(new Image(
+                        getClass().getResource("/images/visible.png").toExternalForm()
+                ));
+                pf.setText(tfPassword.getText());
+                tf.setVisible(false);
+                pf.setVisible(true);
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
 
     }
 
     private boolean verificarCampos() {
-        if (verificarCamposVacios()) {
+        if (verificarCamposVacios() && verificarReglasCampos()) {
             System.out.println("Exito");
             return true;
         }
@@ -163,7 +206,7 @@ public class FXMLFormularioColaboradorController implements Initializable, INave
         Label[] labelsError = {lbErrorNombre, lbErrorApPaterno, lbErrorCurp, lbErrorCorreo, lbErrorNoPersonal, lbErrorPassword, lbErrorConfirmarPassword};
 
         for (int i = 0; i < tfObligatorios.length; i++) {
-            if (!verificarInputVacio(tfObligatorios[i], labelsError[i])) {
+            if (esInputVacio(tfObligatorios[i], labelsError[i])) {
                 camposCorrectos = false;
             }
         }
@@ -172,23 +215,24 @@ public class FXMLFormularioColaboradorController implements Initializable, INave
         if (rolSeleccionado == null) {
             mostrarMensajeErrorInput(lbErrorRol, "Seleccione un rol");
         } else {
-            if (rolSeleccionado.equals(Constantes.ROL_CONDUCTOR) && !verificarInputVacio(tfLicencia, lbErrorLicencia)) {
+            ocultarMensajeErrorInput(lbErrorRol);
+            if (rolSeleccionado.equals(Constantes.ROL_CONDUCTOR) && esInputVacio(tfLicencia, lbErrorLicencia)) {
                 camposCorrectos = false;
             }
         }
         return camposCorrectos;
     }
 
-    private boolean verificarInputVacio(TextInputControl input, Label labelError) {
-        String valor = input.getText();
+    private boolean esInputVacio(TextInputControl input, Label labelError) {
+        String valor = input.getText().trim();
         if (valor.isEmpty()) {
             marcarErrorTextInputControl(input);
             mostrarMensajeErrorInput(labelError, "Campo obligatorio");
-            return false;
+            return true;
         }
-        limpiarErrorTextInputControl(tfNombre);
-        ocultarMensajeErrorInput(lbErrorNombre);
-        return true;
+        limpiarErrorTextInputControl(input);
+        ocultarMensajeErrorInput(labelError);
+        return false;
     }
 
     private void mostrarMensajeErrorInput(Label label, String mensaje) {
@@ -212,9 +256,96 @@ public class FXMLFormularioColaboradorController implements Initializable, INave
     }
 
     private void limpiarErrorTextInputControl(TextInputControl input) {
+        System.out.println("Input : "  + input.getId());
         if (input != null) {
             input.getStyleClass().remove("tf_error");
         }
     }
 
+    private boolean verificarReglasCampos() {
+        boolean camposCorrectos = true;
+
+        String noPersonal = tfNoPersonal.getText();
+        String correo = tfCorreo.getText().trim();
+        String curp = tfCurp.getText().trim();
+        String nombre = tfNombre.getText().trim();
+        String apellidoPaterno = tfApPaterno.getText().trim();
+        String apellidoMaterno = tfApPaterno.getText().trim();
+        Integer idSucursal = 1;
+        Rol rol = cbRol.getSelectionModel().getSelectedItem();
+        String licencia = null;
+        String password = obtenerTextoPasswordField("password");
+        String confirmarPassword = obtenerTextoPasswordField("confirmarPassword");
+
+        if (!correo.matches("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$")) {
+            marcarErrorTextInputControl(tfCorreo);
+            mostrarMensajeErrorInput(lbErrorCorreo, "Formato de correo no valido");
+            camposCorrectos = false;
+        } else {
+            limpiarErrorTextInputControl(tfCorreo);
+            ocultarMensajeErrorInput(lbErrorCorreo);
+        }
+
+        if (curp.length() != 18) {
+            marcarErrorTextInputControl(tfCurp);
+            mostrarMensajeErrorInput(lbErrorCurp, "Formato de curp no valido");
+            camposCorrectos = false;
+        } else {
+            limpiarErrorTextInputControl(tfCurp);
+            ocultarMensajeErrorInput(lbErrorCurp);
+        }
+
+        System.out.println("password: " + password);
+        System.out.println("Coincide con el patron de contraseña?: " + password.matches("^(?=.*\\p{Lu})(?=.*\\p{Ll})(?=.*\\d).{8,}$"));
+        if (!password.matches("^(?=.*\\p{Lu})(?=.*\\p{Ll})(?=.*\\d).{8,}$")) {
+            marcarErrorTextInputControl(tfPassword);
+            marcarErrorTextInputControl(pfPassword);
+            mostrarMensajeErrorInput(lbErrorPassword, "Debe incluir almenos una letra minuscula, una mayuscula y un número");
+            camposCorrectos = false;
+        } else {
+            limpiarErrorTextInputControl(tfPassword);
+            limpiarErrorTextInputControl(pfPassword);
+            ocultarMensajeErrorInput(lbErrorPassword);
+        }
+
+        if (!confirmarPassword.equalsIgnoreCase(password)) {
+            marcarErrorTextInputControl(tfConfirmarPassword);
+            marcarErrorTextInputControl(pfConfirmarPassword);
+            camposCorrectos = false;
+            if(lbErrorPassword.isVisible() == false){
+                mostrarMensajeErrorInput(lbErrorConfirmarPassword, "La contraseña no coincide");
+            }
+        } else {
+            limpiarErrorTextInputControl(tfConfirmarPassword);
+            limpiarErrorTextInputControl(pfConfirmarPassword);
+            ocultarMensajeErrorInput(lbErrorConfirmarPassword);
+        }
+
+        return camposCorrectos;
+    }
+
+    private String obtenerTextoPasswordField(String campo) {
+        if (campo == null) {
+            return "";
+        }
+
+        campo = campo.trim().toLowerCase();
+
+        switch (campo) {
+            case "password":
+                return (pfPassword.isVisible() ? pfPassword.getText().trim() : tfPassword.getText()).trim();
+
+            case "confirmarpassword":
+                return (pfConfirmarPassword.isVisible() ? pfConfirmarPassword.getText().trim() : tfConfirmarPassword.getText()).trim();
+
+            default:
+                return "";
+        }
+    }
+
+    public static void limitarCaracteres(TextInputControl field, int max) {
+        field.setTextFormatter(new TextFormatter<>(change
+                -> change.getControlNewText().length() <= max ? change : null
+        ));
+    }
 }

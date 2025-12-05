@@ -33,7 +33,7 @@
             <Font name="System Bold" size="35.0" />
          </font>
       </Label>
-      <AnchorPane layoutX="24.0" layoutY="99.0" prefHeight="498.0" prefWidth="1232.0">
+      <AnchorPane layoutX="24.0" layoutY="99.0" prefHeight="520.0" prefWidth="1232.0">
          <children>
             <Label layoutX="54.0" layoutY="96.0" text="Nombre *">
                <font>
@@ -82,9 +82,9 @@
                         <Font size="17.0" />
                      </font>
                   </TextField>
-                  <ToggleButton fx:id="tbVerPassword" layoutX="236.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="29.0" styleClass="btn_ojo">
+                  <ToggleButton fx:id="tbVerPassword" layoutX="236.0" mnemonicParsing="false" onAction="#clickVerPassword" prefHeight="31.0" prefWidth="29.0" styleClass="btn_ojo">
                      <graphic>
-                        <ImageView fx:id="ivVisible" fitHeight="30.0" fitWidth="36.0" opacity="0.54" preserveRatio="true">
+                        <ImageView fx:id="ivVerPassword" fitHeight="30.0" fitWidth="36.0" opacity="0.54" preserveRatio="true">
                            <image>
                               <Image url="@/images/visible.png" />
                            </image>
@@ -110,9 +110,9 @@
                         <Font size="17.0" />
                      </font>
                   </PasswordField>
-                  <ToggleButton fx:id="tbVerConfirmarPassword" layoutX="236.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="29.0" styleClass="btn_ojo">
+                  <ToggleButton fx:id="tbVerConfirmarPassword" layoutX="236.0" mnemonicParsing="false" onAction="#clickVerConfirmarPassword" prefHeight="31.0" prefWidth="29.0" styleClass="btn_ojo">
                      <graphic>
-                        <ImageView fx:id="ivVisible1" fitHeight="30.0" fitWidth="36.0" opacity="0.54" preserveRatio="true">
+                        <ImageView fx:id="ivVerConfirmarPassword" fitHeight="30.0" fitWidth="36.0" opacity="0.54" preserveRatio="true">
                            <image>
                               <Image url="@/images/visible.png" />
                            </image>
@@ -121,7 +121,7 @@
                   </ToggleButton>
                </children>
             </AnchorPane>
-            <HBox layoutX="48.0" layoutY="460.0" prefWidth="344.0" styleClass="hb_crud_menu">
+            <HBox layoutX="48.0" layoutY="467.0" prefWidth="344.0" styleClass="hb_crud_menu">
                <children>
                   <Button mnemonicParsing="false" onAction="#clickGuardar" prefHeight="31.0" prefWidth="150.0" text="Guardar" textFill="WHITE">
                      <styleClass>
@@ -170,10 +170,10 @@
             <Label fx:id="lbErrorApMaterno" layoutX="554.0" layoutY="162.0" text="Campo obligatorio" textFill="RED" visible="false" />
             <Label fx:id="lbErrorRol" layoutX="53.0" layoutY="338.0" text="Seleccione una opción" textFill="RED" visible="false" />
             <Label fx:id="lbErrorLicencia" layoutX="304.0" layoutY="340.0" text="Campo obligatorio" textFill="RED" visible="false" />
-            <Label fx:id="lbErrorCurp" layoutX="55.0" layoutY="249.0" text="Campo obligatorio" textFill="RED" visible="false" />
-            <Label fx:id="lbErrorConfirmarPassword" layoutX="357.0" layoutY="426.0" text="Campo obligatorio" textFill="RED" visible="false" />
-            <Label fx:id="lbErrorPassword" layoutX="53.0" layoutY="426.0" text="Campo obligatorio" textFill="RED" visible="false" />
             <Label fx:id="lbErrorCorreo" layoutX="304.0" layoutY="249.0" text="Campo obligatorio" textFill="RED" visible="false" />
+            <Label fx:id="lbErrorCurp" layoutX="55.0" layoutY="249.0" text="Campo obligatorio" textFill="RED" visible="false" />
+            <Label fx:id="lbErrorConfirmarPassword" layoutX="357.0" layoutY="432.0" text="Campo obligatorio" textFill="RED" visible="false" />
+            <Label fx:id="lbErrorPassword" layoutX="53.0" layoutY="432.0" text="Campo obligatorio" textFill="RED" visible="false" />
          </children>
       </AnchorPane>
    </children>
