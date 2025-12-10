@@ -26,6 +26,7 @@ import packetworldescritorio.interfaz.INavegacion;
 import packetworldescritorio.utilidad.Constantes;
 import packetworldescritorio.pojo.Rol;
 import packetworldescritorio.utilidad.Utilidades;
+import packetworldescritorio.validacion.UIUtilidad;
 
 public class FXMLFormularioColaboradorController implements Initializable, INavegableChild {
 
@@ -118,13 +119,14 @@ public class FXMLFormularioColaboradorController implements Initializable, INave
     }
 
     @FXML
-    private void clickVerPassword() {
-        tbVerPassword.setOnAction(event -> verPassword(tfPassword, pfPassword, ivVerPassword, tbVerPassword));
-    }
+    private void clickVerPassword(ActionEvent event) {
+        ToggleButton tb = (ToggleButton) event.getSource();
 
-    @FXML
-    private void clickVerConfirmarPassword() {
-        tbVerConfirmarPassword.setOnAction(event -> verPassword(tfConfirmarPassword, pfConfirmarPassword, ivVerConfirmarPassword, tbVerConfirmarPassword));
+        if (tb == tbVerPassword) {
+            alternarPassword(tfPassword, pfPassword, ivVerPassword, tbVerPassword);
+        } else if (tb == tbVerConfirmarPassword) {
+            alternarPassword(tfConfirmarPassword, pfConfirmarPassword, ivVerConfirmarPassword, tbVerConfirmarPassword);
+        }
     }
 
     private void configurarComboBoxRoles() {
@@ -164,188 +166,197 @@ public class FXMLFormularioColaboradorController implements Initializable, INave
         Integer maxNumCaracteres[] = {254, 254, 254, 18, 254, 50, 25, 25};
 
         for (int i = 0; i < tf.length; i++) {
-            limitarCaracteres(tf[i], maxNumCaracteres[i]);
+            UIUtilidad.limitarCaracteres(tf[i], maxNumCaracteres[i]);
         }
     }
 
-    private void verPassword(TextField tf, PasswordField pf, ImageView iv, ToggleButton tb) {
-        try {
-            if (tb.isSelected()) {
-                iv.setImage(new Image(
-                        getClass().getResource("/images/oculto.png").toExternalForm()
-                ));
-                tf.setText(pf.getText());
-                tf.setVisible(true);
-                pf.setVisible(false);
-            } else {
-                iv.setImage(new Image(
-                        getClass().getResource("/images/visible.png").toExternalForm()
-                ));
-                pf.setText(tfPassword.getText());
-                tf.setVisible(false);
-                pf.setVisible(true);
+    private void alternarPassword(TextField tf, PasswordField pf, ImageView iv, ToggleButton tb) {
+        tb.setDisable(true);
+        if (tb.isSelected()) {
+            tf.setText(pf.getText());
+            tf.setVisible(true);
+            pf.setVisible(false);
+                        try {
+                iv.setImage(new Image(getClass().getResource("/images/visible.png").toExternalForm()));
+            } catch (Exception ex) {
             }
-        } catch (Exception ex) {
-            ex.printStackTrace();
+        } else {
+            pf.setText(tf.getText());
+            tf.setVisible(false);
+            pf.setVisible(true);
+                        try {
+                iv.setImage(new Image(getClass().getResource("/images/oculto.png").toExternalForm()));
+            } catch (Exception ex) {
+            }
         }
-
+        tb.setDisable(false);
     }
 
     private boolean verificarCampos() {
-        if (verificarCamposVacios() && verificarReglasCampos()) {
-            System.out.println("Exito");
-            return true;
-        }
-        return false;
-    }
-
-    private boolean verificarCamposVacios() {
         boolean camposCorrectos = true;
-
-        TextInputControl[] tfObligatorios = {tfNombre, tfApPaterno, tfCurp, tfCorreo, tfNoPersonal, pfPassword, pfConfirmarPassword};
-        Label[] labelsError = {lbErrorNombre, lbErrorApPaterno, lbErrorCurp, lbErrorCorreo, lbErrorNoPersonal, lbErrorPassword, lbErrorConfirmarPassword};
-
-        for (int i = 0; i < tfObligatorios.length; i++) {
-            if (esInputVacio(tfObligatorios[i], labelsError[i])) {
-                camposCorrectos = false;
-            }
+        if (verificarNoPersonal() == false) {
+            camposCorrectos = false;
         }
 
-        Rol rolSeleccionado = cbRol.getSelectionModel().getSelectedItem();
-        if (rolSeleccionado == null) {
-            mostrarMensajeErrorInput(lbErrorRol, "Seleccione un rol");
-        } else {
-            ocultarMensajeErrorInput(lbErrorRol);
-            if (rolSeleccionado.equals(Constantes.ROL_CONDUCTOR) && esInputVacio(tfLicencia, lbErrorLicencia)) {
-                camposCorrectos = false;
-            }
+        if (verificarNombre() == false) {
+            camposCorrectos = false;
         }
+        if (verificarApellidoPaterno() == false) {
+            camposCorrectos = false;
+        }
+        if (verificarCurp() == false) {
+            camposCorrectos = false;
+        }
+        if (verificarCorreo() == false) {
+            camposCorrectos = false;
+        }
+        if (verificarPassword() == false) {
+            camposCorrectos = false;
+        }
+        if (verificarRol() == false) {
+            camposCorrectos = false;
+        }
+
         return camposCorrectos;
     }
 
-    private boolean esInputVacio(TextInputControl input, Label labelError) {
-        String valor = input.getText().trim();
-        if (valor.isEmpty()) {
-            marcarErrorTextInputControl(input);
-            mostrarMensajeErrorInput(labelError, "Campo obligatorio");
-            return true;
+    private boolean verificarNoPersonal() {
+
+        if (UIUtilidad.esInputVacio(tfNoPersonal, lbErrorNoPersonal) == true) {
+            return false;
         }
-        limpiarErrorTextInputControl(input);
-        ocultarMensajeErrorInput(labelError);
-        return false;
+
+        UIUtilidad.limpiarError(tfNoPersonal, lbErrorNoPersonal);
+
+        return true;
     }
 
-    private void mostrarMensajeErrorInput(Label label, String mensaje) {
-        if (label != null && mensaje != null) {
-            label.setText(mensaje);
-            label.setVisible(true);
+    private boolean verificarNombre() {
+
+        if (UIUtilidad.esInputVacio(tfNombre, lbErrorNombre) == true) {
+            return false;
         }
+
+        UIUtilidad.limpiarError(tfNombre, lbErrorNombre);
+
+        return true;
     }
 
-    private void ocultarMensajeErrorInput(Label label) {
-        if (label != null) {
-            label.setText("");
-            label.setVisible(false);
+    private boolean verificarApellidoPaterno() {
+
+        if (UIUtilidad.esInputVacio(tfApPaterno, lbErrorApPaterno) == true) {
+            return false;
         }
+
+        UIUtilidad.limpiarError(tfApPaterno, lbErrorApPaterno);
+
+        return true;
     }
 
-    private void marcarErrorTextInputControl(TextInputControl input) {
-        if (input != null) {
-            input.getStyleClass().add("tf_error");
+    private boolean verificarCurp() {
+
+        if (UIUtilidad.esInputVacio(tfCurp, lbErrorCurp) == true) {
+            return false;
         }
+
+        if (tfCurp.getText().trim().length() != 18) {
+            UIUtilidad.marcarError(tfCurp, lbErrorCurp, "El curp debe tener 18 caracteres");
+            return false;
+        }
+
+        UIUtilidad.limpiarError(tfCurp, lbErrorCurp);
+
+        return true;
     }
 
-    private void limpiarErrorTextInputControl(TextInputControl input) {
-        System.out.println("Input : "  + input.getId());
-        if (input != null) {
-            input.getStyleClass().remove("tf_error");
+    private boolean verificarCorreo() {
+        if (UIUtilidad.esInputVacio(tfCorreo, lbErrorCorreo) == true) {
+            return false;
         }
+
+        if (tfCorreo.getText().trim().matches("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$") == false) {
+            UIUtilidad.marcarError(tfCorreo, lbErrorCorreo, "Formato de correo no valido");
+            return false;
+        }
+
+        UIUtilidad.limpiarError(tfCorreo, lbErrorCorreo);
+
+        return true;
     }
 
-    private boolean verificarReglasCampos() {
-        boolean camposCorrectos = true;
+    private boolean verificarRol() {
+        Rol rolSeleccionado = cbRol.getSelectionModel().getSelectedItem();
+        if (rolSeleccionado == null) {
+            UIUtilidad.mostrarLabelMensajeError(lbErrorRol, "Seleccione un rol");
+            return false;
+        } else {
+            UIUtilidad.ocultarLabelMensajeError(lbErrorRol);
+            if (rolSeleccionado.toString().equals(Constantes.ROL_CONDUCTOR) && UIUtilidad.esInputVacio(tfLicencia, lbErrorLicencia) == true) {
+                return false;
+            }
+        }
 
-        String noPersonal = tfNoPersonal.getText();
-        String correo = tfCorreo.getText().trim();
-        String curp = tfCurp.getText().trim();
-        String nombre = tfNombre.getText().trim();
-        String apellidoPaterno = tfApPaterno.getText().trim();
-        String apellidoMaterno = tfApPaterno.getText().trim();
-        Integer idSucursal = 1;
-        Rol rol = cbRol.getSelectionModel().getSelectedItem();
-        String licencia = null;
+        UIUtilidad.ocultarLabelMensajeError(lbErrorRol);
+        return true;
+    }
+
+    private boolean verificarPassword() {
         String password = obtenerTextoPasswordField("password");
         String confirmarPassword = obtenerTextoPasswordField("confirmarPassword");
 
-        if (!correo.matches("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$")) {
-            marcarErrorTextInputControl(tfCorreo);
-            mostrarMensajeErrorInput(lbErrorCorreo, "Formato de correo no valido");
-            camposCorrectos = false;
-        } else {
-            limpiarErrorTextInputControl(tfCorreo);
-            ocultarMensajeErrorInput(lbErrorCorreo);
-        }
-
-        if (curp.length() != 18) {
-            marcarErrorTextInputControl(tfCurp);
-            mostrarMensajeErrorInput(lbErrorCurp, "Formato de curp no valido");
-            camposCorrectos = false;
-        } else {
-            limpiarErrorTextInputControl(tfCurp);
-            ocultarMensajeErrorInput(lbErrorCurp);
-        }
-
-        System.out.println("password: " + password);
-        System.out.println("Coincide con el patron de contraseña?: " + password.matches("^(?=.*\\p{Lu})(?=.*\\p{Ll})(?=.*\\d).{8,}$"));
         if (!password.matches("^(?=.*\\p{Lu})(?=.*\\p{Ll})(?=.*\\d).{8,}$")) {
-            marcarErrorTextInputControl(tfPassword);
-            marcarErrorTextInputControl(pfPassword);
-            mostrarMensajeErrorInput(lbErrorPassword, "Debe incluir almenos una letra minuscula, una mayuscula y un número");
-            camposCorrectos = false;
-        } else {
-            limpiarErrorTextInputControl(tfPassword);
-            limpiarErrorTextInputControl(pfPassword);
-            ocultarMensajeErrorInput(lbErrorPassword);
-        }
+            UIUtilidad.marcarErrorTextInputControl(tfPassword);
+            UIUtilidad.marcarErrorTextInputControl(pfPassword);
+            UIUtilidad.mostrarLabelMensajeError(lbErrorPassword, "Debe incluir almenos una letra minuscula, una mayuscula y un número");
 
-        if (!confirmarPassword.equalsIgnoreCase(password)) {
-            marcarErrorTextInputControl(tfConfirmarPassword);
-            marcarErrorTextInputControl(pfConfirmarPassword);
-            camposCorrectos = false;
-            if(lbErrorPassword.isVisible() == false){
-                mostrarMensajeErrorInput(lbErrorConfirmarPassword, "La contraseña no coincide");
+            UIUtilidad.limpiarErrorTextInputControl(tfConfirmarPassword);
+            UIUtilidad.limpiarErrorTextInputControl(pfConfirmarPassword);
+            UIUtilidad.ocultarLabelMensajeError(lbErrorConfirmarPassword);
+
+            return false;
+        } else {
+            UIUtilidad.limpiarErrorTextInputControl(tfPassword);
+            UIUtilidad.limpiarErrorTextInputControl(pfPassword);
+            UIUtilidad.ocultarLabelMensajeError(lbErrorPassword);
+
+            if (!confirmarPassword.equals(password)) {
+                UIUtilidad.marcarErrorTextInputControl(tfConfirmarPassword);
+                UIUtilidad.marcarErrorTextInputControl(pfConfirmarPassword);
+                UIUtilidad.mostrarLabelMensajeError(lbErrorConfirmarPassword, "La contraseña no coincide");
+                return false;
+            } else {
+                UIUtilidad.limpiarErrorTextInputControl(tfConfirmarPassword);
+                UIUtilidad.limpiarErrorTextInputControl(pfConfirmarPassword);
+                UIUtilidad.ocultarLabelMensajeError(lbErrorConfirmarPassword);
+                return true;
             }
-        } else {
-            limpiarErrorTextInputControl(tfConfirmarPassword);
-            limpiarErrorTextInputControl(pfConfirmarPassword);
-            ocultarMensajeErrorInput(lbErrorConfirmarPassword);
         }
+    }
 
-        return camposCorrectos;
+    private void registrarColaborador() {
+        String noPersonal = tfNoPersonal.getText();
+        String nombre = tfNombre.getText().trim();
+        String apellidoPaterno = tfApPaterno.getText().trim();
+        String apellidoMaterno = tfApPaterno.getText().trim();
+        String curp = tfCurp.getText().trim();
+        Integer idSucursal = 1;
+        Rol rol = cbRol.getSelectionModel().getSelectedItem();
+        String password = obtenerTextoPasswordField("password");
+
     }
 
     private String obtenerTextoPasswordField(String campo) {
         if (campo == null) {
             return "";
         }
-
         campo = campo.trim().toLowerCase();
-
         switch (campo) {
             case "password":
                 return (pfPassword.isVisible() ? pfPassword.getText().trim() : tfPassword.getText()).trim();
-
             case "confirmarpassword":
                 return (pfConfirmarPassword.isVisible() ? pfConfirmarPassword.getText().trim() : tfConfirmarPassword.getText()).trim();
-
             default:
                 return "";
         }
-    }
-
-    public static void limitarCaracteres(TextInputControl field, int max) {
-        field.setTextFormatter(new TextFormatter<>(change
-                -> change.getControlNewText().length() <= max ? change : null
-        ));
     }
 }

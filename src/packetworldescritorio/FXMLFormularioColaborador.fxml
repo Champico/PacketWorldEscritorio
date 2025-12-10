@@ -110,7 +110,7 @@
                         <Font size="17.0" />
                      </font>
                   </PasswordField>
-                  <ToggleButton fx:id="tbVerConfirmarPassword" layoutX="236.0" mnemonicParsing="false" onAction="#clickVerConfirmarPassword" prefHeight="31.0" prefWidth="29.0" styleClass="btn_ojo">
+                  <ToggleButton fx:id="tbVerConfirmarPassword" layoutX="236.0" mnemonicParsing="false" onAction="#clickVerPassword" prefHeight="31.0" prefWidth="29.0" styleClass="btn_ojo">
                      <graphic>
                         <ImageView fx:id="ivVerConfirmarPassword" fitHeight="30.0" fitWidth="36.0" opacity="0.54" preserveRatio="true">
                            <image>
