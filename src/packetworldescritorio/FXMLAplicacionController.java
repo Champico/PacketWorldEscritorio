@@ -21,12 +21,11 @@ import javafx.stage.StageStyle;
 import packetworldescritorio.interfaz.INavegableChild;
 import packetworldescritorio.interfaz.INavegacion;
 import packetworldescritorio.pojo.Colaborador;
+import packetworldescritorio.pojo.Session;
 import packetworldescritorio.utilidad.Constantes;
 import packetworldescritorio.utilidad.Utilidades;
 
 public class FXMLAplicacionController implements Initializable, INavegacion {
-
-    private Colaborador colaboradorSesion;
 
     @FXML
     private Label lbNombre;
@@ -43,7 +42,7 @@ public class FXMLAplicacionController implements Initializable, INavegacion {
     }
 
     public void cargarInformacion(Colaborador colaborador) {
-        colaboradorSesion = colaborador;
+       Session.getInstance().setUsuarioActual(colaborador);
         lbNombre.setText(colaborador.getNombre() + " " + colaborador.getApellidoPaterno() + " " + colaborador.getApellidoMaterno());
         lbRol.setText("Rol: " + colaborador.getRol());
         showScreen("FXMLPrincipal.fxml");
@@ -76,7 +75,7 @@ public class FXMLAplicacionController implements Initializable, INavegacion {
     private void clickCerrarSesion(ActionEvent event) {
         Boolean confirmarCerrarSesion = Utilidades.mostrarAlertaConfirmacion("Cerrar Sesión", "¿Estás seguro que quieres cerrar sesión?");
         if (confirmarCerrarSesion) {
-            colaboradorSesion = null;
+            Session.getInstance().limpiarSesion();
             irPantallaInicioSesion();
         }
     }

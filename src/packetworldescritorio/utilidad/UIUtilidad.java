@@ -1,5 +1,5 @@
 /** @authores  Pipe, Kevin, champ */
-package packetworldescritorio.validacion;
+package packetworldescritorio.utilidad;
 
 import javafx.scene.control.Label;
 import javafx.scene.control.TextFormatter;
@@ -89,13 +89,13 @@ public class UIUtilidad {
 
     public static void marcarErrorTextInputControl(TextInputControl input) {
         if (input != null) {
-            input.getStyleClass().add("tf_error");
+            input.getStyleClass().add("input_error");
         }
     }
 
     public static void limpiarErrorTextInputControl(TextInputControl input) {
         if (input != null) {
-            input.getStyleClass().remove("tf_error");
+            input.getStyleClass().remove("input_error");
         }
     }
 

@@ -160,5 +160,12 @@ public class Colaborador {
     public void setNumLicencia(String numLicencia) {
         this.numLicencia = numLicencia;
     }
+
+    @Override
+    public String toString() {
+        return "Colaborador{" + "idColaborador=" + idColaborador + ", noPersonal=" + noPersonal + ", nombre=" + nombre + ", apellidoPaterno=" + apellidoPaterno + ", apellidoMaterno=" + apellidoMaterno + ", correo=" + correo + ", password=" + password + ", curp=" + curp + ", idSucursal=" + idSucursal + ", nombreSucursal=" + nombreSucursal + ", idRol=" + idRol + ", rol=" + rol + ", foto=" + foto + ", fotoBase64=" + fotoBase64 + ", numLicencia=" + numLicencia + '}';
+    }
+    
+    
     
 }

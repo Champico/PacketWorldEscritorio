@@ -21,12 +21,16 @@ import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import packetworldescritorio.dominio.CatalogoImp;
+import packetworldescritorio.dominio.ColaboradorImp;
+import packetworldescritorio.dto.Respuesta;
 import packetworldescritorio.interfaz.INavegableChild;
 import packetworldescritorio.interfaz.INavegacion;
+import packetworldescritorio.pojo.Colaborador;
 import packetworldescritorio.utilidad.Constantes;
 import packetworldescritorio.pojo.Rol;
+import packetworldescritorio.pojo.Session;
 import packetworldescritorio.utilidad.Utilidades;
-import packetworldescritorio.validacion.UIUtilidad;
+import packetworldescritorio.utilidad.UIUtilidad;
 
 public class FXMLFormularioColaboradorController implements Initializable, INavegableChild {
 
@@ -104,18 +108,39 @@ public class FXMLFormularioColaboradorController implements Initializable, INave
 
     @FXML
     private void clickRegresar(ActionEvent event) {
+        regresar();
+    }
+    
+    private void regresar(){
         nav.navegar(Constantes.MODULO_COLABORADORES);
     }
 
     @FXML
     private void clickGuardar(ActionEvent event) {
         if (verificarCampos()) {
-            System.out.println("Exito");
+
+            int idSucursal = Session.getInstance().getUsuarioActual().getIdSucursal();
+            Rol rol = cbRol.getSelectionModel().getSelectedItem();
+            String password = obtenerTextoPasswordField("password");
+
+            Colaborador colaborador = new Colaborador();
+            colaborador.setNoPersonal(tfNoPersonal.getText());
+            colaborador.setNombre(tfNombre.getText().trim());
+            colaborador.setApellidoPaterno(tfApPaterno.getText().trim());
+            colaborador.setApellidoMaterno(tfApPaterno.getText().trim());
+            colaborador.setCurp(tfCurp.getText().trim());
+            colaborador.setCorreo(tfCorreo.getText().trim());
+            colaborador.setIdSucursal(idSucursal);
+            colaborador.setIdRol(rol.getIdRol());
+            colaborador.setPassword(password);
+
+            registrarColaborador(colaborador);
         }
     }
 
     @FXML
     private void clicCancelar(ActionEvent event) {
+       regresar();
     }
 
     @FXML
@@ -333,16 +358,16 @@ public class FXMLFormularioColaboradorController implements Initializable, INave
         }
     }
 
-    private void registrarColaborador() {
-        String noPersonal = tfNoPersonal.getText();
-        String nombre = tfNombre.getText().trim();
-        String apellidoPaterno = tfApPaterno.getText().trim();
-        String apellidoMaterno = tfApPaterno.getText().trim();
-        String curp = tfCurp.getText().trim();
-        Integer idSucursal = 1;
-        Rol rol = cbRol.getSelectionModel().getSelectedItem();
-        String password = obtenerTextoPasswordField("password");
+    private void registrarColaborador(Colaborador colaborador) {
+        System.out.println("El nuevo usuario es " + colaborador);
 
+        Respuesta respuesta = ColaboradorImp.registrar(colaborador);
+        if (!respuesta.isError()) {
+            Utilidades.mostrarAlertaSimple("Colaborador registrado", respuesta.getMensaje(), Alert.AlertType.INFORMATION);
+            regresar();
+        } else {
+            Utilidades.mostrarAlertaSimple("Error al registrar", respuesta.getMensaje(), Alert.AlertType.ERROR);
+        }
     }
 
     private String obtenerTextoPasswordField(String campo) {

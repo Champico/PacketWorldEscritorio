@@ -11,6 +11,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -55,12 +56,11 @@ public class FXMLInicioSesionController implements Initializable {
 
     @FXML
     private void clickIniciarSesion(ActionEvent event) {
-
-        if (!hayCamposVacios()) {
-            btn_iniciarSesion.setDisable(true);
+        
+        btn_iniciarSesion.setDisable(true);
+        if (!hayCamposVacios()) { 
             String noPersonal = tfNoPersonal.getText().trim();
-            String password = pfPassword.getText().trim();
-
+            String password =  obtenerPassword();
             verificarCredenciales(noPersonal, password);
         } else {
             btn_iniciarSesion.setDisable(false);
@@ -106,7 +106,7 @@ public class FXMLInicioSesionController implements Initializable {
     private boolean hayCamposVacios() {
         boolean hayCamposVacios = false;
         String noPersonal = tfNoPersonal.getText();
-        String password = pfPassword.isVisible() ? pfPassword.getText().trim() : tfPassword.getText().trim();
+        String password = obtenerPassword();
 
         if (noPersonal.isEmpty()) {
             hayCamposVacios = true;
@@ -155,7 +155,6 @@ public class FXMLInicioSesionController implements Initializable {
 
     private void irPantallaInicio(Colaborador colaborador) {
         try {
-
             /* Cargar el FXML*/
             FXMLLoader cargador = new FXMLLoader(getClass().getResource(Constantes.PG_APLICACION));
             Parent vista = cargador.load();
@@ -184,8 +183,14 @@ public class FXMLInicioSesionController implements Initializable {
             stPrincipal.show();
 
         } catch (IOException ex) {
-            ex.printStackTrace();
+            Utilidades.mostrarAlertaSimple("Error", "Ocurrio un error al cargar el sistema ", Alert.AlertType.ERROR);
+            Platform.exit();
         }
+    }
+    
+    
+    private String obtenerPassword(){
+         return pfPassword.isVisible() ? pfPassword.getText().trim() : tfPassword.getText().trim();
     }
 
 }

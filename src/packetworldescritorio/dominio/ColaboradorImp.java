@@ -44,12 +44,12 @@ public class ColaboradorImp {
         }
         return respuesta;
     }
-/*
+
     public static Respuesta registrar(Colaborador colaborador) {
         Respuesta respuesta = new Respuesta();
-        String URL = Constantes.URL_WS + "/profesor/registrar";
+        String URL = Constantes.URL_WS + Constantes.WS_COLABORADOR_REGISTRAR;
         Gson gson = new Gson();
-        String parametrosJSON = gson.toJson(profesor);
+        String parametrosJSON = gson.toJson(colaborador);
 
         RespuestaHTTP respuestaAPI = ConexionAPI.peticionBody(URL, Constantes.PETICION_POST, parametrosJSON, Constantes.APPLICATION_JSON);
 
@@ -74,7 +74,7 @@ public class ColaboradorImp {
 
         return respuesta;
     }
-
+/*
     public static Respuesta verificarNoPersonal(String noPersonal) {
         Respuesta respuesta = new Respuesta();
         String URL = Constantes.URL_WS + "/profesor/verificar/noPersonal";

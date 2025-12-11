@@ -72,15 +72,23 @@
             </Label>
             <AnchorPane layoutX="51.0" layoutY="389.0">
                <children>
-                  <PasswordField fx:id="pfPassword" prefHeight="40.0" prefWidth="281.0" promptText="●●●●●●●●" styleClass="pf_password">
+                  <PasswordField fx:id="pfPassword" prefHeight="40.0" prefWidth="281.0" promptText="●●●●●●●●">
                      <font>
                         <Font size="17.0" />
                      </font>
+                     <styleClass>
+                        <String fx:value="input_general" />
+                        <String fx:value="input_password" />
+                     </styleClass>
                   </PasswordField>
-                  <TextField fx:id="tfPassword" prefHeight="40.0" prefWidth="281.0" promptText="●●●●●●●●" styleClass="pf_password" visible="false">
+                  <TextField fx:id="tfPassword" prefHeight="40.0" prefWidth="281.0" promptText="●●●●●●●●" visible="false">
                      <font>
                         <Font size="17.0" />
                      </font>
+                     <styleClass>
+                        <String fx:value="input_general" />
+                        <String fx:value="input_password" />
+                     </styleClass>
                   </TextField>
                   <ToggleButton fx:id="tbVerPassword" layoutX="236.0" mnemonicParsing="false" onAction="#clickVerPassword" prefHeight="31.0" prefWidth="29.0" styleClass="btn_ojo">
                      <graphic>
@@ -100,15 +108,23 @@
             </Label>
             <AnchorPane layoutX="355.0" layoutY="389.0">
                <children>
-                  <TextField fx:id="tfConfirmarPassword" prefHeight="40.0" prefWidth="281.0" promptText="●●●●●●●●" styleClass="pf_password" visible="false">
+                  <TextField fx:id="tfConfirmarPassword" prefHeight="40.0" prefWidth="281.0" promptText="●●●●●●●●" visible="false">
                      <font>
                         <Font size="17.0" />
                      </font>
+                     <styleClass>
+                        <String fx:value="input_general" />
+                        <String fx:value="input_password" />
+                     </styleClass>
                   </TextField>
-                  <PasswordField fx:id="pfConfirmarPassword" prefHeight="40.0" prefWidth="281.0" promptText="●●●●●●●●" styleClass="pf_password">
+                  <PasswordField fx:id="pfConfirmarPassword" prefHeight="40.0" prefWidth="281.0" promptText="●●●●●●●●">
                      <font>
                         <Font size="17.0" />
                      </font>
+                     <styleClass>
+                        <String fx:value="input_general" />
+                        <String fx:value="input_password" />
+                     </styleClass>
                   </PasswordField>
                   <ToggleButton fx:id="tbVerConfirmarPassword" layoutX="236.0" mnemonicParsing="false" onAction="#clickVerPassword" prefHeight="31.0" prefWidth="29.0" styleClass="btn_ojo">
                      <graphic>
