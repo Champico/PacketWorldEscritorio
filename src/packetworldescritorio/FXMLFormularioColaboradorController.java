@@ -176,7 +176,7 @@ public class FXMLFormularioColaboradorController implements Initializable, INave
             tf.setText(pf.getText());
             tf.setVisible(true);
             pf.setVisible(false);
-                        try {
+            try {
                 iv.setImage(new Image(getClass().getResource("/images/visible.png").toExternalForm()));
             } catch (Exception ex) {
             }
@@ -184,7 +184,7 @@ public class FXMLFormularioColaboradorController implements Initializable, INave
             pf.setText(tf.getText());
             tf.setVisible(false);
             pf.setVisible(true);
-                        try {
+            try {
                 iv.setImage(new Image(getClass().getResource("/images/oculto.png").toExternalForm()));
             } catch (Exception ex) {
             }

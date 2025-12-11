@@ -74,26 +74,22 @@ public class FXMLInicioSesionController implements Initializable {
 
     @FXML
     private void clickVerPassword(ActionEvent event) {
+        tbVerPassword.setDisable(true);
         try {
             if (tbVerPassword.isSelected()) {
-                ivVisible.setImage(new Image(
-                        getClass().getResource("/images/oculto.png").toExternalForm()
-                ));
+                ivVisible.setImage(new Image(getClass().getResource("/images/oculto.png").toExternalForm()));
                 tfPassword.setText(pfPassword.getText());
                 tfPassword.setVisible(true);
                 pfPassword.setVisible(false);
             } else {
-                ivVisible.setImage(new Image(
-                        getClass().getResource("/images/visible.png").toExternalForm()
-                ));
+                ivVisible.setImage(new Image(getClass().getResource("/images/visible.png").toExternalForm()));
                 pfPassword.setText(tfPassword.getText());
                 tfPassword.setVisible(false);
                 pfPassword.setVisible(true);
             }
         } catch (Exception ex) {
-            ex.printStackTrace();
         }
-
+        tbVerPassword.setDisable(false);
     }
 
     private void verificarCredenciales(String noPersonal, String password) {
@@ -110,7 +106,7 @@ public class FXMLInicioSesionController implements Initializable {
     private boolean hayCamposVacios() {
         boolean hayCamposVacios = false;
         String noPersonal = tfNoPersonal.getText();
-        String password = pfPassword.getText();
+        String password = pfPassword.isVisible() ? pfPassword.getText().trim() : tfPassword.getText().trim();
 
         if (noPersonal.isEmpty()) {
             hayCamposVacios = true;

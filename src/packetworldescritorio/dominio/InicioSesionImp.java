@@ -14,7 +14,7 @@ public class InicioSesionImp {
         public static RSAutenticacionColaborador verificarCredenciales(String noPersonal, String password) {
         RSAutenticacionColaborador respuesta = new RSAutenticacionColaborador();
         String parametros = "noPersonal=" + noPersonal + "&password=" + password;
-        String URL = Constantes.URL_WS + Constantes.WS_INICIO_SESION;
+        String URL = Constantes.URL_WS + Constantes.WS_AUTENTICACION_COLABORADOR;
          
             System.out.println(URL);
             

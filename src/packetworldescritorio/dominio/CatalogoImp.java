@@ -16,7 +16,7 @@ import java.util.List;
 public class CatalogoImp {
     public static HashMap<String, Object> obtenerRolesSistema(){
         HashMap<String, Object> respuesta = new HashMap<>();
-        String URL = Constantes.URL_WS+Constantes.WSA_CATALOGO_ROLES;
+        String URL = Constantes.URL_WS+Constantes.WS_CATALOGO_ROLES;
         RespuestaHTTP respuestaAPI = ConexionAPI.peticionGET(URL);
         if(respuestaAPI.getCodigo() == HttpURLConnection.HTTP_OK){
                 Gson gson = new Gson();
