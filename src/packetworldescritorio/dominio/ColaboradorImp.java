@@ -12,9 +12,11 @@ import packetworldescritorio.utilidad.Constantes;
 import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
+import packetworldescritorio.utilidad.Utilidades;
 
 public class ColaboradorImp {
 
@@ -133,4 +135,24 @@ public class ColaboradorImp {
         return respuesta;
     }
 
+    public static byte[] obtenerFotoBytes(int idColaborador) {
+        byte[] imagen = null;
+        String URL = Constantes.URL_WS + Constantes.WS_COLABORADOR_OBTENER_FOTO + "/" + idColaborador;
+
+        RespuestaHTTP respuestaAPI = ConexionAPI.peticionGET(URL);
+
+        Gson gson = new Gson();
+
+        if (respuestaAPI.getCodigo() == HttpURLConnection.HTTP_OK) {
+            Colaborador colaborador = gson.fromJson(respuestaAPI.getContenido(), Colaborador.class);
+            if (colaborador != null && colaborador.getFotoBase64() != null && !colaborador.getFotoBase64().isEmpty()) {
+                try {
+                    imagen = Utilidades.base64ABits(colaborador.getFotoBase64());
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            }
+        }
+        return imagen;
+    }
 }

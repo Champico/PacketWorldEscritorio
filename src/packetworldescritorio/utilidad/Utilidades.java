@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.text.Normalizer;
+import java.util.Base64;
 import java.util.Optional;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
@@ -40,7 +41,7 @@ public class Utilidades {
     }
 
     /**
-     * Normaliza un texto eliminando acentos y marcas diacríticas, convirtiendo
+     * Elimina acentos y marcas diacríticas, convirtiendo
      * caracteres como á, é, í, ó, ú, ü, ñ, Á, É, Í, Ó, Ú en sus equivalentes
      * sin acento. También transforma la cadena resultante a minúsculas.
      *
@@ -48,7 +49,7 @@ public class Utilidades {
      * Esta función utiliza la normalización Unicode en la forma NFD
      * (Normalization Form Decomposition), la cual separa cada carácter
      * acentuado en su forma base más las marcas de acento. Posteriormente, se
-     * eliminan todas las marcas combinadas de tipo {@code \p{M}}, que
+     * eliminan todas las marcas de tipo {@code \p{M}}, que
      * representan los acentos, diéresis, tildes y otros signos diacríticos.
      * </p>
      *
@@ -63,5 +64,25 @@ public class Utilidades {
         String normal = Normalizer.normalize(texto, Normalizer.Form.NFD);
         return normal.replaceAll("\\p{M}", "").toLowerCase();
     }
+    
+    
+    
+    public static byte[] base64ABits(String base64){
+        byte[] bytes = null;
+        base64 = normalizarTextoBase64(base64);
+        bytes = Base64.getDecoder().decode(base64);
+        return bytes;
+    }
+    
+    public static String normalizarTextoBase64(String base64){
+         return base64
+            .replaceAll("\\s", "")  // elimina \n \r \t y espacios
+            .replaceAll("^data:[^,]*,", ""); // elimina encabezado data:image/png;base64
+    }
+    
+    
+    
+    
+    
 
 }

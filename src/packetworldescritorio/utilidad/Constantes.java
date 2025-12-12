@@ -11,8 +11,9 @@ public class Constantes {
     public static final String WS_COLABORADOR_REGISTRAR = "colaborador/registrar";
     public static final String WS_COLABORADOR_EDITAR = "colaborador/editar";
     public static final String WS_COLABORADOR_ELIMINAR = "colaborador/eliminar";
-    public static final String WS_COLABORADOR_SUBIR_FOTO = "colaborador/subir-foto";
-    public static final String WS_COLABORADOR_OBTENER_FOTO = "colaborador/obtener-foto";
+    public static final String WS_COLABORADOR_SUBIR_FOTO = "colaborador/subirFoto";
+    public static final String WS_COLABORADOR_OBTENER_FOTO = "colaborador/obtenerFoto";
+    
     
 
     //Peticiones

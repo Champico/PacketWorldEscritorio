@@ -1,12 +1,17 @@
 /** @authores  Pipe, Kevin, champ */
 package packetworldescritorio;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -20,6 +25,8 @@ import javafx.scene.control.TextInputControl;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.FileChooser;
+import javax.imageio.ImageIO;
 import packetworldescritorio.dominio.CatalogoImp;
 import packetworldescritorio.dominio.ColaboradorImp;
 import packetworldescritorio.dto.Respuesta;
@@ -33,8 +40,6 @@ import packetworldescritorio.utilidad.Utilidades;
 import packetworldescritorio.utilidad.UIUtilidad;
 
 public class FXMLFormularioColaboradorController implements Initializable, INavegableChild {
-
-    Colaborador colaboradorEdicion = null;
 
     @FXML
     private TextField tfNoPersonal;
@@ -86,9 +91,6 @@ public class FXMLFormularioColaboradorController implements Initializable, INave
     private Label lbErrorCurp;
     @FXML
     private Label lbErrorCorreo;
-
-    private ObservableList<Rol> roles;
-
     @FXML
     private Label lbLicencia;
     @FXML
@@ -99,6 +101,16 @@ public class FXMLFormularioColaboradorController implements Initializable, INave
     private Label lbPassword;
     @FXML
     private Label lbConfirmarPassword;
+    @FXML
+    private ImageView ivFoto;
+
+    private Colaborador colaboradorEdicion = null;
+    private ObservableList<Rol> roles;
+    private File foto;
+    private byte[] imagenBytes = null;
+    private boolean fotoEditada = false;
+    @FXML
+    private Label lbTitulo;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -110,6 +122,9 @@ public class FXMLFormularioColaboradorController implements Initializable, INave
     public void inicializarDatos(Colaborador colaboradorEdicion) {
         this.colaboradorEdicion = colaboradorEdicion;
         if (colaboradorEdicion != null) {
+            
+            lbTitulo.setText("Editar colaborador");
+            
             tfNoPersonal.setText(colaboradorEdicion.getNoPersonal());
             tfNombre.setText(colaboradorEdicion.getNombre());
             tfApPaterno.setText(colaboradorEdicion.getApellidoPaterno());
@@ -121,13 +136,14 @@ public class FXMLFormularioColaboradorController implements Initializable, INave
             cbRol.setDisable(true);
 
             int posicionRol = obtenerPosicionRol(colaboradorEdicion.getIdRol());
-            
+
             cbRol.getSelectionModel().select(posicionRol);
 
             if (colaboradorEdicion.getIdRol() == Constantes.ID_ROL_CONDUCTOR) {
                 tfLicencia.setText(colaboradorEdicion.getNumLicencia());
             }
 
+            cargarFoto();
             ocultarCamposPassword();
         }
     }
@@ -152,6 +168,11 @@ public class FXMLFormularioColaboradorController implements Initializable, INave
 
     private void regresar() {
         nav.navegar(Constantes.MODULO_COLABORADORES);
+    }
+
+    @FXML
+    private void clickSeleccionarFoto(ActionEvent event) {
+        mostrarDialogoSeleccion();
     }
 
     @FXML
@@ -184,7 +205,7 @@ public class FXMLFormularioColaboradorController implements Initializable, INave
     }
 
     @FXML
-    private void clicCancelar(ActionEvent event) {
+    private void clickCancelar(ActionEvent event) {
         regresar();
     }
 
@@ -470,7 +491,6 @@ public class FXMLFormularioColaboradorController implements Initializable, INave
         tbVerConfirmarPassword.setVisible(false);
     }
 
-    
     private int obtenerPosicionRol(int idRol) {
         for (int i = 0; i < roles.size(); i++) {
             if (roles.get(i).getIdRol() == idRol) {
@@ -480,5 +500,48 @@ public class FXMLFormularioColaboradorController implements Initializable, INave
         return -1;
     }
 
+    private void mostrarDialogoSeleccion() {
+        FileChooser dialogo = new FileChooser();
+        dialogo.setTitle("Selecciona una foto");
+        FileChooser.ExtensionFilter filtroImg = new FileChooser.ExtensionFilter("Archivos de imagen (.jpg, .png) ", "*.jpg", "*.png");
+        dialogo.getExtensionFilters().add(filtroImg);
+        foto = dialogo.showOpenDialog(ivFoto.getParent().getScene().getWindow());
+
+        if (foto != null) {
+            mostrarFoto(foto);
+            fotoEditada = true;
+        }
+    }
+
+    private void mostrarFoto(File file) {
+        try {
+            BufferedImage bufferImg = ImageIO.read(file);
+            Image imagen = SwingFXUtils.toFXImage(bufferImg, null);
+            ivFoto.setImage(imagen);
+        } catch (IOException ex) {
+            Utilidades.mostrarAlertaSimple("Error", "Error al cargar la foto", Alert.AlertType.ERROR);
+        }
+    }
+
+    private void mostrarFoto(byte[] foto) {
+        try {
+            ByteArrayInputStream bis = new ByteArrayInputStream(foto);
+            Image imagen = new Image(bis);
+            ivFoto.setImage(imagen);
+        } catch (Exception ex) {
+        }
+    }
+
+    private void cargarFoto() {
+        imagenBytes = ColaboradorImp.obtenerFotoBytes(colaboradorEdicion.getIdColaborador());
+        if (imagenBytes != null) {
+            mostrarFoto(imagenBytes);
+        }
+    }
     
+    
+    private void subirFoto(byte[] foto){
+        
+    }
+
 }
