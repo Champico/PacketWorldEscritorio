@@ -42,33 +42,20 @@ public class FXMLAplicacionController implements Initializable, INavegacion {
     }
 
     public void cargarInformacion(Colaborador colaborador) {
-       Session.getInstance().setUsuarioActual(colaborador);
+        Session.getInstance().setUsuarioActual(colaborador);
         lbNombre.setText(colaborador.getNombre() + " " + colaborador.getApellidoPaterno() + " " + colaborador.getApellidoMaterno());
         lbRol.setText("Rol: " + colaborador.getRol());
         showScreen("FXMLPrincipal.fxml");
     }
 
-    public void showScreen(String fxml) {
-        try {
-            FXMLLoader cargador = new FXMLLoader(getClass().getResource(fxml));
-            Node pantalla = cargador.load();
-
-            Object controlador = cargador.getController();
-
-            if (controlador instanceof INavegableChild) {
-                INavegableChild child = (INavegableChild) controlador;
-                child.setNavegador(this);
-            }
-
-            contentArea.getChildren().setAll(pantalla);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
     @Override
     public void navegar(String fxml) {
         showScreen(fxml);
+    }
+
+    @Override
+    public void navegar(String fxml, Object object) {
+        showScreen(fxml, object);
     }
 
     @FXML
@@ -106,6 +93,43 @@ public class FXMLAplicacionController implements Initializable, INavegacion {
             Utilidades.mostrarAlertaSimple("Error", "Ocurrio un error inesperado", Alert.AlertType.ERROR);
             ex.printStackTrace();
             Platform.exit();
+        }
+    }
+
+    public void showScreen(String fxml) {
+        try {
+            FXMLLoader cargador = new FXMLLoader(getClass().getResource(fxml));
+            Node pantalla = cargador.load();
+
+            Object controlador = cargador.getController();
+
+            if (controlador instanceof INavegableChild) {
+                INavegableChild child = (INavegableChild) controlador;
+                child.setNavegador(this);
+            }
+
+            contentArea.getChildren().setAll(pantalla);
+        } catch (IOException e) {
+            Utilidades.mostrarAlertaSimple("Error al cargar", "Ocurrio un error al cargar la página", Alert.AlertType.ERROR);
+        }
+    }
+
+    public void showScreen(String fxml, Object object) {
+        try {
+            FXMLLoader cargador = new FXMLLoader(getClass().getResource(fxml));
+            Node pantalla = cargador.load();
+
+            Object controlador = cargador.getController();
+
+            if (controlador instanceof INavegableChild) {
+                INavegableChild child = (INavegableChild) controlador;
+                child.setNavegador(this);
+                child.setObject(object);
+            }
+
+            contentArea.getChildren().setAll(pantalla);
+        } catch (IOException e) {
+            Utilidades.mostrarAlertaSimple("Error al cargar", "Ocurrio un error al cargar la página", Alert.AlertType.ERROR);
         }
     }
 

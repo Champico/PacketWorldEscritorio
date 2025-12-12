@@ -19,4 +19,9 @@ public class FXMLModuloSucursalesController implements Initializable, INavegable
     public void setNavegador(INavegacion nav) {
         this.nav = nav;
     }
+
+    @Override
+    public void setObject(Object object) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

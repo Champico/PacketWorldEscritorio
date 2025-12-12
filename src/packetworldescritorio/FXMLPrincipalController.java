@@ -50,4 +50,9 @@ public class FXMLPrincipalController implements Initializable, INavegableChild {
         nav.navegar(Constantes.MODULO_CLIENTES);
     }
 
+    @Override
+    public void setObject(Object object) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

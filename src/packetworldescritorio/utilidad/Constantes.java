@@ -1,3 +1,4 @@
+/** @authores  Pipe, Kevin, champ */
 package packetworldescritorio.utilidad;
 
 public class Constantes {
@@ -8,6 +9,10 @@ public class Constantes {
     public static final String WS_CATALOGO_ROLES = "catalogo/obtener-roles";
     public static final String WS_COLABORADOR_OBTENER_TODOS = "colaborador/obtener";
     public static final String WS_COLABORADOR_REGISTRAR = "colaborador/registrar";
+    public static final String WS_COLABORADOR_EDITAR = "colaborador/editar";
+    public static final String WS_COLABORADOR_ELIMINAR = "colaborador/eliminar";
+    public static final String WS_COLABORADOR_SUBIR_FOTO = "colaborador/subir-foto";
+    public static final String WS_COLABORADOR_OBTENER_FOTO = "colaborador/obtener-foto";
     
 
     //Peticiones

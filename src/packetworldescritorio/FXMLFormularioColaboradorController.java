@@ -34,6 +34,8 @@ import packetworldescritorio.utilidad.UIUtilidad;
 
 public class FXMLFormularioColaboradorController implements Initializable, INavegableChild {
 
+    Colaborador colaboradorEdicion = null;
+
     @FXML
     private TextField tfNoPersonal;
     @FXML
@@ -101,17 +103,42 @@ public class FXMLFormularioColaboradorController implements Initializable, INave
         configurarMaximoNumeroCaracteres();
     }
 
+    public void inicializarDatos(Colaborador colaboradorEdicion) {
+        this.colaboradorEdicion = colaboradorEdicion;
+        if (colaboradorEdicion != null) {
+            tfNoPersonal.setText(colaboradorEdicion.getNoPersonal());
+            tfNombre.setText(colaboradorEdicion.getNombre());
+            tfApPaterno.setText(colaboradorEdicion.getApellidoPaterno());
+            tfApMaterno.setText(colaboradorEdicion.getApellidoMaterno());
+            int posicionRol = colaboradorEdicion.getIdRol();
+            cbRol.getSelectionModel().select(posicionRol);
+
+            tfNoPersonal.setDisable(true);
+            cbRol.setDisable(true);
+
+            ocultarCamposPassword();
+        }
+    }
+
     @Override
     public void setNavegador(INavegacion nav) {
         this.nav = nav;
+    }
+
+    @Override
+    public void setObject(Object object) {
+        if(object instanceof Colaborador){
+            Colaborador colaborador = (Colaborador) object;
+            inicializarDatos(colaborador);
+        }
     }
 
     @FXML
     private void clickRegresar(ActionEvent event) {
         regresar();
     }
-    
-    private void regresar(){
+
+    private void regresar() {
         nav.navegar(Constantes.MODULO_COLABORADORES);
     }
 
@@ -127,7 +154,7 @@ public class FXMLFormularioColaboradorController implements Initializable, INave
             colaborador.setNoPersonal(tfNoPersonal.getText());
             colaborador.setNombre(tfNombre.getText().trim());
             colaborador.setApellidoPaterno(tfApPaterno.getText().trim());
-            colaborador.setApellidoMaterno(tfApPaterno.getText().trim());
+            colaborador.setApellidoMaterno(tfApMaterno.getText().trim());
             colaborador.setCurp(tfCurp.getText().trim());
             colaborador.setCorreo(tfCorreo.getText().trim());
             colaborador.setIdSucursal(idSucursal);
@@ -140,7 +167,7 @@ public class FXMLFormularioColaboradorController implements Initializable, INave
 
     @FXML
     private void clicCancelar(ActionEvent event) {
-       regresar();
+        regresar();
     }
 
     @FXML
@@ -384,4 +411,15 @@ public class FXMLFormularioColaboradorController implements Initializable, INave
                 return "";
         }
     }
+
+    private void ocultarCamposPassword() {
+          tfPassword.setVisible(false);
+          pfPassword.setVisible(false);
+          tbVerPassword.setVisible(false);
+          
+          tfConfirmarPassword.setVisible(false);
+          pfConfirmarPassword.setVisible(false);
+          tbVerConfirmarPassword.setVisible(false);
+    }
+
 }

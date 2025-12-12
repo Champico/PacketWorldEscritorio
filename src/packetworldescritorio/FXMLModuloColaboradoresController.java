@@ -1,4 +1,4 @@
-/** @author champico */
+/** @authores  Pipe, Kevin, champ */
 package packetworldescritorio;
 
 
@@ -26,6 +26,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import packetworldescritorio.dominio.ColaboradorImp;
+import packetworldescritorio.dto.Respuesta;
 import packetworldescritorio.interfaz.INavegableChild;
 import packetworldescritorio.interfaz.INavegacion;
 import packetworldescritorio.interfaz.INotificador;
@@ -105,29 +106,29 @@ public class FXMLModuloColaboradoresController implements Initializable, INotifi
 
     @FXML
     private void clickIrEditar(ActionEvent event) {
-      /*  Profesor profesor = tvProfesores.getSelectionModel().getSelectedItem();
-        if (profesor != null) {
-            irFormulario(profesor);
+      Colaborador colaborador = tvColaboradores.getSelectionModel().getSelectedItem();
+        if (colaborador != null) {
+            irFormulario(colaborador);
         } else {
-            Utilidades.mostrarAlertaSimple("Selecciona profesor", "Para editar la información d eun profesor, debes seleciconarlo primero de la tabla", Alert.AlertType.WARNING);
-        }*/
+            Utilidades.mostrarAlertaSimple("Selecciona un colaborador", "Para editar la información de un colaborador, debes seleciconarlo primero de la tabla", Alert.AlertType.WARNING);
+        }
     }
 
     @FXML
     private void clickEliminar(ActionEvent event) {
-        /*Profesor profesor = tvProfesores.getSelectionModel().getSelectedItem();
-        if (profesor != null) {
-            Boolean confirmarOperacion = Utilidades.mostrarAlertaConfirmacion("Eliminar profesor", "¿Estas seguro de que quieres eliminar el registro del profesor(a) " + profesor.getNombre() + " " + profesor.getApellidoPaterno() + " " + profesor.getApellidoMaterno() + " ?" + "\n Al eliminar un registro no podras recuperar la información posteriormente");
+        Colaborador colaborador = tvColaboradores.getSelectionModel().getSelectedItem();
+        if (colaborador != null) {
+            Boolean confirmarOperacion = Utilidades.mostrarAlertaConfirmacion("Eliminar colaborador", "¿Estas seguro de que quieres eliminar el registro del colaborador " + (colaborador.getNombre() != null ? colaborador.getNombre() : "") + " " + (colaborador.getApellidoPaterno() != null ? colaborador.getApellidoPaterno(): "") + " " + (colaborador.getApellidoMaterno() != null ? colaborador.getApellidoMaterno() : "") + " ?" + "\n Al eliminar un registro no podras recuperar la información posteriormente");
             if (confirmarOperacion) {
-                eliminarProfesor(profesor.getIdProfesor());
+               eliminarProfesor(colaborador.getIdColaborador());
             }
         } else {
             Utilidades.mostrarAlertaSimple("Selecciona profesor", "Para eliminar un profesor, debe seleccionarlo de la tabla", Alert.AlertType.WARNING);
-        }*/
+        }
     }
 
     private void irFormulario(Colaborador colaborador) {
-        nav.navegar(Constantes.PG_FORMULARIO_COLABORADOR);
+        nav.navegar(Constantes.PG_FORMULARIO_COLABORADOR, colaborador);
     }
 
     @Override
@@ -136,13 +137,13 @@ public class FXMLModuloColaboradoresController implements Initializable, INotifi
     }
 
     private void eliminarProfesor(int idProfesor) {
-        /*Respuesta respuesta = ProfesorImp.eliminar(idProfesor);
+        Respuesta respuesta = ColaboradorImp.eliminar(idProfesor);
         if (!respuesta.isError()) {
             Utilidades.mostrarAlertaSimple("Registro eliminado", "El registro del profesor(a) fue eliminado correctamente", Alert.AlertType.INFORMATION);
             cargarInformaciónProfesores();
         } else {
             Utilidades.mostrarAlertaSimple("Error al eliminar", respuesta.getMensaje(), Alert.AlertType.ERROR);
-        }*/
+        }
     }
 
 
@@ -162,6 +163,11 @@ public class FXMLModuloColaboradoresController implements Initializable, INotifi
             ex.printStackTrace();
         }
 */
+    }
+
+    @Override
+    public void setObject(Object object) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 
