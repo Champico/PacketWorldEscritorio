@@ -33,6 +33,10 @@ public class UIUtilidad {
      * algún texto.
      */
     public static boolean esInputVacio(TextInputControl input, Label labelError) {
+        if(input == null){
+            return true;
+        }
+        
         String valor = input.getText().trim();
         if (valor.isEmpty()) {
             marcarError(input, labelError, "Campo obligatorio");

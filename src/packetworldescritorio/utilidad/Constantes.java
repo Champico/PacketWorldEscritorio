@@ -53,5 +53,6 @@ public class Constantes {
     
     //Roles
     public static final String ROL_CONDUCTOR = "Conductor";
+    public static final int ID_ROL_CONDUCTOR = 3;
     
 }

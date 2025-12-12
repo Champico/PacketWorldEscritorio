@@ -146,25 +146,6 @@ public class FXMLModuloColaboradoresController implements Initializable, INotifi
         }
     }
 
-
-    private void irSeleccionFoto(Colaborador colaborador) {
-        /*try {
-            FXMLLoader cargador = new FXMLLoader(getClass().getResource("FXMLFotoProfesor.fxml"));
-            Parent vista = cargador.load();
-            FXMLFotoProfesorController controlador = cargador.getController();
-            controlador.inicializarValores(profesor.getIdProfesor());
-            Scene escena = new Scene(vista);
-            Stage escenario = new Stage();
-            escenario.setScene(escena);
-            escenario.setTitle("Selección de foto profesor");
-            escenario.initModality(Modality.APPLICATION_MODAL);
-            escenario.showAndWait();
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-*/
-    }
-
     @Override
     public void setObject(Object object) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

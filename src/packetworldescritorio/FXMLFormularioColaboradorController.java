@@ -95,6 +95,10 @@ public class FXMLFormularioColaboradorController implements Initializable, INave
     private ImageView ivVerPassword;
     @FXML
     private ImageView ivVerConfirmarPassword;
+    @FXML
+    private Label lbPassword;
+    @FXML
+    private Label lbConfirmarPassword;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -110,11 +114,19 @@ public class FXMLFormularioColaboradorController implements Initializable, INave
             tfNombre.setText(colaboradorEdicion.getNombre());
             tfApPaterno.setText(colaboradorEdicion.getApellidoPaterno());
             tfApMaterno.setText(colaboradorEdicion.getApellidoMaterno());
-            int posicionRol = colaboradorEdicion.getIdRol();
-            cbRol.getSelectionModel().select(posicionRol);
+            tfCorreo.setText(colaboradorEdicion.getCorreo());
+            tfCurp.setText(colaboradorEdicion.getCurp());
 
             tfNoPersonal.setDisable(true);
             cbRol.setDisable(true);
+
+            int posicionRol = obtenerPosicionRol(colaboradorEdicion.getIdRol());
+            
+            cbRol.getSelectionModel().select(posicionRol);
+
+            if (colaboradorEdicion.getIdRol() == Constantes.ID_ROL_CONDUCTOR) {
+                tfLicencia.setText(colaboradorEdicion.getNumLicencia());
+            }
 
             ocultarCamposPassword();
         }
@@ -127,7 +139,7 @@ public class FXMLFormularioColaboradorController implements Initializable, INave
 
     @Override
     public void setObject(Object object) {
-        if(object instanceof Colaborador){
+        if (object instanceof Colaborador) {
             Colaborador colaborador = (Colaborador) object;
             inicializarDatos(colaborador);
         }
@@ -144,8 +156,9 @@ public class FXMLFormularioColaboradorController implements Initializable, INave
 
     @FXML
     private void clickGuardar(ActionEvent event) {
-        if (verificarCampos()) {
+        boolean camposCorrectos = colaboradorEdicion == null ? verificarCamposNuevo() : verificarCamposEdicion();
 
+        if (camposCorrectos == true) {
             int idSucursal = Session.getInstance().getUsuarioActual().getIdSucursal();
             Rol rol = cbRol.getSelectionModel().getSelectedItem();
             String password = obtenerTextoPasswordField("password");
@@ -161,7 +174,12 @@ public class FXMLFormularioColaboradorController implements Initializable, INave
             colaborador.setIdRol(rol.getIdRol());
             colaborador.setPassword(password);
 
-            registrarColaborador(colaborador);
+            if (colaboradorEdicion == null) {
+                registrarColaborador(colaborador);
+            } else {
+                editarColaborador(colaborador);
+            }
+
         }
     }
 
@@ -244,7 +262,7 @@ public class FXMLFormularioColaboradorController implements Initializable, INave
         tb.setDisable(false);
     }
 
-    private boolean verificarCampos() {
+    private boolean verificarCamposNuevo() {
         boolean camposCorrectos = true;
         if (verificarNoPersonal() == false) {
             camposCorrectos = false;
@@ -269,6 +287,23 @@ public class FXMLFormularioColaboradorController implements Initializable, INave
             camposCorrectos = false;
         }
 
+        return camposCorrectos;
+    }
+
+    private boolean verificarCamposEdicion() {
+        boolean camposCorrectos = true;
+        if (verificarNombre() == false) {
+            camposCorrectos = false;
+        }
+        if (verificarApellidoPaterno() == false) {
+            camposCorrectos = false;
+        }
+        if (verificarCurp() == false) {
+            camposCorrectos = false;
+        }
+        if (verificarCorreo() == false) {
+            camposCorrectos = false;
+        }
         return camposCorrectos;
     }
 
@@ -386,8 +421,6 @@ public class FXMLFormularioColaboradorController implements Initializable, INave
     }
 
     private void registrarColaborador(Colaborador colaborador) {
-        System.out.println("El nuevo usuario es " + colaborador);
-
         Respuesta respuesta = ColaboradorImp.registrar(colaborador);
         if (!respuesta.isError()) {
             Utilidades.mostrarAlertaSimple("Colaborador registrado", respuesta.getMensaje(), Alert.AlertType.INFORMATION);
@@ -395,6 +428,19 @@ public class FXMLFormularioColaboradorController implements Initializable, INave
         } else {
             Utilidades.mostrarAlertaSimple("Error al registrar", respuesta.getMensaje(), Alert.AlertType.ERROR);
         }
+    }
+
+    private void editarColaborador(Colaborador colaborador) {
+        colaborador.setIdColaborador(colaboradorEdicion.getIdColaborador());
+        Respuesta respuesta = ColaboradorImp.editar(colaborador);
+
+        if (!respuesta.isError()) {
+            Utilidades.mostrarAlertaSimple("Colaborador editado", respuesta.getMensaje(), Alert.AlertType.INFORMATION);
+            regresar();
+        } else {
+            Utilidades.mostrarAlertaSimple("Error al editar", respuesta.getMensaje(), Alert.AlertType.ERROR);
+        }
+
     }
 
     private String obtenerTextoPasswordField(String campo) {
@@ -413,13 +459,26 @@ public class FXMLFormularioColaboradorController implements Initializable, INave
     }
 
     private void ocultarCamposPassword() {
-          tfPassword.setVisible(false);
-          pfPassword.setVisible(false);
-          tbVerPassword.setVisible(false);
-          
-          tfConfirmarPassword.setVisible(false);
-          pfConfirmarPassword.setVisible(false);
-          tbVerConfirmarPassword.setVisible(false);
+        lbPassword.setVisible(false);
+        tfPassword.setVisible(false);
+        pfPassword.setVisible(false);
+        tbVerPassword.setVisible(false);
+
+        lbConfirmarPassword.setVisible(false);
+        tfConfirmarPassword.setVisible(false);
+        pfConfirmarPassword.setVisible(false);
+        tbVerConfirmarPassword.setVisible(false);
     }
 
+    
+    private int obtenerPosicionRol(int idRol) {
+        for (int i = 0; i < roles.size(); i++) {
+            if (roles.get(i).getIdRol() == idRol) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    
 }

@@ -85,6 +85,7 @@ public class ColaboradorImp {
             respuesta = gson.fromJson(respuestaAPI.getContenido(), Respuesta.class);
         } else {
             respuesta.setError(true);
+            System.out.println(respuestaAPI.getCodigo());
             switch (respuestaAPI.getCodigo()) {
                 case Constantes.ERROR_MALFORMED_URL:
                     respuesta.setMensaje(Constantes.MSJ_ERROR_PETICION);

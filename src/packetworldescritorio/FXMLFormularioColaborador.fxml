@@ -65,7 +65,7 @@
                   <Font size="17.0" />
                </font>
             </Label>
-            <Label layoutX="56.0" layoutY="362.0" text="Contraseña">
+            <Label fx:id="lbPassword" layoutX="56.0" layoutY="362.0" text="Contraseña">
                <font>
                   <Font size="19.0" />
                </font>
@@ -101,7 +101,7 @@
                   </ToggleButton>
                </children>
             </AnchorPane>
-            <Label layoutX="354.0" layoutY="363.0" text="Confirmar contraseña">
+            <Label fx:id="lbConfirmarPassword" layoutX="354.0" layoutY="363.0" text="Confirmar contraseña">
                <font>
                   <Font size="19.0" />
                </font>
