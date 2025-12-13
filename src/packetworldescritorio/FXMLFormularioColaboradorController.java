@@ -108,7 +108,7 @@ public class FXMLFormularioColaboradorController implements Initializable, INave
     private ImageView ivFoto;
     @FXML
     private Label lbTitulo;
-        @FXML
+    @FXML
     private Label lbErrorSucursal;
 
     private Colaborador colaboradorEdicion = null;
@@ -116,7 +116,6 @@ public class FXMLFormularioColaboradorController implements Initializable, INave
     private ObservableList<Sucursal> sucursales;
     private byte[] imagenBytes = null;
     private boolean fotoEditada = false;
-
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -144,7 +143,7 @@ public class FXMLFormularioColaboradorController implements Initializable, INave
 
             int posicionRol = obtenerPosicionRol(colaboradorEdicion.getIdRol());
             cbRol.getSelectionModel().select(posicionRol);
-            
+
             int posicionSucursal = obtenerPosicionSucursal(colaboradorEdicion.getIdSucursal());
             cbSucursal.getSelectionModel().select(posicionSucursal);
 
@@ -290,7 +289,7 @@ public class FXMLFormularioColaboradorController implements Initializable, INave
             tf.setVisible(true);
             pf.setVisible(false);
             try {
-                iv.setImage(new Image(getClass().getResource("/images/visible.png").toExternalForm()));
+                iv.setImage(new Image(getClass().getResource("/images/oculto.png").toExternalForm()));
             } catch (Exception ex) {
             }
         } else {
@@ -298,7 +297,7 @@ public class FXMLFormularioColaboradorController implements Initializable, INave
             tf.setVisible(false);
             pf.setVisible(true);
             try {
-                iv.setImage(new Image(getClass().getResource("/images/oculto.png").toExternalForm()));
+                iv.setImage(new Image(getClass().getResource("/images/visible.png").toExternalForm()));
             } catch (Exception ex) {
             }
         }
@@ -329,7 +328,7 @@ public class FXMLFormularioColaboradorController implements Initializable, INave
         if (verificarRol() == false) {
             camposCorrectos = false;
         }
-                if (verificarSucursal() == false) {
+        if (verificarSucursal() == false) {
             camposCorrectos = false;
         }
 
@@ -432,8 +431,7 @@ public class FXMLFormularioColaboradorController implements Initializable, INave
         UIUtilidad.ocultarLabelMensajeError(lbErrorRol);
         return true;
     }
-    
-    
+
     private boolean verificarSucursal() {
         Sucursal sucursalSeleccionada = cbSucursal.getSelectionModel().getSelectedItem();
         if (sucursalSeleccionada == null) {
@@ -452,42 +450,71 @@ public class FXMLFormularioColaboradorController implements Initializable, INave
         String confirmarPassword = obtenerTextoPasswordField("confirmarPassword");
 
         if (password == null || password.isEmpty()) {
-            UIUtilidad.marcarErrorTextInputControl(tfPassword);
-            UIUtilidad.marcarErrorTextInputControl(pfPassword);
-            UIUtilidad.mostrarLabelMensajeError(lbErrorPassword, "Campo obligatorio");
-
-            UIUtilidad.limpiarErrorTextInputControl(tfConfirmarPassword);
-            UIUtilidad.limpiarErrorTextInputControl(pfConfirmarPassword);
-            UIUtilidad.ocultarLabelMensajeError(lbErrorConfirmarPassword);
+            marcarErrorCampoPassword("password", "Campo obligatorio");
+            limpiarErrorCampoPassword("confirmarPassword");
             return false;
         }
-        
-        if (!password.matches("^(?=.*\\p{Lu})(?=.*\\p{Ll})(?=.*\\d).{8,}$")) {
-            UIUtilidad.marcarErrorTextInputControl(tfPassword);
-            UIUtilidad.marcarErrorTextInputControl(pfPassword);
-            UIUtilidad.mostrarLabelMensajeError(lbErrorPassword, "Debe incluir almenos una letra minuscula, una mayuscula y un número");
 
-            UIUtilidad.limpiarErrorTextInputControl(tfConfirmarPassword);
-            UIUtilidad.limpiarErrorTextInputControl(pfConfirmarPassword);
-            UIUtilidad.ocultarLabelMensajeError(lbErrorConfirmarPassword);
-
+        if (password.length() < 8) {
+            marcarErrorCampoPassword(password, "La contraseña debe ser minimo de 8 caracteres");
+            limpiarErrorCampoPassword("confirmarPassword");
             return false;
-        } else {
-            UIUtilidad.limpiarErrorTextInputControl(tfPassword);
-            UIUtilidad.limpiarErrorTextInputControl(pfPassword);
-            UIUtilidad.ocultarLabelMensajeError(lbErrorPassword);
+        }
 
-            if (!confirmarPassword.equals(password)) {
+        if (!password.matches("^(?=.*\\p{Lu})(?=.*\\p{Ll})(?=.*\\d).{8,}$")) {
+            marcarErrorCampoPassword("password", "Debe incluir almenos una letra minuscula, una mayuscula y un número");
+            limpiarErrorCampoPassword("confirmarPassword");
+            return false;
+        }
+
+        limpiarErrorCampoPassword("password"); //La contraseña paso los filtros, esta bien
+
+        if (!confirmarPassword.equals(password)) {
+            marcarErrorCampoPassword("confirmarPassword", "La contraseña no coincide");
+            return false;
+        }
+
+        limpiarErrorCampoPassword("confirmarPassword"); //Coincide la confirmación
+        return true;
+    }
+
+    private void marcarErrorCampoPassword(String campo, String mensaje) {
+        if (campo == null) {
+            return;
+        }
+        campo = campo.trim().toLowerCase();
+        switch (campo) {
+            case "password":
+                UIUtilidad.marcarErrorTextInputControl(tfPassword);
+                UIUtilidad.marcarErrorTextInputControl(pfPassword);
+                UIUtilidad.mostrarLabelMensajeError(lbErrorPassword, mensaje);
+                break;
+            case "confirmarpassword":
                 UIUtilidad.marcarErrorTextInputControl(tfConfirmarPassword);
                 UIUtilidad.marcarErrorTextInputControl(pfConfirmarPassword);
-                UIUtilidad.mostrarLabelMensajeError(lbErrorConfirmarPassword, "La contraseña no coincide");
-                return false;
-            } else {
+                UIUtilidad.mostrarLabelMensajeError(lbErrorConfirmarPassword, mensaje);
+                break;
+            default:
+        }
+    }
+
+    private void limpiarErrorCampoPassword(String campo) {
+        if (campo == null) {
+            return;
+        }
+        campo = campo.trim().toLowerCase();
+        switch (campo) {
+            case "password":
+                UIUtilidad.limpiarErrorTextInputControl(tfPassword);
+                UIUtilidad.limpiarErrorTextInputControl(pfPassword);
+                UIUtilidad.ocultarLabelMensajeError(lbErrorPassword);
+                break;
+            case "confirmarpassword":
                 UIUtilidad.limpiarErrorTextInputControl(tfConfirmarPassword);
                 UIUtilidad.limpiarErrorTextInputControl(pfConfirmarPassword);
                 UIUtilidad.ocultarLabelMensajeError(lbErrorConfirmarPassword);
-                return true;
-            }
+                break;
+            default:
         }
     }
 
@@ -495,10 +522,18 @@ public class FXMLFormularioColaboradorController implements Initializable, INave
         Respuesta respuesta = ColaboradorImp.registrar(colaborador);
         if (!respuesta.isError()) {
             if (fotoEditada == true) {
-                Respuesta respuestaFoto = enviarFoto(colaborador.getIdColaborador());
-                Utilidades.mostrarAlertaSimple("Colaborador registrado", respuesta.getMensaje(), Alert.AlertType.INFORMATION);
-                if (respuestaFoto.isError()) {
-                    Utilidades.mostrarAlertaSimple("No se pudo guardar la foto", respuesta.getMensaje(), Alert.AlertType.ERROR);
+                Integer idColaborador = obtenerIdColaboradorPorNumeroPersonal(colaborador.getNoPersonal());
+
+                System.out.println("Se creo el nuevo colaborador. Su id es:  " + idColaborador);
+
+                if (idColaborador != null) {
+                    Respuesta respuestaFoto = enviarFoto(idColaborador);
+                    Utilidades.mostrarAlertaSimple("Colaborador registrado", respuesta.getMensaje(), Alert.AlertType.INFORMATION);
+                    if (respuestaFoto.isError()) {
+                         Utilidades.mostrarAlertaSimple("No se pudo guardar la foto", "Ocurrio un error al guardar la foto, intente subirla más tarde", Alert.AlertType.ERROR);
+                    }
+                } else {
+                    Utilidades.mostrarAlertaSimple("No se pudo guardar la foto", "Ocurrio un error al guardar la foto, intente subirla más tarde", Alert.AlertType.ERROR);
                 }
             } else {
                 Utilidades.mostrarAlertaSimple("Colaborador registrado", respuesta.getMensaje(), Alert.AlertType.INFORMATION);
@@ -588,8 +623,8 @@ public class FXMLFormularioColaboradorController implements Initializable, INave
         }
         return -1;
     }
-    
-        private int obtenerPosicionSucursal(int idSucursal) {
+
+    private int obtenerPosicionSucursal(int idSucursal) {
         for (int i = 0; i < sucursales.size(); i++) {
             if (sucursales.get(i).getIdSucursal() == idSucursal) {
                 return i;
@@ -641,6 +676,24 @@ public class FXMLFormularioColaboradorController implements Initializable, INave
 
     private Respuesta enviarFoto(int idColaborador) {
         return ColaboradorImp.subirFoto(imagenBytes, idColaborador);
+    }
+
+    private Integer obtenerIdColaboradorPorNumeroPersonal(String noPersonal) {
+        Integer idColaborador = null;
+        HashMap<String, Object> respuesta = ColaboradorImp.buscarPorNumPersonal(noPersonal);
+        try {
+            //System.out.println("Respuesta del servicio: " + respuesta.get(Constantes.KEY_ERROR) + " ; " + ((Colaborador) respuesta.get(Constantes.KEY_COLABORADOR)) );
+            if (!(boolean) respuesta.get(Constantes.KEY_ERROR)) {
+                Colaborador colaborador = (Colaborador) respuesta.get(Constantes.KEY_COLABORADOR);
+                if (colaborador != null) {
+                    idColaborador = colaborador.getIdColaborador();
+                }
+            }
+        } catch (Exception ex) {
+            return null;
+        }
+
+        return idColaborador;
     }
 
 }

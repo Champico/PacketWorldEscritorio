@@ -14,7 +14,7 @@ public class Constantes {
     public static final String WS_COLABORADOR_ELIMINAR = "colaborador/eliminar";
     public static final String WS_COLABORADOR_SUBIR_FOTO = "colaborador/subirFoto";
     public static final String WS_COLABORADOR_OBTENER_FOTO = "colaborador/obtenerFoto";
-    
+    public static final String WS_COLABORADOR_BUSCAR_POR_NUM_PERSONAL = "colaborador/buscarPorNumPersonal";
     
 
     //Peticiones
@@ -40,6 +40,7 @@ public class Constantes {
     public static final String KEY_MENSAJE = "mensaje";
     public static final String KEY_LISTA = "lista_valores";
     public static final String KEY_OBJETO = "objeto";
+    public static final String KEY_COLABORADOR = "colaborador";
 
     //Archivos fxml
     public static final String PG_APLICACION = "FXMLAplicacion.fxml";
