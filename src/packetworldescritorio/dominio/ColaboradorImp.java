@@ -53,7 +53,7 @@ public class ColaboradorImp {
         Gson gson = new Gson();
         String parametrosJSON = gson.toJson(colaborador);
 
-        RespuestaHTTP respuestaAPI = ConexionAPI.peticionBody(URL, Constantes.PETICION_POST, parametrosJSON, Constantes.APPLICATION_JSON);
+        RespuestaHTTP respuestaAPI = ConexionAPI.peticionBody(URL, Constantes.PETICION_POST, parametrosJSON, Constantes.CT_APPLICATION_JSON);
 
         if (respuestaAPI.getCodigo() == HttpURLConnection.HTTP_OK) {
             respuesta = gson.fromJson(respuestaAPI.getContenido(), Respuesta.class);
@@ -82,7 +82,7 @@ public class ColaboradorImp {
         String URL = Constantes.URL_WS + Constantes.WS_COLABORADOR_EDITAR;
         Gson gson = new Gson();
         String parametrosJSON = gson.toJson(colaborador);
-        RespuestaHTTP respuestaAPI = ConexionAPI.peticionBody(URL, "PUT", parametrosJSON, Constantes.APPLICATION_JSON);
+        RespuestaHTTP respuestaAPI = ConexionAPI.peticionBody(URL, "PUT", parametrosJSON, Constantes.CT_APPLICATION_JSON);
         if (respuestaAPI.getCodigo() == HttpURLConnection.HTTP_OK) {
             respuesta = gson.fromJson(respuestaAPI.getContenido(), Respuesta.class);
         } else {
@@ -141,9 +141,8 @@ public class ColaboradorImp {
 
         RespuestaHTTP respuestaAPI = ConexionAPI.peticionGET(URL);
 
-        Gson gson = new Gson();
-
         if (respuestaAPI.getCodigo() == HttpURLConnection.HTTP_OK) {
+            Gson gson = new Gson();
             Colaborador colaborador = gson.fromJson(respuestaAPI.getContenido(), Colaborador.class);
             if (colaborador != null && colaborador.getFotoBase64() != null && !colaborador.getFotoBase64().isEmpty()) {
                 try {
@@ -154,5 +153,36 @@ public class ColaboradorImp {
             }
         }
         return imagen;
+    }
+
+    public static Respuesta subirFoto(byte[] foto, int idColaborador) {
+        Respuesta respuesta = new Respuesta();
+        String URL = Constantes.URL_WS + Constantes.WS_COLABORADOR_SUBIR_FOTO + "/" + idColaborador;
+
+        RespuestaHTTP respuestaAPI = ConexionAPI.peticionBodyBinario(URL, Constantes.PETICION_PUT, foto, Constantes.CT_IMAGE_JPEG);
+
+        if (respuestaAPI.getCodigo() == HttpURLConnection.HTTP_OK) {
+            Gson gson = new Gson();
+            respuesta = gson.fromJson(respuestaAPI.getContenido(), Respuesta.class);
+            System.out.println("Se pudo " + respuesta.getMensaje());
+        } else {
+            respuesta.setError(true);
+            System.out.println("El error al subir la imagen fue " + respuestaAPI.getCodigo()) ;
+            switch (respuestaAPI.getCodigo()) {
+                case Constantes.ERROR_MALFORMED_URL:
+                    respuesta.setMensaje(Constantes.MSJ_ERROR_PETICION);
+                    break;
+                case Constantes.ERROR_PETICION:
+                    respuesta.setMensaje(Constantes.MSJ_ERROR_PETICION);
+                    break;
+                case Constantes.ERROR_BAD_REQUEST:
+                    respuesta.setMensaje("Ocurrio un error al subir la foto");
+                    break;
+                default:
+                    respuesta.setMensaje("Lo sentimos hubo un problema para subir la foto, porfavor intente subir la foto más tarde");
+            }
+
+        }
+        return respuesta;
     }
 }

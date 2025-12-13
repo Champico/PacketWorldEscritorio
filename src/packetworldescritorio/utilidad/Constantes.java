@@ -23,9 +23,10 @@ public class Constantes {
     public static final String PETICION_DELETE = "DELETE";
 
     //Content type
-    public static final String APPLICATION_JSON = "application/json";
-    public static final String APPLICATION_FORM_URLENCODED = "application/x-www-form-urlencoded";
-
+    public static final String CT_APPLICATION_JSON = "application/json";
+    public static final String CT_APPLICATION_FORM_URLENCODED = "application/x-www-form-urlencoded";
+    public static final String CT_IMAGE_JPEG = "image/jpeg";
+    
     //Errores
     public static final int ERROR_MALFORMED_URL = 1001;
     public static final int ERROR_PETICION = 1002;
@@ -56,5 +57,9 @@ public class Constantes {
     public static final String ROL_CONDUCTOR = "Conductor";
     public static final int ID_ROL_CONDUCTOR = 3;
     public static final int ID_ROL_TODOS = 999;
+    
+    
+    //Otros
+    public static final int MAX_SIZE_MB_IMAGE = 2;
     
 }

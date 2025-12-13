@@ -1,9 +1,17 @@
 /** @authores  Pipe, Kevin, champ */
 package packetworldescritorio.utilidad;
 
+import java.awt.AlphaComposite;
+import java.awt.Color;
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextFormatter;
 import javafx.scene.control.TextInputControl;
+import javax.imageio.ImageIO;
 
 public class UIUtilidad {
 
@@ -33,10 +41,10 @@ public class UIUtilidad {
      * algún texto.
      */
     public static boolean esInputVacio(TextInputControl input, Label labelError) {
-        if(input == null){
+        if (input == null) {
             return true;
         }
-        
+
         String valor = input.getText().trim();
         if (valor.isEmpty()) {
             marcarError(input, labelError, "Campo obligatorio");
@@ -117,10 +125,20 @@ public class UIUtilidad {
         }
     }
 
+    /**
+     * Limita la cantidad máxima de caracteres que puede ingresar el usuario en
+     * un campo de texto de JavaFX.
+     *
+     * @param field El campo de texto (TextInputControl) al que se aplicará el
+     * límite.
+     * @param max El número máximo de caracteres permitidos.
+     */
     public static void limitarCaracteres(TextInputControl field, int max) {
         field.setTextFormatter(new TextFormatter<>(change
                 -> change.getControlNewText().length() <= max ? change : null
         ));
     }
+
+    
 
 }

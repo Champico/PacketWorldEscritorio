@@ -191,14 +191,19 @@
             <Label fx:id="lbErrorCurp" layoutX="55.0" layoutY="249.0" text="Campo obligatorio" textFill="RED" visible="false" />
             <Label fx:id="lbErrorConfirmarPassword" layoutX="357.0" layoutY="432.0" text="Campo obligatorio" textFill="RED" visible="false" />
             <Label fx:id="lbErrorPassword" layoutX="53.0" layoutY="432.0" text="Campo obligatorio" textFill="RED" visible="false" />
-            <ImageView fx:id="ivFoto" fitHeight="281.0" fitWidth="281.0" layoutX="888.0" layoutY="44.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@/images/perfil-icon.png" />
-               </image>
-               <viewport>
-                  <Rectangle2D />
-               </viewport></ImageView>
-            <Button layoutX="938.0" layoutY="335.0" mnemonicParsing="false" onAction="#clickSeleccionarFoto" prefHeight="31.0" prefWidth="181.0" text="Subir Foto" />
+            <Label alignment="CENTER" layoutX="859.0" layoutY="42.0" minHeight="240.0" minWidth="240.0" prefHeight="240.0" prefWidth="240.0" textAlignment="CENTER">
+               <graphic>
+                  <ImageView fx:id="ivFoto" fitHeight="240.0" fitWidth="240.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@/images/perfil-icon.png" />
+                     </image>
+                     <viewport>
+                        <Rectangle2D />
+                     </viewport>
+                  </ImageView>
+               </graphic>
+            </Label>
+            <Button layoutX="889.0" layoutY="286.0" mnemonicParsing="false" onAction="#clickSeleccionarFoto" prefHeight="31.0" prefWidth="181.0" text="Subir Foto" />
          </children>
       </AnchorPane>
    </children>

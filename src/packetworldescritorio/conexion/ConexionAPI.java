@@ -46,6 +46,8 @@ public class ConexionAPI {
  *
  * @param URL Es la URL a la que va la petición
  * @param metodoHTTP es el método: PUT, POST, DELETE
+     * @param parametros son los datos que se envian
+     * @param contentType es el tipo de datos que se envian
  * @return Retorna un objeto de tipo RespuestaHTTP que incluye si hubo un error, un mensaje y un objeto
  */
     public static RespuestaHTTP peticionBody(String URL, String metodoHTTP, String parametros, String contentType) {
@@ -105,4 +107,49 @@ public class ConexionAPI {
     }
 
 
+     
+     
+     
+     
+    /**
+ * Genera una petición HTTP para mandar datos binarios
+ *
+ * @param URL Es la URL a la que va la petición
+ * @param metodoHTTP es el método: PUT, POST, DELETE
+     * @param binario es un arreglo de bytes que se va a enviar
+     * @param contentType es el tipo de elemento que se envia
+ * @return Retorna un objeto de tipo RespuestaHTTP que incluye si hubo un error, un mensaje y un objeto
+ */
+         public static RespuestaHTTP peticionBodyBinario(String URL, String metodoHTTP, byte[] binario, String contentType) {
+        RespuestaHTTP respuesta = new RespuestaHTTP();
+        try {
+            URL urlWS = new URL(URL);
+            HttpURLConnection conexionHTTP = (HttpURLConnection) urlWS.openConnection();
+            conexionHTTP.setRequestMethod(metodoHTTP);
+            conexionHTTP.setRequestProperty("Content-Type", contentType);
+            conexionHTTP.setDoOutput(true);
+            OutputStream os = conexionHTTP.getOutputStream();
+            os.write(binario);
+            os.flush();
+            os.close();
+            int codigo = conexionHTTP.getResponseCode();
+            if (codigo == HttpURLConnection.HTTP_OK) {
+                respuesta.setContenido(Utilidades.streamToString(conexionHTTP.getInputStream()));
+            }
+            respuesta.setCodigo(codigo);
+        } catch (MalformedURLException e) {
+            respuesta.setCodigo(Constantes.ERROR_MALFORMED_URL);
+            respuesta.setContenido(e.getMessage());
+            e.printStackTrace();
+        }catch (IOException e) {
+            respuesta.setCodigo(Constantes.ERROR_PETICION);
+            respuesta.setContenido(e.getMessage());
+            e.printStackTrace();
+        }
+            
+
+        return respuesta;
+
+    }
+         
 }

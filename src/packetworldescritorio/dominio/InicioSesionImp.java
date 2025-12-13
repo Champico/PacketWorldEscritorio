@@ -15,10 +15,8 @@ public class InicioSesionImp {
         RSAutenticacionColaborador respuesta = new RSAutenticacionColaborador();
         String parametros = "noPersonal=" + noPersonal + "&password=" + password;
         String URL = Constantes.URL_WS + Constantes.WS_AUTENTICACION_COLABORADOR;
-         
-            System.out.println(URL);
             
-        RespuestaHTTP respuestaAPI = ConexionAPI.peticionBody(URL, Constantes.PETICION_GET, parametros, Constantes.APPLICATION_FORM_URLENCODED);
+        RespuestaHTTP respuestaAPI = ConexionAPI.peticionBody(URL, Constantes.PETICION_GET, parametros, Constantes.CT_APPLICATION_FORM_URLENCODED);
 
         if (respuestaAPI.getCodigo() == HttpURLConnection.HTTP_OK) {
             try {

@@ -103,14 +103,14 @@ public class FXMLFormularioColaboradorController implements Initializable, INave
     private Label lbConfirmarPassword;
     @FXML
     private ImageView ivFoto;
+    @FXML
+    private Label lbTitulo;
 
     private Colaborador colaboradorEdicion = null;
     private ObservableList<Rol> roles;
-    private File foto;
     private byte[] imagenBytes = null;
     private boolean fotoEditada = false;
-    @FXML
-    private Label lbTitulo;
+    private String extensionFoto = null;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -122,9 +122,9 @@ public class FXMLFormularioColaboradorController implements Initializable, INave
     public void inicializarDatos(Colaborador colaboradorEdicion) {
         this.colaboradorEdicion = colaboradorEdicion;
         if (colaboradorEdicion != null) {
-            
+
             lbTitulo.setText("Editar colaborador");
-            
+
             tfNoPersonal.setText(colaboradorEdicion.getNoPersonal());
             tfNombre.setText(colaboradorEdicion.getNombre());
             tfApPaterno.setText(colaboradorEdicion.getApellidoPaterno());
@@ -444,7 +444,15 @@ public class FXMLFormularioColaboradorController implements Initializable, INave
     private void registrarColaborador(Colaborador colaborador) {
         Respuesta respuesta = ColaboradorImp.registrar(colaborador);
         if (!respuesta.isError()) {
-            Utilidades.mostrarAlertaSimple("Colaborador registrado", respuesta.getMensaje(), Alert.AlertType.INFORMATION);
+            if (fotoEditada == true) {
+                Respuesta respuestaFoto = enviarFoto(colaborador.getIdColaborador());
+                Utilidades.mostrarAlertaSimple("Colaborador registrado", respuesta.getMensaje(), Alert.AlertType.INFORMATION);
+                if (respuestaFoto.isError()) {
+                    Utilidades.mostrarAlertaSimple("No se pudo guardar la foto", respuesta.getMensaje(), Alert.AlertType.ERROR);
+                }
+            } else {
+                Utilidades.mostrarAlertaSimple("Colaborador registrado", respuesta.getMensaje(), Alert.AlertType.INFORMATION);
+            }
             regresar();
         } else {
             Utilidades.mostrarAlertaSimple("Error al registrar", respuesta.getMensaje(), Alert.AlertType.ERROR);
@@ -456,7 +464,15 @@ public class FXMLFormularioColaboradorController implements Initializable, INave
         Respuesta respuesta = ColaboradorImp.editar(colaborador);
 
         if (!respuesta.isError()) {
-            Utilidades.mostrarAlertaSimple("Colaborador editado", respuesta.getMensaje(), Alert.AlertType.INFORMATION);
+            if (fotoEditada == true) {
+                Respuesta respuestaFoto = enviarFoto(colaborador.getIdColaborador());
+                Utilidades.mostrarAlertaSimple("Colaborador editado", respuesta.getMensaje(), Alert.AlertType.INFORMATION);
+                if (respuestaFoto.isError()) {
+                    Utilidades.mostrarAlertaSimple("No se pudo editar la foto", respuesta.getMensaje(), Alert.AlertType.ERROR);
+                }
+            } else {
+                Utilidades.mostrarAlertaSimple("Colaborador editado", respuesta.getMensaje(), Alert.AlertType.INFORMATION);
+            }
             regresar();
         } else {
             Utilidades.mostrarAlertaSimple("Error al editar", respuesta.getMensaje(), Alert.AlertType.ERROR);
@@ -503,23 +519,26 @@ public class FXMLFormularioColaboradorController implements Initializable, INave
     private void mostrarDialogoSeleccion() {
         FileChooser dialogo = new FileChooser();
         dialogo.setTitle("Selecciona una foto");
-        FileChooser.ExtensionFilter filtroImg = new FileChooser.ExtensionFilter("Archivos de imagen (.jpg, .png) ", "*.jpg", "*.png");
+        FileChooser.ExtensionFilter filtroImg = new FileChooser.ExtensionFilter("Archivos de imagen (.png, .jpg, .jpeg) ", "*.jpg", "*.png", "*.jpeg");
         dialogo.getExtensionFilters().add(filtroImg);
-        foto = dialogo.showOpenDialog(ivFoto.getParent().getScene().getWindow());
+        File foto = dialogo.showOpenDialog(ivFoto.getParent().getScene().getWindow());
 
         if (foto != null) {
-            mostrarFoto(foto);
-            fotoEditada = true;
-        }
-    }
+            if (Utilidades.verificarTamañoMaximoArchivo(foto, Constantes.MAX_SIZE_MB_IMAGE)) {
+                try {
+                    imagenBytes = Utilidades.fileImageToBytes(foto);
+                    mostrarFoto(imagenBytes);
+                    fotoEditada = true;
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                    Utilidades.mostrarAlertaSimple("Error al cargar la imagen", ex.getMessage(), Alert.AlertType.ERROR);
+                    fotoEditada = false;
+                }
+            } else {
+                Utilidades.mostrarAlertaSimple("Error al cargar la imagen", "Tamaño máximo de imagen: " + Constantes.MAX_SIZE_MB_IMAGE + " MB", Alert.AlertType.ERROR);
 
-    private void mostrarFoto(File file) {
-        try {
-            BufferedImage bufferImg = ImageIO.read(file);
-            Image imagen = SwingFXUtils.toFXImage(bufferImg, null);
-            ivFoto.setImage(imagen);
-        } catch (IOException ex) {
-            Utilidades.mostrarAlertaSimple("Error", "Error al cargar la foto", Alert.AlertType.ERROR);
+            }
+
         }
     }
 
@@ -538,10 +557,9 @@ public class FXMLFormularioColaboradorController implements Initializable, INave
             mostrarFoto(imagenBytes);
         }
     }
-    
-    
-    private void subirFoto(byte[] foto){
-        
+
+    private Respuesta enviarFoto(int idColaborador) {
+        return ColaboradorImp.subirFoto(imagenBytes, idColaborador);
     }
 
 }
