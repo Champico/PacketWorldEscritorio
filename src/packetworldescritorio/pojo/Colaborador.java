@@ -2,6 +2,8 @@
 
 package packetworldescritorio.pojo;
 
+import java.util.Objects;
+
 public class Colaborador {
     
     private int idColaborador;
@@ -165,7 +167,19 @@ public class Colaborador {
     public String toString() {
         return "Colaborador{" + "idColaborador=" + idColaborador + ", noPersonal=" + noPersonal + ", nombre=" + nombre + ", apellidoPaterno=" + apellidoPaterno + ", apellidoMaterno=" + apellidoMaterno + ", correo=" + correo + ", password=" + password + ", curp=" + curp + ", idSucursal=" + idSucursal + ", nombreSucursal=" + nombreSucursal + ", idRol=" + idRol + ", rol=" + rol + ", foto=" + foto + ", fotoBase64=" + fotoBase64 + ", numLicencia=" + numLicencia + '}';
     }
-    
-    
-    
+
+public boolean equalsForm(Colaborador otro) {
+    if (otro == null) {
+        return false;
+    }
+
+    return Objects.equals(this.nombre, otro.nombre) &&
+           Objects.equals(this.apellidoPaterno, otro.apellidoPaterno) &&
+           Objects.equals(this.apellidoMaterno, otro.apellidoMaterno) &&
+           Objects.equals(this.curp, otro.curp) &&
+           Objects.equals(this.correo, otro.correo) &&
+           this.idSucursal == otro.idSucursal &&
+           Objects.equals(this.numLicencia, otro.numLicencia);
+}
+      
 }

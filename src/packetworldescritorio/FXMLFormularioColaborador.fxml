@@ -54,14 +54,14 @@
                   <Font size="17.0" />
                </font>
             </Label>
-            <ComboBox fx:id="cbRol" layoutX="53.0" layoutY="299.0" prefHeight="40.0" prefWidth="233.0" styleClass="input_general" />
-            <Label fx:id="lbLicencia" layoutX="306.0" layoutY="275.0" text="Licencia *" visible="false">
+            <ComboBox fx:id="cbSucursal" layoutX="53.0" layoutY="299.0" prefHeight="40.0" prefWidth="233.0" styleClass="input_general" />
+            <Label fx:id="lbLicencia" layoutX="565.0" layoutY="275.0" text="Licencia *" visible="false">
                <font>
                   <Font size="17.0" />
                </font>
             </Label>
-            <TextField fx:id="tfLicencia" layoutX="304.0" layoutY="299.0" prefHeight="40.0" prefWidth="233.0" promptText="123456789" styleClass="input_general" visible="false" />
-            <Label layoutX="53.0" layoutY="275.0" text="Rol en el sistema *">
+            <TextField fx:id="tfLicencia" layoutX="563.0" layoutY="299.0" prefHeight="40.0" prefWidth="233.0" promptText="123456789" styleClass="input_general" visible="false" />
+            <Label layoutX="53.0" layoutY="275.0" text="Sucursal*">
                <font>
                   <Font size="17.0" />
                </font>
@@ -180,17 +180,23 @@
                   <Font size="17.0" />
                </font>
             </Label>
+            <Label layoutX="313.0" layoutY="275.0" text="Rol en el sistema *">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Label>
             <TextField fx:id="tfCorreo" layoutX="304.0" layoutY="211.0" prefHeight="40.0" prefWidth="233.0" promptText="ejemplo@dominio.com" styleClass="input_general" />
             <Label fx:id="lbErrorNoPersonal" layoutX="53.0" layoutY="75.0" text="Campo obligatorio" textFill="RED" visible="false" />
             <Label fx:id="lbErrorNombre" layoutX="53.0" layoutY="162.0" text="Campo obligatorio" textFill="RED" visible="false" />
             <Label fx:id="lbErrorApPaterno" layoutX="303.0" layoutY="162.0" text="Campo obligatorio" textFill="RED" visible="false" />
             <Label fx:id="lbErrorApMaterno" layoutX="554.0" layoutY="162.0" text="Campo obligatorio" textFill="RED" visible="false" />
-            <Label fx:id="lbErrorRol" layoutX="53.0" layoutY="338.0" text="Seleccione una opción" textFill="RED" visible="false" />
-            <Label fx:id="lbErrorLicencia" layoutX="304.0" layoutY="340.0" text="Campo obligatorio" textFill="RED" visible="false" />
             <Label fx:id="lbErrorCorreo" layoutX="304.0" layoutY="249.0" text="Campo obligatorio" textFill="RED" visible="false" />
             <Label fx:id="lbErrorCurp" layoutX="55.0" layoutY="249.0" text="Campo obligatorio" textFill="RED" visible="false" />
             <Label fx:id="lbErrorConfirmarPassword" layoutX="357.0" layoutY="432.0" text="Campo obligatorio" textFill="RED" visible="false" />
             <Label fx:id="lbErrorPassword" layoutX="53.0" layoutY="432.0" text="Campo obligatorio" textFill="RED" visible="false" />
+            <Label fx:id="lbErrorLicencia" layoutX="565.0" layoutY="338.0" text="Campo obligatorio" textFill="RED" visible="false" />
+            <Label fx:id="lbErrorSucursal" layoutX="54.0" layoutY="338.0" text="Seleccione una opción" textFill="RED" visible="false" />
+            <Label fx:id="lbErrorRol" layoutX="314.0" layoutY="338.0" text="Seleccione una opción" textFill="RED" visible="false" />
             <Label alignment="CENTER" layoutX="859.0" layoutY="42.0" minHeight="240.0" minWidth="240.0" prefHeight="240.0" prefWidth="240.0" textAlignment="CENTER">
                <graphic>
                   <ImageView fx:id="ivFoto" fitHeight="240.0" fitWidth="240.0" pickOnBounds="true" preserveRatio="true">
@@ -204,6 +210,7 @@
                </graphic>
             </Label>
             <Button layoutX="889.0" layoutY="286.0" mnemonicParsing="false" onAction="#clickSeleccionarFoto" prefHeight="31.0" prefWidth="181.0" text="Subir Foto" />
+            <ComboBox fx:id="cbRol" layoutX="313.0" layoutY="299.0" prefHeight="40.0" prefWidth="233.0" styleClass="input_general" />
          </children>
       </AnchorPane>
    </children>

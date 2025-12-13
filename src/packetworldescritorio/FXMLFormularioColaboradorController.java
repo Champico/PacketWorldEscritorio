@@ -36,6 +36,7 @@ import packetworldescritorio.pojo.Colaborador;
 import packetworldescritorio.utilidad.Constantes;
 import packetworldescritorio.pojo.Rol;
 import packetworldescritorio.pojo.Session;
+import packetworldescritorio.pojo.Sucursal;
 import packetworldescritorio.utilidad.Utilidades;
 import packetworldescritorio.utilidad.UIUtilidad;
 
@@ -51,6 +52,8 @@ public class FXMLFormularioColaboradorController implements Initializable, INave
     private TextField tfApMaterno;
     @FXML
     private ComboBox<Rol> cbRol;
+    @FXML
+    private ComboBox<Sucursal> cbSucursal;
     @FXML
     private TextField tfLicencia;
     @FXML
@@ -105,16 +108,20 @@ public class FXMLFormularioColaboradorController implements Initializable, INave
     private ImageView ivFoto;
     @FXML
     private Label lbTitulo;
+        @FXML
+    private Label lbErrorSucursal;
 
     private Colaborador colaboradorEdicion = null;
     private ObservableList<Rol> roles;
+    private ObservableList<Sucursal> sucursales;
     private byte[] imagenBytes = null;
     private boolean fotoEditada = false;
-    private String extensionFoto = null;
+
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         configurarComboBoxRoles();
+        configurarComboBoxSucursal();
         cargarRolesProfesor();
         configurarMaximoNumeroCaracteres();
     }
@@ -136,8 +143,10 @@ public class FXMLFormularioColaboradorController implements Initializable, INave
             cbRol.setDisable(true);
 
             int posicionRol = obtenerPosicionRol(colaboradorEdicion.getIdRol());
-
             cbRol.getSelectionModel().select(posicionRol);
+            
+            int posicionSucursal = obtenerPosicionSucursal(colaboradorEdicion.getIdSucursal());
+            cbSucursal.getSelectionModel().select(posicionSucursal);
 
             if (colaboradorEdicion.getIdRol() == Constantes.ID_ROL_CONDUCTOR) {
                 tfLicencia.setText(colaboradorEdicion.getNumLicencia());
@@ -180,8 +189,8 @@ public class FXMLFormularioColaboradorController implements Initializable, INave
         boolean camposCorrectos = colaboradorEdicion == null ? verificarCamposNuevo() : verificarCamposEdicion();
 
         if (camposCorrectos == true) {
-            int idSucursal = Session.getInstance().getUsuarioActual().getIdSucursal();
             Rol rol = cbRol.getSelectionModel().getSelectedItem();
+            Sucursal sucursal = cbSucursal.getSelectionModel().getSelectedItem();
             String password = obtenerTextoPasswordField("password");
 
             Colaborador colaborador = new Colaborador();
@@ -191,7 +200,7 @@ public class FXMLFormularioColaboradorController implements Initializable, INave
             colaborador.setApellidoMaterno(tfApMaterno.getText().trim());
             colaborador.setCurp(tfCurp.getText().trim());
             colaborador.setCorreo(tfCorreo.getText().trim());
-            colaborador.setIdSucursal(idSucursal);
+            colaborador.setIdSucursal(sucursal.getIdSucursal());
             colaborador.setIdRol(rol.getIdRol());
             colaborador.setPassword(password);
 
@@ -223,6 +232,19 @@ public class FXMLFormularioColaboradorController implements Initializable, INave
     private void configurarComboBoxRoles() {
         cargarRolesProfesor();
         agregarEventoCambioRol();
+    }
+
+    private void configurarComboBoxSucursal() {
+        HashMap<String, Object> respuesta = CatalogoImp.obtenerSucursales();
+        if (!(boolean) respuesta.get(Constantes.KEY_ERROR)) {
+            List<Sucursal> sucursalAPI = (List<Sucursal>) respuesta.get(Constantes.KEY_LISTA);
+            sucursales = FXCollections.observableArrayList();
+            sucursales.addAll(sucursalAPI);
+            cbSucursal.setItems(sucursales);
+        } else {
+            Utilidades.mostrarAlertaSimple("Error", respuesta.get(Constantes.KEY_MENSAJE).toString(), Alert.AlertType.ERROR);
+            nav.navegar(Constantes.MODULO_COLABORADORES);
+        }
     }
 
     private void cargarRolesProfesor() {
@@ -305,6 +327,9 @@ public class FXMLFormularioColaboradorController implements Initializable, INave
             camposCorrectos = false;
         }
         if (verificarRol() == false) {
+            camposCorrectos = false;
+        }
+                if (verificarSucursal() == false) {
             camposCorrectos = false;
         }
 
@@ -407,11 +432,36 @@ public class FXMLFormularioColaboradorController implements Initializable, INave
         UIUtilidad.ocultarLabelMensajeError(lbErrorRol);
         return true;
     }
+    
+    
+    private boolean verificarSucursal() {
+        Sucursal sucursalSeleccionada = cbSucursal.getSelectionModel().getSelectedItem();
+        if (sucursalSeleccionada == null) {
+            UIUtilidad.mostrarLabelMensajeError(lbErrorSucursal, "Seleccione una sucursal");
+            return false;
+        } else {
+            UIUtilidad.ocultarLabelMensajeError(lbErrorSucursal);
+        }
+
+        UIUtilidad.ocultarLabelMensajeError(lbErrorRol);
+        return true;
+    }
 
     private boolean verificarPassword() {
         String password = obtenerTextoPasswordField("password");
         String confirmarPassword = obtenerTextoPasswordField("confirmarPassword");
 
+        if (password == null || password.isEmpty()) {
+            UIUtilidad.marcarErrorTextInputControl(tfPassword);
+            UIUtilidad.marcarErrorTextInputControl(pfPassword);
+            UIUtilidad.mostrarLabelMensajeError(lbErrorPassword, "Campo obligatorio");
+
+            UIUtilidad.limpiarErrorTextInputControl(tfConfirmarPassword);
+            UIUtilidad.limpiarErrorTextInputControl(pfConfirmarPassword);
+            UIUtilidad.ocultarLabelMensajeError(lbErrorConfirmarPassword);
+            return false;
+        }
+        
         if (!password.matches("^(?=.*\\p{Lu})(?=.*\\p{Ll})(?=.*\\d).{8,}$")) {
             UIUtilidad.marcarErrorTextInputControl(tfPassword);
             UIUtilidad.marcarErrorTextInputControl(pfPassword);
@@ -461,23 +511,46 @@ public class FXMLFormularioColaboradorController implements Initializable, INave
 
     private void editarColaborador(Colaborador colaborador) {
         colaborador.setIdColaborador(colaboradorEdicion.getIdColaborador());
-        Respuesta respuesta = ColaboradorImp.editar(colaborador);
 
-        if (!respuesta.isError()) {
-            if (fotoEditada == true) {
-                Respuesta respuestaFoto = enviarFoto(colaborador.getIdColaborador());
-                Utilidades.mostrarAlertaSimple("Colaborador editado", respuesta.getMensaje(), Alert.AlertType.INFORMATION);
-                if (respuestaFoto.isError()) {
-                    Utilidades.mostrarAlertaSimple("No se pudo editar la foto", respuesta.getMensaje(), Alert.AlertType.ERROR);
-                }
-            } else {
-                Utilidades.mostrarAlertaSimple("Colaborador editado", respuesta.getMensaje(), Alert.AlertType.INFORMATION);
+        boolean textoEditado = !colaborador.equalsForm(colaboradorEdicion);
+
+        Respuesta respuestaEditar = null;
+        Respuesta respuestaSubirFoto = null;
+
+        if (textoEditado) {
+            respuestaEditar = ColaboradorImp.editar(colaborador);
+
+            if (respuestaEditar.isError()) {
+                Utilidades.mostrarAlertaSimple("Error al editar", respuestaEditar.getMensaje(), Alert.AlertType.ERROR);
+                return;
             }
-            regresar();
-        } else {
-            Utilidades.mostrarAlertaSimple("Error al editar", respuesta.getMensaje(), Alert.AlertType.ERROR);
         }
 
+        if (fotoEditada) {
+            respuestaSubirFoto = enviarFoto(colaborador.getIdColaborador());
+
+            if (respuestaSubirFoto.isError()) {
+                if (textoEditado) {
+                    Utilidades.mostrarAlertaSimple("Datos del colaborador editados", respuestaEditar.getMensaje(), Alert.AlertType.INFORMATION);
+                    Utilidades.mostrarAlertaSimple("No se pudo guardar la foto", respuestaSubirFoto.getMensaje(), Alert.AlertType.ERROR);
+                } else {
+                    Utilidades.mostrarAlertaSimple("No se pudo guardar la foto", respuestaSubirFoto.getMensaje(), Alert.AlertType.ERROR);
+                }
+                return;
+            } else {
+                if (textoEditado) {
+                    Utilidades.mostrarAlertaSimple("Colaborador editado", respuestaEditar.getMensaje(), Alert.AlertType.INFORMATION);
+                } else {
+                    Utilidades.mostrarAlertaSimple("Se ha guardado la nueva imagen", respuestaSubirFoto.getMensaje(), Alert.AlertType.INFORMATION);
+                }
+            }
+        }
+
+        if (!textoEditado && !fotoEditada) {
+            Utilidades.mostrarAlertaSimple("No se editó ningún campo", "No se realizó ninguna modificación", Alert.AlertType.INFORMATION);
+        }
+
+        regresar();
     }
 
     private String obtenerTextoPasswordField(String campo) {
@@ -515,6 +588,15 @@ public class FXMLFormularioColaboradorController implements Initializable, INave
         }
         return -1;
     }
+    
+        private int obtenerPosicionSucursal(int idSucursal) {
+        for (int i = 0; i < sucursales.size(); i++) {
+            if (sucursales.get(i).getIdSucursal() == idSucursal) {
+                return i;
+            }
+        }
+        return -1;
+    }
 
     private void mostrarDialogoSeleccion() {
         FileChooser dialogo = new FileChooser();
@@ -530,7 +612,6 @@ public class FXMLFormularioColaboradorController implements Initializable, INave
                     mostrarFoto(imagenBytes);
                     fotoEditada = true;
                 } catch (Exception ex) {
-                    ex.printStackTrace();
                     Utilidades.mostrarAlertaSimple("Error al cargar la imagen", ex.getMessage(), Alert.AlertType.ERROR);
                     fotoEditada = false;
                 }
