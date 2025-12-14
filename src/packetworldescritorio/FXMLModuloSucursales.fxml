@@ -85,7 +85,7 @@
                      <children>
                         <ImageView fitHeight="21.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@/images/eliminar.png" />
+                              <Image url="@/images/abajo.png" />
                            </image>
                         </ImageView>
                         <Label prefHeight="27.0" prefWidth="115.0" text="Dar de baja" textFill="WHITE">

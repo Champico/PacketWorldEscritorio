@@ -1,4 +1,4 @@
-/** @author champ */
+/** @authores  Pipe, Kevin, champ */
 package packetworldescritorio.dominio;
 
 import com.google.gson.Gson;

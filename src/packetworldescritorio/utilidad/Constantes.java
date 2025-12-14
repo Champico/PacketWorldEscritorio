@@ -19,7 +19,10 @@ public class Constantes {
     public static final String WS_SUCURSAL_REGISTRAR = "sucursal/registrar";
     public static final String WS_SUCURSAL_EDITAR = "sucursal/editar";
     public static final String WS_SUCURSAL_ELIMINAR = "sucursal/eliminar";
-    
+    public static final String WS_UNIDAD_OBTENER_TODOS = "unidad/obtener";
+    public static final String WS_UNIDAD_REGISTRAR = "unidad/registrar";
+    public static final String WS_UNIDAD_EDITAR = "unidad/editar";
+    public static final String WS_UNIDAD_ELIMINAR = "unidad/eliminar";
 
     //Peticiones
     public static final String PETICION_GET = "GET";
@@ -31,7 +34,7 @@ public class Constantes {
     public static final String CT_APPLICATION_JSON = "application/json";
     public static final String CT_APPLICATION_FORM_URLENCODED = "application/x-www-form-urlencoded";
     public static final String CT_IMAGE_JPEG = "image/jpeg";
-    
+
     //Errores
     public static final int ERROR_MALFORMED_URL = 1001;
     public static final int ERROR_PETICION = 1002;
@@ -58,14 +61,12 @@ public class Constantes {
     public static final String PG_PRINCIPAL = "FXMLPrincipal.fxml";
     public static final String PG_FORMULARIO_COLABORADOR = "FXMLFormularioColaborador.fxml";
 
-    
     //Roles
     public static final String ROL_CONDUCTOR = "Conductor";
     public static final int ID_ROL_CONDUCTOR = 3;
     public static final int ID_ROL_TODOS = 999;
-    
-    
+
     //Otros
     public static final int MAX_SIZE_MB_IMAGE = 2;
-    
+
 }

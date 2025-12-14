@@ -61,7 +61,7 @@ public class FXMLModuloSucursalesController implements Initializable, INavegable
     public void initialize(URL url, ResourceBundle rb) {
         configurarTabla();
         cargarInformaciónSucursales();
-
+        configurarTextFieldBusqueda();
     }
 
     @Override
@@ -125,4 +125,44 @@ public class FXMLModuloSucursalesController implements Initializable, INavegable
             Utilidades.mostrarAlertaSimple("Error al cargar", respuesta.get("mensaje").toString(), Alert.AlertType.ERROR);
         }
     }
+
+    private void configurarTextFieldBusqueda() {
+        tfBusqueda.textProperty().addListener((obs, oldValue, newValue) -> {
+            if (newValue != null && !newValue.equals(oldValue)) {
+                aplicarFiltros();
+            }
+        });
+    }
+
+    private void aplicarFiltros() {
+        String textoDeBusqueda = tfBusqueda.getText();
+
+        /*
+        Un predicado es una función que recibe un objeto de tipo T y devuelve true o false
+        En este caso es una sucursal (suc)}
+         */
+        filteredData.setPredicate(suc -> {
+
+            suc = (Sucursal) suc;
+
+            // Filtro por texto
+            boolean coincideTexto = true;
+
+            if (textoDeBusqueda != null && !textoDeBusqueda.isEmpty()) {
+                String filtro = textoDeBusqueda.toLowerCase();
+
+                String nombre = Utilidades.normalizar(suc.getNombre());
+                String codigo = String.valueOf(suc.getCodigo()).toLowerCase();
+
+                coincideTexto
+                        = nombre.contains(filtro)
+                        || codigo.contains(filtro);
+            }
+
+            return coincideTexto;
+
+        });
+
+    }
+
 }
