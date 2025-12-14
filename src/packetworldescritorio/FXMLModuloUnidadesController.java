@@ -19,7 +19,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import packetworldescritorio.dominio.SucursalImp;
-import packetworldescritorio.dominio.UnidadesImp;
+import packetworldescritorio.dominio.UnidadImp;
 import packetworldescritorio.interfaz.INavegableChild;
 import packetworldescritorio.interfaz.INavegacion;
 import packetworldescritorio.pojo.Sucursal;
@@ -94,7 +94,7 @@ public class FXMLModuloUnidadesController implements Initializable, INavegableCh
     }
 
     private void cargarInformaciónUnidades() {
-        HashMap<String, Object> respuesta = UnidadesImp.obtenerTodos();
+        HashMap<String, Object> respuesta = UnidadImp.obtenerTodos();
         boolean esError = (boolean) respuesta.get(Constantes.KEY_ERROR);
         if (!esError) {
             List<Unidad> unidadesAPI = (List<Unidad>) respuesta.get(Constantes.KEY_LISTA);

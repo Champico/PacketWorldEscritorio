@@ -1,14 +1,137 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane id="AnchorPane" minWidth="1000.0" prefHeight="627.0" prefWidth="1280.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="packetworldescritorio.FXMLModuloClientesController">
+<AnchorPane id="AnchorPane" minWidth="1000.0" prefHeight="627.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="packetworldescritorio.FXMLModuloClientesController">
    <children>
-      <Label layoutX="63.0" layoutY="49.0" text="Modulo clientes" />
+      <Button layoutX="24.0" layoutY="24.0" mnemonicParsing="false" onAction="#clickRegresar" prefHeight="40.0" prefWidth="139.0" styleClass="btn_regresar">
+         <graphic>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <ImageView fitHeight="30.0" fitWidth="32.0" opacity="0.48" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@/images/flecha-izquierda.png" />
+                     </image>
+                  </ImageView>
+                  <Label prefHeight="30.0" prefWidth="99.0" text=" Regresar" textFill="#4a4a4a">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+         </graphic>
+      </Button>
+      <Label layoutX="43.0" layoutY="64.0" prefHeight="51.0" prefWidth="440.0" text="Modulo de Clientes">
+         <font>
+            <Font name="System Bold" size="35.0" />
+         </font>
+      </Label>
+      <HBox layoutX="35.0" layoutY="127.0" prefHeight="43.0" prefWidth="408.0" styleClass="hb_crud_menu">
+         <children>
+            <Button mnemonicParsing="false" onAction="#clickIrRegistrar" prefHeight="40.0" prefWidth="120.0">
+               <graphic>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <ImageView fitHeight="21.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@/images/+.png" />
+                           </image>
+                        </ImageView>
+                        <Label text=" Nuevo" textFill="WHITE">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+               </graphic>
+               <styleClass>
+                  <String fx:value="btn_general" />
+                  <String fx:value="btn_agregar" />
+               </styleClass>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#clickIrEditar" prefHeight="40.0" prefWidth="120.0">
+               <graphic>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <ImageView fitHeight="21.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@/images/lapiz.png" />
+                           </image>
+                        </ImageView>
+                        <Label text=" Editar" textFill="WHITE">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+               </graphic>
+               <styleClass>
+                  <String fx:value="btn_general" />
+                  <String fx:value="btn_editar" />
+               </styleClass>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#clickEliminar" prefHeight="40.0" prefWidth="120.0">
+               <graphic>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <ImageView fitHeight="21.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@/images/eliminar.png" />
+                           </image>
+                        </ImageView>
+                        <Label text=" Eliminar" textFill="WHITE">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+               </graphic>
+               <styleClass>
+                  <String fx:value="btn_general" />
+                  <String fx:value="btn_eliminar" />
+               </styleClass>
+            </Button>
+         </children>
+      </HBox>
+      <TableView fx:id="tvClientes" layoutX="35.0" layoutY="190.0" prefHeight="414.0" prefWidth="1023.0">
+         <columns>
+            <TableColumn fx:id="colNombre" minWidth="0.0" prefWidth="138.0" text="Nombre" />
+            <TableColumn fx:id="colApPaterno" prefWidth="142.0" text="Apellido paterno" />
+            <TableColumn fx:id="colApMaterno" prefWidth="145.0" text="Apellido Materno" />
+            <TableColumn fx:id="colTelefono" prefWidth="117.0" text="Telefono" />
+            <TableColumn fx:id="colCorreo" prefWidth="254.0" text="Correo" />
+            <TableColumn fx:id="colCalle" prefWidth="149.0" text="Calle" />
+            <TableColumn fx:id="colNumero" prefWidth="77.0" text="Numero" />
+         </columns>
+      </TableView>
+      <TextField fx:id="tfBusqueda" layoutX="478.0" layoutY="127.0" prefHeight="43.0" prefWidth="414.0" promptText="Buscar por nombre, número de teléfono o correo...">
+         <styleClass>
+            <String fx:value="input_general" />
+            <String fx:value="input_busqueda" />
+         </styleClass>
+      </TextField>
+      <Button fx:id="btnBusqueda" layoutX="832.0" layoutY="127.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="59.0">
+         <graphic>
+            <ImageView fitHeight="28.0" fitWidth="29.0" opacity="0.58" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@/images/lupa.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <styleClass>
+            <String fx:value="btn_general" />
+            <String fx:value="btn_buscar" />
+         </styleClass>
+      </Button>
    </children>
 </AnchorPane>

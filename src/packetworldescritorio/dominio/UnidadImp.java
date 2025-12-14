@@ -15,7 +15,7 @@ import packetworldescritorio.pojo.Unidad;
 import packetworldescritorio.utilidad.Constantes;
 
 
-public class UnidadesImp {
+public class UnidadImp {
     
     
     

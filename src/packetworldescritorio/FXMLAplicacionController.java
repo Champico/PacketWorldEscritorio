@@ -110,6 +110,7 @@ public class FXMLAplicacionController implements Initializable, INavegacion {
 
             contentArea.getChildren().setAll(pantalla);
         } catch (IOException e) {
+            e.printStackTrace();
             Utilidades.mostrarAlertaSimple("Error al cargar", "Ocurrio un error al cargar la página", Alert.AlertType.ERROR);
         }
     }

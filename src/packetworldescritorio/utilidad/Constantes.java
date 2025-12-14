@@ -23,6 +23,10 @@ public class Constantes {
     public static final String WS_UNIDAD_REGISTRAR = "unidad/registrar";
     public static final String WS_UNIDAD_EDITAR = "unidad/editar";
     public static final String WS_UNIDAD_ELIMINAR = "unidad/eliminar";
+    public static final String WS_CLIENTE_OBTENER_TODOS = "cliente/obtener";
+    public static final String WS_CLIENTE_REGISTRAR = "cliente/registrar";
+    public static final String WS_CLIENTE_EDITAR = "cliente/editar";
+    public static final String WS_CLIENTE_ELIMINAR = "cliente/eliminar";
 
     //Peticiones
     public static final String PETICION_GET = "GET";

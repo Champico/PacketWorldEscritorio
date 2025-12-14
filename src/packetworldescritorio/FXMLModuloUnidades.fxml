@@ -80,16 +80,16 @@
                   <String fx:value="btn_editar" />
                </styleClass>
             </Button>
-            <Button mnemonicParsing="false" onAction="#clickEliminar" prefHeight="40.0" prefWidth="120.0">
+            <Button mnemonicParsing="false" onAction="#clickEliminar" prefHeight="40.0" prefWidth="165.0">
                <graphic>
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                      <children>
                         <ImageView fitHeight="21.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@/images/eliminar.png" />
+                              <Image url="@/images/abajo.png" />
                            </image>
                         </ImageView>
-                        <Label text=" Eliminar" textFill="WHITE">
+                        <Label text="Dar  de baja" textFill="WHITE">
                            <font>
                               <Font size="18.0" />
                            </font>
