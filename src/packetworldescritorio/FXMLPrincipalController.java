@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 
 import packetworldescritorio.interfaz.INavegableChild;
 import packetworldescritorio.interfaz.INavegacion;
@@ -14,6 +15,18 @@ import packetworldescritorio.utilidad.Constantes;
 public class FXMLPrincipalController implements Initializable, INavegableChild {
 
     private INavegacion nav;
+    @FXML
+    private Button btnColaboradores;
+    @FXML
+    private Button btnUnidades;
+    @FXML
+    private Button btnEnvios;
+    @FXML
+    private Button btnPaquetes;
+    @FXML
+    private Button btnSucursales;
+    @FXML
+    private Button btnClientes;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -48,6 +61,11 @@ public class FXMLPrincipalController implements Initializable, INavegableChild {
     @FXML
     private void clickIrModuloClientes(ActionEvent event) {
         nav.navegar(Constantes.MODULO_CLIENTES);
+    }
+
+    @FXML
+    private void clickIrModuloSucursales(ActionEvent event) {
+        nav.navegar(Constantes.MODULO_SUCURSALES);
     }
 
     @Override

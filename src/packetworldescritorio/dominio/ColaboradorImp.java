@@ -29,10 +29,10 @@ public class ColaboradorImp {
             Type tipoLista = new TypeToken<List<Colaborador>>() {
             }.getType();
             List<Colaborador> colaboradores = gson.fromJson(respuestaAPI.getContenido(), tipoLista);
-            respuesta.put("error", false);
-            respuesta.put("colaboradores", colaboradores);
+            respuesta.put(Constantes.KEY_ERROR, false);
+            respuesta.put(Constantes.KEY_LISTA, colaboradores);
         } else {
-            respuesta.put("error", true);
+            respuesta.put(Constantes.KEY_ERROR, true);
             switch (respuestaAPI.getCodigo()) {
                 case Constantes.ERROR_MALFORMED_URL:
                     respuesta.put("mensaje", Constantes.MSJ_ERROR_PETICION);
@@ -87,7 +87,6 @@ public class ColaboradorImp {
             respuesta = gson.fromJson(respuestaAPI.getContenido(), Respuesta.class);
         } else {
             respuesta.setError(true);
-            System.out.println(respuestaAPI.getCodigo());
             switch (respuestaAPI.getCodigo()) {
                 case Constantes.ERROR_MALFORMED_URL:
                     respuesta.setMensaje(Constantes.MSJ_ERROR_PETICION);
@@ -196,7 +195,6 @@ public class ColaboradorImp {
             respuesta.put(Constantes.KEY_COLABORADOR, colaborador);
         } else {
             respuesta.put(Constantes.KEY_ERROR, true);
-            System.out.println("Error: " + respuestaAPI.getCodigo());
             switch (respuestaAPI.getCodigo()) {
                 case Constantes.ERROR_MALFORMED_URL:
                     respuesta.put("mensaje", Constantes.MSJ_ERROR_PETICION);

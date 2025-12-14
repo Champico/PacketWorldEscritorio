@@ -35,7 +35,7 @@ public class CatalogoImp {
                     respuesta.put(Constantes.KEY_MENSAJE, Constantes.MSJ_ERROR_PETICION);
                     break;
                 default:
-                    respuesta.put(Constantes.KEY_MENSAJE, "Lo sentimos hay problemas para obtener la informacíon en este momento, porfavor intentelo más tarde");
+                    respuesta.put(Constantes.KEY_MENSAJE, "Lo sentimos, ocurrio un problema al obtener la información de roles.\nPorfavor intentelo más tarde");
             }
         }
         return respuesta;
@@ -61,7 +61,7 @@ public class CatalogoImp {
                     respuesta.put(Constantes.KEY_MENSAJE, Constantes.MSJ_ERROR_PETICION);
                     break;
                 default:
-                    respuesta.put(Constantes.KEY_MENSAJE, "Lo sentimos hay problemas para obtener la informacíon en este momento, porfavor intentelo más tarde");
+                    respuesta.put(Constantes.KEY_MENSAJE, "Lo sentimos hay problemas para obtener la informacíon de sucursales, porfavor intentelo más tarde");
             }
         }
         return respuesta;

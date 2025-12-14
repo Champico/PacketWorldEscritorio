@@ -523,9 +523,6 @@ public class FXMLFormularioColaboradorController implements Initializable, INave
         if (!respuesta.isError()) {
             if (fotoEditada == true) {
                 Integer idColaborador = obtenerIdColaboradorPorNumeroPersonal(colaborador.getNoPersonal());
-
-                System.out.println("Se creo el nuevo colaborador. Su id es:  " + idColaborador);
-
                 if (idColaborador != null) {
                     Respuesta respuestaFoto = enviarFoto(idColaborador);
                     Utilidades.mostrarAlertaSimple("Colaborador registrado", respuesta.getMensaje(), Alert.AlertType.INFORMATION);
@@ -682,7 +679,6 @@ public class FXMLFormularioColaboradorController implements Initializable, INave
         Integer idColaborador = null;
         HashMap<String, Object> respuesta = ColaboradorImp.buscarPorNumPersonal(noPersonal);
         try {
-            //System.out.println("Respuesta del servicio: " + respuesta.get(Constantes.KEY_ERROR) + " ; " + ((Colaborador) respuesta.get(Constantes.KEY_COLABORADOR)) );
             if (!(boolean) respuesta.get(Constantes.KEY_ERROR)) {
                 Colaborador colaborador = (Colaborador) respuesta.get(Constantes.KEY_COLABORADOR);
                 if (colaborador != null) {

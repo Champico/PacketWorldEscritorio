@@ -38,7 +38,7 @@ import packetworldescritorio.pojo.Rol;
 import packetworldescritorio.utilidad.Constantes;
 import packetworldescritorio.utilidad.Utilidades;
 
-public class FXMLModuloColaboradoresController implements Initializable, INotificador, INavegableChild {
+public class FXMLModuloColaboradoresController implements Initializable, INavegableChild {
 
     private INavegacion nav;
 
@@ -58,23 +58,20 @@ public class FXMLModuloColaboradoresController implements Initializable, INotifi
     private TableColumn colCorreo;
     @FXML
     private TableColumn colRol;
-
     @FXML
     private Button btnBusqueda;
-
     @FXML
     private ComboBox<Rol> cbRol;
 
     private ObservableList<Colaborador> colaboradores;
     private FilteredList<Colaborador> filteredData;
     private SortedList<Colaborador> sortedData;
-
     private ObservableList<Rol> roles;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         configurarTabla();
-        cargarInformaciónProfesores();
+        cargarInformaciónColaboradores();
         configurarComboBoxRoles();
         configurarTextFieldBusqueda();
     }
@@ -98,11 +95,11 @@ public class FXMLModuloColaboradoresController implements Initializable, INotifi
         colRol.setCellValueFactory(new PropertyValueFactory("rol"));
     }
 
-    private void cargarInformaciónProfesores() {
+    private void cargarInformaciónColaboradores() {
         HashMap<String, Object> respuesta = ColaboradorImp.obtenerTodos();
-        boolean esError = (boolean) respuesta.get("error");
+        boolean esError = (boolean) respuesta.get(Constantes.KEY_ERROR);
         if (!esError) {
-            List<Colaborador> colaboradoresAPI = (List<Colaborador>) respuesta.get("colaboradores");
+            List<Colaborador> colaboradoresAPI = (List<Colaborador>) respuesta.get(Constantes.KEY_LISTA);
             colaboradores = FXCollections.observableArrayList();
             colaboradores.addAll(colaboradoresAPI);
 
@@ -154,16 +151,13 @@ public class FXMLModuloColaboradoresController implements Initializable, INotifi
         nav.navegar(Constantes.PG_FORMULARIO_COLABORADOR, colaborador);
     }
 
-    @Override
-    public void notificarOperacionExitosa(String operacion, String nombre) {
-        cargarInformaciónProfesores();
-    }
+ 
 
     private void eliminarProfesor(int idProfesor) {
         Respuesta respuesta = ColaboradorImp.eliminar(idProfesor);
         if (!respuesta.isError()) {
             Utilidades.mostrarAlertaSimple("Registro eliminado", "El registro del profesor(a) fue eliminado correctamente", Alert.AlertType.INFORMATION);
-            cargarInformaciónProfesores();
+            cargarInformaciónColaboradores();
         } else {
             Utilidades.mostrarAlertaSimple("Error al eliminar", respuesta.getMensaje(), Alert.AlertType.ERROR);
         }

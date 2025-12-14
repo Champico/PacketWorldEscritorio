@@ -1,3 +1,4 @@
+/** @authores  Pipe, Kevin, champ */
 
 package packetworldescritorio.pojo;
 
@@ -10,7 +11,7 @@ public class Sucursal {
     private int idSucursal;
     private String codigo;
     private String nombre;
-    private String status;
+    private String estatus;
     private String calle;
     private String numero;
     private String colonia;
@@ -25,7 +26,7 @@ public class Sucursal {
         this.idSucursal = idSucursal;
         this.codigo = codigo;
         this.nombre = nombre;
-        this.status = status;
+        this.estatus = status;
         this.calle = calle;
         this.numero = numero;
         this.colonia = colonia;
@@ -58,12 +59,12 @@ public class Sucursal {
         this.nombre = nombre;
     }
 
-    public String getStatus() {
-        return status;
+    public String getEstatus() {
+        return estatus;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setEstatus(String status) {
+        this.estatus = status;
     }
 
     public String getCalle() {
