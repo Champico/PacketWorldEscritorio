@@ -140,7 +140,7 @@ public class FXMLModuloColaboradoresController implements Initializable, INavega
         if (colaborador != null) {
             Boolean confirmarOperacion = Utilidades.mostrarAlertaConfirmacion("Eliminar colaborador", "¿Estas seguro de que quieres eliminar el registro del colaborador " + (colaborador.getNombre() != null ? colaborador.getNombre() : "") + " " + (colaborador.getApellidoPaterno() != null ? colaborador.getApellidoPaterno() : "") + " " + (colaborador.getApellidoMaterno() != null ? colaborador.getApellidoMaterno() : "") + " ?" + "\n Al eliminar un registro no podras recuperar la información posteriormente");
             if (confirmarOperacion) {
-                eliminarProfesor(colaborador.getIdColaborador());
+                eliminarColaborador(colaborador.getIdColaborador());
             }
         } else {
             Utilidades.mostrarAlertaSimple("Selecciona profesor", "Para eliminar un profesor, debe seleccionarlo de la tabla", Alert.AlertType.WARNING);
@@ -153,10 +153,10 @@ public class FXMLModuloColaboradoresController implements Initializable, INavega
 
  
 
-    private void eliminarProfesor(int idProfesor) {
-        Respuesta respuesta = ColaboradorImp.eliminar(idProfesor);
+    private void eliminarColaborador(int idColaborador) {
+        Respuesta respuesta = ColaboradorImp.eliminar(idColaborador);
         if (!respuesta.isError()) {
-            Utilidades.mostrarAlertaSimple("Registro eliminado", "El registro del profesor(a) fue eliminado correctamente", Alert.AlertType.INFORMATION);
+            Utilidades.mostrarAlertaSimple("Registro eliminado", "El registro del colaborador fue eliminado correctamente", Alert.AlertType.INFORMATION);
             cargarInformaciónColaboradores();
         } else {
             Utilidades.mostrarAlertaSimple("Error al eliminar", respuesta.getMensaje(), Alert.AlertType.ERROR);

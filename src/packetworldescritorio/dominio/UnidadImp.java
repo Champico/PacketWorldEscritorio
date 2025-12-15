@@ -9,16 +9,14 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import packetworldescritorio.conexion.ConexionAPI;
+import packetworldescritorio.dto.Respuesta;
 import packetworldescritorio.pojo.RespuestaHTTP;
 import packetworldescritorio.pojo.Sucursal;
 import packetworldescritorio.pojo.Unidad;
 import packetworldescritorio.utilidad.Constantes;
 
-
 public class UnidadImp {
-    
-    
-    
+
     public static HashMap<String, Object> obtenerTodos() {
         HashMap<String, Object> respuesta = new LinkedHashMap<>();
         String URL = Constantes.URL_WS + Constantes.WS_UNIDAD_OBTENER_TODOS;
@@ -45,6 +43,36 @@ public class UnidadImp {
         }
         return respuesta;
     }
-    
-    
+
+    public static Respuesta darDeBaja(Unidad unidad) {
+        Respuesta respuesta = new Respuesta();
+        String URL = Constantes.URL_WS + Constantes.WS_UNIDAD_DAR_DE_BAJA;
+
+        Gson gson = new Gson();
+        String parametrosJSON = gson.toJson(unidad);
+        RespuestaHTTP respuestaAPI = ConexionAPI.peticionBody(URL, Constantes.PETICION_POST, parametrosJSON, Constantes.CT_APPLICATION_JSON);
+
+        if (respuestaAPI.getCodigo() == HttpURLConnection.HTTP_OK) {
+            gson = new Gson();
+            respuesta = gson.fromJson(respuestaAPI.getContenido(), Respuesta.class);
+        } else {
+            respuesta.setError(true);
+            switch (respuestaAPI.getCodigo()) {
+                case Constantes.ERROR_MALFORMED_URL:
+                    respuesta.setMensaje(Constantes.MSJ_ERROR_PETICION);
+                    break;
+                case Constantes.ERROR_PETICION:
+                    respuesta.setMensaje(Constantes.MSJ_ERROR_PETICION);
+                    break;
+                case Constantes.ERROR_BAD_REQUEST:
+                    respuesta.setMensaje("Ocurrio un error al dar de baja la unidad");
+                    break;
+                default:
+                    respuesta.setMensaje("Lo sentimos hay problemas para dar de baja en este momento, porfavor intentelo más tarde");
+            }
+        }
+
+        return respuesta;
+    }
+
 }

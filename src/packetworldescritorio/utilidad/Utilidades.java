@@ -13,10 +13,22 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.text.Normalizer;
 import java.util.Base64;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.Optional;
+import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.Dialog;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+import javafx.scene.control.TextInputDialog;
+import javafx.scene.layout.VBox;
 import javax.imageio.ImageIO;
 import javax.imageio.ImageReader;
 import javax.imageio.stream.ImageInputStream;
@@ -51,6 +63,60 @@ public class Utilidades {
         return (btnSeleccion.get() == ButtonType.OK);
     }
 
+    public static  HashMap<String, Object> mostrarAlertaConfirmacionConMotivo(String titulo, String contenido, String mensajeBotonAceptar){
+        HashMap<String, Object> respuesta = new LinkedHashMap<>();
+        
+        Dialog<String> dialog = new Dialog<>();
+        dialog.setTitle(titulo);
+        dialog.setHeaderText(null);
+        dialog.getDialogPane().setPrefWidth(420);
+        
+        ButtonType  btnAceptar = new ButtonType(mensajeBotonAceptar, ButtonBar.ButtonData.OK_DONE);
+        dialog.getDialogPane().getButtonTypes().addAll(btnAceptar, ButtonType.CANCEL);
+        
+        Label lbMotivo = new Label(contenido);
+        
+        TextArea taMotivo = new TextArea();
+        taMotivo.setPromptText("Escriba aqui...");
+        taMotivo.setWrapText(true);
+        taMotivo.setPrefRowCount(4);
+        taMotivo.setPrefWidth(400);
+        
+        VBox content = new VBox(10, lbMotivo, taMotivo);
+        content.setPadding(new Insets(10));
+        
+        dialog.getDialogPane().setContent(content);
+        
+        Node btnOkNode = dialog.getDialogPane().lookupButton(btnAceptar);
+        
+        taMotivo.textProperty().addListener((obs, oldText, newText) ->{
+            btnOkNode.setDisable(newText.trim().isEmpty());
+        });
+        
+        dialog.setResultConverter(button ->{
+            if(button == btnAceptar) {
+                return taMotivo.getText().trim();
+            }
+            return null;
+        });
+        
+        Optional<String> result = dialog.showAndWait();
+        
+        if(result.isPresent()){
+            String motivo = result.get().trim();
+            respuesta.put(Constantes.KEY_CONFIRMACION, true);
+            respuesta.put(Constantes.KEY_MOTIVO, motivo);
+        }else{
+            respuesta.put(Constantes.KEY_CONFIRMACION, false);
+            respuesta.put(Constantes.KEY_MOTIVO, "cancelado");
+        }
+        return respuesta;
+    }
+    
+    
+    
+    
+    
     /**
      * Elimina acentos y marcas diacríticas, convirtiendo caracteres como á, é,
      * í, ó, ú, ü, ñ, Á, É, Í, Ó, Ú en sus equivalentes sin acento. También

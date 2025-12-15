@@ -18,11 +18,11 @@ public class Constantes {
     public static final String WS_SUCURSAL_OBTENER_TODOS = "sucursal/obtener";
     public static final String WS_SUCURSAL_REGISTRAR = "sucursal/registrar";
     public static final String WS_SUCURSAL_EDITAR = "sucursal/editar";
-    public static final String WS_SUCURSAL_ELIMINAR = "sucursal/eliminar";
+    public static final String WS_SUCURSAL_DAR_DE_BAJA = "sucursal/darBaja";
     public static final String WS_UNIDAD_OBTENER_TODOS = "unidad/obtener";
     public static final String WS_UNIDAD_REGISTRAR = "unidad/registrar";
     public static final String WS_UNIDAD_EDITAR = "unidad/editar";
-    public static final String WS_UNIDAD_ELIMINAR = "unidad/eliminar";
+    public static final String WS_UNIDAD_DAR_DE_BAJA= "unidad/darBaja";
     public static final String WS_CLIENTE_OBTENER_TODOS = "cliente/obtener";
     public static final String WS_CLIENTE_REGISTRAR = "cliente/registrar";
     public static final String WS_CLIENTE_EDITAR = "cliente/editar";
@@ -52,6 +52,8 @@ public class Constantes {
     public static final String KEY_LISTA = "lista_valores";
     public static final String KEY_OBJETO = "objeto";
     public static final String KEY_COLABORADOR = "colaborador";
+    public static final String KEY_CONFIRMACION = "confirmacion";
+    public static final String KEY_MOTIVO = "motivo";
 
     //Archivos fxml
     public static final String PG_APLICACION = "FXMLAplicacion.fxml";
@@ -64,11 +66,14 @@ public class Constantes {
     public static final String MODULO_ENVIOS = "FXMLModuloEnvios.fxml";
     public static final String PG_PRINCIPAL = "FXMLPrincipal.fxml";
     public static final String PG_FORMULARIO_COLABORADOR = "FXMLFormularioColaborador.fxml";
+    public static final String PG_FORMULARIO_UNIDADES = "FXMLFormularioUnidades.fxml";
 
     //Roles
     public static final String ROL_CONDUCTOR = "Conductor";
     public static final int ID_ROL_CONDUCTOR = 3;
     public static final int ID_ROL_TODOS = 999;
+    
+    public static final String UNIDAD_ESTATUS_INACTIVA = "inactiva";
 
     //Otros
     public static final int MAX_SIZE_MB_IMAGE = 2;

@@ -80,7 +80,7 @@
                   <String fx:value="btn_editar" />
                </styleClass>
             </Button>
-            <Button mnemonicParsing="false" onAction="#clickEliminar" prefHeight="40.0" prefWidth="165.0">
+            <Button mnemonicParsing="false" onAction="#clickDarDeBaja" prefHeight="40.0" prefWidth="165.0">
                <graphic>
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                      <children>

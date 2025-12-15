@@ -18,10 +18,13 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import packetworldescritorio.dominio.ColaboradorImp;
 import packetworldescritorio.dominio.SucursalImp;
 import packetworldescritorio.dominio.UnidadImp;
+import packetworldescritorio.dto.Respuesta;
 import packetworldescritorio.interfaz.INavegableChild;
 import packetworldescritorio.interfaz.INavegacion;
+import packetworldescritorio.pojo.Colaborador;
 import packetworldescritorio.pojo.Sucursal;
 import packetworldescritorio.pojo.Unidad;
 import packetworldescritorio.utilidad.Constantes;
@@ -75,14 +78,54 @@ public class FXMLModuloUnidadesController implements Initializable, INavegableCh
 
     @FXML
     private void clickIrRegistrar(ActionEvent event) {
+        irFormulario(null);
     }
 
     @FXML
     private void clickIrEditar(ActionEvent event) {
+        Unidad unidad = tvUnidades.getSelectionModel().getSelectedItem();
+        if (unidad != null) {
+            irFormulario(unidad);
+        } else {
+            Utilidades.mostrarAlertaSimple("Selecciona una unidad", "Para editar la información de una unidad, debes seleciconarlo primero de la tabla", Alert.AlertType.WARNING);
+        }
     }
 
     @FXML
-    private void clickEliminar(ActionEvent event) {
+    private void clickDarDeBaja(ActionEvent event) {
+        Unidad unidad = tvUnidades.getSelectionModel().getSelectedItem();
+        if (unidad != null) {
+            if (unidad.getEstatus().equalsIgnoreCase(Constantes.UNIDAD_ESTATUS_INACTIVA)) {
+                Utilidades.mostrarAlertaSimple("Alerta", "Esta unidad no esta activa", Alert.AlertType.INFORMATION);
+                return;
+            }
+
+            HashMap confirmacion = Utilidades.mostrarAlertaConfirmacionConMotivo("Dar de baja unidad", "Escribe el motivo por el cual se da de baja esta unidad", "Dar de baja");
+            if ((Boolean) confirmacion.get(Constantes.KEY_CONFIRMACION) == true) {
+                String motivo = (String) confirmacion.get(Constantes.KEY_MOTIVO);
+                Boolean confirmarOperacion = Utilidades.mostrarAlertaConfirmacion("Dar de baja unidad", "¿Estas seguro de que quieres dar de baja la unidad " + (unidad.getTipo() != null ? unidad.getNumIdInterno() : "") + " " + (unidad.getMarca() != null ? unidad.getMarca() : "") + " " + (unidad.getModelo() != null ? unidad.getModelo() : "") + " ? " + "\n Esta acción no se puede deshacer");
+                if (confirmarOperacion) {
+                    unidad.setMotivoBaja(motivo);
+                    darDeBajaUnidad(unidad);
+                }
+            }
+        } else {
+            Utilidades.mostrarAlertaSimple("Selecciona unidad", "Para eliminar una unidad, debe seleccionarla de la tabla", Alert.AlertType.WARNING);
+        }
+    }
+
+    private void irFormulario(Unidad unidad) {
+        nav.navegar(Constantes.PG_FORMULARIO_UNIDADES, unidad);
+    }
+
+    private void darDeBajaUnidad(Unidad unidad) {
+        Respuesta respuesta = UnidadImp.darDeBaja(unidad);
+        if (!respuesta.isError()) {
+            Utilidades.mostrarAlertaSimple("Registro eliminado", "El registro de la unidad fue eliminado correctamente", Alert.AlertType.INFORMATION);
+            cargarInformaciónUnidades();
+        } else {
+            Utilidades.mostrarAlertaSimple("Error al eliminar", respuesta.getMensaje(), Alert.AlertType.ERROR);
+        }
     }
 
     private void configurarTabla() {
