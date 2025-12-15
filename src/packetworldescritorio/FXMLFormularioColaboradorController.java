@@ -42,6 +42,9 @@ import packetworldescritorio.utilidad.UIUtilidad;
 
 public class FXMLFormularioColaboradorController implements Initializable, INavegableChild {
 
+    
+    private INavegacion nav;
+    
     @FXML
     private TextField tfNoPersonal;
     @FXML
@@ -84,8 +87,6 @@ public class FXMLFormularioColaboradorController implements Initializable, INave
     private Label lbErrorPassword;
     @FXML
     private Label lbErrorConfirmarPassword;
-
-    private INavegacion nav;
     @FXML
     private TextField tfCurp;
     @FXML

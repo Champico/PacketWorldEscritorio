@@ -8,6 +8,7 @@ public class Constantes {
     public static final String WS_AUTENTICACION_COLABORADOR = "autenticacion/colaborador";
     public static final String WS_CATALOGO_ROLES = "catalogo/obtener-roles";
     public static final String WS_CATALOGO_SUCURSALES = "catalogo/obtener-sucursales";
+    public static final String WS_CATALOGO_TIPOS_UNIDAD = "catalogo/obtener-tipos-unidad";
     public static final String WS_COLABORADOR_OBTENER_TODOS = "colaborador/obtener";
     public static final String WS_COLABORADOR_REGISTRAR = "colaborador/registrar";
     public static final String WS_COLABORADOR_EDITAR = "colaborador/editar";
@@ -66,7 +67,7 @@ public class Constantes {
     public static final String MODULO_ENVIOS = "FXMLModuloEnvios.fxml";
     public static final String PG_PRINCIPAL = "FXMLPrincipal.fxml";
     public static final String PG_FORMULARIO_COLABORADOR = "FXMLFormularioColaborador.fxml";
-    public static final String PG_FORMULARIO_UNIDADES = "FXMLFormularioUnidades.fxml";
+    public static final String PG_FORMULARIO_UNIDADES = "FXMLFormularioUnidad.fxml";
 
     //Roles
     public static final String ROL_CONDUCTOR = "Conductor";

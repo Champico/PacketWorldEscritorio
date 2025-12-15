@@ -115,6 +115,7 @@ public class FXMLModuloUnidadesController implements Initializable, INavegableCh
     }
 
     private void irFormulario(Unidad unidad) {
+        System.out.println(Constantes.PG_FORMULARIO_UNIDADES);
         nav.navegar(Constantes.PG_FORMULARIO_UNIDADES, unidad);
     }
 
