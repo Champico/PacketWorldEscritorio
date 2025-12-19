@@ -120,3 +120,7 @@
     -fx-focus-color:#ff3434; 
     -fx-faint-focus-color: #ff52524e
 }
+
+input_no_writable:disabled{
+-fx-opacity: 1;
+}
