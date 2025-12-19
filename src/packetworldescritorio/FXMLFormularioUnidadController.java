@@ -16,6 +16,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextInputControl;
 import packetworldescritorio.dominio.CatalogoImp;
 import packetworldescritorio.interfaz.INavegableChild;
 import packetworldescritorio.interfaz.INavegacion;
@@ -25,6 +26,7 @@ import packetworldescritorio.pojo.Sucursal;
 import packetworldescritorio.pojo.TipoUnidad;
 import packetworldescritorio.pojo.Unidad;
 import packetworldescritorio.utilidad.Constantes;
+import packetworldescritorio.utilidad.UIUtilidad;
 import packetworldescritorio.utilidad.Utilidades;
 
 public class FXMLFormularioUnidadController implements Initializable, INavegableChild {
@@ -63,6 +65,7 @@ public class FXMLFormularioUnidadController implements Initializable, INavegable
     public void initialize(URL url, ResourceBundle rb) {
         cargarComboBoxAno();
         cargarComboBoxTiposUnidad();
+        configurarMaximoNumeroCaracteres();
     }
 
     @Override
@@ -89,6 +92,25 @@ public class FXMLFormularioUnidadController implements Initializable, INavegable
 
     @FXML
     private void clickGuardar(ActionEvent event) {
+        boolean camposCorrectos = unidadEdicion == null ? verificarCamposNuevo() : verificarCamposEdicion();
+
+        if (camposCorrectos == true) {
+ 
+            Unidad unidad = new Unidad();
+            unidad.setVin(tfVin.getText());
+            unidad.setEstatus(Constantes.UNIDAD_ESTATUS_ACTIVA);
+            unidad.setMarca(tfMarca.getText());
+            unidad.setModelo(tfModelo.getText());
+            unidad.setAnio(cbAno.getSelectionModel().getSelectedItem().toString());
+            unidad.setIdTipo(cbTipo.getSelectionModel().getSelectedItem().getIdTipoUnidad());
+
+            if (unidadEdicion == null) {
+                registrarUnidad(unidad);
+            } else {
+                editarUnidad(unidad);
+            }
+
+        }
     }
 
     @FXML
@@ -99,7 +121,7 @@ public class FXMLFormularioUnidadController implements Initializable, INavegable
         this.unidadEdicion = unidadEdicion;
         if (unidadEdicion != null) {
 
-            lbTitulo.setText("Editar colaborador");
+            lbTitulo.setText("Editar unidad");
 
             tfVin.setText(unidadEdicion.getVin());
             tfMarca.setText(unidadEdicion.getMarca());
@@ -117,7 +139,7 @@ public class FXMLFormularioUnidadController implements Initializable, INavegable
         int anoActual = LocalDate.now().getYear();
 
         ArrayList<Integer> anosTemp = new ArrayList<>();
-        for (int ano = anoActual + 3; ano > anoActual -50; ano--) {
+        for (int ano = anoActual + 3; ano > anoActual - 50; ano--) {
             anosTemp.add(ano);
         }
 
@@ -141,7 +163,7 @@ public class FXMLFormularioUnidadController implements Initializable, INavegable
     }
 
     private void cargarComboBoxTiposUnidad() {
-           HashMap<String, Object> respuesta = CatalogoImp.obtenerTiposUnidad();
+        HashMap<String, Object> respuesta = CatalogoImp.obtenerTiposUnidad();
         if (!(boolean) respuesta.get(Constantes.KEY_ERROR)) {
             List<TipoUnidad> sucursalAPI = (List<TipoUnidad>) respuesta.get(Constantes.KEY_LISTA);
             tiposDeUnidad = FXCollections.observableArrayList();
@@ -153,4 +175,118 @@ public class FXMLFormularioUnidadController implements Initializable, INavegable
         }
     }
 
+    private void configurarMaximoNumeroCaracteres() {
+        TextInputControl[] tf = {tfVin, tfMarca, tfModelo};
+        Integer maxNumCaracteres[] = {17, 255, 255};
+
+        for (int i = 0; i < tf.length; i++) {
+            UIUtilidad.limitarCaracteres(tf[i], maxNumCaracteres[i]);
+        }
+    }
+
+    private boolean verificarCamposNuevo() {
+        boolean camposCorrectos = true;
+        if (verificarVin() == false) {
+            camposCorrectos = false;
+        }
+        if (verificarMarca() == false) {
+            camposCorrectos = false;
+        }
+        if (verificarModelo() == false) {
+            camposCorrectos = false;
+        }
+        if (verificarAno() == false) {
+            camposCorrectos = false;
+        }
+
+        if (verificarTipoUnidad() == false) {
+            camposCorrectos = false;
+        }
+        return camposCorrectos;
+    }
+
+    private boolean verificarCamposEdicion() {
+        boolean camposCorrectos = true;
+        if (verificarMarca() == false) {
+            camposCorrectos = false;
+        }
+        if (verificarModelo() == false) {
+            camposCorrectos = false;
+        }
+        if (verificarAno() == false) {
+            camposCorrectos = false;
+        }
+        return camposCorrectos;
+    }
+
+    private boolean verificarMarca() {
+
+        if (UIUtilidad.esInputVacio(tfMarca, lbErrorMarca) == true) {
+            return false;
+        }
+
+        UIUtilidad.limpiarError(tfMarca, lbErrorMarca);
+
+        return true;
+    }
+
+    private boolean verificarVin() {
+
+        if (UIUtilidad.esInputVacio(tfVin, lbErrorVin) == true) {
+            return false;
+        }
+
+        if (tfVin.getText().trim().length() != 17) {
+            UIUtilidad.marcarError(tfVin, lbErrorVin, "El vin debe tener 7 caracteres");
+            return false;
+        }
+
+        UIUtilidad.limpiarError(tfVin, lbErrorVin);
+
+        return true;
+    }
+
+    private boolean verificarModelo() {
+        if (UIUtilidad.esInputVacio(tfModelo, lbErrorModelo) == true) {
+            return false;
+        }
+
+        UIUtilidad.limpiarError(tfModelo, lbErrorModelo);
+
+        return true;
+    }
+
+    private boolean verificarAno() {
+        Integer anoSeleccionado = cbAno.getSelectionModel().getSelectedItem();
+        if (anoSeleccionado == null) {
+            UIUtilidad.mostrarLabelMensajeError(lbErrorAno, "Seleccione un año");
+            return false;
+        }
+
+        UIUtilidad.ocultarLabelMensajeError(lbErrorAno);
+        return true;
+    }
+
+    private boolean verificarTipoUnidad() {
+        TipoUnidad tipoUnidadSeleccionado = cbTipo.getSelectionModel().getSelectedItem();
+        if (tipoUnidadSeleccionado == null) {
+            UIUtilidad.mostrarLabelMensajeError(lbErrorTipo, "Seleccione un tipo de unidad");
+            return false;
+        } else {
+            UIUtilidad.ocultarLabelMensajeError(lbErrorTipo);
+        }
+
+        UIUtilidad.ocultarLabelMensajeError(lbErrorTipo);
+        return true;
+    }
+
+    private void registrarUnidad(Unidad unidad) {
+  
+    
+    }
+
+    private void editarUnidad(Unidad unidad) {
+    
+    
+    }
 }

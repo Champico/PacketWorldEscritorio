@@ -75,6 +75,7 @@ public class Constantes {
     public static final int ID_ROL_TODOS = 999;
     
     public static final String UNIDAD_ESTATUS_INACTIVA = "inactiva";
+    public static final String UNIDAD_ESTATUS_ACTIVA = "activa";
 
     //Otros
     public static final int MAX_SIZE_MB_IMAGE = 2;
