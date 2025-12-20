@@ -89,6 +89,7 @@ public class Utilidades {
         
         Node btnOkNode = dialog.getDialogPane().lookupButton(btnAceptar);
         
+        btnOkNode.setDisable(true);
         taMotivo.textProperty().addListener((obs, oldText, newText) ->{
             btnOkNode.setDisable(newText.trim().isEmpty());
         });

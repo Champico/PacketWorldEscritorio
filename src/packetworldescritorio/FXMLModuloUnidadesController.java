@@ -110,7 +110,7 @@ public class FXMLModuloUnidadesController implements Initializable, INavegableCh
                 }
             }
         } else {
-            Utilidades.mostrarAlertaSimple("Selecciona unidad", "Para eliminar una unidad, debe seleccionarla de la tabla", Alert.AlertType.WARNING);
+            Utilidades.mostrarAlertaSimple("Selecciona unidad", "Para dar de baja una unidad, debe seleccionarla de la tabla", Alert.AlertType.WARNING);
         }
     }
 
@@ -122,10 +122,10 @@ public class FXMLModuloUnidadesController implements Initializable, INavegableCh
     private void darDeBajaUnidad(Unidad unidad) {
         Respuesta respuesta = UnidadImp.darDeBaja(unidad);
         if (!respuesta.isError()) {
-            Utilidades.mostrarAlertaSimple("Registro eliminado", "El registro de la unidad fue eliminado correctamente", Alert.AlertType.INFORMATION);
+            Utilidades.mostrarAlertaSimple("Unidad dada de baja", "La unidad fue dada de baja correctamente", Alert.AlertType.INFORMATION);
             cargarInformaciónUnidades();
         } else {
-            Utilidades.mostrarAlertaSimple("Error al eliminar", respuesta.getMensaje(), Alert.AlertType.ERROR);
+            Utilidades.mostrarAlertaSimple("Error al dar de baja", respuesta.getMensaje(), Alert.AlertType.ERROR);
         }
     }
 
