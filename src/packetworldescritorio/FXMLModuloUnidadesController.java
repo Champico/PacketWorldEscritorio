@@ -1,6 +1,7 @@
 /** @authores  Pipe, Kevin, champ */
 package packetworldescritorio;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
@@ -11,13 +12,18 @@ import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.stage.Stage;
 import packetworldescritorio.dominio.ColaboradorImp;
 import packetworldescritorio.dominio.SucursalImp;
 import packetworldescritorio.dominio.UnidadImp;
@@ -45,6 +51,8 @@ public class FXMLModuloUnidadesController implements Initializable, INavegableCh
     private TableColumn colModelo;
     @FXML
     private TableColumn colEstatus;
+    @FXML
+    private TableColumn colNombreColaborador;
     @FXML
     private Button btnBusqueda;
     @FXML
@@ -135,6 +143,7 @@ public class FXMLModuloUnidadesController implements Initializable, INavegableCh
         colMarca.setCellValueFactory(new PropertyValueFactory("marca"));
         colModelo.setCellValueFactory(new PropertyValueFactory("modelo"));
         colEstatus.setCellValueFactory(new PropertyValueFactory("estatus"));
+        colNombreColaborador.setCellValueFactory(new PropertyValueFactory("nombreColaborador"));
     }
 
     private void cargarInformaciónUnidades() {
@@ -199,6 +208,43 @@ public class FXMLModuloUnidadesController implements Initializable, INavegableCh
             return coincideTexto;
 
         });
+
+    }
+    
+    
+    
+    
+        @FXML
+    private void clickBuscarConductor(ActionEvent event) {
+        buscarConductor();
+    }
+
+
+    private void buscarConductor() {
+        try {
+            FXMLLoader cargador = new FXMLLoader(getClass().getResource(Constantes.MODAL_BUSCAR_CONDUCTOR));
+            Parent vista = cargador.load();
+            //FXMLAplicacionController controlador = cargador.getController();
+            //controlador.cargarInformacion(colaborador);
+            Scene escenaPrincipal = new Scene(vista);
+
+            Stage stModal = new Stage();
+            stModal.setScene(escenaPrincipal);
+            stModal.setWidth(900);
+            stModal.setHeight(500);
+            stModal.setResizable(false);
+            stModal.setTitle("Buscar conductor");
+
+            try {
+                stModal.getIcons().add(new Image(getClass().getResourceAsStream("/images/lupa.png")));
+            } catch (Exception ex) {
+            }
+
+            stModal.showAndWait();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            Utilidades.mostrarAlertaSimple("Error", "Ocurrio un error al cargar la ventana de buscar colaborador", Alert.AlertType.ERROR);
+        }
 
     }
 }

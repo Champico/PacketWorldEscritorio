@@ -157,7 +157,7 @@ public class ColaboradorImp {
     public static Respuesta subirFoto(byte[] foto, int idColaborador) {
         Respuesta respuesta = new Respuesta();
         String URL = Constantes.URL_WS + Constantes.WS_COLABORADOR_SUBIR_FOTO + "/" + idColaborador;
-      
+
         RespuestaHTTP respuestaAPI = ConexionAPI.peticionBodyBinario(URL, Constantes.PETICION_PUT, foto, Constantes.CT_IMAGE_JPEG);
 
         if (respuestaAPI.getCodigo() == HttpURLConnection.HTTP_OK) {
@@ -182,15 +182,15 @@ public class ColaboradorImp {
         }
         return respuesta;
     }
-    
-        public static HashMap<String, Object> buscarPorNumPersonal(String noPersonal) {
+
+    public static HashMap<String, Object> buscarPorNumPersonal(String noPersonal) {
         HashMap<String, Object> respuesta = new LinkedHashMap<>();
         String URL = Constantes.URL_WS + Constantes.WS_COLABORADOR_BUSCAR_POR_NUM_PERSONAL + "/" + noPersonal;
         RespuestaHTTP respuestaAPI = ConexionAPI.peticionGET(URL);
         if (respuestaAPI.getCodigo() == HttpURLConnection.HTTP_OK) {
             Gson gson = new Gson();
             Colaborador colaborador = gson.fromJson(respuestaAPI.getContenido(), Colaborador.class);
-            
+
             respuesta.put(Constantes.KEY_ERROR, false);
             respuesta.put(Constantes.KEY_COLABORADOR, colaborador);
         } else {
@@ -209,5 +209,30 @@ public class ColaboradorImp {
         return respuesta;
     }
 
-    
+    public static HashMap<String, Object> obtenerConductores() {
+        HashMap<String, Object> respuesta = new LinkedHashMap<>();
+        String URL = Constantes.URL_WS + Constantes.WS_COLABORADOR_OBTENER_CONDUCTORES;
+        RespuestaHTTP respuestaAPI = ConexionAPI.peticionGET(URL);
+        if (respuestaAPI.getCodigo() == HttpURLConnection.HTTP_OK) {
+            Gson gson = new Gson();
+            Type tipoLista = new TypeToken<List<Colaborador>>() {
+            }.getType();
+            List<Colaborador> colaboradores = gson.fromJson(respuestaAPI.getContenido(), tipoLista);
+            respuesta.put(Constantes.KEY_ERROR, false);
+            respuesta.put(Constantes.KEY_LISTA, colaboradores);
+        } else {
+            respuesta.put(Constantes.KEY_ERROR, true);
+            switch (respuestaAPI.getCodigo()) {
+                case Constantes.ERROR_MALFORMED_URL:
+                    respuesta.put("mensaje", Constantes.MSJ_ERROR_PETICION);
+                    break;
+                case Constantes.ERROR_PETICION:
+                    respuesta.put("mensaje", Constantes.MSJ_ERROR_PETICION);
+                    break;
+                default:
+                    respuesta.put("mensaje", "Lo sentimos hay problemas para obtener la informacíon en este momento, porfavor intentelo más tarde");
+            }
+        }
+        return respuesta;
+    }
 }

@@ -8,9 +8,8 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" minWidth="1000.0" prefHeight="627.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="packetworldescritorio.FXMLModuloUnidadesController">
+<AnchorPane id="AnchorPane" minWidth="1000.0" prefHeight="627.0" prefWidth="1280.0" stylesheets="@/estilos/CSSAplicacion.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="packetworldescritorio.FXMLModuloUnidadesController">
    <children>
-      <HBox layoutX="861.0" layoutY="128.0" prefHeight="41.0" prefWidth="232.0" />
       <Button layoutX="24.0" layoutY="24.0" mnemonicParsing="false" onAction="#clickRegresar" prefHeight="40.0" prefWidth="139.0" styleClass="btn_regresar">
          <graphic>
             <HBox prefHeight="100.0" prefWidth="200.0">
@@ -104,15 +103,22 @@
             </Button>
          </children>
       </HBox>
-      <TableView fx:id="tvUnidades" layoutX="35.0" layoutY="192.0" prefHeight="414.0" prefWidth="787.0">
+      <TableView fx:id="tvUnidades" layoutX="35.0" layoutY="192.0" prefHeight="414.0" prefWidth="1017.0">
          <columns>
             <TableColumn fx:id="colIdentificador" prefWidth="126.0" text="Identificador" />
             <TableColumn fx:id="colVIN" minWidth="0.0" prefWidth="168.0" text="VIN" />
             <TableColumn fx:id="colMarca" prefWidth="161.0" text="Marca" />
             <TableColumn fx:id="colModelo" prefWidth="172.0" text="Modelo" />
             <TableColumn fx:id="colEstatus" prefWidth="164.0" text="Estatus" />
+            <TableColumn fx:id="colNombreColaborador" prefWidth="225.0" text="Conductor" />
          </columns>
       </TableView>
+      <TextField fx:id="tfBusqueda" layoutX="478.0" layoutY="127.0" prefHeight="43.0" prefWidth="345.0" promptText="Buscar una unidad por VIN, Marca o NII,,,">
+         <styleClass>
+            <String fx:value="input_general" />
+            <String fx:value="input_busqueda" />
+         </styleClass>
+      </TextField>
       <Button fx:id="btnBusqueda" layoutX="764.0" layoutY="127.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="59.0">
          <graphic>
             <ImageView fitHeight="28.0" fitWidth="29.0" opacity="0.58" pickOnBounds="true" preserveRatio="true">
@@ -126,11 +132,19 @@
             <String fx:value="btn_buscar" />
          </styleClass>
       </Button>
-      <TextField fx:id="tfBusqueda" layoutX="478.0" layoutY="127.0" prefHeight="43.0" prefWidth="345.0" promptText="Buscar una unidad por VIN, Marca o NII,,,">
-         <styleClass>
-            <String fx:value="input_general" />
-            <String fx:value="input_busqueda" />
-         </styleClass>
-      </TextField>
+      <Button layoutX="860.0" layoutY="128.0" mnemonicParsing="false" onAction="#clickBuscarConductor" prefHeight="41.0" prefWidth="192.0">
+         <graphic>
+            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label text="Asignar Conductor  " />
+                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@/images/conductor.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </HBox>
+         </graphic>
+      </Button>
    </children>
 </AnchorPane>

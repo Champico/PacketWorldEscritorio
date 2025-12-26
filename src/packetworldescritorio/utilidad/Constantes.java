@@ -16,6 +16,7 @@ public class Constantes {
     public static final String WS_COLABORADOR_SUBIR_FOTO = "colaborador/subirFoto";
     public static final String WS_COLABORADOR_OBTENER_FOTO = "colaborador/obtenerFoto";
     public static final String WS_COLABORADOR_BUSCAR_POR_NUM_PERSONAL = "colaborador/buscarPorNumPersonal";
+    public static final String WS_COLABORADOR_OBTENER_CONDUCTORES = "colaborador/obtenerConductores";
     public static final String WS_SUCURSAL_OBTENER_TODOS = "sucursal/obtener";
     public static final String WS_SUCURSAL_REGISTRAR = "sucursal/registrar";
     public static final String WS_SUCURSAL_EDITAR = "sucursal/editar";
@@ -68,7 +69,8 @@ public class Constantes {
     public static final String PG_PRINCIPAL = "FXMLPrincipal.fxml";
     public static final String PG_FORMULARIO_COLABORADOR = "FXMLFormularioColaborador.fxml";
     public static final String PG_FORMULARIO_UNIDADES = "FXMLFormularioUnidad.fxml";
-
+    public static final String MODAL_BUSCAR_CONDUCTOR = "FXMLBuscadorConductor.fxml";
+    
     //Roles
     public static final String ROL_CONDUCTOR = "Conductor";
     public static final int ID_ROL_CONDUCTOR = 3;

@@ -1,0 +1,50 @@
+/** @authores  Pipe, Kevin, champ */
+
+.table-view {
+    -fx-background-color: white;
+    -fx-border-color: #dcdcdc;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+}
+
+/* Encabezado */
+.table-view .column-header-background {
+    -fx-background-color: #2c3e50;
+}
+
+.table-view .column-header .label {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-alignment: CENTER_LEFT;
+}
+
+/* Filas */
+.table-row-cell {
+    -fx-background-color: white;
+    -fx-border-color: transparent transparent #eeeeee transparent;
+}
+
+.table-row-cell:odd {
+    -fx-background-color: #f9f9f9;
+}
+
+/* Hover */
+.table-row-cell:hover {
+    -fx-background-color: #e3f2fd;
+}
+
+/* Selección */
+.table-row-cell:selected {
+    -fx-background-color: #1976d2;
+}
+
+.table-row-cell:selected .text {
+    -fx-fill: white;
+}
+
+/* Celdas */
+.table-cell {
+    -fx-padding: 8px;
+    -fx-font-size: 13px;
+}
+

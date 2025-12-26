@@ -9,7 +9,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" minWidth="1000.0" prefHeight="627.0" prefWidth="1280.0" stylesheets="@estilos/CSSAplicacion.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="packetworldescritorio.FXMLFormularioUnidadController">
+<AnchorPane id="AnchorPane" minWidth="1000.0" prefHeight="627.0" prefWidth="1280.0" stylesheets="@/estilos/CSSAplicacion.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="packetworldescritorio.FXMLFormularioUnidadController">
    <children>
       <Button layoutX="34.0" layoutY="24.0" mnemonicParsing="false" onAction="#clickRegresar" prefHeight="40.0" prefWidth="139.0" styleClass="btn_regresar">
          <graphic>
@@ -54,7 +54,7 @@
                </font>
             </Label>
             <ComboBox fx:id="cbAno" layoutX="551.0" layoutY="122.0" prefHeight="40.0" prefWidth="233.0" styleClass="input_general" />
-            <HBox layoutX="53.0" layoutY="372.0" prefWidth="344.0" styleClass="hb_crud_menu">
+            <HBox layoutX="53.0" layoutY="277.0" prefWidth="344.0" styleClass="hb_crud_menu">
                <children>
                   <Button mnemonicParsing="false" onAction="#clickGuardar" prefHeight="31.0" prefWidth="150.0" text="Guardar" textFill="WHITE">
                      <styleClass>
@@ -91,19 +91,6 @@
             <Label fx:id="lbErrorAno" layoutX="554.0" layoutY="162.0" text="Campo obligatorio" textFill="RED" visible="false" />
             <Label fx:id="lbErrorTipo" layoutX="55.0" layoutY="249.0" text="Campo obligatorio" textFill="RED" visible="false" />
             <ComboBox fx:id="cbTipo" layoutX="53.0" layoutY="211.0" prefHeight="40.0" prefWidth="233.0" styleClass="input_general" />
-            <Label fx:id="lbErrorConductor" layoutX="55.0" layoutY="340.0" text="Campo obligatorio" textFill="RED" visible="false" />
-            <Label layoutX="54.0" layoutY="276.0" text="Conductor asignado">
-               <font>
-                  <Font size="17.0" />
-               </font>
-            </Label>
-            <TextField fx:id="tfConductor" disable="true" layoutX="53.0" layoutY="302.0" prefHeight="40.0" prefWidth="233.0" promptText="Conductor">
-               <styleClass>
-                  <String fx:value="input_general" />
-                  <String fx:value="input_no_writable" />
-               </styleClass>
-            </TextField>
-            <Button layoutX="286.0" layoutY="302.0" mnemonicParsing="false" onAction="#clickBuscarConductor" prefHeight="40.0" prefWidth="74.0" styleClass="btn_general" text="Buscar" />
          </children>
       </AnchorPane>
    </children>

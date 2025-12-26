@@ -1,22 +1,30 @@
 /** @authores  Pipe, Kevin, champ */
 package packetworldescritorio;
 
+import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextInputControl;
+import javafx.scene.image.Image;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import packetworldescritorio.dominio.CatalogoImp;
 import packetworldescritorio.interfaz.INavegableChild;
 import packetworldescritorio.interfaz.INavegacion;
@@ -57,8 +65,8 @@ public class FXMLFormularioUnidadController implements Initializable, INavegable
     private ComboBox<TipoUnidad> cbTipo;
 
     private Unidad unidadEdicion = null;
+
     private ObservableList<TipoUnidad> tiposDeUnidad;
-    private ObservableList<Colaborador> conductores;
     private ObservableList<Integer> anos;
 
     @Override
@@ -95,7 +103,7 @@ public class FXMLFormularioUnidadController implements Initializable, INavegable
         boolean camposCorrectos = unidadEdicion == null ? verificarCamposNuevo() : verificarCamposEdicion();
 
         if (camposCorrectos == true) {
- 
+
             Unidad unidad = new Unidad();
             unidad.setVin(tfVin.getText());
             unidad.setEstatus(Constantes.UNIDAD_ESTATUS_ACTIVA);
@@ -116,6 +124,7 @@ public class FXMLFormularioUnidadController implements Initializable, INavegable
     @FXML
     private void clickCancelar(ActionEvent event) {
     }
+
 
     public void inicializarDatos(Unidad unidadEdicion) {
         this.unidadEdicion = unidadEdicion;
@@ -281,12 +290,11 @@ public class FXMLFormularioUnidadController implements Initializable, INavegable
     }
 
     private void registrarUnidad(Unidad unidad) {
-  
-    
+
     }
 
     private void editarUnidad(Unidad unidad) {
-    
-    
+
     }
+    
 }

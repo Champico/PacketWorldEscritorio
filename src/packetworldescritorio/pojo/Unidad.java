@@ -1,13 +1,11 @@
 /** @authores  Pipe, Kevin, champ */
-
 package packetworldescritorio.pojo;
 
 /**
  * Clase de modelado para las unidades.
  */
-
 public class Unidad {
-    
+
     private int idUnidad;
     private String marca;
     private String modelo;
@@ -19,11 +17,12 @@ public class Unidad {
     private int idTipo;
     private String tipo;
     private Integer idColaborador;
+    private String nombreColaborador;
 
     public Unidad() {
     }
 
-    public Unidad(int idUnidad, String marca, String modelo, String anio, String vin, String numIdInterno, String motivoBaja, String estatus, int idTipo, String tipo, Integer idColaborador) {
+    public Unidad(int idUnidad, String marca, String modelo, String anio, String vin, String numIdInterno, String motivoBaja, String estatus, int idTipo, String tipo, Integer idColaborador, String nombreColaborador) {
         this.idUnidad = idUnidad;
         this.marca = marca;
         this.modelo = modelo;
@@ -35,6 +34,7 @@ public class Unidad {
         this.idTipo = idTipo;
         this.tipo = tipo;
         this.idColaborador = idColaborador;
+        this.nombreColaborador = nombreColaborador;
     }
 
     public int getIdUnidad() {
@@ -124,6 +124,13 @@ public class Unidad {
     public void setIdColaborador(Integer idColaborador) {
         this.idColaborador = idColaborador;
     }
-    
-    
+
+    public String getNombreColaborador() {
+        return nombreColaborador;
+    }
+
+    public void setNombreColaborador(String nombreColaborador) {
+        this.nombreColaborador = nombreColaborador;
+    }
+
 }
