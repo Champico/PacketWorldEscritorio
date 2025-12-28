@@ -69,7 +69,8 @@ public class Constantes {
     public static final String PG_PRINCIPAL = "FXMLPrincipal.fxml";
     public static final String PG_FORMULARIO_COLABORADOR = "FXMLFormularioColaborador.fxml";
     public static final String PG_FORMULARIO_UNIDADES = "FXMLFormularioUnidad.fxml";
-    public static final String MODAL_BUSCAR_CONDUCTOR = "FXMLBuscadorConductor.fxml";
+    public static final String MODAL_ASIGNAR_CONDUCTOR = "FXMLModalAsignarConductor.fxml";
+    public static final String MODAL_SELECCIONAR_CONDUCTOR = "FXMLModalSeleccionarConductor.fxml";
     
     //Roles
     public static final String ROL_CONDUCTOR = "Conductor";

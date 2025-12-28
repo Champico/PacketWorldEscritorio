@@ -23,7 +23,9 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import packetworldescritorio.dominio.ColaboradorImp;
 import packetworldescritorio.dominio.SucursalImp;
 import packetworldescritorio.dominio.UnidadImp;
@@ -92,11 +94,26 @@ public class FXMLModuloUnidadesController implements Initializable, INavegableCh
     @FXML
     private void clickIrEditar(ActionEvent event) {
         Unidad unidad = tvUnidades.getSelectionModel().getSelectedItem();
-        if (unidad != null) {
-            irFormulario(unidad);
-        } else {
-            Utilidades.mostrarAlertaSimple("Selecciona una unidad", "Para editar la información de una unidad, debes seleciconarlo primero de la tabla", Alert.AlertType.WARNING);
+        if (unidad == null) {
+            Utilidades.mostrarAlertaSimple("Selecciona una unidad", "Para editar la información de una unidad, debes seleccionarlo primero de la tabla", Alert.AlertType.WARNING);
+            return;
         }
+    }
+
+    @FXML
+    private void clickAsignarConductor(ActionEvent event) {
+        Unidad unidad = tvUnidades.getSelectionModel().getSelectedItem();
+        if (unidad == null) {
+            Utilidades.mostrarAlertaSimple("Selecciona una unidad", "Para asignar un conductor, debes seleccionarlo primero de la tabla", Alert.AlertType.WARNING);
+            return;
+        }
+
+        if (unidad.getEstatus().equalsIgnoreCase(Constantes.UNIDAD_ESTATUS_INACTIVA)) {
+            Utilidades.mostrarAlertaSimple("Unidad inactiva", "Esta unidad esta inactiva, no se puede asignar conductor", Alert.AlertType.ERROR);
+            return;
+        }
+        
+        asignarConductor(unidad);
     }
 
     @FXML
@@ -210,35 +227,25 @@ public class FXMLModuloUnidadesController implements Initializable, INavegableCh
         });
 
     }
-    
-    
-    
-    
-        @FXML
-    private void clickBuscarConductor(ActionEvent event) {
-        buscarConductor();
-    }
 
-
-    private void buscarConductor() {
+    private void asignarConductor(Unidad unidad) {
         try {
-            FXMLLoader cargador = new FXMLLoader(getClass().getResource(Constantes.MODAL_BUSCAR_CONDUCTOR));
+            FXMLLoader cargador = new FXMLLoader(getClass().getResource(Constantes.MODAL_ASIGNAR_CONDUCTOR));
             Parent vista = cargador.load();
-            //FXMLAplicacionController controlador = cargador.getController();
-            //controlador.cargarInformacion(colaborador);
+            FXMLModalAsignarConductorController controlador = cargador.getController();
+            controlador.cargarInformacion(unidad);
+            Stage context = (Stage) tfBusqueda.getScene().getWindow();
             Scene escenaPrincipal = new Scene(vista);
 
             Stage stModal = new Stage();
             stModal.setScene(escenaPrincipal);
-            stModal.setWidth(900);
-            stModal.setHeight(500);
+            stModal.setWidth(560);
+            stModal.setHeight(360);
             stModal.setResizable(false);
-            stModal.setTitle("Buscar conductor");
-
-            try {
-                stModal.getIcons().add(new Image(getClass().getResourceAsStream("/images/lupa.png")));
-            } catch (Exception ex) {
-            }
+            stModal.setTitle("Asignar conductor");
+            stModal.initOwner(context);
+            stModal.initModality(Modality.WINDOW_MODAL);
+            stModal.initStyle(StageStyle.UTILITY);
 
             stModal.showAndWait();
         } catch (IOException ex) {

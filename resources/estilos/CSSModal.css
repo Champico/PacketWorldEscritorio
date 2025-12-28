@@ -48,3 +48,57 @@
     -fx-font-size: 13px;
 }
 
+
+
+
+
+
+
+
+
+.hb_crud_menu {
+    -fx-spacing: 15;
+}
+
+.btn_general {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 8;
+    -fx-padding: 8 15 8 15; /* top right bottom left */
+    -fx-cursor: HAND;
+}
+
+.btn_general:hover {
+    -fx-effect: dropshadow(three-pass-box, rgba(255, 255, 255, 0.6), 10, 0.3, 0, 0);
+}
+
+.btn_general:disabled {
+    -fx-background-color: #C0C0C0;
+    -fx-text-fill: #6e6e6e;
+}
+
+.btn_editar{
+    -fx-background-color: #2274e0;
+}
+
+.btn_eliminar{
+  -fx-background-color: #eb4034;
+}
+
+.btn_agregar{
+    -fx-background-color: #00ad20;
+}
+
+.btn_cancelar{
+  -fx-background-color: #eb4034;
+}
+
+.btn_aceptar{
+    -fx-background-color: #2274e0;
+}
+
+
+.input_general{
+  -fx-background-color: #ffffff;
+  -fx-border-color: #9b9b9b;
+  -fx-border-radius: 4px;
+}

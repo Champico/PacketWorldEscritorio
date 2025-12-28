@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" minHeight="305.0" minWidth="496.0" prefHeight="323.0" prefWidth="578.0" styleClass="tableView" stylesheets="@/estilos/CSSModal.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="packetworldescritorio.FXMLModalAsignarConductorController">
+   <children>
+      <Label layoutX="22.0" prefHeight="51.0" prefWidth="440.0" text="Asignar conductor">
+         <font>
+            <Font name="System Bold" size="35.0" />
+         </font>
+      </Label>
+      <TextField fx:id="tfBusqueda" editable="false" layoutX="186.0" layoutY="173.0" prefHeight="43.0" prefWidth="235.0">
+         <styleClass>
+            <String fx:value="input_general" />
+            <String fx:value="input_busqueda" />
+         </styleClass>
+      </TextField>
+      <Label layoutX="31.0" layoutY="105.0" text="Marca: ">
+         <font>
+            <Font name="System Bold" size="17.0" />
+         </font>
+      </Label>
+      <Label fx:id="lbMarca" layoutX="95.0" layoutY="105.0" text="Marca">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
+      <Label layoutX="234.0" layoutY="105.0" text="Modelo: ">
+         <font>
+            <Font name="System Bold" size="17.0" />
+         </font>
+      </Label>
+      <Label fx:id="lbModelo" layoutX="315.0" layoutY="105.0" text="Modelo">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
+      <Label layoutX="31.0" layoutY="79.0" text="VIN:">
+         <font>
+            <Font name="System Bold" size="17.0" />
+         </font>
+      </Label>
+      <Label fx:id="lbVIN" layoutX="72.0" layoutY="79.0" text="00000">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
+      <Label layoutX="31.0" layoutY="131.0" text="Conductor actual:">
+         <font>
+            <Font name="System Bold" size="17.0" />
+         </font>
+      </Label>
+      <Label layoutX="30.0" layoutY="181.0" text="Nuevo conductor:">
+         <font>
+            <Font name="System Bold" size="17.0" />
+         </font>
+      </Label>
+      <Label fx:id="lbConductor" layoutX="186.0" layoutY="131.0" text="Ninguno">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
+      <HBox layoutX="30.0" layoutY="257.0" prefWidth="344.0" styleClass="hb_crud_menu">
+         <children>
+            <Button mnemonicParsing="false" onAction="#clickGuardar" prefHeight="31.0" prefWidth="150.0" text="Guardar" textFill="WHITE">
+               <styleClass>
+                  <String fx:value="btn_general" />
+                  <String fx:value="btn_aceptar" />
+               </styleClass>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#clickCancelar" prefHeight="31.0" prefWidth="150.0" text="Cancelar" textFill="WHITE">
+               <styleClass>
+                  <String fx:value="btn_general" />
+                  <String fx:value="btn_cancelar" />
+               </styleClass>
+            </Button>
+         </children>
+      </HBox>
+      <Button layoutX="421.0" layoutY="173.0" mnemonicParsing="false" onAction="#clickBuscarConductor" prefHeight="43.0" prefWidth="91.0" text="Buscar" />
+      <Label layoutX="31.0" layoutY="53.0" text="Unidad (NII):">
+         <font>
+            <Font name="System Bold" size="17.0" />
+         </font>
+      </Label>
+      <Label fx:id="lbNII" layoutX="142.0" layoutY="53.0" text="00000">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

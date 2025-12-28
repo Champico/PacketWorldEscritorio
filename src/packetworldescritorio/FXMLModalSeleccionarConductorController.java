@@ -1,4 +1,3 @@
-/** @authores  Pipe, Kevin, champ */
 package packetworldescritorio;
 
 import java.net.URL;
@@ -9,19 +8,24 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 import packetworldescritorio.dominio.ColaboradorImp;
 import packetworldescritorio.pojo.Colaborador;
+import packetworldescritorio.pojo.Unidad;
 import packetworldescritorio.utilidad.Constantes;
 import packetworldescritorio.utilidad.Utilidades;
 
-public class FXMLBuscadorConductorController implements Initializable {
+public class FXMLModalSeleccionarConductorController implements Initializable {
 
     @FXML
     private TableView<Colaborador> tvColaboradores;
@@ -35,6 +39,10 @@ public class FXMLBuscadorConductorController implements Initializable {
     private TableColumn colApMaterno;
     @FXML
     private TextField tfBusqueda;
+    @FXML
+    private Button btnBusqueda;
+
+    private Colaborador colaboradorSeleccionado;
 
     private ObservableList<Colaborador> colaboradores;
     private FilteredList<Colaborador> filteredData;
@@ -46,11 +54,29 @@ public class FXMLBuscadorConductorController implements Initializable {
         cargarInformaciónColaboradores();
     }
 
+    @FXML
+    private void clickGuardar(ActionEvent event) {
+    }
+
+    @FXML
+    private void clickCancelar(ActionEvent event) {
+    }
+
     private void configurarTabla() {
         colNoPersonal.setCellValueFactory(new PropertyValueFactory("noPersonal"));
         colNombre.setCellValueFactory(new PropertyValueFactory("nombre"));
         colApPaterno.setCellValueFactory(new PropertyValueFactory("apellidoPaterno"));
         colApMaterno.setCellValueFactory(new PropertyValueFactory("apellidoMaterno"));
+
+        tvColaboradores.setRowFactory(tv -> {
+            TableRow<Colaborador> row = new TableRow<>();
+            row.setOnMouseClicked(e -> {
+                if (e.getClickCount() == 2 && !row.isEmpty()) {
+                    colaboradorSeleccionado = row.getItem();
+                }
+            });
+            return row;
+        });
     }
 
     private void cargarInformaciónColaboradores() {
@@ -76,8 +102,14 @@ public class FXMLBuscadorConductorController implements Initializable {
             Utilidades.mostrarAlertaSimple("Error al cargar", respuesta.get("mensaje").toString(), Alert.AlertType.ERROR);
         }
     }
-    
-    
-    
+
+    public void cerrar() {
+        Stage stage = (Stage) tvColaboradores.getScene().getWindow();
+        stage.close();
+    }
+
+    public Colaborador getColaboradorSeleccionado() {
+        return colaboradorSeleccionado;
+    }
 
 }
