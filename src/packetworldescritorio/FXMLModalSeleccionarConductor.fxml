@@ -8,8 +8,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="450.0" prefWidth="600.0" stylesheets="@/estilos/CSSModal.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="packetworldescritorio.FXMLModalSeleccionarConductorController">
+<AnchorPane id="AnchorPane" prefHeight="450.0" prefWidth="600.0" stylesheets="@/estilos/CSSModal.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="packetworldescritorio.FXMLModalSeleccionarConductorController">
    <children>
       <TableView fx:id="tvColaboradores" layoutX="30.0" layoutY="146.0" prefHeight="234.0" prefWidth="541.0">
          <columns>
@@ -46,7 +45,7 @@
       </Button>
       <HBox layoutX="32.0" layoutY="397.0" prefWidth="344.0" styleClass="hb_crud_menu">
          <children>
-            <Button mnemonicParsing="false" onAction="#clickGuardar" prefHeight="31.0" prefWidth="150.0" text="Guardar" textFill="WHITE">
+            <Button mnemonicParsing="false" onAction="#clickGuardar" prefHeight="31.0" prefWidth="150.0" text="Seleccionar" textFill="WHITE">
                <styleClass>
                   <String fx:value="btn_general" />
                   <String fx:value="btn_aceptar" />

@@ -52,14 +52,18 @@ public class FXMLModalSeleccionarConductorController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         configurarTabla();
         cargarInformaciónColaboradores();
+        configurarTextFieldBusqueda();
     }
 
     @FXML
     private void clickGuardar(ActionEvent event) {
+        colaboradorSeleccionado = tvColaboradores.getSelectionModel().getSelectedItem();
+        cerrar();
     }
 
     @FXML
     private void clickCancelar(ActionEvent event) {
+        cerrar();
     }
 
     private void configurarTabla() {
@@ -73,6 +77,7 @@ public class FXMLModalSeleccionarConductorController implements Initializable {
             row.setOnMouseClicked(e -> {
                 if (e.getClickCount() == 2 && !row.isEmpty()) {
                     colaboradorSeleccionado = row.getItem();
+                    cerrar();
                 }
             });
             return row;
@@ -87,7 +92,7 @@ public class FXMLModalSeleccionarConductorController implements Initializable {
             colaboradores = FXCollections.observableArrayList();
             colaboradores.addAll(colaboradoresAPI);
 
-            filteredData = new FilteredList<>(colaboradores, p -> true);
+            filteredData = new FilteredList<>(colaboradores, c -> c.getIdUnidad() == null );
             sortedData = new SortedList<>(filteredData);
             sortedData.comparatorProperty().bind(tvColaboradores.comparatorProperty());
             tvColaboradores.setItems(sortedData);
@@ -110,6 +115,40 @@ public class FXMLModalSeleccionarConductorController implements Initializable {
 
     public Colaborador getColaboradorSeleccionado() {
         return colaboradorSeleccionado;
+    }
+
+    
+    private void configurarTextFieldBusqueda() {
+        tfBusqueda.textProperty().addListener((obs, oldValue, newValue) -> {
+            if (newValue != null && !newValue.equals(oldValue)) {
+                aplicarFiltros();
+            }
+        });
+    }
+
+    private void aplicarFiltros() {
+        String textoDeBusqueda = tfBusqueda.getText();
+        filteredData.setPredicate(col -> {
+            col = (Colaborador) col;
+            boolean coincideTexto = true;
+
+            if (textoDeBusqueda != null && !textoDeBusqueda.isEmpty()) {
+                String filtro = textoDeBusqueda.toLowerCase();
+
+                String nombre = Utilidades.normalizar(col.getNombre());
+                String apellido = Utilidades.normalizar(col.getApellidoPaterno());
+                String noPersonal = String.valueOf(col.getNoPersonal()).toLowerCase();
+
+                coincideTexto = 
+                        nombre.contains(filtro)
+                        || apellido.contains(filtro)
+                        || noPersonal.contains(filtro);
+            }
+
+            return coincideTexto;
+
+        });
+
     }
 
 }

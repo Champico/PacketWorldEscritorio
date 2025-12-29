@@ -12,6 +12,10 @@
     -fx-background-color: #2c3e50;
 }
 
+.table-view .column-header{
+     -fx-background-color: #2c3e50;
+}
+
 .table-view .column-header .label {
     -fx-text-fill: white;
     -fx-font-weight: bold;
@@ -22,6 +26,7 @@
 .table-row-cell {
     -fx-background-color: white;
     -fx-border-color: transparent transparent #eeeeee transparent;
+    -fx-cursor: hand;
 }
 
 .table-row-cell:odd {
@@ -46,6 +51,12 @@
 .table-cell {
     -fx-padding: 8px;
     -fx-font-size: 13px;
+}
+
+/* Barra de desplazamiento horizontal*/
+.table-view .scroll-bar:horizontal {
+    -fx-opacity: 0;
+    -fx-pref-width: 0;
 }
 
 
@@ -81,7 +92,7 @@
 }
 
 .btn_eliminar{
-  -fx-background-color: #eb4034;
+    -fx-background-color: #eb4034;
 }
 
 .btn_agregar{
@@ -89,16 +100,26 @@
 }
 
 .btn_cancelar{
-  -fx-background-color: #eb4034;
+    -fx-background-color: #eb4034;
 }
 
 .btn_aceptar{
     -fx-background-color: #2274e0;
 }
 
+.btn_buscar{
+    -fx-cursor: HAND;
+    -fx-background-color: #00000000;
+}
+
+
 
 .input_general{
-  -fx-background-color: #ffffff;
-  -fx-border-color: #9b9b9b;
-  -fx-border-radius: 4px;
+    -fx-background-color: #ffffff;
+    -fx-border-color: #9b9b9b;
+    -fx-border-radius: 4px;
+}
+
+.input_busqueda{
+    -fx-padding:  0 50 0 9; /* top right bottom left */
 }

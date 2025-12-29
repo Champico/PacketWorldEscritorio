@@ -25,7 +25,7 @@ import packetworldescritorio.utilidad.Utilidades;
 public class FXMLModalAsignarConductorController implements Initializable {
 
     @FXML
-    private TextField tfBusqueda;
+    private TextField tfConductor;
     @FXML
     private Label lbMarca;
     @FXML
@@ -38,6 +38,8 @@ public class FXMLModalAsignarConductorController implements Initializable {
     private Label lbNII;
 
     private Unidad unidadEdicion = null;
+
+    private Colaborador conductorEdicion = null;
 
     public void cargarInformacion(Unidad unidad) {
         this.unidadEdicion = unidad;
@@ -63,6 +65,7 @@ public class FXMLModalAsignarConductorController implements Initializable {
 
     @FXML
     private void clickGuardar(ActionEvent event) {
+
     }
 
     @FXML
@@ -73,19 +76,18 @@ public class FXMLModalAsignarConductorController implements Initializable {
     @FXML
     private void clickBuscarConductor(ActionEvent event) {
         try {
-            System.out.println(Constantes.MODAL_SELECCIONAR_CONDUCTOR);
             FXMLLoader cargador = new FXMLLoader(getClass().getResource(Constantes.MODAL_SELECCIONAR_CONDUCTOR));
             Parent vista = cargador.load();
             FXMLModalSeleccionarConductorController controlador = cargador.getController();
-            Stage context = (Stage) tfBusqueda.getScene().getWindow();
+            Stage context = (Stage) tfConductor.getScene().getWindow();
             Scene escenaPrincipal = new Scene(vista);
 
             Stage stModal = new Stage();
             stModal.setScene(escenaPrincipal);
-            stModal.setWidth(700);
+            stModal.setWidth(640);
             stModal.setHeight(500);
             stModal.setResizable(false);
-            stModal.setTitle("Asignar conductor");
+            stModal.setTitle("Seleccionar conductor");
             stModal.initOwner(context);
             stModal.initModality(Modality.WINDOW_MODAL);
             stModal.initStyle(StageStyle.UTILITY);
@@ -97,9 +99,15 @@ public class FXMLModalAsignarConductorController implements Initializable {
 
             stModal.showAndWait();
 
-            Colaborador colaborador = controlador.getColaboradorSeleccionado();
-            
-            System.out.println("El colaborador seleccionado es: "  + colaborador);
+            conductorEdicion = controlador.getColaboradorSeleccionado();
+
+            if (conductorEdicion != null) {
+                tfConductor.setText(
+                        (conductorEdicion.getNombre() != null ? conductorEdicion.getNombre() + " " : "")
+                        + (conductorEdicion.getApellidoPaterno() != null ? conductorEdicion.getApellidoPaterno() + " " : "")
+                        + (conductorEdicion.getApellidoMaterno() != null ? conductorEdicion.getApellidoMaterno() : "")
+                );
+            }
         } catch (IOException ex) {
             ex.printStackTrace();
             Utilidades.mostrarAlertaSimple("Error", "Ocurrio un error al cargar la ventana de buscar colaborador", Alert.AlertType.ERROR);

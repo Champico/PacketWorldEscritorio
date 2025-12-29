@@ -4,7 +4,7 @@ package packetworldescritorio.utilidad;
 public class Constantes {
 
     //Servicios
-    public static final String URL_WS = "http://localhost:8084/ProyectoWS/api/";
+    public static final String URL_WS = "http://localhost:8080/ProyectoWS/api/";
     public static final String WS_AUTENTICACION_COLABORADOR = "autenticacion/colaborador";
     public static final String WS_CATALOGO_ROLES = "catalogo/obtener-roles";
     public static final String WS_CATALOGO_SUCURSALES = "catalogo/obtener-sucursales";
