@@ -112,6 +112,9 @@
     -fx-background-color: #00000000;
 }
 
+.btn_naranja{
+        -fx-background-color: #f79123;
+}
 
 
 .input_general{

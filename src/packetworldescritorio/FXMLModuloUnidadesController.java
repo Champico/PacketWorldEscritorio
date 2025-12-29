@@ -248,6 +248,9 @@ public class FXMLModuloUnidadesController implements Initializable, INavegableCh
             stModal.initStyle(StageStyle.UTILITY);
 
             stModal.showAndWait();
+            
+            cargarInformaciónUnidades();
+            
         } catch (IOException ex) {
             ex.printStackTrace();
             Utilidades.mostrarAlertaSimple("Error", "Ocurrio un error al cargar la ventana de buscar colaborador", Alert.AlertType.ERROR);

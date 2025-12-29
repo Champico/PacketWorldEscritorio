@@ -65,7 +65,7 @@
             <Font size="17.0" />
          </font>
       </Label>
-      <HBox layoutX="30.0" layoutY="257.0" prefWidth="344.0" styleClass="hb_crud_menu">
+      <HBox layoutX="30.0" layoutY="257.0" prefHeight="31.0" prefWidth="525.0" styleClass="hb_crud_menu">
          <children>
             <Button mnemonicParsing="false" onAction="#clickGuardar" prefHeight="31.0" prefWidth="150.0" text="Guardar" textFill="WHITE">
                <styleClass>
@@ -77,6 +77,12 @@
                <styleClass>
                   <String fx:value="btn_general" />
                   <String fx:value="btn_cancelar" />
+               </styleClass>
+            </Button>
+            <Button fx:id="btnQuitarConductor" mnemonicParsing="false" onAction="#clickQuitarConductor" prefHeight="31.0" prefWidth="150.0" text="Quitar conductor" textFill="WHITE" visible="false">
+               <styleClass>
+                  <String fx:value="btn_general" />
+                  <String fx:value="btn_naranja" />
                </styleClass>
             </Button>
          </children>

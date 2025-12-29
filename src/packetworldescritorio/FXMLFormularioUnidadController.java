@@ -294,7 +294,7 @@ public class FXMLFormularioUnidadController implements Initializable, INavegable
     }
 
     private void editarUnidad(Unidad unidad) {
-
+        
     }
     
 }

@@ -191,4 +191,10 @@ public class Colaborador {
                 && Objects.equals(this.numLicencia, otro.numLicencia);
     }
 
+    
+    public String getNombreCompleto(){
+         return (nombre != null ? nombre + " " : "")
+                        + (apellidoPaterno != null ? apellidoPaterno + " " : "")
+                        + (apellidoMaterno != null ? apellidoMaterno : "");
+    }
 }
