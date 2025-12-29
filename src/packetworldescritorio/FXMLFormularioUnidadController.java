@@ -26,6 +26,8 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import packetworldescritorio.dominio.CatalogoImp;
+import packetworldescritorio.dominio.UnidadImp;
+import packetworldescritorio.dto.Respuesta;
 import packetworldescritorio.interfaz.INavegableChild;
 import packetworldescritorio.interfaz.INavegacion;
 import packetworldescritorio.pojo.Colaborador;
@@ -101,12 +103,12 @@ public class FXMLFormularioUnidadController implements Initializable, INavegable
     @FXML
     private void clickGuardar(ActionEvent event) {
         boolean camposCorrectos = unidadEdicion == null ? verificarCamposNuevo() : verificarCamposEdicion();
+        String estatus = unidadEdicion == null ? Constantes.UNIDAD_ESTATUS_ACTIVA : unidadEdicion.getEstatus();
 
         if (camposCorrectos == true) {
-
             Unidad unidad = new Unidad();
             unidad.setVin(tfVin.getText());
-            unidad.setEstatus(Constantes.UNIDAD_ESTATUS_ACTIVA);
+            unidad.setEstatus(estatus);
             unidad.setMarca(tfMarca.getText());
             unidad.setModelo(tfModelo.getText());
             unidad.setAnio(cbAno.getSelectionModel().getSelectedItem().toString());
@@ -115,6 +117,8 @@ public class FXMLFormularioUnidadController implements Initializable, INavegable
             if (unidadEdicion == null) {
                 registrarUnidad(unidad);
             } else {
+                unidad.setIdColaborador(unidadEdicion.getIdColaborador());
+                unidad.setIdUnidad(unidadEdicion.getIdUnidad());
                 editarUnidad(unidad);
             }
 
@@ -123,8 +127,8 @@ public class FXMLFormularioUnidadController implements Initializable, INavegable
 
     @FXML
     private void clickCancelar(ActionEvent event) {
+        regresar();
     }
-
 
     public void inicializarDatos(Unidad unidadEdicion) {
         this.unidadEdicion = unidadEdicion;
@@ -140,6 +144,10 @@ public class FXMLFormularioUnidadController implements Initializable, INavegable
 
             int posicionAno = obtenerPosicionAno(unidadEdicion.getAnio());
             cbAno.getSelectionModel().select(posicionAno);
+            
+            int posicionTipo = obtenerPosicionTipo(unidadEdicion.getIdTipo());
+            cbTipo.getSelectionModel().select(posicionTipo);
+            
 
         }
     }
@@ -171,6 +179,16 @@ public class FXMLFormularioUnidadController implements Initializable, INavegable
         return -1;
     }
 
+        private int obtenerPosicionTipo(int idTipoUnidad) {
+        for (int i = 0; i < tiposDeUnidad.size(); i++) {
+            if (tiposDeUnidad.get(i).getIdTipoUnidad() == idTipoUnidad) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+        
     private void cargarComboBoxTiposUnidad() {
         HashMap<String, Object> respuesta = CatalogoImp.obtenerTiposUnidad();
         if (!(boolean) respuesta.get(Constantes.KEY_ERROR)) {
@@ -290,11 +308,23 @@ public class FXMLFormularioUnidadController implements Initializable, INavegable
     }
 
     private void registrarUnidad(Unidad unidad) {
-
+        Respuesta respuesta = UnidadImp.registrar(unidad);
+        if (!respuesta.isError()) {
+            Utilidades.mostrarAlertaSimple("Registrada correctamente", "La unidad ha sido registrada correctamente", Alert.AlertType.INFORMATION);
+            regresar();
+        } else {
+            Utilidades.mostrarAlertaSimple("Ocurrio un error", respuesta.getMensaje(), Alert.AlertType.ERROR);
+        }
     }
 
     private void editarUnidad(Unidad unidad) {
-        
+        Respuesta respuesta = UnidadImp.editar(unidad);
+        if (!respuesta.isError()) {
+            Utilidades.mostrarAlertaSimple("Editara correctamente", "La unidad ha sido editada correctamente", Alert.AlertType.INFORMATION);
+            regresar();
+        } else {
+            Utilidades.mostrarAlertaSimple("Ocurrio un error", respuesta.getMensaje(), Alert.AlertType.ERROR);
+        }
     }
-    
+
 }

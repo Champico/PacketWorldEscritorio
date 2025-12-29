@@ -98,6 +98,7 @@ public class FXMLModuloUnidadesController implements Initializable, INavegableCh
             Utilidades.mostrarAlertaSimple("Selecciona una unidad", "Para editar la información de una unidad, debes seleccionarlo primero de la tabla", Alert.AlertType.WARNING);
             return;
         }
+        irFormulario(unidad);
     }
 
     @FXML
