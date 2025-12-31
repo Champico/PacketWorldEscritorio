@@ -81,14 +81,25 @@ public class FXMLModuloSucursalesController implements Initializable, INavegable
 
     @FXML
     private void clickIrRegistrar(ActionEvent event) {
+        irFormulario(null);
     }
 
     @FXML
     private void clickIrEditar(ActionEvent event) {
+        Sucursal sucursal = tvSucursales.getSelectionModel().getSelectedItem();
+        if (sucursal != null) {
+            irFormulario(sucursal);
+        } else {
+            Utilidades.mostrarAlertaSimple("Selecciona un colaborador", "Para editar la información de un colaborador, debes seleciconarlo primero de la tabla", Alert.AlertType.WARNING);
+        }
     }
 
     @FXML
     private void clickEliminar(ActionEvent event) {
+    }
+    
+        private void irFormulario(Sucursal sucursal) {
+        nav.navegar(Constantes.PG_FORMULARIO_SUCURSALES, sucursal);
     }
 
     private void configurarTabla() {

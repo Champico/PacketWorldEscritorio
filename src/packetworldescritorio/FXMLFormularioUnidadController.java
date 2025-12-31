@@ -192,9 +192,9 @@ public class FXMLFormularioUnidadController implements Initializable, INavegable
     private void cargarComboBoxTiposUnidad() {
         HashMap<String, Object> respuesta = CatalogoImp.obtenerTiposUnidad();
         if (!(boolean) respuesta.get(Constantes.KEY_ERROR)) {
-            List<TipoUnidad> sucursalAPI = (List<TipoUnidad>) respuesta.get(Constantes.KEY_LISTA);
+            List<TipoUnidad> tiposUnidadAPI = (List<TipoUnidad>) respuesta.get(Constantes.KEY_LISTA);
             tiposDeUnidad = FXCollections.observableArrayList();
-            tiposDeUnidad.addAll(sucursalAPI);
+            tiposDeUnidad.addAll(tiposUnidadAPI);
             cbTipo.setItems(tiposDeUnidad);
         } else {
             Utilidades.mostrarAlertaSimple("Error", respuesta.get(Constantes.KEY_MENSAJE).toString(), Alert.AlertType.ERROR);

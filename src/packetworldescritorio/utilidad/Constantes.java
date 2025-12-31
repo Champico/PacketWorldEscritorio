@@ -6,9 +6,12 @@ public class Constantes {
     //Servicios
     public static final String URL_WS = "http://localhost:8080/ProyectoWS/api/";
     public static final String WS_AUTENTICACION_COLABORADOR = "autenticacion/colaborador";
-    public static final String WS_CATALOGO_ROLES = "catalogo/obtener-roles";
-    public static final String WS_CATALOGO_SUCURSALES = "catalogo/obtener-sucursales";
-    public static final String WS_CATALOGO_TIPOS_UNIDAD = "catalogo/obtener-tipos-unidad";
+    public static final String WS_CATALOGO_ROLES = "catalogo/obtenerRoles";
+    public static final String WS_CATALOGO_SUCURSALES = "catalogo/obtenerSucursales";
+    public static final String WS_CATALOGO_TIPOS_UNIDAD = "catalogo/obtenerTiposUnidad";
+    public static final String WS_CATALOGO_ESTADOS = "catalogo/obtenerEstados";
+    public static final String WS_CATALOGO_MUNICIPIOS = "catalogo/obtenerMunicipios";
+    public static final String WS_CATALOGO_COLONIAS = "catalogo/obtenerColonias";
     public static final String WS_COLABORADOR_OBTENER_TODOS = "colaborador/obtener";
     public static final String WS_COLABORADOR_REGISTRAR = "colaborador/registrar";
     public static final String WS_COLABORADOR_EDITAR = "colaborador/editar";
@@ -69,6 +72,8 @@ public class Constantes {
     public static final String PG_PRINCIPAL = "FXMLPrincipal.fxml";
     public static final String PG_FORMULARIO_COLABORADOR = "FXMLFormularioColaborador.fxml";
     public static final String PG_FORMULARIO_UNIDADES = "FXMLFormularioUnidad.fxml";
+    public static final String PG_FORMULARIO_SUCURSALES = "FXMLFormularioSucursal.fxml";
+    public static final String PG_FORMULARIO_CLIENTES = "FXMLFormularioCliente.fxml";
     public static final String MODAL_ASIGNAR_CONDUCTOR = "FXMLModalAsignarConductor.fxml";
     public static final String MODAL_SELECCIONAR_CONDUCTOR = "FXMLModalSeleccionarConductor.fxml";
     

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" minWidth="1000.0" prefHeight="627.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="packetworldescritorio.FXMLFormularioSucursalController">
+   <children>
+      <AnchorPane layoutX="24.0" layoutY="119.0" prefHeight="520.0" prefWidth="1232.0">
+         <children>
+            <Label layoutX="54.0" layoutY="98.0" text="Codigo postal*">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Label>
+            <TextField fx:id="tfCodigoPostal" layoutX="53.0" layoutY="124.0" prefHeight="40.0" prefWidth="150.0" promptText="01000" styleClass="input_general" />
+            <HBox layoutX="46.0" layoutY="286.0" prefWidth="344.0" styleClass="hb_crud_menu">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#clickGuardar" prefHeight="31.0" prefWidth="150.0" text="Guardar" textFill="WHITE">
+                     <styleClass>
+                        <String fx:value="btn_general" />
+                        <String fx:value="btn_aceptar" />
+                     </styleClass>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#clickCancelar" prefHeight="31.0" prefWidth="150.0" text="Cancelar" textFill="WHITE">
+                     <styleClass>
+                        <String fx:value="btn_general" />
+                        <String fx:value="btn_cancelar" />
+                     </styleClass>
+                  </Button>
+               </children>
+            </HBox>
+            <Label layoutX="53.0" layoutY="13.0" text="Codigo*">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Label>
+            <TextField fx:id="tfCodigo" layoutX="53.0" layoutY="36.0" prefHeight="40.0" prefWidth="204.0" promptText="SUC-000" styleClass="input_general">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="tfNombre" layoutX="272.0" layoutY="36.0" prefHeight="40.0" prefWidth="233.0" promptText="sucursal " styleClass="input_general" />
+            <Label layoutX="272.0" layoutY="13.0" text="Nombre*">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Label>
+            <TextField fx:id="tfCalle" layoutX="53.0" layoutY="212.0" prefHeight="40.0" prefWidth="356.0" promptText="Ingrese el domicilio de la sucursal" styleClass="input_general" />
+            <Label layoutX="54.0" layoutY="186.0" text="Calle*">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Label>
+            <ComboBox fx:id="cbEstado" layoutX="218.0" layoutY="124.0" prefHeight="40.0" prefWidth="233.0" styleClass="input_general" />
+            <Label fx:id="lbErrorCalle" layoutX="53.0" layoutY="252.0" text="Campo obligatorio" textFill="RED" visible="false" />
+            <Label fx:id="lbErrorCodigo" layoutX="53.0" layoutY="75.0" text="Campo obligatorio" textFill="RED" visible="false" />
+            <Label fx:id="lbErrorCodigoPostal" layoutX="54.0" layoutY="164.0" text="Campo obligatorio" textFill="RED" visible="false" />
+            <Label fx:id="lbErrorNombre" layoutX="273.0" layoutY="75.0" text="Campo obligatorio" textFill="RED" visible="false" />
+            <Label fx:id="lbErrorEstado" layoutX="218.0" layoutY="164.0" text="Campo obligatorio" textFill="RED" visible="false" />
+            <Label fx:id="lbErrorCiudad" layoutX="467.0" layoutY="164.0" text="Campo obligatorio" textFill="RED" visible="false" />
+            <Label fx:id="lbErrorColonia" layoutX="712.0" layoutY="165.0" text="Campo obligatorio" textFill="RED" visible="false" />
+            <Label layoutX="218.0" layoutY="102.0" text="Estado*">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Label>
+            <Label layoutX="466.0" layoutY="102.0" text="Ciudad*">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Label>
+            <ComboBox fx:id="cbCiudad" layoutX="466.0" layoutY="124.0" prefHeight="40.0" prefWidth="233.0" styleClass="input_general" />
+            <Label layoutX="711.0" layoutY="103.0" text="Colonia*">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Label>
+            <TextField fx:id="tfColonia" layoutX="711.0" layoutY="126.0" prefHeight="40.0" prefWidth="233.0" promptText="Nissan" styleClass="input_general" />
+            <TextField fx:id="tfNumero" layoutX="422.0" layoutY="212.0" prefHeight="40.0" prefWidth="150.0" promptText="000" styleClass="input_general" />
+            <Label layoutX="422.0" layoutY="186.0" text="Numero exterior*">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Label>
+            <Label fx:id="lbErrorNumero" layoutX="422.0" layoutY="252.0" text="Campo obligatorio" textFill="RED" visible="false" />
+         </children>
+      </AnchorPane>
+      <Label fx:id="lbTitulo" layoutX="61.0" layoutY="68.0" prefHeight="51.0" prefWidth="440.0" text="Registrar Sucursal">
+         <font>
+            <Font name="System Bold" size="35.0" />
+         </font>
+      </Label>
+      <Button layoutX="42.0" layoutY="28.0" mnemonicParsing="false" onAction="#clickRegresar" prefHeight="40.0" prefWidth="139.0" styleClass="btn_regresar">
+         <graphic>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <ImageView fitHeight="30.0" fitWidth="32.0" opacity="0.48" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@/images/flecha-izquierda.png" />
+                     </image>
+                  </ImageView>
+                  <Label prefHeight="30.0" prefWidth="99.0" text=" Regresar" textFill="#4a4a4a">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+         </graphic>
+      </Button>
+   </children>
+</AnchorPane>

@@ -11,6 +11,9 @@ import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
 import java.util.HashMap;
 import java.util.List;
+import packetworldescritorio.pojo.Asentamiento;
+import packetworldescritorio.pojo.Estado;
+import packetworldescritorio.pojo.Municipio;
 import packetworldescritorio.pojo.Sucursal;
 import packetworldescritorio.pojo.TipoUnidad;
 
@@ -92,6 +95,94 @@ public class CatalogoImp {
                     break;
                 default:
                     respuesta.put(Constantes.KEY_MENSAJE, "Lo sentimos hay problemas para obtener la informacíon de sucursales, porfavor intentelo más tarde");
+            }
+        }
+        return respuesta;
+    }
+    
+    
+    
+    public static HashMap<String, Object> obtenerEstados() {
+        HashMap<String, Object> respuesta = new HashMap<>();
+        String URL = Constantes.URL_WS + Constantes.WS_CATALOGO_ESTADOS;
+        RespuestaHTTP respuestaAPI = ConexionAPI.peticionGET(URL);
+        if (respuestaAPI.getCodigo() == HttpURLConnection.HTTP_OK) {
+            Gson gson = new Gson();
+            Type tipoLista = new TypeToken<List<Estado>>() {
+            }.getType();
+            List<Estado> estados = gson.fromJson(respuestaAPI.getContenido(), tipoLista);
+            respuesta.put(Constantes.KEY_ERROR, false);
+            respuesta.put(Constantes.KEY_LISTA, estados);
+        } else {
+            respuesta.put("error", true);
+            switch (respuestaAPI.getCodigo()) {
+                case Constantes.ERROR_MALFORMED_URL:
+                    respuesta.put(Constantes.KEY_ERROR, Constantes.MSJ_ERROR_PETICION);
+                    break;
+                case Constantes.ERROR_PETICION:
+                    respuesta.put(Constantes.KEY_MENSAJE, Constantes.MSJ_ERROR_PETICION);
+                    break;
+                default:
+                    respuesta.put(Constantes.KEY_MENSAJE, "Lo sentimos hay problemas para obtener la informacíon de estados, porfavor intentelo más tarde");
+            }
+        }
+        return respuesta;
+    }
+    
+    
+    
+    
+    public static HashMap<String, Object> obtenerMunicipios(String claveEstado) {
+        HashMap<String, Object> respuesta = new HashMap<>();
+        String URL = Constantes.URL_WS + Constantes.WS_CATALOGO_MUNICIPIOS + "/" + claveEstado;
+        RespuestaHTTP respuestaAPI = ConexionAPI.peticionGET(URL);
+        if (respuestaAPI.getCodigo() == HttpURLConnection.HTTP_OK) {
+            Gson gson = new Gson();
+            Type tipoLista = new TypeToken<List<Municipio>>() {
+            }.getType();
+            List<Municipio> municipios = gson.fromJson(respuestaAPI.getContenido(), tipoLista);
+            respuesta.put(Constantes.KEY_ERROR, false);
+            respuesta.put(Constantes.KEY_LISTA, municipios);
+        } else {
+            respuesta.put("error", true);
+            switch (respuestaAPI.getCodigo()) {
+                case Constantes.ERROR_MALFORMED_URL:
+                    respuesta.put(Constantes.KEY_ERROR, Constantes.MSJ_ERROR_PETICION);
+                    break;
+                case Constantes.ERROR_PETICION:
+                    respuesta.put(Constantes.KEY_MENSAJE, Constantes.MSJ_ERROR_PETICION);
+                    break;
+                default:
+                    respuesta.put(Constantes.KEY_MENSAJE, "Lo sentimos hay problemas para obtener la informacíon de municipios, porfavor intentelo más tarde");
+            }
+        }
+        return respuesta;
+    }
+    
+    
+    
+    public static HashMap<String, Object> obtenerColonias(String claveEstado, String claveMunicipio) {
+        HashMap<String, Object> respuesta = new HashMap<>();
+        String URL = Constantes.URL_WS + Constantes.WS_CATALOGO_COLONIAS + "/" + claveEstado + "/" + claveMunicipio;
+        RespuestaHTTP respuestaAPI = ConexionAPI.peticionGET(URL);
+        if (respuestaAPI.getCodigo() == HttpURLConnection.HTTP_OK) {
+            Gson gson = new Gson();
+            Type tipoLista = new TypeToken<List<Asentamiento>>() {
+            }.getType();
+            List<Asentamiento> asentamientos = gson.fromJson(respuestaAPI.getContenido(), tipoLista);
+            respuesta.put(Constantes.KEY_ERROR, false);
+            respuesta.put(Constantes.KEY_LISTA, asentamientos);
+        } else {
+            respuesta.put("error", true);
+            switch (respuestaAPI.getCodigo()) {
+                case Constantes.ERROR_MALFORMED_URL:
+                    respuesta.put(Constantes.KEY_ERROR, Constantes.MSJ_ERROR_PETICION);
+                    break;
+                case Constantes.ERROR_PETICION:
+                    respuesta.put(Constantes.KEY_MENSAJE, Constantes.MSJ_ERROR_PETICION);
+                    break;
+                default:
+                    respuesta.put(Constantes.KEY_MENSAJE, "Lo sentimos hay problemas para obtener la informacíon de colonias, porfavor intentelo más tarde");
             }
         }
         return respuesta;
