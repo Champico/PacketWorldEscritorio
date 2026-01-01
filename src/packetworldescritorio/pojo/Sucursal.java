@@ -1,13 +1,11 @@
 /** @authores  Pipe, Kevin, champ */
-
 package packetworldescritorio.pojo;
 
 /**
  * Clase de modelado para las sucursales.
  */
-
 public class Sucursal {
-    
+
     private int idSucursal;
     private String codigo;
     private String nombre;
@@ -18,11 +16,13 @@ public class Sucursal {
     private String codigoPostal;
     private String ciudad;
     private String estado;
+    private Integer idEstado;
+    private Integer idCiudad;
 
     public Sucursal() {
     }
 
-    public Sucursal(int idSucursal, String codigo, String nombre, String status, String calle, String numero, String colonia, String codigoPostal, String ciudad, String estado) {
+    public Sucursal(int idSucursal, String codigo, String nombre, String status, String calle, String numero, String colonia, String codigoPostal, String ciudad, String estado, Integer idEstado, Integer idCiudad) {
         this.idSucursal = idSucursal;
         this.codigo = codigo;
         this.nombre = nombre;
@@ -33,6 +33,8 @@ public class Sucursal {
         this.codigoPostal = codigoPostal;
         this.ciudad = ciudad;
         this.estado = estado;
+        this.idEstado = idEstado;
+        this.idCiudad = idCiudad;
     }
 
     public int getIdSucursal() {
@@ -119,8 +121,21 @@ public class Sucursal {
     public String toString() {
         return nombre;
     }
-    
-    
-    
-    
+
+    public Integer getIdEstado() {
+        return idEstado;
+    }
+
+    public void setIdEstado(Integer idEstado) {
+        this.idEstado = idEstado;
+    }
+
+    public Integer getIdCiudad() {
+        return idCiudad;
+    }
+
+    public void setIdCiudad(Integer idCiudad) {
+        this.idCiudad = idCiudad;
+    }
+
 }

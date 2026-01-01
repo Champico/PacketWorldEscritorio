@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="177.0" prefWidth="909.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="packetworldescritorio.FXMLFormularioDireccionController">
+   <children>
+      <Label layoutX="375.0" layoutY="88.0" text="Numero exterior*">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
+      <TextField fx:id="tfNumero" layoutX="375.0" layoutY="114.0" prefHeight="40.0" prefWidth="150.0" promptText="000" styleClass="input_general" />
+      <TextField fx:id="tfColonia" layoutX="664.0" layoutY="28.0" prefHeight="40.0" prefWidth="233.0" promptText="Nissan" styleClass="input_general" />
+      <Label layoutX="664.0" layoutY="5.0" text="Colonia*">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="cbCiudad" layoutX="419.0" layoutY="26.0" prefHeight="40.0" prefWidth="233.0" styleClass="input_general" />
+      <Label layoutX="419.0" layoutY="4.0" text="Ciudad*">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
+      <Label layoutX="171.0" layoutY="4.0" text="Estado*">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
+      <Label fx:id="lbErrorColonia" layoutX="665.0" layoutY="67.0" text="Campo obligatorio" textFill="RED" />
+      <Label fx:id="lbErrorNumero" layoutX="375.0" layoutY="152.0" text="Campo obligatorio" textFill="RED" />
+      <Label fx:id="lbErrorCiudad" layoutX="420.0" layoutY="66.0" text="Campo obligatorio" textFill="RED" />
+      <Label fx:id="lbErrorEstado" layoutX="171.0" layoutY="66.0" text="Campo obligatorio" textFill="RED" />
+      <Label fx:id="lbErrorCodigoPostal" layoutX="7.0" layoutY="66.0" text="Campo obligatorio" textFill="RED" />
+      <Label fx:id="lbErrorCalle" layoutX="6.0" layoutY="154.0" text="Campo obligatorio" textFill="RED" />
+      <ComboBox fx:id="cbEstado" layoutX="171.0" layoutY="26.0" prefHeight="40.0" prefWidth="233.0" styleClass="input_general" />
+      <Label layoutX="7.0" layoutY="88.0" text="Calle*">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
+      <TextField fx:id="tfCalle" layoutX="6.0" layoutY="114.0" prefHeight="40.0" prefWidth="356.0" promptText="Ingrese el domicilio de la sucursal" styleClass="input_general" />
+      <TextField fx:id="tfCodigoPostal" layoutX="6.0" layoutY="26.0" prefHeight="40.0" prefWidth="150.0" promptText="01000" styleClass="input_general" />
+      <Label layoutX="7.0" text="Codigo postal*">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

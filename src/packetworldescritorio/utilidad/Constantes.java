@@ -74,6 +74,7 @@ public class Constantes {
     public static final String PG_FORMULARIO_UNIDADES = "FXMLFormularioUnidad.fxml";
     public static final String PG_FORMULARIO_SUCURSALES = "FXMLFormularioSucursal.fxml";
     public static final String PG_FORMULARIO_CLIENTES = "FXMLFormularioCliente.fxml";
+    public static final String COMP_FORMULARIO_DIRECCION = "FXMLFormularioDireccion.fxml";
     public static final String MODAL_ASIGNAR_CONDUCTOR = "FXMLModalAsignarConductor.fxml";
     public static final String MODAL_SELECCIONAR_CONDUCTOR = "FXMLModalSeleccionarConductor.fxml";
     

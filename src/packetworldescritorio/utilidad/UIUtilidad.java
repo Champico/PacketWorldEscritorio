@@ -139,6 +139,29 @@ public class UIUtilidad {
         ));
     }
 
-    
+        /**
+     * Limita la cantidad máxima de caracteres de tipo numerico (1-9) que puede ingresar
+     * el usuario en un campo de texto de JavaFX.
+     *
+     * @param field El campo de texto (TextInputControl) al que se aplicará el
+     * límite.
+     * @param max El número máximo de caracteres permitidos.
+     */
+    public static void limitarNumeros(TextInputControl field, int max) {
+        field.setTextFormatter(new TextFormatter<>(change -> {
+
+            String nuevoTexto = change.getControlNewText();
+
+            if (nuevoTexto.length() > max) {
+                return null;
+            }
+
+            if (!nuevoTexto.matches("\\d*")) {
+                return null;
+            }
+
+            return change;
+        }));
+    }
 
 }
