@@ -52,12 +52,15 @@ public class FXMLModuloClientesController implements Initializable, INavegableCh
     private TableColumn colNumero;
     @FXML
     private TextField tfBusqueda;
+        @FXML
+    private TableColumn colCodigoPostal;
     @FXML
     private Button btnBusqueda;
 
     private ObservableList<Cliente> clientes;
     private FilteredList<Cliente> filteredData;
     private SortedList<Cliente> sortedData;
+
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -121,6 +124,7 @@ public class FXMLModuloClientesController implements Initializable, INavegableCh
         colCorreo.setCellValueFactory(new PropertyValueFactory("correo"));
         colCalle.setCellValueFactory(new PropertyValueFactory("calle"));
         colNumero.setCellValueFactory(new PropertyValueFactory("numero"));
+        colCodigoPostal.setCellValueFactory(new PropertyValueFactory("codigoPostal"));
     }
 
     private void cargarInformaciónClientes() {

@@ -58,7 +58,7 @@ public class FXMLFormularioClienteController implements Initializable, INavegabl
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         agregarFormularioDireccion();
-        
+        configurarMaximoNumeroCaracteres();
     }
 
     @Override
@@ -71,7 +71,6 @@ public class FXMLFormularioClienteController implements Initializable, INavegabl
         if (object instanceof Cliente) {
             Cliente cliente = (Cliente) object;
             inicializarDatos(cliente);
-
         }
     }
 
@@ -81,7 +80,7 @@ public class FXMLFormularioClienteController implements Initializable, INavegabl
     }
 
     private void regresar() {
-        nav.navegar(Constantes.MODULO_SUCURSALES);
+        nav.navegar(Constantes.MODULO_CLIENTES);
     }
 
     public void inicializarDatos(Cliente clienteEdicion) {

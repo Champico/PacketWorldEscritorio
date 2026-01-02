@@ -103,7 +103,7 @@
             </Button>
          </children>
       </HBox>
-      <TableView fx:id="tvClientes" layoutX="35.0" layoutY="190.0" prefHeight="414.0" prefWidth="1023.0">
+      <TableView fx:id="tvClientes" layoutX="35.0" layoutY="190.0" prefHeight="414.0" prefWidth="1151.0">
          <columns>
             <TableColumn fx:id="colNombre" minWidth="0.0" prefWidth="138.0" text="Nombre" />
             <TableColumn fx:id="colApPaterno" prefWidth="142.0" text="Apellido paterno" />
@@ -112,6 +112,7 @@
             <TableColumn fx:id="colCorreo" prefWidth="254.0" text="Correo" />
             <TableColumn fx:id="colCalle" prefWidth="149.0" text="Calle" />
             <TableColumn fx:id="colNumero" prefWidth="77.0" text="Numero" />
+            <TableColumn fx:id="colCodigoPostal" prefWidth="128.0" text="Código Postal" />
          </columns>
       </TableView>
       <TextField fx:id="tfBusqueda" layoutX="478.0" layoutY="127.0" prefHeight="43.0" prefWidth="414.0" promptText="Buscar por nombre, número de teléfono o correo...">

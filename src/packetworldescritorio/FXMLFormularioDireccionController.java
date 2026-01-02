@@ -175,7 +175,7 @@ public class FXMLFormularioDireccionController implements Initializable {
 
             sugerencias.getItems().setAll(items);
 
-            if (!sugerencias.isShowing()) {
+            if (!sugerencias.isShowing() && tfColonia.getScene() != null && tfColonia.getScene().getWindow() != null) {
                 sugerencias.show(tfColonia, Side.BOTTOM, 0, 0);
             }
         });
