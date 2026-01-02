@@ -20,6 +20,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import packetworldescritorio.dominio.ColaboradorImp;
 import packetworldescritorio.dominio.SucursalImp;
+import packetworldescritorio.dto.Respuesta;
 import packetworldescritorio.interfaz.INavegableChild;
 import packetworldescritorio.interfaz.INavegacion;
 import packetworldescritorio.pojo.Colaborador;
@@ -90,12 +91,35 @@ public class FXMLModuloSucursalesController implements Initializable, INavegable
         if (sucursal != null) {
             irFormulario(sucursal);
         } else {
-            Utilidades.mostrarAlertaSimple("Selecciona un colaborador", "Para editar la información de un colaborador, debes seleciconarlo primero de la tabla", Alert.AlertType.WARNING);
+            Utilidades.mostrarAlertaSimple("Selecciona una sucursal", "Para editar la información de una sucursal, debes seleciconarlo primero de la tabla", Alert.AlertType.WARNING);
         }
     }
 
     @FXML
     private void clickEliminar(ActionEvent event) {
+                Sucursal sucursal = tvSucursales.getSelectionModel().getSelectedItem();
+        if (sucursal != null) {
+            
+             if (sucursal.getEstatus().equalsIgnoreCase(Constantes.UNIDAD_ESTATUS_INACTIVA)) {
+                Utilidades.mostrarAlertaSimple("Alerta", "Esta sucursal no esta activa", Alert.AlertType.INFORMATION);
+                return;
+            }
+             
+             boolean confirmacion = Utilidades.mostrarAlertaConfirmacion("¿Esta seguro de dar de bara?", "¿Esta seguro que quiere dar de baja esta sucursal?");
+             
+             if(confirmacion == true){
+                Respuesta respuesta = SucursalImp.darDeBaja(sucursal.getIdSucursal());
+                if(respuesta.isError()){
+                   Utilidades.mostrarAlertaSimple("Error al dar de baja", respuesta.getMensaje(), Alert.AlertType.ERROR);
+                }else{
+                   Utilidades.mostrarAlertaSimple("Exito", "La sucursal ha sido dada de baja con exito", Alert.AlertType.INFORMATION);
+                    cargarInformaciónSucursales();
+                }
+             }
+             
+        } else {
+            Utilidades.mostrarAlertaSimple("Selecciona un colaborador", "Para editar la información de una sucursal, debes seleciconarlo primero de la tabla", Alert.AlertType.WARNING);
+        }
     }
     
         private void irFormulario(Sucursal sucursal) {

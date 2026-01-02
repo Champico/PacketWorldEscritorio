@@ -27,7 +27,7 @@ public class Constantes {
     public static final String WS_UNIDAD_OBTENER_TODOS = "unidad/obtener";
     public static final String WS_UNIDAD_REGISTRAR = "unidad/registrar";
     public static final String WS_UNIDAD_EDITAR = "unidad/editar";
-    public static final String WS_UNIDAD_DAR_DE_BAJA= "unidad/darBaja";
+    public static final String WS_UNIDAD_DAR_DE_BAJA = "unidad/darBaja";
     public static final String WS_CLIENTE_OBTENER_TODOS = "cliente/obtener";
     public static final String WS_CLIENTE_REGISTRAR = "cliente/registrar";
     public static final String WS_CLIENTE_EDITAR = "cliente/editar";
@@ -77,14 +77,16 @@ public class Constantes {
     public static final String COMP_FORMULARIO_DIRECCION = "FXMLFormularioDireccion.fxml";
     public static final String MODAL_ASIGNAR_CONDUCTOR = "FXMLModalAsignarConductor.fxml";
     public static final String MODAL_SELECCIONAR_CONDUCTOR = "FXMLModalSeleccionarConductor.fxml";
-    
+
     //Roles
     public static final String ROL_CONDUCTOR = "Conductor";
     public static final int ID_ROL_CONDUCTOR = 3;
     public static final int ID_ROL_TODOS = 999;
-    
+
     public static final String UNIDAD_ESTATUS_INACTIVA = "inactiva";
     public static final String UNIDAD_ESTATUS_ACTIVA = "activa";
+    public static final String SUCURSAL_ESTATUS_INACTIVA = "inactiva";
+    public static final String SUCURSAL_ESTATUS_ACTIVA = "activa";
 
     //Otros
     public static final int MAX_SIZE_MB_IMAGE = 2;

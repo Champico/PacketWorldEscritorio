@@ -16,13 +16,13 @@ public class Sucursal {
     private String codigoPostal;
     private String ciudad;
     private String estado;
-    private Integer idEstado;
-    private Integer idCiudad;
+    private String claveEstado;
+    private String claveCiudad;
 
     public Sucursal() {
     }
 
-    public Sucursal(int idSucursal, String codigo, String nombre, String status, String calle, String numero, String colonia, String codigoPostal, String ciudad, String estado, Integer idEstado, Integer idCiudad) {
+    public Sucursal(int idSucursal, String codigo, String nombre, String status, String calle, String numero, String colonia, String codigoPostal, String ciudad, String estado, String claveEstado, String claveCiudad) {
         this.idSucursal = idSucursal;
         this.codigo = codigo;
         this.nombre = nombre;
@@ -33,8 +33,8 @@ public class Sucursal {
         this.codigoPostal = codigoPostal;
         this.ciudad = ciudad;
         this.estado = estado;
-        this.idEstado = idEstado;
-        this.idCiudad = idCiudad;
+        this.claveEstado = claveEstado;
+        this.claveCiudad = claveCiudad;
     }
 
     public int getIdSucursal() {
@@ -122,20 +122,21 @@ public class Sucursal {
         return nombre;
     }
 
-    public Integer getIdEstado() {
-        return idEstado;
+    
+    public String getClaveEstado() {
+        return claveEstado;
     }
 
-    public void setIdEstado(Integer idEstado) {
-        this.idEstado = idEstado;
+    public void setClaveEstado(String claveEstado) {
+        this.claveEstado = claveEstado;
     }
 
-    public Integer getIdCiudad() {
-        return idCiudad;
+    public String getClaveCiudad() {
+        return claveCiudad;
     }
 
-    public void setIdCiudad(Integer idCiudad) {
-        this.idCiudad = idCiudad;
+    public void setClaveCiudad(String claveCiudad) {
+        this.claveCiudad = claveCiudad;
     }
 
 }

@@ -164,6 +164,9 @@ public class FXMLFormularioDireccionController implements Initializable {
 
                 item.setOnAction(e -> {
                     tfColonia.setText(a.getNombre());
+                    if(a.getCodigoPostal() != null && !a.getCodigoPostal().isEmpty()){
+                        tfCodigoPostal.setText(a.getCodigoPostal());
+                    }
                     sugerencias.hide();
                 });
 
@@ -289,11 +292,12 @@ public class FXMLFormularioDireccionController implements Initializable {
         return true;
     }
 
-    public void inicializarDatos(String calle, String codigoPostal, String colonia, String numero, Integer idEstado, Integer idCiudad) {
+    public void inicializarDatos(String calle, String codigoPostal, String colonia, String numero, String claveEstado, String claveCiudad) {
 
         try {
-            cbEstado.getSelectionModel().select(idEstado);
-            cbCiudad.getSelectionModel().select(idCiudad);
+            int posicionEstado = obtenerPosicionEstado(claveEstado);
+            cbEstado.getSelectionModel().select(posicionEstado);
+            cbCiudad.getSelectionModel().select(obtenerPosicionMunicipio(claveCiudad, claveEstado));
         } catch (Exception ex) {
         }
 
@@ -336,7 +340,7 @@ public class FXMLFormularioDireccionController implements Initializable {
     }
 
     public String getColonia() {
-        return tfNumero.getText();
+        return tfColonia.getText();
     }
 
     public void setColonia(String colonia) {
