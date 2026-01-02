@@ -1,0 +1,85 @@
+/* ===== TABLE VIEW GENERAL ===== */
+.table-view {
+    -fx-background-color: #ffffff;
+    -fx-border-color: transparent;
+    -fx-padding: 0;
+}
+
+/* ===== CONTENEDOR ===== */
+.table-view .virtual-flow {
+    -fx-background-color: transparent;
+}
+
+/* ===== HEADER ===== */
+.table-view .column-header-background {
+    -fx-background-color: #3b3752;
+    -fx-background-radius: 10 10 0 0;
+    -fx-padding: 5 0 5 0;
+}
+
+.table-view .column-header {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.table-view .column-header .label {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 13px;
+    -fx-alignment: CENTER_LEFT;
+    -fx-padding: 10;
+}
+
+/* ===== FILAS ===== */
+.table-row-cell {
+    -fx-background-color: white;
+    -fx-border-color: transparent;
+    -fx-padding: 6;
+}
+
+/* Zebra striping */
+.table-row-cell:odd {
+    -fx-background-color: #f6f6f6;
+}
+
+/* Hover */
+.table-row-cell:hover {
+    -fx-background-color: #ecebf2;
+}
+
+/* Selección */
+.table-row-cell:selected {
+    -fx-background-color: #dcd8f0;
+}
+
+/* ===== CELDAS ===== */
+.table-cell {
+    -fx-text-fill: #7a7a7a;
+    -fx-font-size: 13px;
+    -fx-padding: 12 10 12 10;
+    -fx-border-color: transparent;
+}
+
+/* ===== SCROLL BAR ===== */
+.scroll-bar:vertical {
+    -fx-background-color: transparent;
+}
+
+.scroll-bar:vertical .thumb {
+    -fx-background-color: #c2c2c2;
+    -fx-background-radius: 10;
+}
+
+.scroll-bar:vertical .track {
+    -fx-background-color: transparent;
+}
+
+/* ===== ELIMINA LÍNEAS ===== */
+.table-view .column-resize-line {
+    -fx-background-color: transparent;
+}
+
+/* ===== QUITA FOCUS AZUL ===== */
+.table-view:focused {
+    -fx-background-color: transparent;
+}

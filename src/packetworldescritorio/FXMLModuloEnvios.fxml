@@ -1,14 +1,124 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane id="AnchorPane" minWidth="1000.0" prefHeight="627.0" prefWidth="1280.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="packetworldescritorio.FXMLModuloEnviosController">
+<AnchorPane id="AnchorPane" minWidth="1000.0" prefHeight="627.0" prefWidth="1280.0" stylesheets="@/estilos/CSSAplicacion.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="packetworldescritorio.FXMLModuloEnviosController">
    <children>
-      <Label layoutX="69.0" layoutY="78.0" text="Modulo de envios" />
+      <TableView fx:id="tvEnvios" layoutX="44.0" layoutY="243.0" prefHeight="361.0" prefWidth="1176.0" stylesheets="@/estilos/CSSTablaModerna.css">
+         <columns>
+            <TableColumn fx:id="colGuia" minWidth="0.0" prefWidth="194.0" text="Guia" />
+            <TableColumn fx:id="colDestinatario" prefWidth="247.0" text="Destinatario" />
+            <TableColumn fx:id="colCalle" prefWidth="129.0" text="Calle" />
+            <TableColumn fx:id="colColonia" prefWidth="101.0" text="Colonia" />
+            <TableColumn fx:id="colCiudad" prefWidth="131.0" text="Ciudad" />
+            <TableColumn fx:id="colEstado" prefWidth="127.0" text="Estado" />
+            <TableColumn fx:id="colCodigoPostal" prefWidth="134.0" text="Codigo Postal" />
+            <TableColumn fx:id="colEstatus" prefWidth="113.0" text="Estatus" />
+         </columns>
+      </TableView>
+      <HBox alignment="CENTER_LEFT" layoutX="44.0" layoutY="115.0" prefHeight="66.0" prefWidth="695.0" styleClass="hb_crud_menu">
+         <children>
+            <Button mnemonicParsing="false" onAction="#clickIrRegistrar" prefHeight="66.0" prefWidth="222.0">
+               <graphic>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <ImageView fitHeight="50.0" fitWidth="83.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@/images/nuevo.png" />
+                           </image>
+                        </ImageView>
+                        <Label text="Nuevo envío" textFill="#2f2f2f">
+                           <font>
+                              <Font name="System Bold" size="20.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+               </graphic>
+               <styleClass>
+                  <String fx:value="btn_general_envio" />
+                  <String fx:value="btn_crear_envio" />
+               </styleClass>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#clickIrBuscar" prefHeight="40.0" prefWidth="189.0">
+               <graphic>
+                  <HBox alignment="CENTER" prefHeight="30.0" prefWidth="168.0">
+                     <children>
+                        <ImageView fitHeight="21.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@/images/lupa.png" />
+                           </image>
+                        </ImageView>
+                        <Label prefHeight="27.0" prefWidth="134.0" text=" Buscar envío">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+               </graphic>
+               <styleClass>
+                  <String fx:value="btn_general_envio" />
+                  <String fx:value="btn_buscar_envio" />
+               </styleClass>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#clickIrBuscar" prefHeight="40.0" prefWidth="208.0">
+               <graphic>
+                  <HBox alignment="CENTER" prefHeight="30.0" prefWidth="168.0">
+                     <children>
+                        <ImageView fitHeight="21.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@/images/lapiz-negro.png" />
+                           </image>
+                        </ImageView>
+                        <Label prefHeight="27.0" prefWidth="146.0" text=" Modificar envío">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+               </graphic>
+               <styleClass>
+                  <String fx:value="btn_general_envio" />
+                  <String fx:value="btn_buscar_envio" />
+               </styleClass>
+            </Button>
+         </children>
+      </HBox>
+      <Label layoutX="52.0" layoutY="64.0" prefHeight="51.0" prefWidth="440.0" text="Modulo de Envíos">
+         <font>
+            <Font name="System Bold" size="35.0" />
+         </font>
+      </Label>
+      <Button layoutX="33.0" layoutY="24.0" mnemonicParsing="false" onAction="#clickRegresar" prefHeight="40.0" prefWidth="139.0" styleClass="btn_regresar">
+         <graphic>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <ImageView fitHeight="30.0" fitWidth="32.0" opacity="0.48" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@/images/flecha-izquierda.png" />
+                     </image>
+                  </ImageView>
+                  <Label prefHeight="30.0" prefWidth="99.0" text=" Regresar" textFill="#4a4a4a">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+         </graphic>
+      </Button>
+      <Label layoutX="44.0" layoutY="202.0" prefHeight="30.0" prefWidth="168.0" text="Últimos Enviós">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
