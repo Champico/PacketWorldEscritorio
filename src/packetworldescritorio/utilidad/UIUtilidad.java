@@ -139,9 +139,9 @@ public class UIUtilidad {
         ));
     }
 
-        /**
-     * Limita la cantidad máxima de caracteres de tipo numerico (1-9) que puede ingresar
-     * el usuario en un campo de texto de JavaFX.
+    /**
+     * Limita la cantidad máxima de caracteres de tipo numerico (1-9) que puede
+     * ingresar el usuario en un campo de texto de JavaFX.
      *
      * @param field El campo de texto (TextInputControl) al que se aplicará el
      * límite.
@@ -157,6 +157,30 @@ public class UIUtilidad {
             }
 
             if (!nuevoTexto.matches("\\d*")) {
+                return null;
+            }
+
+            return change;
+        }));
+    }
+
+    /**
+     * Configura un campo de texto para escribir numeros de telefono Los
+     * caracteres permitidos son los números (0-9) Espacios, guiones y el
+     * simbolo de +
+     *
+     * @param field El campo de texto (TextInputControl) al que se aplicará el
+     * la configuración.
+     */
+    public static void setPhoneNumberFormatter(TextInputControl field) {
+
+        field.setTextFormatter(new TextFormatter<>(change -> {
+            String nuevoTexto = change.getControlNewText();
+
+            if (nuevoTexto.length() > 20) {
+                return null;
+            }
+            if (!nuevoTexto.matches("[0-9+\\- ]*")) {
                 return null;
             }
 

@@ -1,9 +1,8 @@
 /** @authores  Pipe, Kevin, champ */
-
 package packetworldescritorio.pojo;
 
 public class Cliente {
-    
+
     private int idCliente;
     private String nombre;
     private String apellidoPaterno;
@@ -14,11 +13,15 @@ public class Cliente {
     private String numero;
     private String colonia;
     private String codigoPostal;
+    private String ciudad;
+    private String estado;
+    private String claveEstado;
+    private String claveCiudad;
 
     public Cliente() {
     }
 
-    public Cliente(int idCliente, String nombre, String apellidoPaterno, String apellidoMaterno, String telefono, String correo, String calle, String numero, String colonia, String codigoPostal) {
+    public Cliente(int idCliente, String nombre, String apellidoPaterno, String apellidoMaterno, String telefono, String correo, String calle, String numero, String colonia, String codigoPostal, String ciudad, String estado, String claveEstado, String claveCiudad) {
         this.idCliente = idCliente;
         this.nombre = nombre;
         this.apellidoPaterno = apellidoPaterno;
@@ -29,6 +32,10 @@ public class Cliente {
         this.numero = numero;
         this.colonia = colonia;
         this.codigoPostal = codigoPostal;
+        this.ciudad = ciudad;
+        this.estado = estado;
+        this.claveEstado = claveEstado;
+        this.claveCiudad = claveCiudad;
     }
 
     public int getIdCliente() {
@@ -110,5 +117,42 @@ public class Cliente {
     public void setCodigoPostal(String codigoPostal) {
         this.codigoPostal = codigoPostal;
     }
-    
+
+    public String getCiudad() {
+        return ciudad;
+    }
+
+    public void setCiudad(String ciudad) {
+        this.ciudad = ciudad;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    public String getClaveEstado() {
+        return claveEstado;
+    }
+
+    public void setClaveEstado(String claveEstado) {
+        this.claveEstado = claveEstado;
+    }
+
+    public String getClaveCiudad() {
+        return claveCiudad;
+    }
+
+    public void setClaveCiudad(String claveCiudad) {
+        this.claveCiudad = claveCiudad;
+    }
+
+    public String getNombreCompleto() {
+        return (nombre != null ? nombre + " " : "")
+                + (apellidoPaterno != null ? apellidoPaterno + " " : "")
+                + (apellidoMaterno != null ? apellidoMaterno : "");
+    }
 }

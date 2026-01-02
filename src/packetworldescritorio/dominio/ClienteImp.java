@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import packetworldescritorio.conexion.ConexionAPI;
+import packetworldescritorio.dto.Respuesta;
 import packetworldescritorio.pojo.Cliente;
 import packetworldescritorio.pojo.Colaborador;
 import packetworldescritorio.pojo.RespuestaHTTP;
@@ -42,4 +43,95 @@ public class ClienteImp {
         }
         return respuesta;
     }
+    
+    
+    
+    public static Respuesta registrar(Cliente cliente) {
+        Respuesta respuesta = new Respuesta();
+        String URL = Constantes.URL_WS + Constantes.WS_CLIENTE_REGISTRAR;
+        Gson gson = new Gson();
+        String parametrosJSON = gson.toJson(cliente);
+
+        RespuestaHTTP respuestaAPI = ConexionAPI.peticionBody(URL, Constantes.PETICION_POST, parametrosJSON, Constantes.CT_APPLICATION_JSON);
+
+        if (respuestaAPI.getCodigo() == HttpURLConnection.HTTP_OK) {
+            respuesta = gson.fromJson(respuestaAPI.getContenido(), Respuesta.class);
+        } else {
+            respuesta.setError(true);
+            switch (respuestaAPI.getCodigo()) {
+                case Constantes.ERROR_MALFORMED_URL:
+                    respuesta.setMensaje(Constantes.MSJ_ERROR_PETICION);
+                    break;
+                case Constantes.ERROR_PETICION:
+                    respuesta.setMensaje(Constantes.MSJ_ERROR_PETICION);
+                    break;
+                case Constantes.ERROR_BAD_REQUEST:
+                    respuesta.setMensaje("Campos en formato incorrecto, por favor verifica la información enviada");
+                    break;
+                default:
+                    respuesta.setMensaje("Lo sentimos hay problemas para registrar la informacíon en este momento, porfavor intentelo más tarde");
+            }
+        }
+
+        return respuesta;
+    }
+
+    
+    public static Respuesta editar(Cliente cliente) {
+        Respuesta respuesta = new Respuesta();
+        String URL = Constantes.URL_WS + Constantes.WS_CLIENTE_EDITAR;
+        Gson gson = new Gson();
+        String parametrosJSON = gson.toJson(cliente);
+        RespuestaHTTP respuestaAPI = ConexionAPI.peticionBody(URL, "PUT", parametrosJSON, Constantes.CT_APPLICATION_JSON);
+        if (respuestaAPI.getCodigo() == HttpURLConnection.HTTP_OK) {
+            respuesta = gson.fromJson(respuestaAPI.getContenido(), Respuesta.class);
+        } else {
+            respuesta.setError(true);
+            switch (respuestaAPI.getCodigo()) {
+                case Constantes.ERROR_MALFORMED_URL:
+                    respuesta.setMensaje(Constantes.MSJ_ERROR_PETICION);
+                    break;
+                case Constantes.ERROR_PETICION:
+                    respuesta.setMensaje(Constantes.MSJ_ERROR_PETICION);
+                    break;
+                case Constantes.ERROR_BAD_REQUEST:
+                    respuesta.setMensaje("Campos en formato incorrecto, por favor verifica la información enviada");
+                    break;
+                default:
+                    respuesta.setMensaje("Lo sentimos hay problemas para editar la informacíon en este momento, porfavor intentelo más tarde");
+            }
+        }
+
+        return respuesta;
+    }
+    
+    public static Respuesta eliminar(int idCliente) {
+        Respuesta respuesta = new Respuesta();
+        String URL = Constantes.URL_WS + Constantes.WS_CLIENTE_ELIMINAR+ "/" + idCliente;
+
+        RespuestaHTTP respuestaAPI = ConexionAPI.peticionSinBody(URL, Constantes.PETICION_DELETE);
+
+        if (respuestaAPI.getCodigo() == HttpURLConnection.HTTP_OK) {
+            Gson gson = new Gson();
+            respuesta = gson.fromJson(respuestaAPI.getContenido(), Respuesta.class);
+        } else {
+            respuesta.setError(true);
+            switch (respuestaAPI.getCodigo()) {
+                case Constantes.ERROR_MALFORMED_URL:
+                    respuesta.setMensaje(Constantes.MSJ_ERROR_PETICION);
+                    break;
+                case Constantes.ERROR_PETICION:
+                    respuesta.setMensaje(Constantes.MSJ_ERROR_PETICION);
+                    break;
+                case Constantes.ERROR_BAD_REQUEST:
+                    respuesta.setMensaje("Ocurrio un error al eliminar el clientes");
+                    break;
+                default:
+                    respuesta.setMensaje("Lo sentimos hay problemas para eliminar la informacíon en este momento, porfavor intentelo más tarde");
+            }
+        }
+
+        return respuesta;
+    }
+   
 }

@@ -19,17 +19,21 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import packetworldescritorio.dominio.ClienteImp;
+import packetworldescritorio.dominio.ColaboradorImp;
 import packetworldescritorio.dominio.UnidadImp;
+import packetworldescritorio.dto.Respuesta;
 import packetworldescritorio.interfaz.INavegableChild;
 import packetworldescritorio.interfaz.INavegacion;
 import packetworldescritorio.pojo.Cliente;
+import packetworldescritorio.pojo.Colaborador;
+import packetworldescritorio.pojo.Sucursal;
 import packetworldescritorio.pojo.Unidad;
 import packetworldescritorio.utilidad.Constantes;
 import packetworldescritorio.utilidad.Utilidades;
 
-public class FXMLModuloClientesController implements Initializable, INavegableChild  {
+public class FXMLModuloClientesController implements Initializable, INavegableChild {
 
-        private INavegacion nav;
+    private INavegacion nav;
     @FXML
     private TableView<Cliente> tvClientes;
     @FXML
@@ -61,8 +65,8 @@ public class FXMLModuloClientesController implements Initializable, INavegableCh
         cargarInformaciónClientes();
         configurarTextFieldBusqueda();
     }
-    
-        @Override
+
+    @Override
     public void setNavegador(INavegacion nav) {
         this.nav = nav;
     }
@@ -76,17 +80,37 @@ public class FXMLModuloClientesController implements Initializable, INavegableCh
     private void clickRegresar(ActionEvent event) {
         nav.navegar(Constantes.PG_PRINCIPAL);
     }
-    
+
     @FXML
     private void clickIrRegistrar(ActionEvent event) {
+        irFormulario(null);
     }
 
     @FXML
     private void clickIrEditar(ActionEvent event) {
+        Cliente cliente = tvClientes.getSelectionModel().getSelectedItem();
+        if (cliente != null) {
+            irFormulario(cliente);
+        } else {
+            Utilidades.mostrarAlertaSimple("Selecciona un cliente", "Para editar la información de un cliente, debes seleccionarlo primero de la tabla", Alert.AlertType.WARNING);
+        }
     }
 
     @FXML
     private void clickEliminar(ActionEvent event) {
+        Cliente cliente = tvClientes.getSelectionModel().getSelectedItem();
+        if (cliente != null) {
+            Boolean confirmarOperacion = Utilidades.mostrarAlertaConfirmacion("Eliminar cliente", "¿Estas seguro de que quieres eliminar el registro del cliente " + cliente.getNombreCompleto() + " ?" + "\n Al eliminar un registro no podras recuperar la información posteriormente");
+            if (confirmarOperacion) {
+                eliminarCliente(cliente.getIdCliente());
+            }
+        } else {
+            Utilidades.mostrarAlertaSimple("Selecciona cliente", "Para eliminar un cliente, debe seleccionarlo de la tabla", Alert.AlertType.WARNING);
+        }
+    }
+
+    private void irFormulario(Cliente cliente) {
+        nav.navegar(Constantes.PG_FORMULARIO_CLIENTES, cliente);
     }
 
     private void configurarTabla() {
@@ -163,5 +187,13 @@ public class FXMLModuloClientesController implements Initializable, INavegableCh
 
     }
 
-
+    private void eliminarCliente(int idCliente) {
+        Respuesta respuesta = ClienteImp.eliminar(idCliente);
+        if (!respuesta.isError()) {
+            Utilidades.mostrarAlertaSimple("Registro eliminado", "El registro del cliente fue eliminado correctamente", Alert.AlertType.INFORMATION);
+            cargarInformaciónClientes();
+        } else {
+            Utilidades.mostrarAlertaSimple("Error al eliminar", respuesta.getMensaje(), Alert.AlertType.ERROR);
+        }
+    }
 }

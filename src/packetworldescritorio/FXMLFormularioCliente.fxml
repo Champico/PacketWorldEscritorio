@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" minWidth="1000.0" prefHeight="627.0" stylesheets="@/estilos/CSSAplicacion.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="packetworldescritorio.FXMLFormularioClienteController">
+   <children>
+      <Button layoutX="34.0" layoutY="24.0" mnemonicParsing="false" onAction="#clickRegresar" prefHeight="40.0" prefWidth="139.0" styleClass="btn_regresar">
+         <graphic>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <ImageView fitHeight="30.0" fitWidth="32.0" opacity="0.48" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@/images/flecha-izquierda.png" />
+                     </image>
+                  </ImageView>
+                  <Label prefHeight="30.0" prefWidth="99.0" text=" Regresar" textFill="#4a4a4a">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+         </graphic>
+      </Button>
+      <Label fx:id="lbTitulo" layoutX="53.0" layoutY="64.0" prefHeight="51.0" prefWidth="440.0" text="Registrar Cliente">
+         <font>
+            <Font name="System Bold" size="35.0" />
+         </font>
+      </Label>
+      <AnchorPane fx:id="apFormularioColaborador" layoutX="34.0" layoutY="109.0" prefHeight="520.0" prefWidth="1232.0">
+         <children>
+            <Label layoutX="55.0" layoutY="20.0" text="Nombre *">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Label>
+            <TextField fx:id="tfNombre" layoutX="54.0" layoutY="46.0" prefHeight="40.0" prefWidth="233.0" promptText="Jose" styleClass="input_general" />
+            <Label layoutX="305.0" layoutY="20.0" text="Apellido Paterno *">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Label>
+            <TextField fx:id="tfApPaterno" layoutX="304.0" layoutY="46.0" prefHeight="40.0" prefWidth="233.0" promptText="Garcia" />
+            <TextField fx:id="tfApMaterno" layoutX="554.0" layoutY="46.0" prefHeight="40.0" prefWidth="233.0" promptText="Torres" />
+            <Label layoutX="552.0" layoutY="20.0" text="Apellido Materno">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Label>
+            <HBox layoutX="51.0" layoutY="399.0" prefWidth="344.0" styleClass="hb_crud_menu">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#clickGuardar" prefHeight="31.0" prefWidth="150.0" text="Guardar" textFill="WHITE">
+                     <styleClass>
+                        <String fx:value="btn_general" />
+                        <String fx:value="btn_aceptar" />
+                     </styleClass>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#clickCancelar" prefHeight="31.0" prefWidth="150.0" text="Cancelar" textFill="WHITE">
+                     <styleClass>
+                        <String fx:value="btn_general" />
+                        <String fx:value="btn_cancelar" />
+                     </styleClass>
+                  </Button>
+               </children>
+            </HBox>
+            <Label layoutX="53.0" layoutY="293.0" text="Correo electronico*">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Label>
+            <TextField fx:id="tfCorreo" layoutX="51.0" layoutY="319.0" prefHeight="40.0" prefWidth="233.0" promptText="ejemplo@dominio.com" styleClass="input_general" />
+            <TextField fx:id="tfTelefono" layoutX="301.0" layoutY="319.0" prefHeight="40.0" prefWidth="233.0" promptText="5500000000" styleClass="input_general" />
+            <Label layoutX="302.0" layoutY="293.0" text="Telefono*">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Label>
+            <Label fx:id="lbErrorNombre" layoutX="54.0" layoutY="86.0" text="Campo obligatorio" textFill="RED" visible="false" />
+            <Label fx:id="lbErrorApPaterno" layoutX="304.0" layoutY="86.0" text="Campo obligatorio" textFill="RED" visible="false" />
+            <Label fx:id="lbErrorApMaterno" layoutX="555.0" layoutY="86.0" text="Campo obligatorio" textFill="RED" visible="false" />
+            <Label fx:id="lbErrorCorreo" layoutX="51.0" layoutY="359.0" text="Campo obligatorio" textFill="RED" visible="false" />
+            <Label fx:id="lbErrorTelefono" layoutX="301.0" layoutY="359.0" text="Campo obligatorio" textFill="RED" visible="false" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
