@@ -60,6 +60,9 @@
 }
 
 
+.table-view:focused {
+    -fx-background-color: transparent;
+}
 
 
 

@@ -100,15 +100,14 @@
 
 .btn_general_envio{
     -fx-background-color: #ffffff;
-    -fx-border-color: #fbfbfb;
+    -fx-border-color: transparent;
     -fx-cursor: HAND;
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0.1, 0, 4);
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 10, 0.1, 0, 4);
 }
 
 .btn_general_envio:hover {
-    -fx-background-color: #eeeeee;
-        -fx-border-color: transparent;
-    -fx-effect: dropshadow(three-pass-box, rgba(255, 255, 255, 0.6), 10, 0.3, 0, 0);
+    -fx-background-color: #f2f2f2;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 10, 0.1, 0, 4);
 }
 
 .btn_crear_envio{

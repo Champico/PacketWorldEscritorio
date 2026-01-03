@@ -22,7 +22,7 @@
             <TableColumn fx:id="colEstatus" prefWidth="113.0" text="Estatus" />
          </columns>
       </TableView>
-      <HBox alignment="CENTER_LEFT" layoutX="44.0" layoutY="115.0" prefHeight="66.0" prefWidth="695.0" styleClass="hb_crud_menu">
+      <HBox alignment="CENTER_LEFT" layoutX="44.0" layoutY="115.0" prefHeight="66.0" prefWidth="888.0" styleClass="hb_crud_menu">
          <children>
             <Button mnemonicParsing="false" onAction="#clickIrRegistrar" prefHeight="66.0" prefWidth="222.0">
                <graphic>
@@ -68,7 +68,7 @@
                   <String fx:value="btn_buscar_envio" />
                </styleClass>
             </Button>
-            <Button mnemonicParsing="false" onAction="#clickIrBuscar" prefHeight="40.0" prefWidth="208.0">
+            <Button mnemonicParsing="false" onAction="#clickIrModificar" prefHeight="40.0" prefWidth="208.0">
                <graphic>
                   <HBox alignment="CENTER" prefHeight="30.0" prefWidth="168.0">
                      <children>
@@ -89,6 +89,24 @@
                   <String fx:value="btn_general_envio" />
                   <String fx:value="btn_buscar_envio" />
                </styleClass>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#clickAsignarConductor" prefHeight="41.0" prefWidth="212.0">
+               <graphic>
+                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@/images/conductor.png" />
+                           </image>
+                        </ImageView>
+                        <Label text="Asignar Conductor  ">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+               </graphic>
             </Button>
          </children>
       </HBox>

@@ -32,6 +32,10 @@ public class Constantes {
     public static final String WS_CLIENTE_REGISTRAR = "cliente/registrar";
     public static final String WS_CLIENTE_EDITAR = "cliente/editar";
     public static final String WS_CLIENTE_ELIMINAR = "cliente/eliminar";
+    public static final String WS_ENVIO_OBTENER_TODOS = "envio/obtener";
+    public static final String WS_ENVIO_REGISTRAR = "envio/registrar";
+    public static final String WS_ENVIO_EDITAR = "envio/editar";
+    public static final String WS_ENVIO_ELIMINAR = "envio/eliminar";
 
     //Peticiones
     public static final String PETICION_GET = "GET";
@@ -90,5 +94,6 @@ public class Constantes {
 
     //Otros
     public static final int MAX_SIZE_MB_IMAGE = 2;
+    public static final int LIMITE_ENVIOS = 30;
 
 }

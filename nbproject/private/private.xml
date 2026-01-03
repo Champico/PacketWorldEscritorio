@@ -4,11 +4,12 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/champico/Documents/Integracion%20de%20soluciones/PacketWorldEscritorio/src/packetworldescritorio/FXMLModuloSucursalesController.java</file>
-            <file>file:/C:/Users/champico/Documents/Integracion%20de%20soluciones/PacketWorldEscritorio/src/packetworldescritorio/FXMLFormularioColaboradorController.java</file>
-            <file>file:/C:/Users/champico/Documents/Integracion%20de%20soluciones/PacketWorldEscritorio/src/packetworldescritorio/FXMLFormularioUnidadController.java</file>
-            <file>file:/C:/Users/champico/Documents/Integracion%20de%20soluciones/PacketWorldEscritorio/src/packetworldescritorio/dominio/CatalogoImp.java</file>
+            <file>file:/C:/Users/champico/Documents/Integracion%20de%20soluciones/PacketWorldEscritorio/resources/estilos/CSSTablaModerna.css</file>
+            <file>file:/C:/Users/champico/Documents/Integracion%20de%20soluciones/PacketWorldEscritorio/src/packetworldescritorio/FXMLModuloEnviosController.java</file>
+            <file>file:/C:/Users/champico/Documents/Integracion%20de%20soluciones/PacketWorldEscritorio/src/packetworldescritorio/dominio/ColaboradorImp.java</file>
+            <file>file:/C:/Users/champico/Documents/Integracion%20de%20soluciones/PacketWorldEscritorio/src/packetworldescritorio/utilidad/Constantes.java</file>
             <file>file:/C:/Users/champico/Documents/Integracion%20de%20soluciones/PacketWorldEscritorio/src/packetworldescritorio/FXMLFormularioSucursalController.java</file>
-            <file>file:/C:/Users/champico/Documents/Integracion%20de%20soluciones/PacketWorldEscritorio/src/packetworldescritorio/pojo/Estado.java</file>
+            <file>file:/C:/Users/champico/Documents/Integracion%20de%20soluciones/PacketWorldEscritorio/src/packetworldescritorio/dominio/EnvioImp.java</file>
         </group>
     </open-files>
 </project-private>

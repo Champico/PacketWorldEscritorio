@@ -1,16 +1,11 @@
-/* ===== TABLE VIEW GENERAL ===== */
+
 .table-view {
     -fx-background-color: #ffffff;
     -fx-border-color: transparent;
     -fx-padding: 0;
 }
 
-/* ===== CONTENEDOR ===== */
-.table-view .virtual-flow {
-    -fx-background-color: transparent;
-}
-
-/* ===== HEADER ===== */
+/* Encabezado */
 .table-view .column-header-background {
     -fx-background-color: #3b3752;
     -fx-background-radius: 10 10 0 0;
@@ -34,7 +29,7 @@
 .table-row-cell {
     -fx-background-color: white;
     -fx-border-color: transparent;
-    -fx-padding: 6;
+    -fx-cursor: HAND;
 }
 
 /* Zebra striping */
@@ -54,9 +49,9 @@
 
 /* ===== CELDAS ===== */
 .table-cell {
-    -fx-text-fill: #7a7a7a;
-    -fx-font-size: 13px;
-    -fx-padding: 12 10 12 10;
+    -fx-text-fill: #3b3b3b;
+    -fx-font-size: 18px;
+    -fx-padding: 12 5 12 5; /* top right bottom left */
     -fx-border-color: transparent;
 }
 
@@ -65,21 +60,16 @@
     -fx-background-color: transparent;
 }
 
-.scroll-bar:vertical .thumb {
-    -fx-background-color: #c2c2c2;
-    -fx-background-radius: 10;
+.scroll-bar:horizontal {
+    -fx-opacity: 0;
+    -fx-pref-width: 0;
 }
 
-.scroll-bar:vertical .track {
-    -fx-background-color: transparent;
-}
 
-/* ===== ELIMINA LÍNEAS ===== */
 .table-view .column-resize-line {
     -fx-background-color: transparent;
 }
 
-/* ===== QUITA FOCUS AZUL ===== */
 .table-view:focused {
     -fx-background-color: transparent;
 }

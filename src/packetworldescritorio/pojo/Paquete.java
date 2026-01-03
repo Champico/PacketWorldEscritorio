@@ -1,0 +1,88 @@
+/** @authores  Pipe, Kevin, champ */
+
+package packetworldescritorio.pojo;
+
+/**
+ * Clase de modelado para los paquetes.
+ */
+
+public class Paquete {
+    
+    private Integer idPaquete;
+    private String descripcion;
+    private Float peso;
+    private Float alto;
+    private Float ancho;
+    private Float profundidad;
+    private Integer idEnvio;
+
+    public Paquete() {
+    }
+
+    public Paquete(Integer idPaquete, String descripcion, Float peso, Float alto, Float ancho, Float profundidad, Integer idEnvio) {
+        this.idPaquete = idPaquete;
+        this.descripcion = descripcion;
+        this.peso = peso;
+        this.alto = alto;
+        this.ancho = ancho;
+        this.profundidad = profundidad;
+        this.idEnvio = idEnvio;
+    }
+
+    public Integer getIdPaquete() {
+        return idPaquete;
+    }
+
+    public void setIdPaquete(Integer idPaquete) {
+        this.idPaquete = idPaquete;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public Float getPeso() {
+        return peso;
+    }
+
+    public void setPeso(Float peso) {
+        this.peso = peso;
+    }
+
+    public Float getAlto() {
+        return alto;
+    }
+
+    public void setAlto(Float alto) {
+        this.alto = alto;
+    }
+
+    public Float getAncho() {
+        return ancho;
+    }
+
+    public void setAncho(Float ancho) {
+        this.ancho = ancho;
+    }
+
+    public Float getProfundidad() {
+        return profundidad;
+    }
+
+    public void setProfundidad(Float profundidad) {
+        this.profundidad = profundidad;
+    }
+
+    public Integer getIdEnvio() {
+        return idEnvio;
+    }
+
+    public void setIdEnvio(Integer idEnvio) {
+        this.idEnvio = idEnvio;
+    }
+    
+}
