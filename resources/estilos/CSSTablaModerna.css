@@ -73,3 +73,8 @@
 .table-view:focused {
     -fx-background-color: transparent;
 }
+
+
+.tabla-fondo-gris-oscuro {
+    -fx-background-color: #e7e7e7;
+}

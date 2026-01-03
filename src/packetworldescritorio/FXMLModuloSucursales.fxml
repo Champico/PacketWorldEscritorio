@@ -9,130 +9,133 @@
 <?import javafx.scene.layout.*?>
 
 <AnchorPane id="AnchorPane" minWidth="1000.0" prefHeight="627.0" prefWidth="1280.0" styleClass="estilos\CSSAplicacion.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="packetworldescritorio.FXMLModuloSucursalesController">
-   <children>
-      <Button layoutX="24.0" layoutY="24.0" mnemonicParsing="false" onAction="#clickRegresar" prefHeight="40.0" prefWidth="139.0" styleClass="btn_regresar">
-         <graphic>
-            <HBox prefHeight="100.0" prefWidth="200.0">
-               <children>
-                  <ImageView fitHeight="30.0" fitWidth="32.0" opacity="0.48" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@/images/flecha-izquierda.png" />
-                     </image>
-                  </ImageView>
-                  <Label prefHeight="30.0" prefWidth="99.0" text=" Regresar" textFill="#4a4a4a">
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                  </Label>
-               </children>
-            </HBox>
-         </graphic>
-      </Button>
-      <Label layoutX="53.0" layoutY="74.0" prefHeight="51.0" prefWidth="440.0" text="Modulo de Sucursales">
-         <font>
-            <Font name="System Bold" size="35.0" />
-         </font>
-      </Label>
-      <HBox layoutX="34.0" layoutY="135.0" prefHeight="43.0" prefWidth="408.0" styleClass="hb_crud_menu">
-         <children>
-            <Button mnemonicParsing="false" onAction="#clickIrRegistrar" prefHeight="40.0" prefWidth="120.0">
-               <graphic>
-                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                     <children>
-                        <ImageView fitHeight="21.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@/images/+.png" />
-                           </image>
+    <children>
+        <Button layoutX="24.0" layoutY="24.0" mnemonicParsing="false" onAction="#clickRegresar" prefHeight="40.0" prefWidth="139.0" styleClass="btn_regresar">
+            <graphic>
+                <HBox prefHeight="100.0" prefWidth="200.0">
+                    <children>
+                        <ImageView fitHeight="30.0" fitWidth="32.0" opacity="0.48" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@/images/flecha-izquierda.png" />
+                            </image>
                         </ImageView>
-                        <Label text=" Nuevo" textFill="WHITE">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
+                        <Label prefHeight="30.0" prefWidth="99.0" text=" Regresar" textFill="#4a4a4a">
+                            <font>
+                                <Font size="20.0" />
+                            </font>
                         </Label>
-                     </children>
-                  </HBox>
-               </graphic>
-               <styleClass>
-                  <String fx:value="btn_general" />
-                  <String fx:value="btn_agregar" />
-               </styleClass>
-            </Button>
-            <Button mnemonicParsing="false" onAction="#clickIrEditar" prefHeight="40.0" prefWidth="120.0">
-               <graphic>
-                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                     <children>
-                        <ImageView fitHeight="21.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@/images/lapiz.png" />
-                           </image>
-                        </ImageView>
-                        <Label text=" Editar" textFill="WHITE">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </HBox>
-               </graphic>
-               <styleClass>
-                  <String fx:value="btn_general" />
-                  <String fx:value="btn_editar" />
-               </styleClass>
-            </Button>
-            <Button mnemonicParsing="false" onAction="#clickEliminar" prefHeight="40.0" prefWidth="158.0">
-               <graphic>
-                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                     <children>
-                        <ImageView fitHeight="21.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@/images/abajo.png" />
-                           </image>
-                        </ImageView>
-                        <Label prefHeight="27.0" prefWidth="115.0" text="Dar de baja" textFill="WHITE">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </HBox>
-               </graphic>
-               <styleClass>
-                  <String fx:value="btn_general" />
-                  <String fx:value="btn_eliminar" />
-               </styleClass>
-            </Button>
-         </children>
-      </HBox>
-      <TextField fx:id="tfBusqueda" layoutX="478.0" layoutY="135.0" prefHeight="43.0" prefWidth="345.0" promptText="Buscar sucursal...">
-         <styleClass>
-            <String fx:value="input_general" />
-            <String fx:value="input_busqueda" />
-         </styleClass>
-      </TextField>
-      <Button fx:id="btnBusqueda" layoutX="764.0" layoutY="135.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="59.0">
-         <graphic>
-            <ImageView fitHeight="28.0" fitWidth="29.0" opacity="0.58" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@/images/lupa.png" />
-               </image>
-            </ImageView>
-         </graphic>
-         <styleClass>
-            <String fx:value="btn_general" />
-            <String fx:value="btn_buscar" />
-         </styleClass>
-      </Button>
-      <TableView fx:id="tvSucursales" layoutX="34.0" layoutY="199.0" prefHeight="414.0" prefWidth="1194.0">
-         <columns>
-            <TableColumn fx:id="colCodigo" prefWidth="136.0" text="Codigo" />
-            <TableColumn fx:id="colNombre" minWidth="0.0" prefWidth="216.0" text="Nombre" />
-            <TableColumn fx:id="colCalle" prefWidth="145.0" text="Calle" />
-            <TableColumn fx:id="colColonia" prefWidth="168.0" text="Colonia" />
-            <TableColumn fx:id="colCodigoPostal" prefWidth="134.0" text="Codigo Postal" />
-            <TableColumn fx:id="colCiudad" prefWidth="131.0" text="Ciudad" />
-            <TableColumn fx:id="colEstado" prefWidth="127.0" text="Estado" />
-            <TableColumn fx:id="colEstatus" prefWidth="136.0" text="Estatus" />
-         </columns>
-      </TableView>
-   </children>
+                    </children>
+                </HBox>
+            </graphic>
+        </Button>
+        <Label layoutX="53.0" layoutY="74.0" prefHeight="51.0" prefWidth="440.0" text="Modulo de Sucursales">
+            <font>
+                <Font name="System Bold" size="35.0" />
+            </font>
+        </Label>
+        <HBox layoutX="34.0" layoutY="135.0" prefHeight="43.0" prefWidth="408.0" styleClass="hb_crud_menu">
+            <children>
+                <Button mnemonicParsing="false" onAction="#clickIrRegistrar" prefHeight="40.0" prefWidth="120.0">
+                    <graphic>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                            <children>
+                                <ImageView fitHeight="21.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@/images/+.png" />
+                                    </image>
+                                </ImageView>
+                                <Label text=" Nuevo" textFill="WHITE">
+                                    <font>
+                                        <Font size="18.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                        </HBox>
+                    </graphic>
+                    <styleClass>
+                        <String fx:value="btn_general" />
+                        <String fx:value="btn_agregar" />
+                    </styleClass>
+                </Button>
+                <Button mnemonicParsing="false" onAction="#clickIrEditar" prefHeight="40.0" prefWidth="120.0">
+                    <graphic>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                            <children>
+                                <ImageView fitHeight="21.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@/images/lapiz.png" />
+                                    </image>
+                                </ImageView>
+                                <Label text=" Editar" textFill="WHITE">
+                                    <font>
+                                        <Font size="18.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                        </HBox>
+                    </graphic>
+                    <styleClass>
+                        <String fx:value="btn_general" />
+                        <String fx:value="btn_editar" />
+                    </styleClass>
+                </Button>
+                <Button mnemonicParsing="false" onAction="#clickEliminar" prefHeight="40.0" prefWidth="158.0">
+                    <graphic>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                            <children>
+                                <ImageView fitHeight="21.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@/images/abajo.png" />
+                                    </image>
+                                </ImageView>
+                                <Label prefHeight="27.0" prefWidth="115.0" text="Dar de baja" textFill="WHITE">
+                                    <font>
+                                        <Font size="18.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                        </HBox>
+                    </graphic>
+                    <styleClass>
+                        <String fx:value="btn_general" />
+                        <String fx:value="btn_eliminar" />
+                    </styleClass>
+                </Button>
+            </children>
+        </HBox>
+        <TextField fx:id="tfBusqueda" layoutX="478.0" layoutY="135.0" prefHeight="43.0" prefWidth="345.0" promptText="Buscar sucursal...">
+            <styleClass>
+                <String fx:value="input_general" />
+                <String fx:value="input_busqueda" />
+            </styleClass>
+        </TextField>
+        <Button fx:id="btnBusqueda" layoutX="764.0" layoutY="135.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="59.0">
+            <graphic>
+                <ImageView fitHeight="28.0" fitWidth="29.0" opacity="0.58" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@/images/lupa.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+            <styleClass>
+                <String fx:value="btn_general" />
+                <String fx:value="btn_buscar" />
+            </styleClass>
+        </Button>
+        <TableView fx:id="tvSucursales" layoutX="34.0" layoutY="199.0" prefHeight="414.0" prefWidth="1194.0">
+            <placeholder>
+                <Label style="-fx-text-fill: #333333; -fx-font-size: 16px;" text="Haga click en Nuevo para agregar una sucursal" />
+            </placeholder>
+            <columns>
+                <TableColumn fx:id="colCodigo" prefWidth="136.0" text="Codigo" />
+                <TableColumn fx:id="colNombre" minWidth="0.0" prefWidth="216.0" text="Nombre" />
+                <TableColumn fx:id="colCalle" prefWidth="145.0" text="Calle" />
+                <TableColumn fx:id="colColonia" prefWidth="168.0" text="Colonia" />
+                <TableColumn fx:id="colCodigoPostal" prefWidth="134.0" text="Codigo Postal" />
+                <TableColumn fx:id="colCiudad" prefWidth="131.0" text="Ciudad" />
+                <TableColumn fx:id="colEstado" prefWidth="127.0" text="Estado" />
+                <TableColumn fx:id="colEstatus" prefWidth="136.0" text="Estatus" />
+            </columns>
+        </TableView>
+    </children>
 </AnchorPane>
