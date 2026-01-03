@@ -73,6 +73,7 @@ public class FXMLModuloEnviosController implements Initializable, INavegableChil
 
     @FXML
     private void clickIrRegistrar(ActionEvent event) {
+        irFormulario();
     }
 
     @FXML
@@ -153,4 +154,8 @@ public class FXMLModuloEnviosController implements Initializable, INavegableChil
         }
     }
 
+    
+    private void irFormulario(){
+        nav.navegar(Constantes.PG_FORMULARIO_ENVIOS);
+    }
 }

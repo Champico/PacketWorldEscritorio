@@ -144,6 +144,27 @@
     -fx-faint-focus-color: #ff52524e
 }
 
-input_no_writable:disabled{
+.input_no_writable:disabled{
     -fx-opacity: 1;
+}
+
+
+
+
+
+.tarjeta_formulario{
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0.1, 0, 4);
+    -fx-background-radius: 8px;
+    -fx-border-radius: 8px;
+    -fx-background-color: #ffffff;
+    -fx-cursor: HAND;
+    -fx-padding:  15 15 15 15; /* top right bottom left */
+}
+
+.vb_formulario {
+    -fx-spacing: 20;
+}
+
+.vb_tarjeta_formulario {
+    -fx-spacing: 12;
 }

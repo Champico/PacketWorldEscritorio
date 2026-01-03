@@ -90,7 +90,7 @@
                   <String fx:value="btn_buscar_envio" />
                </styleClass>
             </Button>
-            <Button mnemonicParsing="false" onAction="#clickAsignarConductor" prefHeight="41.0" prefWidth="212.0">
+            <Button mnemonicParsing="false" onAction="#clickAsignarConductor" prefHeight="41.0" prefWidth="212.0" styleClass="btn_general_envio">
                <graphic>
                   <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
                      <children>
@@ -99,7 +99,7 @@
                               <Image url="@/images/conductor.png" />
                            </image>
                         </ImageView>
-                        <Label text="Asignar Conductor  ">
+                        <Label text=" Asignar Conductor  ">
                            <font>
                               <Font size="18.0" />
                            </font>
