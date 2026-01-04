@@ -167,3 +167,10 @@
 .vb_tarjeta_formulario {
     -fx-spacing: 12;
 }
+
+
+.table-view .scroll-bar:horizontal {
+    -fx-opacity: 0;
+    -fx-pref-height: 0;
+    -fx-max-height: 0;
+}

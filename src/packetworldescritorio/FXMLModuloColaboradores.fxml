@@ -29,7 +29,7 @@
                 </ImageView>
             </graphic>
         </Button>
-        <TableView fx:id="tvColaboradores" layoutX="25.0" layoutY="217.0" prefHeight="414.0" prefWidth="1058.0" AnchorPane.bottomAnchor="32.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="197.0">
+        <TableView fx:id="tvColaboradores" layoutX="25.0" layoutY="172.0" prefHeight="414.0" prefWidth="1058.0" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="172.0">
             <placeholder>
                 <Label style="-fx-text-fill: #333333; -fx-font-size: 16px;" text="Haga click en Nuevo para agregar un colaborador" />
             </placeholder>
