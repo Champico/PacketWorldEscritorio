@@ -39,6 +39,7 @@ public class Constantes {
     public static final String WS_ENVIO_REGISTRAR = "envio/registrar";
     public static final String WS_ENVIO_EDITAR = "envio/editar";
     public static final String WS_ENVIO_ELIMINAR = "envio/eliminar";
+    public static final String WS_PAQUETE_OBTENER_CARACTERISTICAS = "paquete/obtenerCaracteristicas";
 
     //Peticiones
     public static final String PETICION_GET = "GET";
@@ -82,6 +83,7 @@ public class Constantes {
     public static final String PG_FORMULARIO_SUCURSALES = "FXMLFormularioSucursal.fxml";
     public static final String PG_FORMULARIO_CLIENTES = "FXMLFormularioCliente.fxml";
     public static final String PG_FORMULARIO_ENVIOS = "FXMLFormularioEnvio.fxml";
+    public static final String PG_FORMULARIO_PAQUETES = "FXMLFormularioPaquete.fxml";
     public static final String COMP_FORMULARIO_DIRECCION = "FXMLFormularioDireccion.fxml";
     public static final String MODAL_ASIGNAR_CONDUCTOR = "FXMLModalAsignarConductor.fxml";
     public static final String MODAL_SELECCIONAR_CONDUCTOR = "FXMLModalSeleccionarConductor.fxml";

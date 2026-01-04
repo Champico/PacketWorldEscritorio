@@ -3,8 +3,13 @@ package packetworldescritorio;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.HashMap;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,6 +21,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Modality;
@@ -28,6 +34,8 @@ import packetworldescritorio.interfaz.INavegableChild;
 import packetworldescritorio.interfaz.INavegacion;
 import packetworldescritorio.pojo.Cliente;
 import packetworldescritorio.pojo.Envio;
+import packetworldescritorio.pojo.Paquete;
+import packetworldescritorio.pojo.Session;
 import packetworldescritorio.pojo.Sucursal;
 import packetworldescritorio.utilidad.Constantes;
 import packetworldescritorio.utilidad.UIUtilidad;
@@ -61,17 +69,17 @@ public class FXMLFormularioEnvioController implements Initializable, INavegableC
     @FXML
     private Label lbErrorTelefono;
     @FXML
-    private TableView<?> tvPaquetes;
+    private TableView<Paquete> tvPaquetes;
     @FXML
-    private TableColumn<?, ?> colDescripcion;
+    private TableColumn colDescripcion;
     @FXML
-    private TableColumn<?, ?> colPeso;
+    private TableColumn colPeso;
     @FXML
-    private TableColumn<?, ?> colAlto;
+    private TableColumn colAlto;
     @FXML
-    private TableColumn<?, ?> colAncho;
+    private TableColumn colAncho;
     @FXML
-    private TableColumn<?, ?> colProfundidad;
+    private TableColumn colProfundidad;
     @FXML
     private AnchorPane apDatosCliente;
     @FXML
@@ -93,9 +101,12 @@ public class FXMLFormularioEnvioController implements Initializable, INavegableC
     @FXML
     private HBox hbMenuCliente;
 
+    private ObservableList<Paquete> paquetes;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         configurarSeccionCliente();
+        configurarSeccionDestinatario();
         configurarSeccionPaquetes();
     }
 
@@ -111,6 +122,7 @@ public class FXMLFormularioEnvioController implements Initializable, INavegableC
 
     @FXML
     private void clickIrRegistrarPaquete(ActionEvent event) {
+        irFormularioPaqueteModal(null);
     }
 
     @FXML
@@ -142,9 +154,9 @@ public class FXMLFormularioEnvioController implements Initializable, INavegableC
 
     @FXML
     private void clickQuitarCliente(ActionEvent event) {
-            clienteSeleccionado = null;
-            borrarDatosCliente();
-            ocultarDatosCliente();
+        clienteSeleccionado = null;
+        borrarDatosCliente();
+        ocultarDatosCliente();
     }
 
     @FXML
@@ -173,6 +185,10 @@ public class FXMLFormularioEnvioController implements Initializable, INavegableC
     }
 
     private void configurarSeccionPaquetes() {
+        configurarTabla();
+    }
+
+    private void configurarSeccionDestinatario() {
         agregarFormularioDireccion();
     }
 
@@ -198,6 +214,9 @@ public class FXMLFormularioEnvioController implements Initializable, INavegableC
     private boolean verificarCampos() {
         boolean camposCorrectos = true;
 
+        if (verificarCliente() == false) {
+            camposCorrectos = false;
+        }
         if (verificarNombre() == false) {
             camposCorrectos = false;
         }
@@ -210,7 +229,6 @@ public class FXMLFormularioEnvioController implements Initializable, INavegableC
         if (formularioDireccionController.verificarCampos() == false) {
             camposCorrectos = false;
         }
-
         return camposCorrectos;
     }
 
@@ -251,6 +269,14 @@ public class FXMLFormularioEnvioController implements Initializable, INavegableC
         return true;
     }
 
+    private boolean verificarCliente() {
+        if (clienteSeleccionado == null) {
+            return false;
+        }
+
+        return true;
+    }
+
     private void registrarEnvio() {
         boolean camposCorrectos = verificarCampos();
 
@@ -269,7 +295,9 @@ public class FXMLFormularioEnvioController implements Initializable, INavegableC
             envio.setClaveEstado(formularioDireccionController.getEstado().getClaveEstado());
             envio.setClaveCiudad(formularioDireccionController.getCiudad().getClaveMunicipio());
             envio.setNumero(formularioDireccionController.getNumero());
+            envio.setIdSucursalOrigen(Session.getInstance().getUsuarioActual().getIdSucursal());
 
+            envio.setPaquetes(paquetes);
             boolean exito = registrarDatosDeEnvio(envio);
 
             if (!exito) {
@@ -396,7 +424,6 @@ public class FXMLFormularioEnvioController implements Initializable, INavegableC
                 if (temp != null) {
                     borrarDatosCliente();
                     recargarDatosCliente(temp);
-                    System.out.println("Cliente seleccionado nuevo: " + cliente);
                     cargarDatosCliente(clienteSeleccionado);
                     mostrarDatosCliente();
                 }
@@ -414,7 +441,6 @@ public class FXMLFormularioEnvioController implements Initializable, INavegableC
             clienteSeleccionado = null;
             return;
         }
-        System.out.println("Nuevos datos " + cliente);
         try {
             if (cliente.getIdCliente() > 0) {
                 clienteSeleccionado = ClienteImp.obtenerCliente(cliente.getIdCliente());
@@ -425,4 +451,60 @@ public class FXMLFormularioEnvioController implements Initializable, INavegableC
             clienteSeleccionado = null;
         }
     }
+
+    private void configurarTabla() {
+        colDescripcion.setCellValueFactory(new PropertyValueFactory("descripcion"));
+        colAlto.setCellValueFactory(new PropertyValueFactory("alto"));
+        colAncho.setCellValueFactory(new PropertyValueFactory("ancho"));
+        colProfundidad.setCellValueFactory(new PropertyValueFactory("profundidad"));
+        colPeso.setCellValueFactory(new PropertyValueFactory("peso"));
+    }
+
+    private void inicializarTablaPaquetesVacia() {
+        paquetes = FXCollections.observableArrayList();
+        tvPaquetes.setItems(paquetes);
+    }
+
+    private void irFormularioPaqueteModal(Paquete paquete) {
+        try {
+            FXMLLoader cargador = new FXMLLoader(getClass().getResource(Constantes.PG_FORMULARIO_PAQUETES));
+            Parent vista = cargador.load();
+            FXMLFormularioPaqueteController controlador = cargador.getController();
+
+            if (paquete != null) {
+                controlador.setObject(paquete);
+            }
+
+            controlador.setTipoModal();
+            Stage context = (Stage) lbTitulo.getScene().getWindow();
+            Scene escenaPrincipal = new Scene(vista);
+
+            Stage stModal = new Stage();
+            stModal.setScene(escenaPrincipal);
+            stModal.setWidth(1000);
+            stModal.setHeight(657);
+            stModal.setResizable(false);
+            stModal.setTitle(paquete != null ? "Editar paquete" : "Nuevo paquete");
+            stModal.initOwner(context);
+            stModal.initModality(Modality.WINDOW_MODAL);
+            stModal.initStyle(StageStyle.UTILITY);
+
+            stModal.showAndWait();
+
+            boolean error = controlador.isError();
+
+            if (error == false) {
+                Paquete temp = controlador.getPaqueteSeleccionModal();
+                if (temp != null) {
+                    paquetes.add(temp);
+                }
+            }
+
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            Utilidades.mostrarAlertaSimple("Error", "Ocurrio un error al cargar la ventana de paquete", Alert.AlertType.ERROR);
+        }
+
+    }
+    
 }

@@ -188,4 +188,23 @@ public class UIUtilidad {
         }));
     }
 
+    public static void aplicarFormatoNumericoDecimal(TextInputControl field, int maxIzquierda, int maxDerecha) {
+
+        field.setTextFormatter(new TextFormatter<>(change -> {
+            String nuevoTexto = change.getControlNewText();
+
+            if (nuevoTexto.isEmpty()) {
+                return change;
+            }
+
+            String regex = "^\\d{0," + maxIzquierda + "}(\\.\\d{0," + maxDerecha + "})?$";
+
+            if (nuevoTexto.matches(regex)) {
+                return change;
+            }
+
+            return null;
+        }));
+    }
+
 }

@@ -25,6 +25,7 @@ public class Envio {
     private Integer idSucursalOrigen;
     private Integer idEstatus;
     private String nombreEstatus;
+    private String comentario;
     private Integer idConductor;
     private String nombreConductor;
     private List<Paquete> paquetes;
@@ -35,7 +36,7 @@ public class Envio {
     public Envio() {
     }
 
-    public Envio(Integer idEnvio, String numeroGuia, Float costo, String destinatarioNombre, String destinatarioApellidoP, String destinatarioApellidoM, String calle, String numero, String colonia, String codigoPostal, String ciudad, String estado, Integer idCliente, Integer idSucursalOrigen, Integer idEstatus, String nombreEstatus, Integer idConductor, String nombreConductor, List<Paquete> paquetes, String claveEstado, String claveCiudad, String destinatario, String destinatarioTelefono) {
+    public Envio(Integer idEnvio, String numeroGuia, Float costo, String destinatarioNombre, String destinatarioApellidoP, String destinatarioApellidoM, String calle, String numero, String colonia, String codigoPostal, String ciudad, String estado, Integer idCliente, Integer idSucursalOrigen, Integer idEstatus, String nombreEstatus, Integer idConductor, String nombreConductor, List<Paquete> paquetes, String claveEstado, String claveCiudad, String destinatario, String destinatarioTelefono, String comentario) {
         this.idEnvio = idEnvio;
         this.numeroGuia = numeroGuia;
         this.costo = costo;
@@ -52,6 +53,7 @@ public class Envio {
         this.idSucursalOrigen = idSucursalOrigen;
         this.idEstatus = idEstatus;
         this.nombreEstatus = nombreEstatus;
+        this.comentario = comentario;
         this.idConductor = idConductor;
         this.nombreConductor = nombreConductor;
         this.paquetes = paquetes;
@@ -243,6 +245,14 @@ public class Envio {
 
     public void setDestinatarioTelefono(String destinatarioTelefono) {
         this.destinatarioTelefono = destinatarioTelefono;
+    }
+
+    public String getComentario() {
+        return comentario;
+    }
+
+    public void setComentario(String comentario) {
+        this.comentario = comentario;
     }
 
     @Override
