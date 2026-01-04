@@ -49,12 +49,103 @@
                                                 <Font name="System Bold" size="22.0" />
                                             </font>
                                         </Label>
-                                        <HBox prefHeight="11.0" prefWidth="1000.0" styleClass="hb_crud_menu">
+                                        <HBox fx:id="hbMenuCliente" prefHeight="11.0" prefWidth="1000.0" styleClass="hb_crud_menu">
                                             <children>
-                                                <Button mnemonicParsing="false" text="Seleccionar cliente" />
-                                                <Button mnemonicParsing="false" text="Crear nuevo cliente" />
+                                                <Button mnemonicParsing="false" onAction="#clickSeleccionarCliente" text="Seleccionar cliente" />
+                                                <Button mnemonicParsing="false" onAction="#clickCrearNuevoCliente" text="Crear nuevo cliente" />
                                             </children>
                                         </HBox>
+                              <AnchorPane fx:id="apDatosCliente" managed="false" visible="false">
+                                 <children>
+                                    <HBox layoutY="-1.0" prefHeight="11.0" prefWidth="1000.0" styleClass="hb_crud_menu">
+                                       <children>
+                                          <Button mnemonicParsing="false" onAction="#clickQuitarCliente" text="Quitar cliente" />
+                                          <Button mnemonicParsing="false" onAction="#clickEditarCliente" text="Editar datos del cliente" />
+                                          <Button mnemonicParsing="false" onAction="#clickCambiarCliente" text="Cambiar cliente" />
+                                       </children>
+                                    </HBox>
+                                    <Label layoutY="36.0" text="Nombre:">
+                                       <font>
+                                          <Font name="System Bold" size="17.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="lbClienteNombre" layoutX="76.0" layoutY="36.0" text="nombre apPaterno apMaterno">
+                                       <font>
+                                          <Font size="17.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutY="62.0" text="Telefono: ">
+                                       <font>
+                                          <Font name="System Bold" size="17.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="lbClienteTelefono" layoutX="81.0" layoutY="62.0" maxHeight="26.0" maxWidth="219.0" prefHeight="26.0" prefWidth="219.0" text="+52 22-00-00-00-00">
+                                       <font>
+                                          <Font size="17.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="310.0" layoutY="62.0" text="Correo:">
+                                       <font>
+                                          <Font name="System Bold" size="17.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="lbClienteCorreo" layoutX="375.0" layoutY="62.0" prefHeight="26.0" prefWidth="210.0" text="ejemplo@midominio.com">
+                                       <font>
+                                          <Font size="17.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutY="87.0" text="Direccion:">
+                                       <font>
+                                          <Font name="System Bold" size="17.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="lbClienteDireccion" layoutX="92.0" layoutY="87.0" maxHeight="26.0" maxWidth="211.0" prefHeight="26.0" prefWidth="211.0" text="Av. Sin nombre #4">
+                                       <font>
+                                          <Font size="17.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="591.0" layoutY="87.0" text="Codigo Postal:">
+                                       <font>
+                                          <Font name="System Bold" size="17.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="lbClienteCodigoPostal" layoutX="716.0" layoutY="87.0" maxHeight="26.0" maxWidth="53.0" prefHeight="26.0" prefWidth="53.0" text="91158">
+                                       <font>
+                                          <Font size="17.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="308.0" layoutY="87.0" text="Colonia:">
+                                       <font>
+                                          <Font name="System Bold" size="17.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="lbClienteColonia" layoutX="381.0" layoutY="87.0" maxHeight="26.0" maxWidth="191.0" prefHeight="26.0" prefWidth="191.0" text="Colonia Carolino">
+                                       <font>
+                                          <Font size="17.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="1.0" layoutY="113.0" text="Ciudad:">
+                                       <font>
+                                          <Font name="System Bold" size="17.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="lbClienteCiudad" layoutX="71.0" layoutY="113.0" maxHeight="26.0" maxWidth="211.0" prefHeight="26.0" prefWidth="211.0" text="Ciudad">
+                                       <font>
+                                          <Font size="17.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="307.0" layoutY="113.0" text="Estado:">
+                                       <font>
+                                          <Font name="System Bold" size="17.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="lbClienteEstado" layoutX="369.0" layoutY="113.0" maxHeight="26.0" maxWidth="191.0" prefHeight="26.0" prefWidth="191.0" text="Estado">
+                                       <font>
+                                          <Font size="17.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
                                     </children>
                                     <styleClass>
                                         <String fx:value="tarjeta_formulario" />
@@ -111,7 +202,7 @@
                                         </Label>
                                         <HBox prefHeight="43.0" prefWidth="408.0" styleClass="hb_crud_menu">
                                             <children>
-                                                <Button mnemonicParsing="false" onAction="#clickIrRegistrar" prefHeight="40.0" prefWidth="120.0">
+                                                <Button mnemonicParsing="false" onAction="#clickIrRegistrarPaquete" prefHeight="40.0" prefWidth="120.0">
                                                     <graphic>
                                                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                                                             <children>
@@ -133,7 +224,7 @@
                                                         <String fx:value="btn_agregar" />
                                                     </styleClass>
                                                 </Button>
-                                                <Button mnemonicParsing="false" onAction="#clickIrEditar" prefHeight="40.0" prefWidth="120.0">
+                                                <Button mnemonicParsing="false" onAction="#clickIrEditarPaquete" prefHeight="40.0" prefWidth="120.0">
                                                     <graphic>
                                                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                                                             <children>
@@ -155,7 +246,7 @@
                                                         <String fx:value="btn_editar" />
                                                     </styleClass>
                                                 </Button>
-                                                <Button mnemonicParsing="false" onAction="#clickEliminar" prefHeight="40.0" prefWidth="120.0">
+                                                <Button mnemonicParsing="false" onAction="#clickEliminarPaquete" prefHeight="40.0" prefWidth="120.0">
                                                     <graphic>
                                                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                                                             <children>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="450.0" prefWidth="661.0" stylesheets="@/estilos/CSSModal.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="packetworldescritorio.FXMLModalSeleccionarClienteController">
+   <children>
+      <HBox layoutX="31.0" layoutY="405.0" prefWidth="344.0" styleClass="hb_crud_menu">
+         <children>
+            <Button mnemonicParsing="false" onAction="#clickGuardar" prefHeight="31.0" prefWidth="150.0" text="Seleccionar" textFill="WHITE">
+               <styleClass>
+                  <String fx:value="btn_general" />
+                  <String fx:value="btn_aceptar" />
+               </styleClass>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#clickCancelar" prefHeight="31.0" prefWidth="150.0" text="Cancelar" textFill="WHITE">
+               <styleClass>
+                  <String fx:value="btn_general" />
+                  <String fx:value="btn_cancelar" />
+               </styleClass>
+            </Button>
+         </children>
+      </HBox>
+      <TextField fx:id="tfBusqueda" layoutX="29.0" layoutY="98.0" prefHeight="43.0" prefWidth="372.0" promptText="Buscar cliente">
+         <styleClass>
+            <String fx:value="input_general" />
+            <String fx:value="input_busqueda" />
+         </styleClass>
+      </TextField>
+      <Button fx:id="btnBusqueda" layoutX="343.0" layoutY="98.0" mnemonicParsing="false" onAction="#clickBuscar" prefHeight="44.0" prefWidth="59.0">
+         <graphic>
+            <ImageView fitHeight="28.0" fitWidth="29.0" opacity="0.58" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@/images/lupa.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <styleClass>
+            <String fx:value="btn_general" />
+            <String fx:value="btn_buscar" />
+         </styleClass>
+      </Button>
+      <Label layoutX="31.0" layoutY="69.0" prefHeight="21.0" prefWidth="541.0" text="Busca un cliente por nombre, telefono o correo" />
+      <Label layoutX="31.0" layoutY="18.0" prefHeight="51.0" prefWidth="440.0" text="Seleccionar cliente">
+         <font>
+            <Font name="System Bold" size="35.0" />
+         </font>
+      </Label>
+      <TableView fx:id="tvClientes" layoutX="29.0" layoutY="154.0" prefHeight="234.0" prefWidth="609.0">
+         <columns>
+            <TableColumn fx:id="colNombre" minWidth="0.0" prefWidth="111.0" text="Nombre" />
+            <TableColumn fx:id="colApPaterno" prefWidth="128.0" text="Apellido paterno" />
+            <TableColumn fx:id="colApMaterno" prefWidth="149.0" text="Apellido Materno" />
+            <TableColumn fx:id="colTelefono" prefWidth="113.0" text="Telefono" />
+            <TableColumn fx:id="colCorreo" prefWidth="107.0" text="Correo" />
+         </columns>
+         <placeholder>
+            <Label style="-fx-text-fill: #333333; -fx-font-size: 16px;" text="No se encontro ningún cliente" />
+         </placeholder>
+      </TableView>
+   </children>
+</AnchorPane>

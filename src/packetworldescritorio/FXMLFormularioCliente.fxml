@@ -11,7 +11,7 @@
 
 <AnchorPane id="AnchorPane" minWidth="1000.0" prefHeight="627.0" stylesheets="@/estilos/CSSAplicacion.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="packetworldescritorio.FXMLFormularioClienteController">
    <children>
-      <Button layoutX="34.0" layoutY="24.0" mnemonicParsing="false" onAction="#clickRegresar" prefHeight="40.0" prefWidth="139.0" styleClass="btn_regresar">
+      <Button fx:id="btnRegresar" layoutX="34.0" layoutY="24.0" mnemonicParsing="false" onAction="#clickRegresar" prefHeight="40.0" prefWidth="139.0" styleClass="btn_regresar">
          <graphic>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>

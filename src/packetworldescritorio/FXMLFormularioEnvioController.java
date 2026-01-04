@@ -3,26 +3,41 @@ package packetworldescritorio;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+import packetworldescritorio.dominio.ClienteImp;
+import packetworldescritorio.dominio.EnvioImp;
+import packetworldescritorio.dto.Respuesta;
 import packetworldescritorio.interfaz.INavegableChild;
 import packetworldescritorio.interfaz.INavegacion;
+import packetworldescritorio.pojo.Cliente;
 import packetworldescritorio.pojo.Envio;
 import packetworldescritorio.pojo.Sucursal;
 import packetworldescritorio.utilidad.Constantes;
+import packetworldescritorio.utilidad.UIUtilidad;
+import packetworldescritorio.utilidad.Utilidades;
 
 public class FXMLFormularioEnvioController implements Initializable, INavegableChild {
 
     private INavegacion nav;
     private Envio envioEdicion;
+    private Cliente clienteSeleccionado;
     private FXMLFormularioDireccionController formularioDireccionController;
 
     @FXML
@@ -57,9 +72,30 @@ public class FXMLFormularioEnvioController implements Initializable, INavegableC
     private TableColumn<?, ?> colAncho;
     @FXML
     private TableColumn<?, ?> colProfundidad;
+    @FXML
+    private AnchorPane apDatosCliente;
+    @FXML
+    private Label lbClienteNombre;
+    @FXML
+    private Label lbClienteTelefono;
+    @FXML
+    private Label lbClienteCorreo;
+    @FXML
+    private Label lbClienteDireccion;
+    @FXML
+    private Label lbClienteCodigoPostal;
+    @FXML
+    private Label lbClienteColonia;
+    @FXML
+    private Label lbClienteCiudad;
+    @FXML
+    private Label lbClienteEstado;
+    @FXML
+    private HBox hbMenuCliente;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        configurarSeccionCliente();
         configurarSeccionPaquetes();
     }
 
@@ -71,6 +107,57 @@ public class FXMLFormularioEnvioController implements Initializable, INavegableC
     @FXML
     private void clickRegresar(ActionEvent event) {
         regresar();
+    }
+
+    @FXML
+    private void clickIrRegistrarPaquete(ActionEvent event) {
+    }
+
+    @FXML
+    private void clickIrEditarPaquete(ActionEvent event) {
+    }
+
+    @FXML
+    private void clickEliminarPaquete(ActionEvent event) {
+    }
+
+    @FXML
+    private void clickGuardar(ActionEvent event) {
+        registrarEnvio();
+    }
+
+    @FXML
+    private void clickCancelar(ActionEvent event) {
+    }
+
+    @FXML
+    private void clickSeleccionarCliente(ActionEvent event) {
+        asignarCliente();
+    }
+
+    @FXML
+    private void clickCrearNuevoCliente(ActionEvent event) {
+        irFormularioClienteModal(null);
+    }
+
+    @FXML
+    private void clickQuitarCliente(ActionEvent event) {
+            clienteSeleccionado = null;
+            borrarDatosCliente();
+            ocultarDatosCliente();
+    }
+
+    @FXML
+    private void clickEditarCliente(ActionEvent event) {
+        if (clienteSeleccionado != null) {
+            irFormularioClienteModal(clienteSeleccionado);
+        }
+    }
+
+    @FXML
+    private void clickCambiarCliente(ActionEvent event) {
+        asignarCliente();
+
     }
 
     private void regresar() {
@@ -85,28 +172,12 @@ public class FXMLFormularioEnvioController implements Initializable, INavegableC
         }
     }
 
-    @FXML
-    private void clickIrRegistrar(ActionEvent event) {
-    }
-
-    @FXML
-    private void clickIrEditar(ActionEvent event) {
-    }
-
-    @FXML
-    private void clickEliminar(ActionEvent event) {
-    }
-
-    @FXML
-    private void clickGuardar(ActionEvent event) {
-    }
-
-    @FXML
-    private void clickCancelar(ActionEvent event) {
-    }
-    
-    private void configurarSeccionPaquetes(){
+    private void configurarSeccionPaquetes() {
         agregarFormularioDireccion();
+    }
+
+    private void configurarSeccionCliente() {
+
     }
 
     private void agregarFormularioDireccion() {
@@ -124,4 +195,234 @@ public class FXMLFormularioEnvioController implements Initializable, INavegableC
         }
     }
 
+    private boolean verificarCampos() {
+        boolean camposCorrectos = true;
+
+        if (verificarNombre() == false) {
+            camposCorrectos = false;
+        }
+        if (verificarApellidoPaterno() == false) {
+            camposCorrectos = false;
+        }
+        if (verificarTelefono() == false) {
+            camposCorrectos = false;
+        }
+        if (formularioDireccionController.verificarCampos() == false) {
+            camposCorrectos = false;
+        }
+
+        return camposCorrectos;
+    }
+
+    private boolean verificarNombre() {
+
+        if (UIUtilidad.esInputVacio(tfNombre, lbErrorNombre) == true) {
+            return false;
+        }
+
+        UIUtilidad.limpiarError(tfNombre, lbErrorNombre);
+
+        return true;
+    }
+
+    private boolean verificarApellidoPaterno() {
+
+        if (UIUtilidad.esInputVacio(tfApPaterno, lbErrorApPaterno) == true) {
+            return false;
+        }
+
+        UIUtilidad.limpiarError(tfApPaterno, lbErrorApPaterno);
+
+        return true;
+    }
+
+    private boolean verificarTelefono() {
+        if (UIUtilidad.esInputVacio(tfTelefono, lbErrorTelefono) == true) {
+            return false;
+        }
+
+        if (tfTelefono.getText().trim().matches("^[0-9+\\- ]{1,20}$") == false) {
+            UIUtilidad.marcarError(tfTelefono, lbErrorTelefono, "Formato de teléfono no válido");
+            return false;
+        }
+
+        UIUtilidad.limpiarError(tfTelefono, lbErrorTelefono);
+
+        return true;
+    }
+
+    private void registrarEnvio() {
+        boolean camposCorrectos = verificarCampos();
+
+        if (camposCorrectos == true) {
+
+            Envio envio = new Envio();
+            envio.setDestinatarioNombre(tfNombre.getText());
+            envio.setDestinatarioApellidoP(tfApPaterno.getText());
+            envio.setDestinatarioApellidoM(tfApMaterno.getText());
+            envio.setDestinatarioTelefono(tfTelefono.getText());
+            envio.setCalle(formularioDireccionController.getCalle());
+            envio.setColonia(formularioDireccionController.getColonia());
+            envio.setCodigoPostal(formularioDireccionController.getCodigoPostal());
+            envio.setEstado(formularioDireccionController.getEstado().getNombre());
+            envio.setCiudad(formularioDireccionController.getCiudad().getNombre());
+            envio.setClaveEstado(formularioDireccionController.getEstado().getClaveEstado());
+            envio.setClaveCiudad(formularioDireccionController.getCiudad().getClaveMunicipio());
+            envio.setNumero(formularioDireccionController.getNumero());
+
+            boolean exito = registrarDatosDeEnvio(envio);
+
+            if (!exito) {
+                return;
+            }
+
+        }
+
+    }
+
+    private boolean registrarDatosDeEnvio(Envio envio) {
+        Respuesta respuesta = EnvioImp.registrar(envio);
+        if (!respuesta.isError()) {
+            return true;
+        } else {
+            Utilidades.mostrarAlertaSimple("Ocurrio un error", respuesta.getMensaje(), Alert.AlertType.ERROR);
+            return false;
+        }
+    }
+
+    private void asignarCliente() {
+        try {
+            FXMLLoader cargador = new FXMLLoader(getClass().getResource(Constantes.MODAL_SELECCIONAR_CLIENTE));
+            Parent vista = cargador.load();
+            FXMLModalSeleccionarClienteController controlador = cargador.getController();
+            Stage context = (Stage) lbTitulo.getScene().getWindow();
+            Scene escenaPrincipal = new Scene(vista);
+
+            Stage stModal = new Stage();
+            stModal.setScene(escenaPrincipal);
+            stModal.setWidth(700);
+            stModal.setHeight(500);
+            stModal.setResizable(false);
+            stModal.setTitle("Asignar cliente");
+            stModal.initOwner(context);
+            stModal.initModality(Modality.WINDOW_MODAL);
+            stModal.initStyle(StageStyle.UTILITY);
+
+            stModal.showAndWait();
+
+            clienteSeleccionado = controlador.getClienteSeleccionado();
+
+            if (clienteSeleccionado != null) {
+                borrarDatosCliente();
+                cargarDatosCliente(clienteSeleccionado);
+                mostrarDatosCliente();
+            }
+
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            Utilidades.mostrarAlertaSimple("Error", "Ocurrio un error al cargar la ventana de buscar cliente", Alert.AlertType.ERROR);
+        }
+
+    }
+
+    private void mostrarDatosCliente() {
+        apDatosCliente.setManaged(true);
+        apDatosCliente.setVisible(true);
+        hbMenuCliente.setManaged(false);
+        hbMenuCliente.setVisible(false);
+    }
+
+    private void ocultarDatosCliente() {
+        apDatosCliente.setVisible(false);
+        apDatosCliente.setManaged(false);
+        hbMenuCliente.setManaged(true);
+        hbMenuCliente.setVisible(true);
+    }
+
+    private void cargarDatosCliente(Cliente cliente) {
+        if (cliente != null) {
+            lbClienteNombre.setText(cliente.getNombreCompleto());
+            lbClienteTelefono.setText(cliente.getTelefono());
+            lbClienteCorreo.setText(cliente.getCorreo());
+            lbClienteDireccion.setText(cliente.getCalle() + " " + cliente.getNumero());
+            lbClienteColonia.setText(cliente.getColonia());
+            lbClienteCodigoPostal.setText(cliente.getCodigoPostal());
+            lbClienteCiudad.setText(cliente.getCiudad());
+            lbClienteEstado.setText(cliente.getEstado());
+        }
+    }
+
+    private void borrarDatosCliente() {
+        lbClienteNombre.setText("");
+        lbClienteTelefono.setText("");
+        lbClienteCorreo.setText("");
+        lbClienteDireccion.setText("");
+        lbClienteColonia.setText("");
+        lbClienteCodigoPostal.setText("");
+        lbClienteCiudad.setText("");
+        lbClienteEstado.setText("");
+    }
+
+    private void irFormularioClienteModal(Cliente cliente) {
+        try {
+            FXMLLoader cargador = new FXMLLoader(getClass().getResource(Constantes.PG_FORMULARIO_CLIENTES));
+            Parent vista = cargador.load();
+            FXMLFormularioClienteController controlador = cargador.getController();
+
+            if (cliente != null) {
+                controlador.setObject(cliente);
+            }
+
+            controlador.setTipoModal();
+            Stage context = (Stage) lbTitulo.getScene().getWindow();
+            Scene escenaPrincipal = new Scene(vista);
+
+            Stage stModal = new Stage();
+            stModal.setScene(escenaPrincipal);
+            stModal.setWidth(1000);
+            stModal.setHeight(657);
+            stModal.setResizable(false);
+            stModal.setTitle(cliente != null ? "Editar Cliente" : "Registrar cliente");
+            stModal.initOwner(context);
+            stModal.initModality(Modality.WINDOW_MODAL);
+            stModal.initStyle(StageStyle.UTILITY);
+
+            stModal.showAndWait();
+
+            boolean error = controlador.isError();
+
+            if (error == false) {
+                Cliente temp = controlador.getClienteSeleccionModal();
+                if (temp != null) {
+                    borrarDatosCliente();
+                    recargarDatosCliente(temp);
+                    System.out.println("Cliente seleccionado nuevo: " + cliente);
+                    cargarDatosCliente(clienteSeleccionado);
+                    mostrarDatosCliente();
+                }
+            }
+
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            Utilidades.mostrarAlertaSimple("Error", "Ocurrio un error al cargar la ventana de buscar cliente", Alert.AlertType.ERROR);
+        }
+
+    }
+
+    private void recargarDatosCliente(Cliente cliente) {
+        if (cliente == null) {
+            clienteSeleccionado = null;
+            return;
+        }
+        System.out.println("Nuevos datos " + cliente);
+        try {
+            if (cliente.getIdCliente() > 0) {
+                clienteSeleccionado = ClienteImp.obtenerCliente(cliente.getIdCliente());
+            } else {
+                clienteSeleccionado = ClienteImp.obtenerClientePorCorreo(cliente.getCorreo());
+            }
+        } catch (Exception ex) {
+            clienteSeleccionado = null;
+        }
+    }
 }

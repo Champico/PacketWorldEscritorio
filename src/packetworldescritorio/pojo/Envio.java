@@ -14,6 +14,7 @@ public class Envio {
     private String destinatarioNombre;
     private String destinatarioApellidoP;
     private String destinatarioApellidoM;
+    private String destinatarioTelefono;
     private String calle;
     private String numero;
     private String colonia;
@@ -34,7 +35,7 @@ public class Envio {
     public Envio() {
     }
 
-    public Envio(Integer idEnvio, String numeroGuia, Float costo, String destinatarioNombre, String destinatarioApellidoP, String destinatarioApellidoM, String calle, String numero, String colonia, String codigoPostal, String ciudad, String estado, Integer idCliente, Integer idSucursalOrigen, Integer idEstatus, String nombreEstatus, Integer idConductor, String nombreConductor, List<Paquete> paquetes, String claveEstado, String claveCiudad, String destinatario) {
+    public Envio(Integer idEnvio, String numeroGuia, Float costo, String destinatarioNombre, String destinatarioApellidoP, String destinatarioApellidoM, String calle, String numero, String colonia, String codigoPostal, String ciudad, String estado, Integer idCliente, Integer idSucursalOrigen, Integer idEstatus, String nombreEstatus, Integer idConductor, String nombreConductor, List<Paquete> paquetes, String claveEstado, String claveCiudad, String destinatario, String destinatarioTelefono) {
         this.idEnvio = idEnvio;
         this.numeroGuia = numeroGuia;
         this.costo = costo;
@@ -57,6 +58,7 @@ public class Envio {
         this.claveEstado = claveEstado;
         this.claveCiudad = claveCiudad;
         this.destinatario = destinatario;
+        this.destinatarioTelefono = destinatarioTelefono;
     }
 
     public Integer getIdEnvio() {
@@ -226,7 +228,7 @@ public class Envio {
     public void setClaveCiudad(String claveCiudad) {
         this.claveCiudad = claveCiudad;
     }
-        
+
     public void setDestinatario(String destinatario) {
         this.destinatario = destinatario;
     }
@@ -235,10 +237,17 @@ public class Envio {
         return destinatario;
     }
 
+    public String getDestinatarioTelefono() {
+        return destinatarioTelefono;
+    }
+
+    public void setDestinatarioTelefono(String destinatarioTelefono) {
+        this.destinatarioTelefono = destinatarioTelefono;
+    }
+
     @Override
     public String toString() {
         return "Envio{" + "idEnvio=" + idEnvio + ", numeroGuia=" + numeroGuia + ", costo=" + costo + ", destinatarioNombre=" + destinatarioNombre + ", destinatarioApellidoP=" + destinatarioApellidoP + ", destinatarioApellidoM=" + destinatarioApellidoM + ", calle=" + calle + ", numero=" + numero + ", colonia=" + colonia + ", codigoPostal=" + codigoPostal + ", ciudad=" + ciudad + ", estado=" + estado + ", idCliente=" + idCliente + ", idSucursalOrigen=" + idSucursalOrigen + ", idEstatus=" + idEstatus + ", nombreEstatus=" + nombreEstatus + '}';
     }
-    
-    
+
 }

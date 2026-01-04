@@ -9,6 +9,8 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import packetworldescritorio.conexion.ConexionAPI;
+import packetworldescritorio.dto.Respuesta;
+import packetworldescritorio.pojo.Colaborador;
 import packetworldescritorio.pojo.Envio;
 import packetworldescritorio.pojo.RespuestaHTTP;
 import packetworldescritorio.utilidad.Constantes;
@@ -69,4 +71,67 @@ public class EnvioImp {
         }
         return respuesta;
     }
+    
+    
+    
+    
+    public static Respuesta registrar(Envio envio) {
+        Respuesta respuesta = new Respuesta();
+        String URL = Constantes.URL_WS + Constantes.WS_ENVIO_REGISTRAR;
+        Gson gson = new Gson();
+        String parametrosJSON = gson.toJson(envio);
+
+        RespuestaHTTP respuestaAPI = ConexionAPI.peticionBody(URL, Constantes.PETICION_POST, parametrosJSON, Constantes.CT_APPLICATION_JSON);
+
+        if (respuestaAPI.getCodigo() == HttpURLConnection.HTTP_OK) {
+            respuesta = gson.fromJson(respuestaAPI.getContenido(), Respuesta.class);
+        } else {
+            respuesta.setError(true);
+            switch (respuestaAPI.getCodigo()) {
+                case Constantes.ERROR_MALFORMED_URL:
+                    respuesta.setMensaje(Constantes.MSJ_ERROR_PETICION);
+                    break;
+                case Constantes.ERROR_PETICION:
+                    respuesta.setMensaje(Constantes.MSJ_ERROR_PETICION);
+                    break;
+                case Constantes.ERROR_BAD_REQUEST:
+                    respuesta.setMensaje("Campos en formato incorrecto, por favor verifica la información enviada");
+                    break;
+                default:
+                    respuesta.setMensaje("Lo sentimos hay problemas para registrar la informacíon en este momento, porfavor intentelo más tarde");
+            }
+        }
+
+        return respuesta;
+    }
+
+    public static Respuesta editar(Envio envio) {
+        Respuesta respuesta = new Respuesta();
+        String URL = Constantes.URL_WS + Constantes.WS_ENVIO_EDITAR;
+        Gson gson = new Gson();
+        String parametrosJSON = gson.toJson(envio);
+        RespuestaHTTP respuestaAPI = ConexionAPI.peticionBody(URL, "PUT", parametrosJSON, Constantes.CT_APPLICATION_JSON);
+        if (respuestaAPI.getCodigo() == HttpURLConnection.HTTP_OK) {
+            respuesta = gson.fromJson(respuestaAPI.getContenido(), Respuesta.class);
+        } else {
+            respuesta.setError(true);
+            switch (respuestaAPI.getCodigo()) {
+                case Constantes.ERROR_MALFORMED_URL:
+                    respuesta.setMensaje(Constantes.MSJ_ERROR_PETICION);
+                    break;
+                case Constantes.ERROR_PETICION:
+                    respuesta.setMensaje(Constantes.MSJ_ERROR_PETICION);
+                    break;
+                case Constantes.ERROR_BAD_REQUEST:
+                    respuesta.setMensaje("Campos en formato incorrecto, por favor verifica la información enviada");
+                    break;
+                default:
+                    respuesta.setMensaje("Lo sentimos hay problemas para editar la informacíon en este momento, porfavor intentelo más tarde");
+            }
+        }
+
+        return respuesta;
+    }
+
+    
 }

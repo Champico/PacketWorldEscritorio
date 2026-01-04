@@ -43,9 +43,7 @@ public class ClienteImp {
         }
         return respuesta;
     }
-    
-    
-    
+
     public static Respuesta registrar(Cliente cliente) {
         Respuesta respuesta = new Respuesta();
         String URL = Constantes.URL_WS + Constantes.WS_CLIENTE_REGISTRAR;
@@ -76,7 +74,6 @@ public class ClienteImp {
         return respuesta;
     }
 
-    
     public static Respuesta editar(Cliente cliente) {
         Respuesta respuesta = new Respuesta();
         String URL = Constantes.URL_WS + Constantes.WS_CLIENTE_EDITAR;
@@ -104,10 +101,10 @@ public class ClienteImp {
 
         return respuesta;
     }
-    
+
     public static Respuesta eliminar(int idCliente) {
         Respuesta respuesta = new Respuesta();
-        String URL = Constantes.URL_WS + Constantes.WS_CLIENTE_ELIMINAR+ "/" + idCliente;
+        String URL = Constantes.URL_WS + Constantes.WS_CLIENTE_ELIMINAR + "/" + idCliente;
 
         RespuestaHTTP respuestaAPI = ConexionAPI.peticionSinBody(URL, Constantes.PETICION_DELETE);
 
@@ -133,5 +130,65 @@ public class ClienteImp {
 
         return respuesta;
     }
-   
+
+    public static HashMap<String, Object> buscar(String filtro) {
+        HashMap<String, Object> respuesta = new LinkedHashMap<>();
+        String URL = Constantes.URL_WS + Constantes.WS_CLIENTE_BUSCAR + "/" + filtro;
+        System.out.println(URL);
+        RespuestaHTTP respuestaAPI = ConexionAPI.peticionGET(URL);
+        System.out.println(respuestaAPI.getCodigo());
+        if (respuestaAPI.getCodigo() == HttpURLConnection.HTTP_OK) {
+            Gson gson = new Gson();
+            Type tipoLista = new TypeToken<List<Cliente>>() {
+            }.getType();
+            List<Cliente> clientes = gson.fromJson(respuestaAPI.getContenido(), tipoLista);
+            respuesta.put(Constantes.KEY_ERROR, false);
+            respuesta.put(Constantes.KEY_LISTA, clientes);
+        } else {
+            respuesta.put(Constantes.KEY_ERROR, true);
+            switch (respuestaAPI.getCodigo()) {
+                case Constantes.ERROR_MALFORMED_URL:
+                    respuesta.put("mensaje", Constantes.MSJ_ERROR_PETICION);
+                    break;
+                case Constantes.ERROR_PETICION:
+                    respuesta.put("mensaje", Constantes.MSJ_ERROR_PETICION);
+                    break;
+                default:
+                    respuesta.put("mensaje", "Lo sentimos hay problemas para obtener la informacíon en este momento, porfavor intentelo más tarde");
+            }
+        }
+        return respuesta;
+    }
+
+    public static Cliente obtenerCliente(int idCliente) {
+        Cliente cliente = new Cliente();
+        String URL = Constantes.URL_WS + Constantes.WS_CLIENTE_OBTENER + "/" + idCliente;
+
+        RespuestaHTTP respuestaAPI = ConexionAPI.peticionGET(URL);
+
+        if (respuestaAPI.getCodigo() == HttpURLConnection.HTTP_OK) {
+            Gson gson = new Gson();
+            cliente = gson.fromJson(respuestaAPI.getContenido(), Cliente.class);
+        } else {
+            cliente = null;
+        }
+
+        return cliente;
+    }
+
+    public static Cliente obtenerClientePorCorreo(String correo) {
+        Cliente cliente = new Cliente();
+        String URL = Constantes.URL_WS + Constantes.WS_CLIENTE_OBTENER_POR_CORREO + "/" + correo;
+
+        RespuestaHTTP respuestaAPI = ConexionAPI.peticionGET(URL);
+
+        if (respuestaAPI.getCodigo() == HttpURLConnection.HTTP_OK) {
+            Gson gson = new Gson();
+            cliente = gson.fromJson(respuestaAPI.getContenido(), Cliente.class);
+        } else {
+            cliente = null;
+        }
+
+        return cliente;
+    }
 }

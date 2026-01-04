@@ -155,4 +155,11 @@ public class Cliente {
                 + (apellidoPaterno != null ? apellidoPaterno + " " : "")
                 + (apellidoMaterno != null ? apellidoMaterno : "");
     }
+
+    @Override
+    public String toString() {
+        return "Cliente{" + "idCliente=" + idCliente + ", nombre=" + nombre + ", apellidoPaterno=" + apellidoPaterno + ", apellidoMaterno=" + apellidoMaterno + ", telefono=" + telefono + ", correo=" + correo + ", calle=" + calle + ", numero=" + numero + ", colonia=" + colonia + ", codigoPostal=" + codigoPostal + ", ciudad=" + ciudad + ", estado=" + estado + ", claveEstado=" + claveEstado + ", claveCiudad=" + claveCiudad + '}';
+    }
+    
+    
 }

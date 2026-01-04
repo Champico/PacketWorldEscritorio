@@ -1,6 +1,7 @@
 /** @authores  Pipe, Kevin, champ */
 package packetworldescritorio;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
@@ -11,7 +12,10 @@ import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
@@ -19,19 +23,21 @@ import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+import packetworldescritorio.dominio.ClienteImp;
 import packetworldescritorio.dominio.ColaboradorImp;
+import packetworldescritorio.pojo.Cliente;
 import packetworldescritorio.pojo.Colaborador;
 import packetworldescritorio.pojo.Unidad;
 import packetworldescritorio.utilidad.Constantes;
 import packetworldescritorio.utilidad.Utilidades;
 
-public class FXMLModalSeleccionarConductorController implements Initializable {
+public class FXMLModalSeleccionarClienteController implements Initializable {
 
     @FXML
-    private TableView<Colaborador> tvColaboradores;
-    @FXML
-    private TableColumn colNoPersonal;
+    private TableView<Cliente> tvClientes;
     @FXML
     private TableColumn colNombre;
     @FXML
@@ -39,27 +45,30 @@ public class FXMLModalSeleccionarConductorController implements Initializable {
     @FXML
     private TableColumn colApMaterno;
     @FXML
+    private TableColumn colTelefono;
+    @FXML
+    private TableColumn colCorreo;
+    @FXML
     private TextField tfBusqueda;
     @FXML
     private Button btnBusqueda;
 
-    private Colaborador colaboradorSeleccionado;
-
-    private ObservableList<Colaborador> colaboradores;
-    private FilteredList<Colaborador> filteredData;
-    private SortedList<Colaborador> sortedData;
+    private Cliente clienteSeleccionado;
+    private ObservableList<Cliente> clientes;
+    private FilteredList<Cliente> filteredData;
+    private SortedList<Cliente> sortedData;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         configurarTabla();
-        cargarInformaciónColaboradores();
-        configurarTextFieldBusqueda();
     }
 
     @FXML
     private void clickGuardar(ActionEvent event) {
-        colaboradorSeleccionado = tvColaboradores.getSelectionModel().getSelectedItem();
-        cerrar();
+        clienteSeleccionado = tvClientes.getSelectionModel().getSelectedItem();
+        if (clienteSeleccionado != null) {
+            cerrar();
+        }
     }
 
     @FXML
@@ -67,17 +76,25 @@ public class FXMLModalSeleccionarConductorController implements Initializable {
         cerrar();
     }
 
+    @FXML
+    private void clickBuscar(ActionEvent event) {
+        if (tfBusqueda.getText() != null && !tfBusqueda.getText().isEmpty()) {
+            cargarInformaciónClientes(tfBusqueda.getText());
+        }
+    }
+
     private void configurarTabla() {
-        colNoPersonal.setCellValueFactory(new PropertyValueFactory("noPersonal"));
         colNombre.setCellValueFactory(new PropertyValueFactory("nombre"));
         colApPaterno.setCellValueFactory(new PropertyValueFactory("apellidoPaterno"));
         colApMaterno.setCellValueFactory(new PropertyValueFactory("apellidoMaterno"));
+        colTelefono.setCellValueFactory(new PropertyValueFactory("telefono"));
+        colCorreo.setCellValueFactory(new PropertyValueFactory("correo"));
 
-        tvColaboradores.setRowFactory(tv -> {
-            TableRow<Colaborador> row = new TableRow<>();
+        tvClientes.setRowFactory(tv -> {
+            TableRow<Cliente> row = new TableRow<>();
             row.setOnMouseClicked(e -> {
                 if (e.getClickCount() == 2 && !row.isEmpty()) {
-                    colaboradorSeleccionado = row.getItem();
+                    clienteSeleccionado = row.getItem();
                     cerrar();
                 }
             });
@@ -85,18 +102,18 @@ public class FXMLModalSeleccionarConductorController implements Initializable {
         });
     }
 
-    private void cargarInformaciónColaboradores() {
-        HashMap<String, Object> respuesta = ColaboradorImp.obtenerConductores();
+    private void cargarInformaciónClientes(String filtro) {
+        HashMap<String, Object> respuesta = ClienteImp.buscar(filtro);
         boolean esError = (boolean) respuesta.get(Constantes.KEY_ERROR);
         if (!esError) {
-            List<Colaborador> colaboradoresAPI = (List<Colaborador>) respuesta.get(Constantes.KEY_LISTA);
-            colaboradores = FXCollections.observableArrayList();
-            colaboradores.addAll(colaboradoresAPI);
+            List<Cliente> clientesAPI = (List<Cliente>) respuesta.get(Constantes.KEY_LISTA);
+            clientes = FXCollections.observableArrayList();
+            clientes.addAll(clientesAPI);
 
-            filteredData = new FilteredList<>(colaboradores, c -> c.getIdUnidad() == null );
+            filteredData = new FilteredList<>(clientes, p -> true);
             sortedData = new SortedList<>(filteredData);
-            sortedData.comparatorProperty().bind(tvColaboradores.comparatorProperty());
-            tvColaboradores.setItems(sortedData);
+            sortedData.comparatorProperty().bind(tvClientes.comparatorProperty());
+            tvClientes.setItems(sortedData);
 
             /* Explicación
             ObservableList - Es la lista original con todos los elementos
@@ -110,46 +127,12 @@ public class FXMLModalSeleccionarConductorController implements Initializable {
     }
 
     public void cerrar() {
-        Stage stage = (Stage) tvColaboradores.getScene().getWindow();
+        Stage stage = (Stage) tvClientes.getScene().getWindow();
         stage.close();
     }
 
-    public Colaborador getColaboradorSeleccionado() {
-        return colaboradorSeleccionado;
-    }
-
-    
-    private void configurarTextFieldBusqueda() {
-        tfBusqueda.textProperty().addListener((obs, oldValue, newValue) -> {
-            if (newValue != null && !newValue.equals(oldValue)) {
-                aplicarFiltros();
-            }
-        });
-    }
-
-    private void aplicarFiltros() {
-        String textoDeBusqueda = tfBusqueda.getText();
-        filteredData.setPredicate(col -> {
-            col = (Colaborador) col;
-            boolean coincideTexto = true;
-
-            if (textoDeBusqueda != null && !textoDeBusqueda.isEmpty()) {
-                String filtro = textoDeBusqueda.toLowerCase();
-
-                String nombre = Utilidades.normalizar(col.getNombre());
-                String apellido = Utilidades.normalizar(col.getApellidoPaterno());
-                String noPersonal = String.valueOf(col.getNoPersonal()).toLowerCase();
-
-                coincideTexto = 
-                        nombre.contains(filtro)
-                        || apellido.contains(filtro)
-                        || noPersonal.contains(filtro);
-            }
-
-            return coincideTexto;
-
-        });
-
+    public Cliente getClienteSeleccionado() {
+        return clienteSeleccionado;
     }
 
 }

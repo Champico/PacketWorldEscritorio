@@ -9,10 +9,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import packetworldescritorio.dominio.ClienteImp;
 import packetworldescritorio.dominio.SucursalImp;
 import packetworldescritorio.dto.Respuesta;
@@ -28,6 +30,9 @@ public class FXMLFormularioClienteController implements Initializable, INavegabl
 
     private INavegacion nav;
     private Cliente clienteEdicion;
+    private Cliente clienteSeleccionadoVentanaModal = null;
+    private String tipoVentana;
+    private boolean isError = true;
 
     private FXMLFormularioDireccionController formularioDireccionController;
     @FXML
@@ -54,9 +59,12 @@ public class FXMLFormularioClienteController implements Initializable, INavegabl
     private Label lbErrorCorreo;
     @FXML
     private Label lbErrorTelefono;
+    @FXML
+    private Button btnRegresar;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        tipoVentana = Constantes.TIPO_VENTANA_PAGINA;
         agregarFormularioDireccion();
         configurarMaximoNumeroCaracteres();
     }
@@ -72,6 +80,11 @@ public class FXMLFormularioClienteController implements Initializable, INavegabl
             Cliente cliente = (Cliente) object;
             inicializarDatos(cliente);
         }
+    }
+
+    public void setTipoModal() {
+        this.tipoVentana = Constantes.TIPO_VENTANA_MODAL;
+        btnRegresar.setVisible(false);
     }
 
     @FXML
@@ -136,11 +149,13 @@ public class FXMLFormularioClienteController implements Initializable, INavegabl
             cliente.setClaveEstado(formularioDireccionController.getEstado().getClaveEstado());
             cliente.setClaveCiudad(formularioDireccionController.getCiudad().getClaveMunicipio());
             cliente.setNumero(formularioDireccionController.getNumero());
-
+            
             if (clienteEdicion == null) {
+                clienteSeleccionadoVentanaModal = cliente;
                 registrarCliente(cliente);
             } else {
                 cliente.setIdCliente(clienteEdicion.getIdCliente());
+                clienteSeleccionadoVentanaModal = cliente;
                 editarCliente(cliente);
             }
 
@@ -149,7 +164,11 @@ public class FXMLFormularioClienteController implements Initializable, INavegabl
 
     @FXML
     private void clickCancelar(ActionEvent event) {
-        regresar();
+        if (tipoVentana.equals(Constantes.TIPO_VENTANA_PAGINA)) {
+            regresar();
+        } else {
+            cerrar();
+        }
     }
 
     private boolean verificarCampos() {
@@ -165,7 +184,7 @@ public class FXMLFormularioClienteController implements Initializable, INavegabl
             camposCorrectos = false;
         }
         if (verificarTelefono() == false) {
-
+            camposCorrectos = false;
         }
         if (formularioDireccionController.verificarCampos() == false) {
             camposCorrectos = false;
@@ -230,8 +249,14 @@ public class FXMLFormularioClienteController implements Initializable, INavegabl
         Respuesta respuesta = ClienteImp.registrar(cliente);
         if (!respuesta.isError()) {
             Utilidades.mostrarAlertaSimple("Registrado correctamente", "El cliente ha sido registrado correctamente", Alert.AlertType.INFORMATION);
-            regresar();
+            isError = false;
+            if (tipoVentana.equals(Constantes.TIPO_VENTANA_PAGINA)) {
+                regresar();
+            } else {
+                cerrar();
+            }
         } else {
+            isError = true;
             Utilidades.mostrarAlertaSimple("Ocurrio un error", respuesta.getMensaje(), Alert.AlertType.ERROR);
         }
     }
@@ -240,21 +265,40 @@ public class FXMLFormularioClienteController implements Initializable, INavegabl
         Respuesta respuesta = ClienteImp.editar(cliente);
         if (!respuesta.isError()) {
             Utilidades.mostrarAlertaSimple("Editado correctamente", "El cliente ha sido editado correctamente", Alert.AlertType.INFORMATION);
-            regresar();
+            isError = false;
+            if (tipoVentana.equals(Constantes.TIPO_VENTANA_PAGINA)) {
+                regresar();
+            } else {
+                cerrar();
+            }
         } else {
+            isError = true;
             Utilidades.mostrarAlertaSimple("Ocurrio un error", respuesta.getMensaje(), Alert.AlertType.ERROR);
         }
     }
-    
-        private void configurarMaximoNumeroCaracteres() {
+
+    private void configurarMaximoNumeroCaracteres() {
         TextInputControl[] tf = {tfNombre, tfApPaterno, tfApMaterno, tfCorreo};
         int maxNumCaracteres = 254;
 
         for (int i = 0; i < tf.length; i++) {
             UIUtilidad.limitarCaracteres(tf[i], maxNumCaracteres);
         }
-        
+
         UIUtilidad.setPhoneNumberFormatter(tfTelefono);
     }
-        
+
+    public boolean isError() {
+        return isError;
+    }
+
+    private void cerrar() {
+        Stage stage = (Stage) lbTitulo.getScene().getWindow();
+        stage.close();
+    }
+    
+    public Cliente getClienteSeleccionModal(){
+        return clienteSeleccionadoVentanaModal;
+    }
+
 }

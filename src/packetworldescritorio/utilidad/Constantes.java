@@ -29,9 +29,12 @@ public class Constantes {
     public static final String WS_UNIDAD_EDITAR = "unidad/editar";
     public static final String WS_UNIDAD_DAR_DE_BAJA = "unidad/darBaja";
     public static final String WS_CLIENTE_OBTENER_TODOS = "cliente/obtener";
+    public static final String WS_CLIENTE_OBTENER = "cliente/obtener";
+    public static final String WS_CLIENTE_OBTENER_POR_CORREO = "cliente/obtenerPorCorreo";
     public static final String WS_CLIENTE_REGISTRAR = "cliente/registrar";
     public static final String WS_CLIENTE_EDITAR = "cliente/editar";
     public static final String WS_CLIENTE_ELIMINAR = "cliente/eliminar";
+    public static final String WS_CLIENTE_BUSCAR = "cliente/buscar";
     public static final String WS_ENVIO_OBTENER_TODOS = "envio/obtener";
     public static final String WS_ENVIO_REGISTRAR = "envio/registrar";
     public static final String WS_ENVIO_EDITAR = "envio/editar";
@@ -82,6 +85,7 @@ public class Constantes {
     public static final String COMP_FORMULARIO_DIRECCION = "FXMLFormularioDireccion.fxml";
     public static final String MODAL_ASIGNAR_CONDUCTOR = "FXMLModalAsignarConductor.fxml";
     public static final String MODAL_SELECCIONAR_CONDUCTOR = "FXMLModalSeleccionarConductor.fxml";
+    public static final String MODAL_SELECCIONAR_CLIENTE = "FXMLModalSeleccionarCliente.fxml";
 
     //Roles
     public static final String ROL_CONDUCTOR = "Conductor";
@@ -92,6 +96,10 @@ public class Constantes {
     public static final String UNIDAD_ESTATUS_ACTIVA = "activa";
     public static final String SUCURSAL_ESTATUS_INACTIVA = "inactiva";
     public static final String SUCURSAL_ESTATUS_ACTIVA = "activa";
+
+    //Tipos de ventana
+    public static final String TIPO_VENTANA_PAGINA = "pagina";
+    public static final String TIPO_VENTANA_MODAL = "modal";
 
     //Otros
     public static final int MAX_SIZE_MB_IMAGE = 2;
