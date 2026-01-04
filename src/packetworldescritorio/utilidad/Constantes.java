@@ -39,6 +39,7 @@ public class Constantes {
     public static final String WS_ENVIO_REGISTRAR = "envio/registrar";
     public static final String WS_ENVIO_EDITAR = "envio/editar";
     public static final String WS_ENVIO_ELIMINAR = "envio/eliminar";
+    public static final String WS_ENVIO_OBTENER_POR_ID = "envio/obtener";
     public static final String WS_PAQUETE_OBTENER_CARACTERISTICAS = "paquete/obtenerCaracteristicas";
 
     //Peticiones

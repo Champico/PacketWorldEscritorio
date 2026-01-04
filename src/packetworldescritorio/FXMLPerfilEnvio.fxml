@@ -1,0 +1,425 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="1500.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="packetworldescritorio.FXMLPerfilEnvioController">
+   <children>
+      <ScrollPane fitToWidth="true" hbarPolicy="NEVER" pannable="true" prefHeight="627.0" prefWidth="1280.0" vbarPolicy="AS_NEEDED" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <content>
+            <AnchorPane prefHeight="1222.0" prefWidth="1103.0">
+               <children>
+                  <Button layoutX="21.0" layoutY="14.0" mnemonicParsing="false" onAction="#clickRegresar" prefHeight="40.0" prefWidth="139.0" styleClass="btn_regresar">
+                     <graphic>
+                        <HBox prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <ImageView fitHeight="30.0" fitWidth="32.0" opacity="0.48" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@/images/flecha-izquierda.png" />
+                                 </image>
+                              </ImageView>
+                              <Label prefHeight="30.0" prefWidth="99.0" text=" Regresar" textFill="#4a4a4a">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                     </graphic>
+                  </Button>
+                  <VBox layoutX="38.0" layoutY="63.0" prefHeight="558.0" prefWidth="1000.0" styleClass="vb_formulario">
+                     <children>
+                        <Label fx:id="lbTitulo" prefHeight="51.0" prefWidth="440.0" text="Envío: guía">
+                           <font>
+                              <Font name="System Bold" size="35.0" />
+                           </font>
+                        </Label>
+                        <VBox prefHeight="47.0" prefWidth="1000.0">
+                           <children>
+                              <Label prefHeight="32.0" prefWidth="192.0" text="Datos del envío">
+                                 <font>
+                                    <Font name="System Bold" size="22.0" />
+                                 </font>
+                              </Label>
+                              <AnchorPane fx:id="apDatosCliente1" prefHeight="114.0" prefWidth="1000.0">
+                                 <children>
+                                    <Label text="Costo:">
+                                       <font>
+                                          <Font name="System Bold" size="17.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="lbCosto" layoutX="63.0" layoutY="1.0" text="\$50">
+                                       <font>
+                                          <Font size="17.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutY="26.0" text="Estatus actual:">
+                                       <font>
+                                          <Font name="System Bold" size="17.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="lbEstatusActual" layoutX="122.0" layoutY="26.0" maxHeight="26.0" maxWidth="219.0" prefHeight="26.0" prefWidth="219.0" text="estatus">
+                                       <font>
+                                          <Font size="17.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
+                              <HBox prefHeight="11.0" prefWidth="1000.0" styleClass="hb_crud_menu">
+                                 <children>
+                                    <Button mnemonicParsing="false" onAction="#clickImprimirComprobante" prefHeight="31.0" prefWidth="185.0" text="Imprimr comprobante" />
+                                 </children>
+                              </HBox>
+                           </children>
+                           <styleClass>
+                              <String fx:value="tarjeta_formulario" />
+                              <String fx:value="vb_tarjeta_formulario" />
+                           </styleClass>
+                        </VBox>
+                        <VBox prefHeight="47.0" prefWidth="1000.0">
+                           <children>
+                              <Label prefHeight="32.0" prefWidth="192.0" text="Datos del cliente">
+                                 <font>
+                                    <Font name="System Bold" size="22.0" />
+                                 </font>
+                              </Label>
+                              <AnchorPane fx:id="apDatosCliente" prefHeight="114.0" prefWidth="1000.0">
+                                 <children>
+                                    <Label text="Nombre:">
+                                       <font>
+                                          <Font name="System Bold" size="17.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="lbClienteNombre" layoutX="76.0" text="nombre apPaterno apMaterno">
+                                       <font>
+                                          <Font size="17.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutY="26.0" text="Telefono: ">
+                                       <font>
+                                          <Font name="System Bold" size="17.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="lbClienteTelefono" layoutX="81.0" layoutY="26.0" maxHeight="26.0" maxWidth="219.0" prefHeight="26.0" prefWidth="219.0" text="+52 22-00-00-00-00">
+                                       <font>
+                                          <Font size="17.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="310.0" layoutY="26.0" text="Correo:">
+                                       <font>
+                                          <Font name="System Bold" size="17.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="lbClienteCorreo" layoutX="375.0" layoutY="26.0" prefHeight="26.0" prefWidth="210.0" text="ejemplo@midominio.com">
+                                       <font>
+                                          <Font size="17.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutY="51.0" text="Direccion:">
+                                       <font>
+                                          <Font name="System Bold" size="17.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="lbClienteDireccion" layoutX="92.0" layoutY="51.0" maxHeight="26.0" maxWidth="211.0" prefHeight="26.0" prefWidth="211.0" text="Av. Sin nombre #4">
+                                       <font>
+                                          <Font size="17.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="591.0" layoutY="51.0" text="Codigo Postal:">
+                                       <font>
+                                          <Font name="System Bold" size="17.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="lbClienteCodigoPostal" layoutX="716.0" layoutY="51.0" maxHeight="26.0" maxWidth="53.0" prefHeight="26.0" prefWidth="53.0" text="91158">
+                                       <font>
+                                          <Font size="17.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="308.0" layoutY="51.0" text="Colonia:">
+                                       <font>
+                                          <Font name="System Bold" size="17.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="lbClienteColonia" layoutX="381.0" layoutY="51.0" maxHeight="26.0" maxWidth="191.0" prefHeight="26.0" prefWidth="191.0" text="Colonia Carolino">
+                                       <font>
+                                          <Font size="17.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="1.0" layoutY="77.0" text="Ciudad:">
+                                       <font>
+                                          <Font name="System Bold" size="17.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="lbClienteCiudad" layoutX="71.0" layoutY="77.0" maxHeight="26.0" maxWidth="211.0" prefHeight="26.0" prefWidth="211.0" text="Ciudad">
+                                       <font>
+                                          <Font size="17.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="307.0" layoutY="77.0" text="Estado:">
+                                       <font>
+                                          <Font name="System Bold" size="17.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="lbClienteEstado" layoutX="369.0" layoutY="77.0" maxHeight="26.0" maxWidth="191.0" prefHeight="26.0" prefWidth="191.0" text="Estado">
+                                       <font>
+                                          <Font size="17.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
+                              <HBox prefHeight="11.0" prefWidth="1000.0" styleClass="hb_crud_menu">
+                                 <children>
+                                    <Button mnemonicParsing="false" onAction="#clickEditarCliente" text="Editar datos del cliente" />
+                                    <Button mnemonicParsing="false" onAction="#clickCambiarCliente" text="Cambiar cliente" />
+                                 </children>
+                              </HBox>
+                           </children>
+                           <styleClass>
+                              <String fx:value="tarjeta_formulario" />
+                              <String fx:value="vb_tarjeta_formulario" />
+                           </styleClass>
+                        </VBox>
+                        <VBox prefHeight="200.0" prefWidth="100.0" styleClass="tarjeta_formulario">
+                           <children>
+                              <Label prefHeight="32.0" prefWidth="262.0" text="Datos del destinatario">
+                                 <font>
+                                    <Font name="System Bold" size="22.0" />
+                                 </font>
+                              </Label>
+                              <AnchorPane fx:id="apDatosDestinatario" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="115.0" prefWidth="846.0">
+                                 <children>
+                                    <Label text="Nombre:">
+                                       <font>
+                                          <Font name="System Bold" size="17.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="lbDestinatarioNombre" layoutX="76.0" text="nombre apPaterno apMaterno">
+                                       <font>
+                                          <Font size="17.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="430.0" text="Telefono: ">
+                                       <font>
+                                          <Font name="System Bold" size="17.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="lbDestinatarioTelefono" layoutX="511.0" maxHeight="26.0" maxWidth="219.0" prefHeight="26.0" prefWidth="219.0" text="+52 22-00-00-00-00">
+                                       <font>
+                                          <Font size="17.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutY="25.0" text="Direccion:">
+                                       <font>
+                                          <Font name="System Bold" size="17.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="lbDestinatarioDireccion" layoutX="92.0" layoutY="25.0" maxHeight="26.0" maxWidth="211.0" prefHeight="26.0" prefWidth="211.0" text="Av. Sin nombre #4">
+                                       <font>
+                                          <Font size="17.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="591.0" layoutY="24.0" text="Codigo Postal:">
+                                       <font>
+                                          <Font name="System Bold" size="17.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="lbDestinatarioCodigoPostal" layoutX="713.0" layoutY="24.0" maxHeight="26.0" maxWidth="53.0" prefHeight="26.0" prefWidth="53.0" text="91158">
+                                       <font>
+                                          <Font size="17.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="308.0" layoutY="25.0" text="Colonia:">
+                                       <font>
+                                          <Font name="System Bold" size="17.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="lbDestinatarioColonia" layoutX="381.0" layoutY="25.0" maxHeight="26.0" maxWidth="191.0" prefHeight="26.0" prefWidth="191.0" text="Colonia Carolino">
+                                       <font>
+                                          <Font size="17.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="1.0" layoutY="50.0" text="Ciudad:">
+                                       <font>
+                                          <Font name="System Bold" size="17.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="lbDestinatarioCiudad" layoutX="71.0" layoutY="50.0" maxHeight="26.0" maxWidth="211.0" prefHeight="26.0" prefWidth="211.0" text="Ciudad">
+                                       <font>
+                                          <Font size="17.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="307.0" layoutY="50.0" text="Estado:">
+                                       <font>
+                                          <Font name="System Bold" size="17.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="lbDestinatarioEstado" layoutX="369.0" layoutY="50.0" maxHeight="26.0" maxWidth="191.0" prefHeight="26.0" prefWidth="191.0" text="Estado">
+                                       <font>
+                                          <Font size="17.0" />
+                                       </font>
+                                    </Label>
+                                    <Button layoutY="76.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="107.0" text="Editar datos" />
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane fx:id="apFormularioDestinatario" managed="false" prefHeight="520.0" prefWidth="1232.0" visible="false">
+                                 <children>
+                                    <Label text="Nombre *">
+                                       <font>
+                                          <Font size="17.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="tfNombre" layoutY="26.0" prefHeight="40.0" prefWidth="233.0" promptText="Jose" styleClass="input_general" />
+                                    <Label layoutX="252.0" text="Apellido Paterno *">
+                                       <font>
+                                          <Font size="17.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="tfApPaterno" layoutX="251.0" layoutY="26.0" prefHeight="40.0" prefWidth="233.0" promptText="Garcia" styleClass="input_general" />
+                                    <TextField fx:id="tfApMaterno" layoutX="501.0" layoutY="26.0" prefHeight="40.0" prefWidth="233.0" promptText="Torres" styleClass="input_general" />
+                                    <Label layoutX="499.0" text="Apellido Materno">
+                                       <font>
+                                          <Font size="17.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="2.0" layoutY="273.0" text="Telefono*">
+                                       <font>
+                                          <Font size="17.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="tfTelefono" layoutY="299.0" prefHeight="40.0" prefWidth="233.0" promptText="5500000000" styleClass="input_general" />
+                                    <Label fx:id="lbErrorNombre" layoutY="66.0" text="Campo obligatorio" textFill="RED" visible="false" />
+                                    <HBox layoutY="349.0" prefWidth="344.0" styleClass="hb_crud_menu">
+                                       <children>
+                                          <Button mnemonicParsing="false" onAction="#clickGuardarDatosEnvio" prefHeight="31.0" prefWidth="150.0" text="Guardar" textFill="WHITE">
+                                             <styleClass>
+                                                <String fx:value="btn_general" />
+                                                <String fx:value="btn_aceptar" />
+                                             </styleClass>
+                                          </Button>
+                                          <Button mnemonicParsing="false" onAction="#clickCancelarDatosEnvio" prefHeight="31.0" prefWidth="150.0" text="Cancelar" textFill="WHITE">
+                                             <styleClass>
+                                                <String fx:value="btn_general" />
+                                                <String fx:value="btn_cancelar" />
+                                             </styleClass>
+                                          </Button>
+                                       </children>
+                                    </HBox>
+                                    <Label fx:id="lbErrorApPaterno" layoutX="251.0" layoutY="66.0" text="Campo obligatorio" textFill="RED" visible="false" />
+                                    <Label fx:id="lbErrorApMaterno" layoutX="502.0" layoutY="66.0" text="Campo obligatorio" textFill="RED" visible="false" />
+                                    <Label fx:id="lbErrorTelefono" layoutY="339.0" text="Campo obligatorio" textFill="RED" visible="false" />
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                        </VBox>
+                        <VBox prefHeight="47.0" prefWidth="1000.0">
+                           <children>
+                              <Label prefHeight="32.0" prefWidth="192.0" text="Paquetes">
+                                 <font>
+                                    <Font name="System Bold" size="22.0" />
+                                 </font>
+                              </Label>
+                              <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                 <children>
+                                    <TableView fx:id="tvPaquetes" prefHeight="200.0" prefWidth="679.0" styleClass="tabla-fondo-gris-oscuro" stylesheets="@/estilos/CSSTablaModerna.css">
+                                       <columns>
+                                          <TableColumn fx:id="colDescripcion" prefWidth="200.0" text="Descripción" />
+                                          <TableColumn fx:id="colPeso" minWidth="5.0" prefWidth="121.0" text=" Peso (Kg)" />
+                                          <TableColumn fx:id="colAlto" prefWidth="107.0" text="Alto (Cm)" />
+                                          <TableColumn fx:id="colAncho" minWidth="7.0" prefWidth="106.0" text="Ancho (Cm)" />
+                                          <TableColumn fx:id="colProfundidad" prefWidth="144.0" text="Profundidad (Cm)" />
+                                       </columns>
+                                       <placeholder>
+                                          <Label style="-fx-text-fill: #333333; -fx-font-size: 16px;" text="Haga click en Nuevo para agregar un paquete" />
+                                       </placeholder>
+                                    </TableView>
+                                 </children>
+                              </AnchorPane>
+                              <HBox prefHeight="43.0" prefWidth="408.0" styleClass="hb_crud_menu">
+                                 <children>
+                                    <Button mnemonicParsing="false" onAction="#clickIrRegistrarPaquete" prefHeight="40.0" prefWidth="120.0">
+                                       <graphic>
+                                          <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                                             <children>
+                                                <ImageView fitHeight="21.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@/images/+.png" />
+                                                   </image>
+                                                </ImageView>
+                                                <Label text=" Nuevo" textFill="WHITE">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </HBox>
+                                       </graphic>
+                                       <styleClass>
+                                          <String fx:value="btn_general" />
+                                          <String fx:value="btn_agregar" />
+                                       </styleClass>
+                                    </Button>
+                                    <Button mnemonicParsing="false" onAction="#clickIrEditarPaquete" prefHeight="40.0" prefWidth="120.0">
+                                       <graphic>
+                                          <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                                             <children>
+                                                <ImageView fitHeight="21.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@/images/lapiz.png" />
+                                                   </image>
+                                                </ImageView>
+                                                <Label text=" Editar" textFill="WHITE">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </HBox>
+                                       </graphic>
+                                       <styleClass>
+                                          <String fx:value="btn_general" />
+                                          <String fx:value="btn_editar" />
+                                       </styleClass>
+                                    </Button>
+                                    <Button mnemonicParsing="false" onAction="#clickEliminarPaquete" prefHeight="40.0" prefWidth="120.0">
+                                       <graphic>
+                                          <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                                             <children>
+                                                <ImageView fitHeight="21.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@/images/eliminar.png" />
+                                                   </image>
+                                                </ImageView>
+                                                <Label text=" Eliminar" textFill="WHITE">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </HBox>
+                                       </graphic>
+                                       <styleClass>
+                                          <String fx:value="btn_general" />
+                                          <String fx:value="btn_eliminar" />
+                                       </styleClass>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                           </children>
+                           <styleClass>
+                              <String fx:value="tarjeta_formulario" />
+                              <String fx:value="vb_tarjeta_formulario" />
+                           </styleClass>
+                        </VBox>
+                     </children>
+                  </VBox>
+               </children>
+            </AnchorPane>
+         </content>
+      </ScrollPane>
+   </children>
+</AnchorPane>

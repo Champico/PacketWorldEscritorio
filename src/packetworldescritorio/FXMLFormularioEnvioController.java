@@ -40,7 +40,6 @@ import packetworldescritorio.utilidad.Utilidades;
 public class FXMLFormularioEnvioController implements Initializable, INavegableChild {
 
     private INavegacion nav;
-    private Envio envioEdicion;
     private Cliente clienteSeleccionado;
     private FXMLFormularioDireccionController formularioDireccionController;
 
@@ -113,7 +112,10 @@ public class FXMLFormularioEnvioController implements Initializable, INavegableC
 
     @FXML
     private void clickRegresar(ActionEvent event) {
-        regresar();
+        Boolean confirmarOperacion = Utilidades.mostrarAlertaConfirmacion("Regresar", "¿Estas seguro de que quieres regresar, los datos no se guardaran?");
+        if (confirmarOperacion) {
+            regresar();
+        }
     }
 
     @FXML
@@ -155,6 +157,10 @@ public class FXMLFormularioEnvioController implements Initializable, INavegableC
 
     @FXML
     private void clickCancelar(ActionEvent event) {
+        Boolean confirmarOperacion = Utilidades.mostrarAlertaConfirmacion("Cancelar", "¿Estas seguro de que quieres cancelar, los datos no se guardaran?");
+        if (confirmarOperacion) {
+            regresar();
+        }
     }
 
     @FXML
@@ -193,10 +199,7 @@ public class FXMLFormularioEnvioController implements Initializable, INavegableC
 
     @Override
     public void setObject(Object object) {
-        if (object instanceof Envio) {
-            Envio envio = (Envio) object;
-            /*inicializarDatos();*/
-        }
+
     }
 
     private void configurarSeccionPaquetes() {

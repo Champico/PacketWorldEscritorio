@@ -10,6 +10,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import packetworldescritorio.conexion.ConexionAPI;
 import packetworldescritorio.dto.Respuesta;
+import packetworldescritorio.pojo.Cliente;
 import packetworldescritorio.pojo.Colaborador;
 import packetworldescritorio.pojo.Envio;
 import packetworldescritorio.pojo.RespuestaHTTP;
@@ -71,10 +72,7 @@ public class EnvioImp {
         }
         return respuesta;
     }
-    
-    
-    
-    
+
     public static Respuesta registrar(Envio envio) {
         Respuesta respuesta = new Respuesta();
         String URL = Constantes.URL_WS + Constantes.WS_ENVIO_REGISTRAR;
@@ -133,5 +131,19 @@ public class EnvioImp {
         return respuesta;
     }
 
-    
+    public static Envio obtenerEnvio(Integer idEnvio) {
+        Envio envio = new Envio();
+        String URL = Constantes.URL_WS + Constantes.WS_ENVIO_OBTENER_POR_ID + "/" + idEnvio;
+        RespuestaHTTP respuestaAPI = ConexionAPI.peticionGET(URL);
+
+        if (respuestaAPI.getCodigo() == HttpURLConnection.HTTP_OK) {
+            Gson gson = new Gson();
+            envio = gson.fromJson(respuestaAPI.getContenido(), Envio.class);
+        } else {
+            envio = null;
+        }
+
+        return envio;
+    }
+
 }
