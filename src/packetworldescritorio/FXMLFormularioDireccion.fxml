@@ -9,20 +9,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="177.0" prefWidth="900.0" stylesheets="@/estilos/CSSAplicacion.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="packetworldescritorio.FXMLFormularioDireccionController">
    <children>
-      <Label layoutX="369.0" layoutY="89.0" text="Numero exterior*">
-         <font>
-            <Font size="17.0" />
-         </font>
-      </Label>
-      <TextField fx:id="tfNumero" layoutX="369.0" layoutY="115.0" prefHeight="40.0" prefWidth="150.0" promptText="000" styleClass="input_general" />
-      <TextField fx:id="tfColonia" layoutX="658.0" layoutY="29.0" prefHeight="40.0" prefWidth="233.0" promptText="Nissan" styleClass="input_general" />
-      <Label layoutX="658.0" layoutY="6.0" text="Colonia*">
-         <font>
-            <Font size="17.0" />
-         </font>
-      </Label>
-      <ComboBox fx:id="cbCiudad" layoutX="413.0" layoutY="27.0" prefHeight="40.0" prefWidth="233.0" styleClass="input_general" />
-      <Label layoutX="413.0" layoutY="5.0" text="Ciudad*">
+      <Label layoutX="1.0" layoutY="1.0" text="Codigo postal*">
          <font>
             <Font size="17.0" />
          </font>
@@ -32,24 +19,37 @@
             <Font size="17.0" />
          </font>
       </Label>
+      <Label layoutX="413.0" layoutY="5.0" text="Ciudad*">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
+      <Label layoutX="658.0" layoutY="6.0" text="Colonia*">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
+      <Label layoutX="1.0" layoutY="89.0" text="Calle*">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
+      <Label layoutX="369.0" layoutY="89.0" text="Numero exterior*">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
+      <TextField fx:id="tfCodigoPostal" layoutY="27.0" prefHeight="40.0" prefWidth="150.0" promptText="01000" styleClass="input_general" />
+      <ComboBox fx:id="cbEstado" layoutX="165.0" layoutY="27.0" prefHeight="40.0" prefWidth="233.0" styleClass="input_general" />
+      <ComboBox fx:id="cbCiudad" layoutX="413.0" layoutY="27.0" prefHeight="40.0" prefWidth="233.0" styleClass="input_general" />
+      <TextField fx:id="tfColonia" layoutX="658.0" layoutY="29.0" prefHeight="40.0" prefWidth="233.0" promptText="Nissan" styleClass="input_general" />
+      <TextField fx:id="tfCalle" layoutY="115.0" prefHeight="40.0" prefWidth="356.0" promptText="Ingrese el domicilio de la sucursal" styleClass="input_general" />
+      <TextField fx:id="tfNumero" layoutX="369.0" layoutY="115.0" prefHeight="40.0" prefWidth="150.0" promptText="000" styleClass="input_general" />
       <Label fx:id="lbErrorColonia" layoutX="659.0" layoutY="68.0" text="Campo obligatorio" textFill="RED" visible="false" />
       <Label fx:id="lbErrorNumero" layoutX="369.0" layoutY="153.0" text="Campo obligatorio" textFill="RED" visible="false" />
       <Label fx:id="lbErrorCiudad" layoutX="414.0" layoutY="67.0" text="Campo obligatorio" textFill="RED" visible="false" />
       <Label fx:id="lbErrorEstado" layoutX="165.0" layoutY="67.0" text="Campo obligatorio" textFill="RED" visible="false" />
       <Label fx:id="lbErrorCodigoPostal" layoutX="1.0" layoutY="67.0" text="Campo obligatorio" textFill="RED" visible="false" />
       <Label fx:id="lbErrorCalle" layoutY="155.0" text="Campo obligatorio" textFill="RED" visible="false" />
-      <ComboBox fx:id="cbEstado" layoutX="165.0" layoutY="27.0" prefHeight="40.0" prefWidth="233.0" styleClass="input_general" />
-      <Label layoutX="1.0" layoutY="89.0" text="Calle*">
-         <font>
-            <Font size="17.0" />
-         </font>
-      </Label>
-      <TextField fx:id="tfCalle" layoutY="115.0" prefHeight="40.0" prefWidth="356.0" promptText="Ingrese el domicilio de la sucursal" styleClass="input_general" />
-      <TextField fx:id="tfCodigoPostal" layoutY="27.0" prefHeight="40.0" prefWidth="150.0" promptText="01000" styleClass="input_general" />
-      <Label layoutX="1.0" layoutY="1.0" text="Codigo postal*">
-         <font>
-            <Font size="17.0" />
-         </font>
-      </Label>
    </children>
 </AnchorPane>

@@ -1,13 +1,13 @@
 /** @authores  Pipe, Kevin, champ */
-
 package packetworldescritorio.pojo;
+
+import java.util.Objects;
 
 /**
  * Clase de modelado para los paquetes.
  */
-
 public class Paquete {
-    
+
     private Integer idPaquete;
     private String descripcion;
     private Float peso;
@@ -84,5 +84,56 @@ public class Paquete {
     public void setIdEnvio(Integer idEnvio) {
         this.idEnvio = idEnvio;
     }
-    
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 97 * hash + Objects.hashCode(this.descripcion);
+        hash = 97 * hash + Objects.hashCode(this.peso);
+        hash = 97 * hash + Objects.hashCode(this.alto);
+        hash = 97 * hash + Objects.hashCode(this.ancho);
+        hash = 97 * hash + Objects.hashCode(this.profundidad);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Paquete other = (Paquete) obj;
+        if (!Objects.equals(this.descripcion, other.descripcion)) {
+            return false;
+        }
+        if (!Objects.equals(this.peso, other.peso)) {
+            return false;
+        }
+        if (!Objects.equals(this.alto, other.alto)) {
+            return false;
+        }
+        if (!Objects.equals(this.ancho, other.ancho)) {
+            return false;
+        }
+        if (!Objects.equals(this.profundidad, other.profundidad)) {
+            return false;
+        }
+        return true;
+    }
+
+    public void copy(Paquete paquete) {
+        this.idPaquete = paquete.getIdPaquete();
+        this.descripcion = paquete.getDescripcion();
+        this.peso = paquete.getPeso();
+        this.alto = paquete.getAlto();
+        this.ancho = paquete.getAncho();
+        this.profundidad = paquete.getProfundidad();
+        this.idEnvio = paquete.getIdEnvio();
+    }
+
 }

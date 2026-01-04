@@ -8,7 +8,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="627.0" prefWidth="1280.0"  stylesheets="@/estilos/CSSAplicacion.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="packetworldescritorio.FXMLFormularioEnvioController">
+<AnchorPane id="AnchorPane" prefHeight="627.0" prefWidth="1280.0" stylesheets="@/estilos/CSSAplicacion.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="packetworldescritorio.FXMLFormularioEnvioController">
     <children>
         <ScrollPane fitToWidth="true" hbarPolicy="NEVER" pannable="true" prefHeight="627.0" prefWidth="1280.0" vbarPolicy="AS_NEEDED">
    
@@ -272,16 +272,16 @@
                                         </HBox>
                                         <AnchorPane prefHeight="200.0" prefWidth="200.0">
                                             <children>
-                                                <TableView fx:id="tvPaquetes" prefHeight="200.0" prefWidth="558.0" styleClass="tabla-fondo-gris-oscuro" stylesheets="@/estilos/CSSTablaModerna.css">
+                                                <TableView fx:id="tvPaquetes" prefHeight="200.0" prefWidth="679.0" styleClass="tabla-fondo-gris-oscuro" stylesheets="@/estilos/CSSTablaModerna.css">
                                                     <placeholder>
                                                         <Label style="-fx-text-fill: #333333; -fx-font-size: 16px;" text="Haga click en Nuevo para agregar un paquete" />
                                                     </placeholder>
                                                     <columns>                                                        
-                                                        <TableColumn fx:id="colDescripcion" prefWidth="197.0" text="Descripción" />
-                                                        <TableColumn fx:id="colPeso" minWidth="5.0" prefWidth="88.0" text="Peso" />
-                                                        <TableColumn fx:id="colAlto" prefWidth="77.0" text="Alto" />
-                                                        <TableColumn fx:id="colAncho" minWidth="7.0" prefWidth="77.0" text="Ancho" />
-                                                        <TableColumn fx:id="colProfundidad" prefWidth="120.0" text="Profundidad" />
+                                                        <TableColumn fx:id="colDescripcion" prefWidth="200.0" text="Descripción" />
+                                                        <TableColumn fx:id="colPeso" minWidth="5.0" prefWidth="121.0" text=" Peso (Kg)" />
+                                                        <TableColumn fx:id="colAlto" prefWidth="107.0" text="Alto (Cm)" />
+                                                        <TableColumn fx:id="colAncho" minWidth="7.0" prefWidth="106.0" text="Ancho (Cm)" />
+                                                        <TableColumn fx:id="colProfundidad" prefWidth="144.0" text="Profundidad (Cm)" />
                                                     </columns>
                                                 </TableView>
                                             </children>

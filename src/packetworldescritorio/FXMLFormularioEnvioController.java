@@ -3,13 +3,10 @@ package packetworldescritorio;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.HashMap;
-import java.util.List;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
-import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -36,7 +33,6 @@ import packetworldescritorio.pojo.Cliente;
 import packetworldescritorio.pojo.Envio;
 import packetworldescritorio.pojo.Paquete;
 import packetworldescritorio.pojo.Session;
-import packetworldescritorio.pojo.Sucursal;
 import packetworldescritorio.utilidad.Constantes;
 import packetworldescritorio.utilidad.UIUtilidad;
 import packetworldescritorio.utilidad.Utilidades;
@@ -122,7 +118,7 @@ public class FXMLFormularioEnvioController implements Initializable, INavegableC
 
     @FXML
     private void clickIrRegistrarPaquete(ActionEvent event) {
-        if(paquetes.size() >= Constantes.MAX_PAQUETES_POR_ENVIO){
+        if (paquetes.size() >= Constantes.MAX_PAQUETES_POR_ENVIO) {
             Utilidades.mostrarAlertaSimple("Máximo numero de paquetes", "El máximo número de paquetes por envío es " + Constantes.MAX_PAQUETES_POR_ENVIO, Alert.AlertType.WARNING);
             return;
         }
@@ -131,10 +127,25 @@ public class FXMLFormularioEnvioController implements Initializable, INavegableC
 
     @FXML
     private void clickIrEditarPaquete(ActionEvent event) {
+        Paquete paquete = tvPaquetes.getSelectionModel().getSelectedItem();
+        if (paquete != null) {
+            irFormularioPaqueteModal(paquete);
+        } else {
+            Utilidades.mostrarAlertaSimple("Selecciona un paquete", "Para editar la información de un paquete, debes seleciconarlo primero de la tabla", Alert.AlertType.WARNING);
+        }
     }
 
     @FXML
     private void clickEliminarPaquete(ActionEvent event) {
+        Paquete paquete = tvPaquetes.getSelectionModel().getSelectedItem();
+        if (paquete != null) {
+            Boolean confirmarOperacion = Utilidades.mostrarAlertaConfirmacion("Eliminar paquete", "¿Estas seguro de que quieres eliminar este paquete?");
+            if (confirmarOperacion) {
+                paquetes.remove(paquete);
+            }
+        } else {
+            Utilidades.mostrarAlertaSimple("Selecciona profesor", "Para eliminar un profesor, debe seleccionarlo de la tabla", Alert.AlertType.WARNING);
+        }
     }
 
     @FXML
@@ -300,26 +311,31 @@ public class FXMLFormularioEnvioController implements Initializable, INavegableC
             envio.setClaveEstado(formularioDireccionController.getEstado().getClaveEstado());
             envio.setClaveCiudad(formularioDireccionController.getCiudad().getClaveMunicipio());
             envio.setNumero(formularioDireccionController.getNumero());
+            envio.setIdCliente(clienteSeleccionado.getIdCliente());
             envio.setIdSucursalOrigen(Session.getInstance().getUsuarioActual().getIdSucursal());
 
-            envio.setPaquetes(paquetes);
-            boolean exito = registrarDatosDeEnvio(envio);
-
-            if (!exito) {
-                return;
+            if (paquetes.isEmpty()) {
+                Boolean confirmarOperacion = Utilidades.mostrarAlertaConfirmacion("Envío sin paquetes", "¿Estas seguro de que quieres crear el envío sin paquetes?");
+                if (confirmarOperacion) {
+                    envio.setPaquetes(new ArrayList<>(paquetes));
+                    registrarDatosDeEnvio(envio);
+                }
+            } else {
+                registrarDatosDeEnvio(envio);
             }
 
         }
 
     }
 
-    private boolean registrarDatosDeEnvio(Envio envio) {
+    private void registrarDatosDeEnvio(Envio envio) {
         Respuesta respuesta = EnvioImp.registrar(envio);
         if (!respuesta.isError()) {
-            return true;
+            Utilidades.mostrarAlertaSimple("Éxito", "Se ha creado el nuevo envío con éxito", Alert.AlertType.INFORMATION);
+            return;
         } else {
             Utilidades.mostrarAlertaSimple("Ocurrio un error", respuesta.getMensaje(), Alert.AlertType.ERROR);
-            return false;
+            return;
         }
     }
 
@@ -498,11 +514,12 @@ public class FXMLFormularioEnvioController implements Initializable, INavegableC
 
             boolean error = controlador.isError();
 
-            System.out.println(error);
             if (error == false) {
                 Paquete temp = controlador.getPaqueteSeleccionModal();
-                System.out.println(temp);
                 if (temp != null) {
+                    if (paquete != null) {
+                        paquetes.remove(paquete);
+                    }
                     paquetes.add(temp);
                 }
             }
@@ -513,5 +530,5 @@ public class FXMLFormularioEnvioController implements Initializable, INavegableC
         }
 
     }
-    
+
 }
