@@ -136,4 +136,11 @@ public class Paquete {
         this.idEnvio = paquete.getIdEnvio();
     }
 
+    @Override
+    public String toString() {
+        return "Paquete{" + "idPaquete=" + idPaquete + ", descripcion=" + descripcion + ", peso=" + peso + ", alto=" + alto + ", ancho=" + ancho + ", profundidad=" + profundidad + ", idEnvio=" + idEnvio + '}';
+    }
+    
+    
+
 }

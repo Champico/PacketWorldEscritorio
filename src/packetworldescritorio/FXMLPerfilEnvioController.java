@@ -2,6 +2,7 @@
 package packetworldescritorio;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -135,13 +136,15 @@ public class FXMLPerfilEnvioController implements Initializable, INavegableChild
             return;
         }
         envioActual = envio;
-        
-        if(clienteActualizado != null){
+
+        if (clienteActualizado != null) {
             clienteSeleccionado = clienteActualizado;
         }
-        
+
         cargarDatosGeneralesEnvio(envioActualizado);
         cargarDatosCliente(clienteActualizado);
+        cargarDatosDestinatario(envioActualizado);
+        cargarDatosPaquetes(envioActualizado.getPaquetes());
     }
 
     /*
@@ -158,15 +161,15 @@ public class FXMLPerfilEnvioController implements Initializable, INavegableChild
         hbMenuCliente.setManaged(true);
         hbMenuCliente.setVisible(true);
     }
-*/
-    private void cargarDatosGeneralesEnvio(Envio envio){
-        if(envio != null){
-            lbTitulo.setText("Envío: " + envio.getIdEnvio());
+     */
+    private void cargarDatosGeneralesEnvio(Envio envio) {
+        if (envio != null) {
+            lbTitulo.setText("Envío: " + envio.getNumeroGuia());
             lbCosto.setText("$" + envio.getCosto());
-            lbEstatusActual.setText("" + envio.getNombreEstatus());
+            lbEstatusActual.setText("" + (envio.getNombreEstatus() != null ? envio.getNombreEstatus() : "Desconocido"));
         }
     }
-    
+
     private void cargarDatosCliente(Cliente cliente) {
         if (cliente != null) {
             lbClienteNombre.setText(cliente.getNombreCompleto());
@@ -180,6 +183,28 @@ public class FXMLPerfilEnvioController implements Initializable, INavegableChild
         }
     }
 
+    private void cargarDatosDestinatario(Envio envio) {
+        if (envio != null) {
+            lbDestinatarioNombre.setText(envio.getDestinatario());
+            lbDestinatarioTelefono.setText(envio.getDestinatarioTelefono());
+            lbDestinatarioDireccion.setText(envio.getCalle() + " " + envio.getNumero());
+            lbDestinatarioColonia.setText(envio.getColonia());
+            lbDestinatarioCodigoPostal.setText(envio.getCodigoPostal());
+            lbDestinatarioCiudad.setText(envio.getCiudad());
+            lbDestinatarioEstado.setText(envio.getEstado());
+        }
+    }
+
+    private void cargarDatosPaquetes(List<Paquete> paquetes) {
+        System.out.println("Los paquetes son ");
+        if (paquetes != null) {
+            for (Paquete p : paquetes) {
+                System.out.println(p);
+            }
+        }
+
+    }
+
     private void borrarDatosCliente() {
         lbClienteNombre.setText("");
         lbClienteTelefono.setText("");
@@ -189,6 +214,16 @@ public class FXMLPerfilEnvioController implements Initializable, INavegableChild
         lbClienteCodigoPostal.setText("");
         lbClienteCiudad.setText("");
         lbClienteEstado.setText("");
+    }
+
+    private void borrarDatosDestinatario() {
+        lbDestinatarioNombre.setText("");
+        lbDestinatarioTelefono.setText("");
+        lbDestinatarioDireccion.setText("");
+        lbDestinatarioColonia.setText("");
+        lbDestinatarioCodigoPostal.setText("");
+        lbDestinatarioCiudad.setText("");
+        lbDestinatarioEstado.setText("");
     }
 
     @FXML

@@ -85,6 +85,7 @@ public class Constantes {
     public static final String PG_FORMULARIO_CLIENTES = "FXMLFormularioCliente.fxml";
     public static final String PG_FORMULARIO_ENVIOS = "FXMLFormularioEnvio.fxml";
     public static final String PG_FORMULARIO_PAQUETES = "FXMLFormularioPaquete.fxml";
+    public static final String PG_PERFIL_ENVIO = "FXMLPerfilEnvio.fxml";
     public static final String COMP_FORMULARIO_DIRECCION = "FXMLFormularioDireccion.fxml";
     public static final String MODAL_ASIGNAR_CONDUCTOR = "FXMLModalAsignarConductor.fxml";
     public static final String MODAL_SELECCIONAR_CONDUCTOR = "FXMLModalSeleccionarConductor.fxml";
