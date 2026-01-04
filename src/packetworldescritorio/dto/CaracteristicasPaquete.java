@@ -7,7 +7,9 @@ public class CaracteristicasPaquete {
     private float pesoMaximo;
     private float alturaMinima;
     private float alturaMaxima;
-    private float anchoMinima;
+    private float anchoMinimo;
+    private float anchoMaximo;
+    private float profundadMinima;
     private float profundidadMaxima;
     private String unidadDeMedidaPeso;
     private String unidadDeMedidaDistancia;
@@ -17,8 +19,10 @@ public class CaracteristicasPaquete {
         this.pesoMaximo = 10.0f;
         this.alturaMinima = 0.0f;
         this.alturaMaxima = 10.0f;
-        this.anchoMinima = 0.0f;
+        this.anchoMinimo = 0.0f;
+        this.anchoMaximo = 10.0f;
         this.profundidadMaxima = 10.0f;
+        this.profundadMinima = 0.0f;
         this.unidadDeMedidaPeso = "kilogramos";
         this.unidadDeMedidaDistancia = "centimetros";
     }
@@ -28,7 +32,9 @@ public class CaracteristicasPaquete {
             float pesoMaximo,
             float alturaMinima,
             float alturaMaxima,
-            float anchoMinima,
+            float anchoMinimo,
+            float anchoMaximo,
+            float profundidadMinima,
             float profundidadMaxima,
             String unidadDeMedidaPeso,
             String unidadDeMedidaDistancia) {
@@ -37,8 +43,10 @@ public class CaracteristicasPaquete {
         this.pesoMaximo = pesoMaximo;
         this.alturaMinima = alturaMinima;
         this.alturaMaxima = alturaMaxima;
-        this.anchoMinima = anchoMinima;
+        this.anchoMinimo = anchoMinimo;
+        this.anchoMaximo = anchoMaximo;
         this.profundidadMaxima = profundidadMaxima;
+        this.profundadMinima = profundidadMinima;
         this.unidadDeMedidaPeso = unidadDeMedidaPeso;
         this.unidadDeMedidaDistancia = unidadDeMedidaDistancia;
     }
@@ -75,12 +83,28 @@ public class CaracteristicasPaquete {
         this.alturaMaxima = alturaMaxima;
     }
 
-    public float getAnchoMinima() {
-        return anchoMinima;
+    public float getAnchoMinimo() {
+        return anchoMinimo;
     }
 
-    public void setAnchoMinima(float anchoMinima) {
-        this.anchoMinima = anchoMinima;
+    public void setAnchoMinimo(float anchoMinimo) {
+        this.anchoMinimo = anchoMinimo;
+    }
+
+    public float getAnchoMaximo() {
+        return anchoMaximo;
+    }
+
+    public void setAnchoMaximo(float anchoMaximo) {
+        this.anchoMaximo = anchoMaximo;
+    }
+
+    public float getProfundadMinima() {
+        return profundadMinima;
+    }
+
+    public void setProfundadMinima(float profundadMinima) {
+        this.profundadMinima = profundadMinima;
     }
 
     public float getProfundidadMaxima() {
@@ -106,4 +130,5 @@ public class CaracteristicasPaquete {
     public void setUnidadDeMedidaDistancia(String unidadDeMedidaDistancia) {
         this.unidadDeMedidaDistancia = unidadDeMedidaDistancia;
     }
+
 }

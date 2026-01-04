@@ -122,6 +122,10 @@ public class FXMLFormularioEnvioController implements Initializable, INavegableC
 
     @FXML
     private void clickIrRegistrarPaquete(ActionEvent event) {
+        if(paquetes.size() >= Constantes.MAX_PAQUETES_POR_ENVIO){
+            Utilidades.mostrarAlertaSimple("Máximo numero de paquetes", "El máximo número de paquetes por envío es " + Constantes.MAX_PAQUETES_POR_ENVIO, Alert.AlertType.WARNING);
+            return;
+        }
         irFormularioPaqueteModal(null);
     }
 
@@ -185,6 +189,7 @@ public class FXMLFormularioEnvioController implements Initializable, INavegableC
     }
 
     private void configurarSeccionPaquetes() {
+        inicializarTablaPaquetesVacia();
         configurarTabla();
     }
 
@@ -481,8 +486,8 @@ public class FXMLFormularioEnvioController implements Initializable, INavegableC
 
             Stage stModal = new Stage();
             stModal.setScene(escenaPrincipal);
-            stModal.setWidth(1000);
-            stModal.setHeight(657);
+            stModal.setWidth(800);
+            stModal.setHeight(600);
             stModal.setResizable(false);
             stModal.setTitle(paquete != null ? "Editar paquete" : "Nuevo paquete");
             stModal.initOwner(context);
@@ -493,8 +498,10 @@ public class FXMLFormularioEnvioController implements Initializable, INavegableC
 
             boolean error = controlador.isError();
 
+            System.out.println(error);
             if (error == false) {
                 Paquete temp = controlador.getPaqueteSeleccionModal();
+                System.out.println(temp);
                 if (temp != null) {
                     paquetes.add(temp);
                 }

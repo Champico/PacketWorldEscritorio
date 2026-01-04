@@ -8,8 +8,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="489.0" prefWidth="779.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="packetworldescritorio.FXMLFormularioPaqueteController">
+<AnchorPane id="AnchorPane" prefHeight="489.0" prefWidth="779.0" stylesheets="@/estilos/CSSAplicacion.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="packetworldescritorio.FXMLFormularioPaqueteController">
    <children>
       <AnchorPane fx:id="apFormularioColaborador" layoutX="44.0" layoutY="119.0" prefHeight="355.0" prefWidth="735.0">
          <children>
@@ -18,52 +17,26 @@
                   <Font size="17.0" />
                </font>
             </Label>
-            <TextField fx:id="tfDescripcion" layoutX="16.0" layoutY="40.0" prefHeight="40.0" prefWidth="379.0" promptText="¿Qué contiene el paquete?" styleClass="input_general" />
             <Label layoutX="16.0" layoutY="100.0" text="Peso*">
                <font>
                   <Font size="17.0" />
                </font>
             </Label>
-            <TextField fx:id="tfPeso" layoutX="16.0" layoutY="126.0" prefHeight="40.0" prefWidth="130.0" promptText="0" />
-            <TextField fx:id="tfAncho" layoutX="16.0" layoutY="218.0" prefHeight="40.0" prefWidth="131.0" promptText="0" />
-            <Label layoutX="16.0" layoutY="192.0" text="Ancho*">
-               <font>
-                  <Font size="17.0" />
-               </font>
-            </Label>
-            <HBox layoutX="14.0" layoutY="301.0" prefWidth="344.0" styleClass="hb_crud_menu">
-               <children>
-                  <Button mnemonicParsing="false" onAction="#clickGuardar" prefHeight="31.0" prefWidth="150.0" text="Guardar" textFill="WHITE">
-                     <styleClass>
-                        <String fx:value="btn_general" />
-                        <String fx:value="btn_aceptar" />
-                     </styleClass>
-                  </Button>
-                  <Button mnemonicParsing="false" onAction="#clickCancelar" prefHeight="31.0" prefWidth="150.0" text="Cancelar" textFill="WHITE">
-                     <styleClass>
-                        <String fx:value="btn_general" />
-                        <String fx:value="btn_cancelar" />
-                     </styleClass>
-                  </Button>
-               </children>
-            </HBox>
             <Label layoutX="208.0" layoutY="103.0" text="Altura*">
                <font>
                   <Font size="17.0" />
                </font>
             </Label>
-            <TextField fx:id="tfAltura" layoutX="206.0" layoutY="129.0" prefHeight="40.0" prefWidth="130.0" promptText="0" styleClass="input_general" />
-            <TextField fx:id="tfProfundidad" layoutX="206.0" layoutY="218.0" prefHeight="40.0" prefWidth="130.0" promptText="0" styleClass="input_general" />
+            <Label layoutX="16.0" layoutY="192.0" text="Ancho*">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Label>
             <Label layoutX="206.0" layoutY="192.0" text="Profundidad*">
                <font>
                   <Font size="17.0" />
                </font>
             </Label>
-            <Label fx:id="lbErrorDescripcion" layoutX="16.0" layoutY="80.0" text="Campo obligatorio" textFill="RED" visible="false" />
-            <Label fx:id="lbErrorPeso" layoutX="16.0" layoutY="166.0" text="Campo obligatorio" textFill="RED" visible="false" />
-            <Label fx:id="lbErrorAncho" layoutX="16.0" layoutY="258.0" text="Campo obligatorio" textFill="RED" visible="false" />
-            <Label fx:id="lbErrorAltura" layoutX="206.0" layoutY="169.0" text="Campo obligatorio" textFill="RED" visible="false" />
-            <Label fx:id="lbErrorProfundidad" layoutX="206.0" layoutY="258.0" text="Campo obligatorio" textFill="RED" visible="false" />
             <Label layoutX="150.0" layoutY="132.0" prefHeight="26.0" prefWidth="27.0" text="Kg">
                <font>
                   <Font size="20.0" />
@@ -84,9 +57,35 @@
                   <Font size="20.0" />
                </font>
             </Label>
+            <TextField fx:id="tfDescripcion" layoutX="16.0" layoutY="40.0" prefHeight="40.0" prefWidth="379.0" promptText="¿Qué contiene el paquete?" styleClass="input_general" />
+            <TextField fx:id="tfPeso" layoutX="16.0" layoutY="126.0" prefHeight="40.0" prefWidth="130.0" promptText="0" />
+            <TextField fx:id="tfAltura" layoutX="206.0" layoutY="129.0" prefHeight="40.0" prefWidth="130.0" promptText="0" styleClass="input_general" />
+            <TextField fx:id="tfAncho" layoutX="16.0" layoutY="218.0" prefHeight="40.0" prefWidth="131.0" promptText="0" />
+            <TextField fx:id="tfProfundidad" layoutX="206.0" layoutY="218.0" prefHeight="40.0" prefWidth="130.0" promptText="0" styleClass="input_general" />
+            <HBox layoutX="14.0" layoutY="301.0" prefWidth="344.0" styleClass="hb_crud_menu">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#clickGuardar" prefHeight="31.0" prefWidth="150.0" text="Guardar" textFill="WHITE">
+                     <styleClass>
+                        <String fx:value="btn_general" />
+                        <String fx:value="btn_aceptar" />
+                     </styleClass>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#clickCancelar" prefHeight="31.0" prefWidth="150.0" text="Cancelar" textFill="WHITE">
+                     <styleClass>
+                        <String fx:value="btn_general" />
+                        <String fx:value="btn_cancelar" />
+                     </styleClass>
+                  </Button>
+               </children>
+            </HBox>
+            <Label fx:id="lbErrorDescripcion" layoutX="16.0" layoutY="80.0" text="Campo obligatorio" textFill="RED" visible="false" />
+            <Label fx:id="lbErrorPeso" layoutX="16.0" layoutY="166.0" text="Campo obligatorio" textFill="RED" visible="false" />
+            <Label fx:id="lbErrorAncho" layoutX="16.0" layoutY="258.0" text="Campo obligatorio" textFill="RED" visible="false" />
+            <Label fx:id="lbErrorAltura" layoutX="206.0" layoutY="169.0" text="Campo obligatorio" textFill="RED" visible="false" />
+            <Label fx:id="lbErrorProfundidad" layoutX="206.0" layoutY="258.0" text="Campo obligatorio" textFill="RED" visible="false" />
             <ImageView fitHeight="221.0" fitWidth="309.0" layoutX="405.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@/resources/images/dimensiones.png" />
+                  <Image url="@/images/dimensiones.png" />
                </image>
             </ImageView>
          </children>

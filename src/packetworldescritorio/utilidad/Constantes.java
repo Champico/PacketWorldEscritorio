@@ -106,5 +106,6 @@ public class Constantes {
     //Otros
     public static final int MAX_SIZE_MB_IMAGE = 2;
     public static final int LIMITE_ENVIOS = 30;
+    public static final int MAX_PAQUETES_POR_ENVIO = 3;
 
 }
