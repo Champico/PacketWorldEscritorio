@@ -42,6 +42,7 @@ public class Constantes {
     public static final String WS_ENVIO_ELIMINAR = "envio/eliminar";
     public static final String WS_ENVIO_OBTENER_POR_ID = "envio/obtener";
     public static final String WS_ENVIO_OBTENER_POR_GUIA = "envio/obtener-guia";
+    public static final String WS_ENVIO_CAMBIAR_CLIENTE = "envio/cambiarCliente";
     public static final String WS_PAQUETE_OBTENER_CARACTERISTICAS = "paquete/obtenerCaracteristicas";
 
     //Peticiones
@@ -106,6 +107,7 @@ public class Constantes {
     //Tipos de ventana
     public static final String TIPO_VENTANA_PAGINA = "pagina";
     public static final String TIPO_VENTANA_MODAL = "modal";
+    public static final String TIPO_VENTANA_MODAL_SELECCION = "modal-selector";
 
     //Otros
     public static final int MAX_SIZE_MB_IMAGE = 2;

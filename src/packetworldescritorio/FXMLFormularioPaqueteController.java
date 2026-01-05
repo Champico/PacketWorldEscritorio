@@ -118,6 +118,11 @@ public class FXMLFormularioPaqueteController implements Initializable, INavegabl
         }
     }
 
+    public void setTipoModalSeleccion() {
+        this.tipoVentana = Constantes.TIPO_VENTANA_MODAL_SELECCION;
+        btnRegresar.setVisible(false);
+    }
+
     public void setTipoModal() {
         this.tipoVentana = Constantes.TIPO_VENTANA_MODAL;
         btnRegresar.setVisible(false);
@@ -331,11 +336,11 @@ public class FXMLFormularioPaqueteController implements Initializable, INavegabl
             } else {
                 Utilidades.mostrarAlertaSimple("Ocurrio un error", respuesta.getMensaje(), Alert.AlertType.ERROR);
             }
-        }else{
+        } else {
             isError = false;
             cerrar();
         }
-              
+
     }
 
     private void editarPaquete(Paquete paquete) {
@@ -348,7 +353,7 @@ public class FXMLFormularioPaqueteController implements Initializable, INavegabl
             } else {
                 Utilidades.mostrarAlertaSimple("Ocurrio un error", respuesta.getMensaje(), Alert.AlertType.ERROR);
             }
-        }else{
+        } else {
             isError = false;
             cerrar();
         }

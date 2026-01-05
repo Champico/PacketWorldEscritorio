@@ -505,7 +505,7 @@ public class FXMLFormularioEnvioController implements Initializable, INavegableC
                 controlador.setObject(paquete);
             }
 
-            controlador.setTipoModal();
+            controlador.setTipoModalSeleccion();
             Stage context = (Stage) lbTitulo.getScene().getWindow();
             Scene escenaPrincipal = new Scene(vista);
 

@@ -1,6 +1,7 @@
 /** @authores  Pipe, Kevin, champ */
 package packetworldescritorio;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -8,16 +9,24 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import packetworldescritorio.dominio.ClienteImp;
 import packetworldescritorio.dominio.EnvioImp;
 import packetworldescritorio.dominio.SucursalImp;
+import packetworldescritorio.dto.Respuesta;
 import packetworldescritorio.interfaz.INavegableChild;
 import packetworldescritorio.interfaz.INavegacion;
 import packetworldescritorio.pojo.Cliente;
@@ -28,12 +37,13 @@ import packetworldescritorio.pojo.Rol;
 import packetworldescritorio.pojo.Sucursal;
 import packetworldescritorio.utilidad.Constantes;
 import packetworldescritorio.utilidad.PdfCreator;
+import packetworldescritorio.utilidad.Utilidades;
 
 public class FXMLPerfilEnvioController implements Initializable, INavegableChild {
 
     private INavegacion nav;
     private Envio envioActual;
-    private Cliente clienteSeleccionado;
+    private Cliente clienteActual;
     private FXMLFormularioDireccionController formularioDireccionController;
 
     @FXML
@@ -135,11 +145,6 @@ public class FXMLPerfilEnvioController implements Initializable, INavegableChild
         this.nav = nav;
     }
 
-    @FXML
-    private void clickRegresar(ActionEvent event) {
-        regresar();
-    }
-
     @Override
     public void setObject(Object object) {
         if (object != null && object instanceof Envio) {
@@ -149,12 +154,66 @@ public class FXMLPerfilEnvioController implements Initializable, INavegableChild
         }
     }
 
+    @FXML
+    private void clickRegresar(ActionEvent event) {
+        regresar();
+    }
+
+    @FXML
+    private void clickEditarCliente(ActionEvent event) {
+        irFormularioClienteModal(clienteActual);
+    }
+
+    @FXML
+    private void clickCambiarCliente(ActionEvent event) {
+        asignarCliente();
+    }
+
+    @FXML
+    private void clickGuardarDatosEnvio(ActionEvent event) {
+    }
+
+    @FXML
+    private void clickCancelarDatosEnvio(ActionEvent event) {
+    }
+
+    @FXML
+    private void clickIrRegistrarPaquete(ActionEvent event) {
+        if (paquetes.size() >= Constantes.MAX_PAQUETES_POR_ENVIO) {
+            Utilidades.mostrarAlertaSimple("Máximo numero de paquetes", "El máximo número de paquetes por envío es " + Constantes.MAX_PAQUETES_POR_ENVIO, Alert.AlertType.WARNING);
+            return;
+        }
+        irFormularioPaqueteModal(null);
+    }
+
+    @FXML
+    private void clickIrEditarPaquete(ActionEvent event) {
+        Paquete paquete = tvPaquetes.getSelectionModel().getSelectedItem();
+        if (paquete != null) {
+            irFormularioPaqueteModal(paquete);
+        } else {
+            Utilidades.mostrarAlertaSimple("Selecciona un paquete", "Para editar la información de un paquete, debes seleciconarlo primero de la tabla", Alert.AlertType.WARNING);
+        }
+    }
+
+    @FXML
+    private void clickEliminarPaquete(ActionEvent event) {
+        Paquete paquete = tvPaquetes.getSelectionModel().getSelectedItem();
+        if (paquete != null) {
+            Boolean confirmarOperacion = Utilidades.mostrarAlertaConfirmacion("Eliminar paquete", "¿Estas seguro de que quieres eliminar este paquete?");
+            if (confirmarOperacion) {
+                paquetes.remove(paquete);
+            }
+        } else {
+            Utilidades.mostrarAlertaSimple("Selecciona profesor", "Para eliminar un profesor, debe seleccionarlo de la tabla", Alert.AlertType.WARNING);
+        }
+    }
+
     private void regresar() {
         nav.navegar(Constantes.MODULO_ENVIOS);
     }
 
     private void recargarDatos(Envio envio) {
-        //Orden: Envio
 
         Envio envioActualizado = obtenerEnvio(envio.getIdEnvio());
         if (envio == null) {
@@ -165,7 +224,7 @@ public class FXMLPerfilEnvioController implements Initializable, INavegableChild
         Cliente clienteActualizado = obtenerCliente(envio.getIdCliente());
 
         if (clienteActualizado != null) {
-            clienteSeleccionado = clienteActualizado;
+            clienteActual = clienteActualizado;
         }
 
         Sucursal sucursalOrigen = obtenerSucursal(envio.getIdSucursalOrigen());
@@ -265,34 +324,6 @@ public class FXMLPerfilEnvioController implements Initializable, INavegableChild
         lbDestinatarioEstado.setText("");
     }
 
-    @FXML
-    private void clickEditarCliente(ActionEvent event) {
-    }
-
-    @FXML
-    private void clickCambiarCliente(ActionEvent event) {
-    }
-
-    @FXML
-    private void clickGuardarDatosEnvio(ActionEvent event) {
-    }
-
-    @FXML
-    private void clickCancelarDatosEnvio(ActionEvent event) {
-    }
-
-    @FXML
-    private void clickIrRegistrarPaquete(ActionEvent event) {
-    }
-
-    @FXML
-    private void clickIrEditarPaquete(ActionEvent event) {
-    }
-
-    @FXML
-    private void clickEliminarPaquete(ActionEvent event) {
-    }
-
     private Cliente obtenerCliente(int idCliente) {
         Cliente cliente = null;
         try {
@@ -323,7 +354,7 @@ public class FXMLPerfilEnvioController implements Initializable, INavegableChild
     @FXML
     private void clickImprimirComprobante(ActionEvent event) {
         Sucursal sucursal = obtenerSucursal(envioActual.getIdSucursalOrigen());
-        PdfCreator.generarTicket(envioActual, clienteSeleccionado, sucursal);
+        PdfCreator.generarTicket(envioActual, clienteActual, sucursal);
     }
 
     private void configurarSeccionPaquetes() {
@@ -342,5 +373,153 @@ public class FXMLPerfilEnvioController implements Initializable, INavegableChild
     private void inicializarTablaPaquetesVacia() {
         paquetes = FXCollections.observableArrayList();
         tvPaquetes.setItems(paquetes);
+    }
+
+    //Nunca sera null cliente
+    private void irFormularioClienteModal(Cliente cliente) {
+        try {
+            FXMLLoader cargador = new FXMLLoader(getClass().getResource(Constantes.PG_FORMULARIO_CLIENTES));
+            Parent vista = cargador.load();
+            FXMLFormularioClienteController controlador = cargador.getController();
+
+            if (cliente != null) {
+                controlador.setObject(cliente);
+            }
+
+            controlador.setTipoModal();
+            Stage context = (Stage) lbTitulo.getScene().getWindow();
+            Scene escenaPrincipal = new Scene(vista);
+
+            Stage stModal = new Stage();
+            stModal.setScene(escenaPrincipal);
+            stModal.setWidth(1000);
+            stModal.setHeight(657);
+            stModal.setResizable(false);
+            stModal.setTitle(cliente != null ? "Editar Cliente" : "Registrar cliente");
+            stModal.initOwner(context);
+            stModal.initModality(Modality.WINDOW_MODAL);
+            stModal.initStyle(StageStyle.UTILITY);
+
+            stModal.showAndWait();
+
+            boolean error = controlador.isError();
+
+            if (error == false) {
+                Cliente temp = controlador.getClienteSeleccionModal();
+                if (temp != null) {
+                    borrarDatosCliente();
+                    recargarDatosClienteAPI(temp);
+                    cargarDatosCliente(clienteActual);
+                }
+            }
+
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            Utilidades.mostrarAlertaSimple("Error", "Ocurrio un error al cargar la ventana de buscar cliente", Alert.AlertType.ERROR);
+        }
+
+    }
+
+    private void asignarCliente() {
+        try {
+            FXMLLoader cargador = new FXMLLoader(getClass().getResource(Constantes.MODAL_SELECCIONAR_CLIENTE));
+            Parent vista = cargador.load();
+            FXMLModalSeleccionarClienteController controlador = cargador.getController();
+            Stage context = (Stage) lbTitulo.getScene().getWindow();
+            Scene escenaPrincipal = new Scene(vista);
+
+            Stage stModal = new Stage();
+            stModal.setScene(escenaPrincipal);
+            stModal.setWidth(700);
+            stModal.setHeight(500);
+            stModal.setResizable(false);
+            stModal.setTitle("Asignar cliente");
+            stModal.initOwner(context);
+            stModal.initModality(Modality.WINDOW_MODAL);
+            stModal.initStyle(StageStyle.UTILITY);
+
+            stModal.showAndWait();
+
+            Cliente nuevoCliente = controlador.getClienteSeleccionado();
+
+            if (nuevoCliente != null) {
+                cambiarCliente(nuevoCliente);
+            }
+
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            Utilidades.mostrarAlertaSimple("Error", "Ocurrio un error al cargar la ventana de buscar cliente", Alert.AlertType.ERROR);
+        }
+
+    }
+
+    private void irFormularioPaqueteModal(Paquete paquete) {
+        try {
+            FXMLLoader cargador = new FXMLLoader(getClass().getResource(Constantes.PG_FORMULARIO_PAQUETES));
+            Parent vista = cargador.load();
+            FXMLFormularioPaqueteController controlador = cargador.getController();
+
+            if (paquete != null) {
+                controlador.setObject(paquete);
+            }
+
+            controlador.setTipoModal();
+            Stage context = (Stage) lbTitulo.getScene().getWindow();
+            Scene escenaPrincipal = new Scene(vista);
+
+            Stage stModal = new Stage();
+            stModal.setScene(escenaPrincipal);
+            stModal.setWidth(800);
+            stModal.setHeight(600);
+            stModal.setResizable(false);
+            stModal.setTitle(paquete != null ? "Editar paquete" : "Nuevo paquete");
+            stModal.initOwner(context);
+            stModal.initModality(Modality.WINDOW_MODAL);
+            stModal.initStyle(StageStyle.UTILITY);
+
+            stModal.showAndWait();
+
+            boolean error = controlador.isError();
+
+            if (error == false) {
+                Paquete temp = controlador.getPaqueteSeleccionModal();
+                if (temp != null) {
+                    if (paquete != null) {
+                        paquetes.remove(paquete);
+                    }
+                    paquetes.add(temp);
+                }
+            }
+
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            Utilidades.mostrarAlertaSimple("Error", "Ocurrio un error al cargar la ventana de paquete", Alert.AlertType.ERROR);
+        }
+
+    }
+
+    private void recargarDatosClienteAPI(Cliente cliente) {
+        try {
+            clienteActual = ClienteImp.obtenerCliente(cliente.getIdCliente());
+        } catch (Exception ex) {
+        }
+    }
+
+    private void cambiarCliente(Cliente nuevoCliente) {
+        Boolean confirmarOperacion = Utilidades.mostrarAlertaConfirmacion("Cambiar cliente", "¿Estas seguro de que quieres cambiar el cliente de este envio?");
+        if (confirmarOperacion) {
+            Respuesta respuesta = EnvioImp.cambiarCliente(envioActual.getIdEnvio(), nuevoCliente.getIdCliente());
+
+            if (!respuesta.isError()) {
+                borrarDatosCliente();
+                clienteActual = nuevoCliente;
+                cargarDatosCliente(nuevoCliente);
+                Utilidades.mostrarAlertaSimple("Éxito", "El cliente ha sido cambiado correctamente", Alert.AlertType.INFORMATION);
+            } else {
+                Utilidades.mostrarAlertaSimple("Error", respuesta.getMensaje(), Alert.AlertType.ERROR);
+            }
+
+        }
+
     }
 }
