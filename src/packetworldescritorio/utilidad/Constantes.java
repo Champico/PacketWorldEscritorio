@@ -48,8 +48,11 @@ public class Constantes {
     public static final String WS_ENVIO_HISTORIAL_ESTATUS = "envio/obtenerHistorialEstatus";
     public static final String WS_ENVIO_ASIGNAR_CONDUCTOR = "envio/asignar-conductor";
     public static final String WS_PAQUETE_OBTENER_CARACTERISTICAS = "paquete/obtenerCaracteristicas";
-   
-    
+    public static final String WS_PAQUETE_OBTENER_ULTIMOS = "paquete/obtener";
+    public static final String WS_PAQUETE_REGISTRAR = "paquete/registrar";
+    public static final String WS_PAQUETE_EDITAR = "paquete/editar";
+    public static final String WS_PAQUETE_ELIMINAR = "paquete/eliminar";
+
     //Peticiones
     public static final String PETICION_GET = "GET";
     public static final String PETICION_POST = "POST";
@@ -99,8 +102,8 @@ public class Constantes {
     public static final String MODAL_ASIGNAR_CONDUCTOR = "FXMLModalAsignarConductor.fxml";
     public static final String MODAL_SELECCIONAR_CONDUCTOR = "FXMLModalSeleccionarConductor.fxml";
     public static final String MODAL_SELECCIONAR_CLIENTE = "FXMLModalSeleccionarCliente.fxml";
-    public static final String  MODAL_ASIGNAR_ENVIO_CONDUCTOR = "FXMLModalAsignarEnvio.fxml";
-    
+    public static final String MODAL_ASIGNAR_ENVIO_CONDUCTOR = "FXMLModalAsignarEnvio.fxml";
+
     //Roles
     public static final String ROL_CONDUCTOR = "Conductor";
     public static final int ID_ROL_CONDUCTOR = 3;
@@ -120,6 +123,7 @@ public class Constantes {
     public static final int MAX_SIZE_MB_IMAGE = 2;
     public static final int LIMITE_ENVIOS = 30;
     public static final int MAX_PAQUETES_POR_ENVIO = 3;
+    public static final int LIMITE_PAQUETES = 50;
 
     public static final int ID_ESTATUS_ENVIO_DETENIDO = 4;
     public static final int ID_ESTATUS_ENVIO_CANCELADO = 6;

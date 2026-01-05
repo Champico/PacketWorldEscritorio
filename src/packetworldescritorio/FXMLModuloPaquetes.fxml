@@ -1,14 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane id="AnchorPane" minWidth="1000.0" prefHeight="627.0" prefWidth="1280.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="packetworldescritorio.FXMLModuloPaquetesController">
+<AnchorPane id="AnchorPane" minWidth="1000.0" prefHeight="627.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="packetworldescritorio.FXMLModuloPaquetesController">
    <children>
-      <Label layoutX="69.0" layoutY="61.0" text="Modulo de paquetes" />
+      <TableView fx:id="tvPaquetes" layoutX="27.0" layoutY="204.0" prefHeight="409.0" prefWidth="836.0">
+         <columns>
+            <TableColumn fx:id="colDescripcion" prefWidth="200.0" text="Descripción" />
+            <TableColumn fx:id="colPeso" minWidth="5.0" prefWidth="121.0" text=" Peso (Kg)" />
+            <TableColumn fx:id="colAlto" prefWidth="107.0" text="Alto (Cm)" />
+            <TableColumn fx:id="colAncho" minWidth="7.0" prefWidth="106.0" text="Ancho (Cm)" />
+            <TableColumn fx:id="colProfundidad" prefWidth="144.0" text="Profundidad (Cm)" />
+            <TableColumn fx:id="colEnvio" prefWidth="156.0" text="No. Guia Envio" />
+         </columns>
+         <placeholder>
+            <Label style="-fx-text-fill: #333333; -fx-font-size: 16px;" text="Haga click en Nuevo para agregar un paquete" />
+         </placeholder>
+      </TableView>
+      <Label layoutX="27.0" layoutY="83.0" prefHeight="51.0" prefWidth="440.0" text="Modulo de Paquetes">
+         <font>
+            <Font name="System Bold" size="35.0" />
+         </font>
+      </Label>
+      <Button layoutX="34.0" layoutY="34.0" mnemonicParsing="false" onAction="#clickRegresar" prefHeight="40.0" prefWidth="139.0" styleClass="btn_regresar">
+         <graphic>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <ImageView fitHeight="30.0" fitWidth="32.0" opacity="0.48" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@/images/flecha-izquierda.png" />
+                     </image>
+                  </ImageView>
+                  <Label prefHeight="30.0" prefWidth="99.0" text=" Regresar" textFill="#4a4a4a">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+         </graphic>
+      </Button>
+      <Button layoutX="474.0" layoutY="134.0" mnemonicParsing="false" onAction="#clickEditarPaquetesEnvio" prefHeight="43.0" prefWidth="91.0" text="Buscar" />
+      <Label layoutX="27.0" layoutY="142.0" text="Editar paquetes de envio:">
+         <font>
+            <Font name="System Bold" size="17.0" />
+         </font>
+      </Label>
+      <TextField fx:id="tfBuscarGuia" layoutX="239.0" layoutY="134.0" prefHeight="43.0" prefWidth="235.0" promptText="Ingrese una guia para buscar">
+         <styleClass>
+            <String fx:value="input_general" />
+            <String fx:value="input_busqueda" />
+         </styleClass>
+      </TextField>
+      <Label fx:id="lbErrorGuia" layoutX="239.0" layoutY="177.0" text="Campo obligatorio" textFill="RED" visible="false" />
    </children>
 </AnchorPane>
