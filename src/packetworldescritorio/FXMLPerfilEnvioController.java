@@ -3,6 +3,7 @@ package packetworldescritorio;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.HashMap;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -14,15 +15,18 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import packetworldescritorio.dominio.CatalogoImp;
 import packetworldescritorio.dominio.ClienteImp;
 import packetworldescritorio.dominio.EnvioImp;
 import packetworldescritorio.dominio.SucursalImp;
@@ -32,10 +36,12 @@ import packetworldescritorio.interfaz.INavegacion;
 import packetworldescritorio.pojo.Cliente;
 import packetworldescritorio.pojo.Colaborador;
 import packetworldescritorio.pojo.Envio;
+import packetworldescritorio.pojo.EstatusEnvio;
 import packetworldescritorio.pojo.Paquete;
 import packetworldescritorio.pojo.Rol;
 import packetworldescritorio.pojo.Session;
 import packetworldescritorio.pojo.Sucursal;
+import packetworldescritorio.pojo.TipoUnidad;
 import packetworldescritorio.utilidad.Constantes;
 import packetworldescritorio.utilidad.PdfCreator;
 import packetworldescritorio.utilidad.UIUtilidad;
@@ -134,13 +140,19 @@ public class FXMLPerfilEnvioController implements Initializable, INavegableChild
     private Label lbSucursalCiudad;
     @FXML
     private Label lbSucursalEstado;
+    @FXML
+    private ComboBox<EstatusEnvio> cbEstatusEnvio;
+    @FXML
+    private VBox vbHistorialEstatusEnvio;
 
     private ObservableList<Paquete> paquetes;
+    private ObservableList<EstatusEnvio> estatusEnvio;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         configurarSeccionPaquetes();
         configurarSeccionDestinatario();
+        configurarSeccionEstatus();
     }
 
     @Override
@@ -184,7 +196,7 @@ public class FXMLPerfilEnvioController implements Initializable, INavegableChild
 
     @FXML
     private void clickGuardarDatosEnvio(ActionEvent event) {
-          guardarEdicionDatosDeDestinatario();
+        guardarEdicionDatosDeDestinatario();
     }
 
     @FXML
@@ -633,7 +645,7 @@ public class FXMLPerfilEnvioController implements Initializable, INavegableChild
         }
     }
 
-      private boolean verificarCampos() {
+    private boolean verificarCampos() {
         boolean camposCorrectos = true;
 
         if (verificarNombre() == false) {
@@ -687,9 +699,62 @@ public class FXMLPerfilEnvioController implements Initializable, INavegableChild
 
         return true;
     }
-    
-    
+
     private void irPaginaPerfilEnvio(Envio envio) {
         nav.navegar(Constantes.PG_PERFIL_ENVIO, envio);
     }
+
+    @FXML
+    private void clickCambiarEstatusEnvio(ActionEvent event) {
+        EstatusEnvio nuevoEstatus = cbEstatusEnvio.getSelectionModel().getSelectedItem();
+        String comentario = null;
+        if (nuevoEstatus != null) {
+            Boolean confirmarOperacion = false;
+            if (nuevoEstatus.getIdEstatus() == Constantes.ID_ESTATUS_ENVIO_CANCELADO || nuevoEstatus.getIdEstatus() == Constantes.ID_ESTATUS_ENVIO_DETENIDO) {
+                HashMap<String, Object> respuesta = Utilidades.mostrarAlertaConfirmacionConMotivo("Motivo", "Escribe un motivo del cambio de estatus", "Aceptar");
+                confirmarOperacion = (Boolean) respuesta.get(Constantes.KEY_CONFIRMACION);
+                comentario = (String) respuesta.get(Constantes.KEY_MOTIVO);
+            } else {
+                confirmarOperacion = Utilidades.mostrarAlertaConfirmacion("Cambiar estatus", "¿Estas seguro de que quieres cambiar el estatus?");
+            }
+            if (confirmarOperacion) {
+                Envio envio = new Envio();
+                envio.setIdEstatus(nuevoEstatus.getIdEstatus());
+                envio.setComentario(comentario);
+                envio.setIdEnvio(envioActual.getIdEnvio());
+                envio.setIdConductor(Session.getInstance().getUsuarioActual().getIdColaborador());
+
+                cambiarEstatusEnvio(envio);
+            }
+        } else {
+            Utilidades.mostrarAlertaSimple("Selecciona un estatus", "Para cambiar el estatus, debe seleccionarlo", Alert.AlertType.WARNING);
+        }
+    }
+
+    private void configurarSeccionEstatus() {
+        cargarComboBoxEstatusEnvio();
+    }
+
+    private void cargarComboBoxEstatusEnvio() {
+        HashMap<String, Object> respuesta = CatalogoImp.obtenerEstatusEnvios();
+        if (!(boolean) respuesta.get(Constantes.KEY_ERROR)) {
+            List<EstatusEnvio> estatusEnvioAPI = (List<EstatusEnvio>) respuesta.get(Constantes.KEY_LISTA);
+            estatusEnvio = FXCollections.observableArrayList();
+            estatusEnvio.addAll(estatusEnvioAPI);
+            cbEstatusEnvio.setItems(estatusEnvio);
+        } else {
+            Utilidades.mostrarAlertaSimple("Error", respuesta.get(Constantes.KEY_MENSAJE).toString(), Alert.AlertType.ERROR);
+        }
+    }
+
+    private void cambiarEstatusEnvio(Envio envio) {
+        Respuesta respuesta = EnvioImp.cambiarEstatus(envio);
+        if (!respuesta.isError()) {
+            Utilidades.mostrarAlertaSimple("Exito", "Se cambio el estatus con exito", Alert.AlertType.INFORMATION);
+
+        } else {
+            Utilidades.mostrarAlertaSimple("Error", respuesta.getMensaje(), Alert.AlertType.ERROR);
+        }
+    }
+
 }

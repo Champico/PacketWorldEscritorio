@@ -12,6 +12,7 @@ public class Constantes {
     public static final String WS_CATALOGO_ESTADOS = "catalogo/obtenerEstados";
     public static final String WS_CATALOGO_MUNICIPIOS = "catalogo/obtenerMunicipios";
     public static final String WS_CATALOGO_COLONIAS = "catalogo/obtenerColonias";
+    public static final String WS_CATALOGO_ESTATUS_ENVIO = "catalogo/obtenerEstatusEnvio";
     public static final String WS_COLABORADOR_OBTENER_TODOS = "colaborador/obtener";
     public static final String WS_COLABORADOR_REGISTRAR = "colaborador/registrar";
     public static final String WS_COLABORADOR_EDITAR = "colaborador/editar";
@@ -43,6 +44,7 @@ public class Constantes {
     public static final String WS_ENVIO_OBTENER_POR_ID = "envio/obtener";
     public static final String WS_ENVIO_OBTENER_POR_GUIA = "envio/obtener-guia";
     public static final String WS_ENVIO_CAMBIAR_CLIENTE = "envio/cambiarCliente";
+    public static final String WS_ENVIO_CAMBIAR_ESTATUS = "envio/actualizar-estatus";
     public static final String WS_PAQUETE_OBTENER_CARACTERISTICAS = "paquete/obtenerCaracteristicas";
 
     //Peticiones
@@ -114,4 +116,6 @@ public class Constantes {
     public static final int LIMITE_ENVIOS = 30;
     public static final int MAX_PAQUETES_POR_ENVIO = 3;
 
+    public static final int ID_ESTATUS_ENVIO_DETENIDO = 4;
+    public static final int ID_ESTATUS_ENVIO_CANCELADO = 6;
 }

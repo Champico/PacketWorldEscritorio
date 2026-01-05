@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 import packetworldescritorio.pojo.Asentamiento;
 import packetworldescritorio.pojo.Estado;
+import packetworldescritorio.pojo.EstatusEnvio;
 import packetworldescritorio.pojo.Municipio;
 import packetworldescritorio.pojo.Sucursal;
 import packetworldescritorio.pojo.TipoUnidad;
@@ -183,6 +184,34 @@ public class CatalogoImp {
                     break;
                 default:
                     respuesta.put(Constantes.KEY_MENSAJE, "Lo sentimos hay problemas para obtener la informacíon de colonias, porfavor intentelo más tarde");
+            }
+        }
+        return respuesta;
+    }
+    
+    
+    public static HashMap<String, Object> obtenerEstatusEnvios() {
+        HashMap<String, Object> respuesta = new HashMap<>();
+        String URL = Constantes.URL_WS + Constantes.WS_CATALOGO_ESTATUS_ENVIO;
+        RespuestaHTTP respuestaAPI = ConexionAPI.peticionGET(URL);
+        if (respuestaAPI.getCodigo() == HttpURLConnection.HTTP_OK) {
+            Gson gson = new Gson();
+            Type tipoLista = new TypeToken<List<EstatusEnvio>>() {
+            }.getType();
+            List<EstatusEnvio> estatus = gson.fromJson(respuestaAPI.getContenido(), tipoLista);
+            respuesta.put(Constantes.KEY_ERROR, false);
+            respuesta.put(Constantes.KEY_LISTA, estatus);
+        } else {
+            respuesta.put("error", true);
+            switch (respuestaAPI.getCodigo()) {
+                case Constantes.ERROR_MALFORMED_URL:
+                    respuesta.put(Constantes.KEY_ERROR, Constantes.MSJ_ERROR_PETICION);
+                    break;
+                case Constantes.ERROR_PETICION:
+                    respuesta.put(Constantes.KEY_MENSAJE, Constantes.MSJ_ERROR_PETICION);
+                    break;
+                default:
+                    respuesta.put(Constantes.KEY_MENSAJE, "Lo sentimos, ocurrio un problema al obtener la información de los estatus de envio.\nPorfavor intentelo más tarde");
             }
         }
         return respuesta;
