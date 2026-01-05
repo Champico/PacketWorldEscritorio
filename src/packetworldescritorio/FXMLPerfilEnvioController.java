@@ -789,8 +789,8 @@ public class FXMLPerfilEnvioController implements Initializable, INavegableChild
             );
 
             ImageView ivIcono = new ImageView();
-            ivIcono.setFitWidth(32);
-            ivIcono.setFitHeight(32);
+            ivIcono.setFitWidth(38);
+            ivIcono.setFitHeight(38);
             ivIcono.setPreserveRatio(true);
 
             try {

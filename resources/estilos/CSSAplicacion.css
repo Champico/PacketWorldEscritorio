@@ -174,3 +174,27 @@
     -fx-pref-height: 0;
     -fx-max-height: 0;
 }
+
+
+.tarjeta_buscador{
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0.1, 0, 4);
+    -fx-background-radius: 8px;
+    -fx-border-radius: 8px;
+    -fx-background-color: #ffffff;
+    -fx-padding:  15 15 15 15; /* top right bottom left */
+}
+
+.text_area_general {
+    -fx-background-color: white;
+    -fx-background-insets: 0;
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}
+
+.btn_default{
+        -fx-cursor: HAND;
+}
+
+.vb_historial_envio{
+        -fx-spacing: 15;
+}

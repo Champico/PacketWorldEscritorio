@@ -78,15 +78,12 @@ public class FXMLModuloEnviosController implements Initializable, INavegableChil
     
     @FXML
     private void clickIrBuscar(ActionEvent event) {
+        irBuscadorEnvio();
     }
     
     @FXML
     private void clickRegresar(ActionEvent event) {
         regresar();
-    }
-    
-    @FXML
-    private void clickIrModificar(ActionEvent event) {
     }
     
     @FXML
@@ -99,6 +96,10 @@ public class FXMLModuloEnviosController implements Initializable, INavegableChil
     
     private void irPerfilEnvio(Envio envio) {
         nav.navegar(Constantes.PG_PERFIL_ENVIO, envio);
+    }
+    
+    private void irBuscadorEnvio(){
+         nav.navegar(Constantes.PG_BUSCADOR_ENVIO);
     }
     
     private void configurarTabla() {

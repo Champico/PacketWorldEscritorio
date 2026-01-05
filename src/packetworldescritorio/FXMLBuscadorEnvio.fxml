@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="442.0" prefWidth="666.0" stylesheets="@/estilos/CSSAplicacion.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="packetworldescritorio.FXMLBuscadorEnvioController">
+   <children>
+      <BorderPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <center>
+            <AnchorPane maxHeight="250.0" maxWidth="400.0" prefHeight="200.0" prefWidth="200.0" styleClass="tarjeta_buscador" BorderPane.alignment="CENTER">
+               <children>
+                  <TextArea fx:id="taGuia" layoutX="13.0" layoutY="57.0" prefHeight="106.0" prefWidth="375.0" promptText="Ingresa la guia">
+                     <font>
+                        <Font size="21.0" />
+                     </font>
+                     <styleClass>
+                        <String fx:value="input_general" />
+                        <String fx:value="text_area_general" />
+                     </styleClass></TextArea>
+                  <Label layoutX="99.0" layoutY="5.0" text="Buscar Envío">
+                     <font>
+                        <Font name="System Bold" size="34.0" />
+                     </font>
+                  </Label>
+                  <Button layoutX="96.0" layoutY="190.0" mnemonicParsing="false" onAction="#clickBuscarEnvio" prefHeight="40.0" prefWidth="212.0" styleClass=".btn_default" text="Buscar" />
+                  <Label fx:id="lbErrorGuia" layoutX="14.0" layoutY="163.0" text="Campo obligatorio" textFill="RED" visible="false" />
+               </children></AnchorPane>
+         </center>
+      </BorderPane>
+      <Button fx:id="btnRegresar" layoutX="20.0" layoutY="20.0" mnemonicParsing="false" onAction="#clickRegresar" prefHeight="40.0" prefWidth="139.0" styleClass="btn_regresar">
+         <graphic>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <ImageView fitHeight="30.0" fitWidth="32.0" opacity="0.48" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@/images/flecha-izquierda.png" />
+                     </image>
+                  </ImageView>
+                  <Label prefHeight="30.0" prefWidth="99.0" text=" Regresar" textFill="#4a4a4a">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+         </graphic>
+      </Button>
+   </children>
+</AnchorPane>
