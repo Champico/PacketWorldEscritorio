@@ -45,8 +45,9 @@ public class UIUtilidad {
             return true;
         }
 
-        String valor = input.getText().trim();
-        if (valor.isEmpty()) {
+        String valor = input.getText();
+        
+        if (valor == null || valor.trim().isEmpty()) {
             marcarError(input, labelError, "Campo obligatorio");
             return true;
         } else {

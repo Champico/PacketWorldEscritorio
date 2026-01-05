@@ -164,7 +164,7 @@ public class FXMLFormularioDireccionController implements Initializable {
 
                 item.setOnAction(e -> {
                     tfColonia.setText(a.getNombre());
-                    if(a.getCodigoPostal() != null && !a.getCodigoPostal().isEmpty()){
+                    if (a.getCodigoPostal() != null && !a.getCodigoPostal().isEmpty()) {
                         tfCodigoPostal.setText(a.getCodigoPostal());
                     }
                     sugerencias.hide();
@@ -380,6 +380,20 @@ public class FXMLFormularioDireccionController implements Initializable {
             }
         }
         return -1;
+    }
+
+    public void limpiarCampos() {
+        try {
+            cbCiudad.getSelectionModel().clearSelection();
+            municipios.clear();
+            cbEstado.getSelectionModel().clearSelection();
+        } catch (Exception ex) {
+        }
+
+        tfCalle.setText("");
+        tfCodigoPostal.setText("");
+        tfColonia.setText("");
+        tfNumero.setText("");
     }
 
 }

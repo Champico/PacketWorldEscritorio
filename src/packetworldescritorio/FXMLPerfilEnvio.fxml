@@ -263,7 +263,7 @@
                                           <Font size="17.0" />
                                        </font>
                                     </Label>
-                                    <Button layoutY="76.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="107.0" text="Editar datos" />
+                                    <Button layoutY="76.0" mnemonicParsing="false" onAction="#clickEditarDatosDestinatario" prefHeight="31.0" prefWidth="107.0" text="Editar datos" />
                                  </children>
                               </AnchorPane>
                               <AnchorPane fx:id="apFormularioDestinatario" managed="false" prefHeight="520.0" prefWidth="1232.0" visible="false">
@@ -286,14 +286,14 @@
                                           <Font size="17.0" />
                                        </font>
                                     </Label>
-                                    <Label layoutX="2.0" layoutY="273.0" text="Telefono*">
+                                    <Label layoutX="2.0" layoutY="267.0" text="Telefono*">
                                        <font>
                                           <Font size="17.0" />
                                        </font>
                                     </Label>
-                                    <TextField fx:id="tfTelefono" layoutY="299.0" prefHeight="40.0" prefWidth="233.0" promptText="5500000000" styleClass="input_general" />
+                                    <TextField fx:id="tfTelefono" layoutY="293.0" prefHeight="40.0" prefWidth="233.0" promptText="5500000000" styleClass="input_general" />
                                     <Label fx:id="lbErrorNombre" layoutY="66.0" text="Campo obligatorio" textFill="RED" visible="false" />
-                                    <HBox layoutY="349.0" prefWidth="344.0" styleClass="hb_crud_menu">
+                                    <HBox layoutY="358.0" prefWidth="344.0" styleClass="hb_crud_menu">
                                        <children>
                                           <Button mnemonicParsing="false" onAction="#clickGuardarDatosEnvio" prefHeight="31.0" prefWidth="150.0" text="Guardar" textFill="WHITE">
                                              <styleClass>
@@ -311,7 +311,7 @@
                                     </HBox>
                                     <Label fx:id="lbErrorApPaterno" layoutX="251.0" layoutY="66.0" text="Campo obligatorio" textFill="RED" visible="false" />
                                     <Label fx:id="lbErrorApMaterno" layoutX="502.0" layoutY="66.0" text="Campo obligatorio" textFill="RED" visible="false" />
-                                    <Label fx:id="lbErrorTelefono" layoutY="339.0" text="Campo obligatorio" textFill="RED" visible="false" />
+                                    <Label fx:id="lbErrorTelefono" layoutY="332.0" text="Campo obligatorio" textFill="RED" visible="false" />
                                  </children>
                               </AnchorPane>
                            </children>

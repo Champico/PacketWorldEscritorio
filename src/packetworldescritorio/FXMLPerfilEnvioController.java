@@ -34,9 +34,11 @@ import packetworldescritorio.pojo.Colaborador;
 import packetworldescritorio.pojo.Envio;
 import packetworldescritorio.pojo.Paquete;
 import packetworldescritorio.pojo.Rol;
+import packetworldescritorio.pojo.Session;
 import packetworldescritorio.pojo.Sucursal;
 import packetworldescritorio.utilidad.Constantes;
 import packetworldescritorio.utilidad.PdfCreator;
+import packetworldescritorio.utilidad.UIUtilidad;
 import packetworldescritorio.utilidad.Utilidades;
 
 public class FXMLPerfilEnvioController implements Initializable, INavegableChild {
@@ -138,6 +140,7 @@ public class FXMLPerfilEnvioController implements Initializable, INavegableChild
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         configurarSeccionPaquetes();
+        configurarSeccionDestinatario();
     }
 
     @Override
@@ -170,11 +173,18 @@ public class FXMLPerfilEnvioController implements Initializable, INavegableChild
     }
 
     @FXML
-    private void clickGuardarDatosEnvio(ActionEvent event) {
+    private void clickEditarDatosDestinatario(ActionEvent event) {
+        editarDatosDestinatario();
     }
 
     @FXML
     private void clickCancelarDatosEnvio(ActionEvent event) {
+        cancelarEdicionDatosDestinatario();
+    }
+
+    @FXML
+    private void clickGuardarDatosEnvio(ActionEvent event) {
+          guardarEdicionDatosDeDestinatario();
     }
 
     @FXML
@@ -236,21 +246,6 @@ public class FXMLPerfilEnvioController implements Initializable, INavegableChild
         cargarDatosPaquetes(envioActualizado.getPaquetes());
     }
 
-    /*
-    private void mostrarDatosCliente() {
-        apDatosCliente.setManaged(true);
-        apDatosCliente.setVisible(true);
-        hbMenuCliente.setManaged(false);
-        hbMenuCliente.setVisible(false);
-    }
-
-    private void ocultarDatosCliente() {
-        apDatosCliente.setVisible(false);
-        apDatosCliente.setManaged(false);
-        hbMenuCliente.setManaged(true);
-        hbMenuCliente.setVisible(true);
-    }
-     */
     private void cargarDatosGeneralesEnvio(Envio envio) {
         if (envio != null) {
             lbTitulo.setText("Envío: " + envio.getNumeroGuia());
@@ -521,5 +516,180 @@ public class FXMLPerfilEnvioController implements Initializable, INavegableChild
 
         }
 
+    }
+
+    private void configurarSeccionDestinatario() {
+        agregarFormularioDireccion();
+    }
+
+    private void agregarFormularioDireccion() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(Constantes.COMP_FORMULARIO_DIRECCION));
+            AnchorPane componenteFormulario = loader.load();
+
+            componenteFormulario.setLayoutX(0);
+            componenteFormulario.setLayoutY(85);
+
+            formularioDireccionController = loader.getController();
+            apFormularioDestinatario.getChildren().add(componenteFormulario);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void cancelarEdicionDatosDestinatario() {
+        limpiarFormularioDestinatario();
+        mostrarDatosDestinatario();
+    }
+
+    private void editarDatosDestinatario() {
+        llenarDatosFormularioDestinatario(envioActual);
+        mostrarFormularioEdicionDatosDestinatario();
+    }
+
+    private void mostrarFormularioEdicionDatosDestinatario() {
+        apFormularioDestinatario.setManaged(true);
+        apFormularioDestinatario.setVisible(true);
+        apDatosDestinatario.setManaged(false);
+        apDatosDestinatario.setVisible(false);
+    }
+
+    private void mostrarDatosDestinatario() {
+        apFormularioDestinatario.setVisible(false);
+        apFormularioDestinatario.setManaged(false);
+        apDatosDestinatario.setManaged(true);
+        apDatosDestinatario.setVisible(true);
+    }
+
+    private void llenarDatosFormularioDestinatario(Envio envioEdicion) {
+        if (envioEdicion != null) {
+
+            tfNombre.setText(envioEdicion.getDestinatarioNombre());
+            tfApPaterno.setText(envioEdicion.getDestinatarioApellidoP());
+            tfApMaterno.setText(envioEdicion.getDestinatarioApellidoM());
+            tfTelefono.setText(envioEdicion.getDestinatarioTelefono());
+
+            if (formularioDireccionController != null) {
+                formularioDireccionController.inicializarDatos(envioEdicion.getCalle(), envioEdicion.getCodigoPostal(), envioEdicion.getColonia(), envioEdicion.getNumero(), envioEdicion.getClaveEstado(), envioEdicion.getClaveCiudad());
+            }
+        }
+    }
+
+    private void limpiarFormularioDestinatario() {
+        tfNombre.setText("");
+        tfApPaterno.setText("");
+        tfApMaterno.setText("");
+        tfTelefono.setText("");
+
+        if (formularioDireccionController != null) {
+            formularioDireccionController.limpiarCampos();
+        }
+
+    }
+
+    private void guardarEdicionDatosDeDestinatario() {
+        boolean camposCorrectos = verificarCampos();
+
+        if (camposCorrectos == true) {
+
+            Envio envio = new Envio();
+            envio.setIdEnvio(envioActual.getIdEnvio());
+            envio.setIdSucursalOrigen(envioActual.getIdSucursalOrigen());
+            envio.setDestinatarioNombre(tfNombre.getText());
+            envio.setDestinatarioApellidoP(tfApPaterno.getText());
+            envio.setDestinatarioApellidoM(tfApMaterno.getText());
+            envio.setDestinatarioTelefono(tfTelefono.getText());
+            envio.setCalle(formularioDireccionController.getCalle());
+            envio.setColonia(formularioDireccionController.getColonia());
+            envio.setCodigoPostal(formularioDireccionController.getCodigoPostal());
+            envio.setEstado(formularioDireccionController.getEstado().getNombre());
+            envio.setCiudad(formularioDireccionController.getCiudad().getNombre());
+            envio.setClaveEstado(formularioDireccionController.getEstado().getClaveEstado());
+            envio.setClaveCiudad(formularioDireccionController.getCiudad().getClaveMunicipio());
+            envio.setNumero(formularioDireccionController.getNumero());
+            envio.setIdCliente(clienteActual.getIdCliente());
+            envio.setIdSucursalOrigen(Session.getInstance().getUsuarioActual().getIdSucursal());
+            envio.setPaquetes(paquetes);
+
+            Boolean confirmarOperacion = Utilidades.mostrarAlertaConfirmacion("Envío sin paquetes", "¿Estas seguro de que quieres editar los datos del destinatario del envío?");
+            if (confirmarOperacion) {
+                editarEnvio(envio);
+            }
+
+        }
+
+    }
+
+    private void editarEnvio(Envio envio) {
+        Respuesta respuesta = EnvioImp.editar(envio);
+        if (!respuesta.isError()) {
+            Utilidades.mostrarAlertaSimple("Éxito", "Se han editado los datos con exito", Alert.AlertType.INFORMATION);
+            recargarDatos(envio);
+            mostrarDatosDestinatario();
+            limpiarFormularioDestinatario();
+        } else {
+            Utilidades.mostrarAlertaSimple("Ocurrio un error", respuesta.getMensaje(), Alert.AlertType.ERROR);
+            return;
+        }
+    }
+
+      private boolean verificarCampos() {
+        boolean camposCorrectos = true;
+
+        if (verificarNombre() == false) {
+            camposCorrectos = false;
+        }
+        if (verificarApellidoPaterno() == false) {
+            camposCorrectos = false;
+        }
+        if (verificarTelefono() == false) {
+            camposCorrectos = false;
+        }
+        if (formularioDireccionController.verificarCampos() == false) {
+            camposCorrectos = false;
+        }
+        return camposCorrectos;
+    }
+
+    private boolean verificarNombre() {
+
+        if (UIUtilidad.esInputVacio(tfNombre, lbErrorNombre) == true) {
+            return false;
+        }
+
+        UIUtilidad.limpiarError(tfNombre, lbErrorNombre);
+
+        return true;
+    }
+
+    private boolean verificarApellidoPaterno() {
+
+        if (UIUtilidad.esInputVacio(tfApPaterno, lbErrorApPaterno) == true) {
+            return false;
+        }
+
+        UIUtilidad.limpiarError(tfApPaterno, lbErrorApPaterno);
+
+        return true;
+    }
+
+    private boolean verificarTelefono() {
+        if (UIUtilidad.esInputVacio(tfTelefono, lbErrorTelefono) == true) {
+            return false;
+        }
+
+        if (tfTelefono.getText().trim().matches("^[0-9+\\- ]{1,20}$") == false) {
+            UIUtilidad.marcarError(tfTelefono, lbErrorTelefono, "Formato de teléfono no válido");
+            return false;
+        }
+
+        UIUtilidad.limpiarError(tfTelefono, lbErrorTelefono);
+
+        return true;
+    }
+    
+    
+    private void irPaginaPerfilEnvio(Envio envio) {
+        nav.navegar(Constantes.PG_PERFIL_ENVIO, envio);
     }
 }
