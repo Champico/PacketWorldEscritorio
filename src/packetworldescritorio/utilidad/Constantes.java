@@ -24,7 +24,7 @@ public class Constantes {
     public static final String WS_SUCURSAL_REGISTRAR = "sucursal/registrar";
     public static final String WS_SUCURSAL_EDITAR = "sucursal/editar";
     public static final String WS_SUCURSAL_DAR_DE_BAJA = "sucursal/darBaja";
-     public static final String WS_SUCURSAL_OBTENER_POR_ID = "sucursal/obtener";
+    public static final String WS_SUCURSAL_OBTENER_POR_ID = "sucursal/obtener";
     public static final String WS_UNIDAD_OBTENER_TODOS = "unidad/obtener";
     public static final String WS_UNIDAD_REGISTRAR = "unidad/registrar";
     public static final String WS_UNIDAD_EDITAR = "unidad/editar";
@@ -41,6 +41,7 @@ public class Constantes {
     public static final String WS_ENVIO_EDITAR = "envio/editar";
     public static final String WS_ENVIO_ELIMINAR = "envio/eliminar";
     public static final String WS_ENVIO_OBTENER_POR_ID = "envio/obtener";
+    public static final String WS_ENVIO_OBTENER_POR_GUIA = "envio/obtener-guia";
     public static final String WS_PAQUETE_OBTENER_CARACTERISTICAS = "paquete/obtenerCaracteristicas";
 
     //Peticiones

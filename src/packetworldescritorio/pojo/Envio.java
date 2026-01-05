@@ -257,7 +257,17 @@ public class Envio {
 
     @Override
     public String toString() {
-        return "Envio{" + "idEnvio=" + idEnvio + ", numeroGuia=" + numeroGuia + ", costo=" + costo + ", destinatarioNombre=" + destinatarioNombre + ", destinatarioApellidoP=" + destinatarioApellidoP + ", destinatarioApellidoM=" + destinatarioApellidoM + ", calle=" + calle + ", numero=" + numero + ", colonia=" + colonia + ", codigoPostal=" + codigoPostal + ", ciudad=" + ciudad + ", estado=" + estado + ", idCliente=" + idCliente + ", idSucursalOrigen=" + idSucursalOrigen + ", idEstatus=" + idEstatus + ", nombreEstatus=" + nombreEstatus + '}';
+        String datosEnvio = "Envio{" + "idEnvio=" + idEnvio + ", numeroGuia=" + numeroGuia + ", costo=" + costo + ", destinatarioNombre=" + destinatarioNombre + ", destinatarioApellidoP=" + destinatarioApellidoP + ", destinatarioApellidoM=" + destinatarioApellidoM + ", destinatarioTelefono=" + destinatarioTelefono + ", calle=" + calle + ", numero=" + numero + ", colonia=" + colonia + ", codigoPostal=" + codigoPostal + ", ciudad=" + ciudad + ", estado=" + estado + ", idCliente=" + idCliente + ", idSucursalOrigen=" + idSucursalOrigen + ", idEstatus=" + idEstatus + ", nombreEstatus=" + nombreEstatus + ", comentario=" + comentario + ", idConductor=" + idConductor + ", nombreConductor=" + nombreConductor + ", claveCiudad=" + claveCiudad + ", claveEstado=" + claveEstado + ", destinatario=" + destinatario;
+        String datosPaquetes = "\n";
+        if(paquetes != null && paquetes.isEmpty() == false){
+            for(Paquete p: paquetes){
+                datosPaquetes += p.toString() + ",\n";
+            }
+        }
+        
+        return datosEnvio + datosPaquetes + '}';
     }
+
+   
 
 }

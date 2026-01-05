@@ -320,10 +320,10 @@ public class FXMLFormularioEnvioController implements Initializable, INavegableC
             if (paquetes.isEmpty()) {
                 Boolean confirmarOperacion = Utilidades.mostrarAlertaConfirmacion("Envío sin paquetes", "¿Estas seguro de que quieres crear el envío sin paquetes?");
                 if (confirmarOperacion) {
-                    envio.setPaquetes(new ArrayList<>(paquetes));
                     registrarDatosDeEnvio(envio);
                 }
             } else {
+                envio.setPaquetes(paquetes);
                 registrarDatosDeEnvio(envio);
             }
 
@@ -335,7 +335,13 @@ public class FXMLFormularioEnvioController implements Initializable, INavegableC
         Respuesta respuesta = EnvioImp.registrar(envio);
         if (!respuesta.isError()) {
             Utilidades.mostrarAlertaSimple("Éxito", "Se ha creado el nuevo envío con éxito", Alert.AlertType.INFORMATION);
-            return;
+             envio = EnvioImp.obtenerEnvioPorGuia(respuesta.getMensaje());
+             if(envio != null){
+                 irPaginaPerfilEnvio(envio);
+             }else{
+                 regresar();
+             }
+             
         } else {
             Utilidades.mostrarAlertaSimple("Ocurrio un error", respuesta.getMensaje(), Alert.AlertType.ERROR);
             return;
@@ -532,6 +538,10 @@ public class FXMLFormularioEnvioController implements Initializable, INavegableC
             Utilidades.mostrarAlertaSimple("Error", "Ocurrio un error al cargar la ventana de paquete", Alert.AlertType.ERROR);
         }
 
+    }
+
+    private void irPaginaPerfilEnvio(Envio envio) {
+        nav.navegar(Constantes.PG_PERFIL_ENVIO, envio);
     }
 
 }

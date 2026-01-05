@@ -146,4 +146,19 @@ public class EnvioImp {
         return envio;
     }
 
+    public static Envio obtenerEnvioPorGuia(String guia) {
+        Envio envio = new Envio();
+        String URL = Constantes.URL_WS + Constantes.WS_ENVIO_OBTENER_POR_GUIA + "/" + guia;
+        RespuestaHTTP respuestaAPI = ConexionAPI.peticionGET(URL);
+
+        if (respuestaAPI.getCodigo() == HttpURLConnection.HTTP_OK) {
+            Gson gson = new Gson();
+            envio = gson.fromJson(respuestaAPI.getContenido(), Envio.class);
+        } else {
+            envio = null;
+        }
+
+        return envio;
+    }
+
 }
