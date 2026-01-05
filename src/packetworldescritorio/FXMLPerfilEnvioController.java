@@ -32,6 +32,7 @@ import javafx.stage.StageStyle;
 import packetworldescritorio.dominio.CatalogoImp;
 import packetworldescritorio.dominio.ClienteImp;
 import packetworldescritorio.dominio.EnvioImp;
+import packetworldescritorio.dominio.PaqueteImp;
 import packetworldescritorio.dominio.SucursalImp;
 import packetworldescritorio.dto.Respuesta;
 import packetworldescritorio.interfaz.INavegableChild;
@@ -229,10 +230,10 @@ public class FXMLPerfilEnvioController implements Initializable, INavegableChild
         if (paquete != null) {
             Boolean confirmarOperacion = Utilidades.mostrarAlertaConfirmacion("Eliminar paquete", "¿Estas seguro de que quieres eliminar este paquete?");
             if (confirmarOperacion) {
-                paquetes.remove(paquete);
+                eliminarPaquete(paquete);
             }
         } else {
-            Utilidades.mostrarAlertaSimple("Selecciona profesor", "Para eliminar un profesor, debe seleccionarlo de la tabla", Alert.AlertType.WARNING);
+            Utilidades.mostrarAlertaSimple("Selecciona un paquete", "Para eliminar un paquete, debe seleccionarlo de la tabla", Alert.AlertType.WARNING);
         }
     }
 
@@ -323,6 +324,14 @@ public class FXMLPerfilEnvioController implements Initializable, INavegableChild
 
         if (paquetesActuales != null && !paquetesActuales.isEmpty()) {
             paquetes.addAll(paquetesActuales);
+        }
+    }
+    
+    private void recargarDatosPaquete(){
+        HashMap<String, Object> respuesta = PaqueteImp.obtenerPaquetesDeEnvio(envioActual.getIdEnvio());
+        if (!(boolean) respuesta.get(Constantes.KEY_ERROR)) {
+            List<Paquete> paquetesRecargados = (List<Paquete>) respuesta.get(Constantes.KEY_LISTA);
+             cargarDatosPaquetes(paquetesRecargados);
         }
     }
 
@@ -476,6 +485,8 @@ public class FXMLPerfilEnvioController implements Initializable, INavegableChild
 
     }
 
+    
+    //EDICION / REGISTRO  PAQUETE
     private void irFormularioPaqueteModal(Paquete paquete) {
         try {
             FXMLLoader cargador = new FXMLLoader(getClass().getResource(Constantes.PG_FORMULARIO_PAQUETES));
@@ -487,6 +498,7 @@ public class FXMLPerfilEnvioController implements Initializable, INavegableChild
             }
 
             controlador.setTipoModal();
+            controlador.setIdEnvio(envioActual.getIdEnvio());
             Stage context = (Stage) lbTitulo.getScene().getWindow();
             Scene escenaPrincipal = new Scene(vista);
 
@@ -505,13 +517,7 @@ public class FXMLPerfilEnvioController implements Initializable, INavegableChild
             boolean error = controlador.isError();
 
             if (error == false) {
-                Paquete temp = controlador.getPaqueteSeleccionModal();
-                if (temp != null) {
-                    if (paquete != null) {
-                        paquetes.remove(paquete);
-                    }
-                    paquetes.add(temp);
-                }
+                recargarDatosPaquete();
             }
 
         } catch (IOException ex) {
@@ -521,6 +527,18 @@ public class FXMLPerfilEnvioController implements Initializable, INavegableChild
 
     }
 
+    
+    //ELIMINAR PAQUETE
+    private void eliminarPaquete(Paquete paquete){
+        Respuesta respuesta = PaqueteImp.eliminar(paquete.getIdPaquete());
+         if (!respuesta.isError()) {
+             recargarDatosPaquete();
+               Utilidades.mostrarAlertaSimple("Éxito", "El paquete ha sido eliminado correctamente", Alert.AlertType.INFORMATION);
+            } else {
+                Utilidades.mostrarAlertaSimple("Error", respuesta.getMensaje(), Alert.AlertType.ERROR);
+            }
+    }
+    
     private void recargarDatosClienteAPI(Cliente cliente) {
         try {
             clienteActual = ClienteImp.obtenerCliente(cliente.getIdCliente());

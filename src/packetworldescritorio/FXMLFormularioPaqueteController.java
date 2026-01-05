@@ -34,6 +34,7 @@ public class FXMLFormularioPaqueteController implements Initializable, INavegabl
     private String tipoVentana;
     private boolean isError = true;
     private CaracteristicasPaquete limites;
+    private Integer idEnvioAsignado;
 
     @FXML
     private AnchorPane apFormularioColaborador;
@@ -83,6 +84,7 @@ public class FXMLFormularioPaqueteController implements Initializable, INavegabl
             paquete.setProfundidad(Float.parseFloat(tfProfundidad.getText()));
 
             if (paqueteEdicion == null) {
+                paquete.setIdEnvio(idEnvioAsignado);
                 registrarPaquete(paquete);
             } else {
                 paquete.setIdPaquete(paqueteEdicion.getIdPaquete());
@@ -126,6 +128,10 @@ public class FXMLFormularioPaqueteController implements Initializable, INavegabl
     public void setTipoModal() {
         this.tipoVentana = Constantes.TIPO_VENTANA_MODAL;
         btnRegresar.setVisible(false);
+    }
+
+    public void setIdEnvio(Integer idEnvioAsignado) {
+        this.idEnvioAsignado = idEnvioAsignado;
     }
 
     private void regresar() {
@@ -328,34 +334,46 @@ public class FXMLFormularioPaqueteController implements Initializable, INavegabl
 
     private void registrarPaquete(Paquete paquete) {
         paqueteSeleccionadoVentanaModal = paquete;
-        if (tipoVentana.equals(Constantes.TIPO_VENTANA_PAGINA)) {
-            Respuesta respuesta = PaqueteImp.registrar(paquete);
-            if (!respuesta.isError()) {
-                Utilidades.mostrarAlertaSimple("Registrada correctamente", "El paquete ha sido agregado correctamente", Alert.AlertType.INFORMATION);
-                regresar();
-            } else {
-                Utilidades.mostrarAlertaSimple("Ocurrio un error", respuesta.getMensaje(), Alert.AlertType.ERROR);
-            }
-        } else {
+        if (tipoVentana.equals(Constantes.TIPO_VENTANA_MODAL_SELECCION)) {
             isError = false;
             cerrar();
+        } else {
+            Respuesta respuesta = PaqueteImp.registrar(paquete);
+            if (!respuesta.isError()) {
+                isError = false;
+                Utilidades.mostrarAlertaSimple("Registrada correctamente", "El paquete ha sido agregado correctamente", Alert.AlertType.INFORMATION);
+                if (tipoVentana.equals(Constantes.TIPO_VENTANA_PAGINA)) {
+                    regresar();
+                } else if (tipoVentana.equals(Constantes.TIPO_VENTANA_MODAL)) {
+                    cerrar();
+                }
+            } else {
+                isError = true;
+                Utilidades.mostrarAlertaSimple("Ocurrio un error", respuesta.getMensaje(), Alert.AlertType.ERROR);
+            }
         }
 
     }
 
     private void editarPaquete(Paquete paquete) {
         paqueteSeleccionadoVentanaModal = paquete;
-        if (tipoVentana.equals(Constantes.TIPO_VENTANA_PAGINA)) {
-            Respuesta respuesta = PaqueteImp.editar(paquete);
-            if (!respuesta.isError()) {
-                Utilidades.mostrarAlertaSimple("Editado correctamente", "El paquete ha sido editado correctamente", Alert.AlertType.INFORMATION);
-                regresar();
-            } else {
-                Utilidades.mostrarAlertaSimple("Ocurrio un error", respuesta.getMensaje(), Alert.AlertType.ERROR);
-            }
-        } else {
+        if (tipoVentana.equals(Constantes.TIPO_VENTANA_MODAL_SELECCION)) {
             isError = false;
             cerrar();
+        } else {
+            Respuesta respuesta = PaqueteImp.editar(paquete);
+            if (!respuesta.isError()) {
+                isError = false;
+                Utilidades.mostrarAlertaSimple("Editado correctamente", "El paquete ha sido editado correctamente", Alert.AlertType.INFORMATION);
+                if (tipoVentana.equals(Constantes.TIPO_VENTANA_PAGINA)) {
+                    regresar();
+                } else if (tipoVentana.equals(Constantes.TIPO_VENTANA_MODAL)) {
+                    cerrar();
+                }
+            } else {
+                isError = true;
+                Utilidades.mostrarAlertaSimple("Ocurrio un error", respuesta.getMensaje(), Alert.AlertType.ERROR);
+            }
         }
     }
 

@@ -146,5 +146,34 @@ public class PaqueteImp {
 
         return respuesta;
     }
+    
+    
+     public static HashMap<String, Object> obtenerPaquetesDeEnvio(Integer idEnvio) {
+        HashMap<String, Object> respuesta = new LinkedHashMap<>();
+        String URL = Constantes.URL_WS + Constantes.WS_PAQUETE_DE_ENVIO + "/" + idEnvio;
+        
+        RespuestaHTTP respuestaAPI = ConexionAPI.peticionGET(URL);
+        if (respuestaAPI.getCodigo() == HttpURLConnection.HTTP_OK) {
+            Gson gson = new Gson();
+            Type tipoLista = new TypeToken<List<Paquete>>() {
+            }.getType();
+            List<Paquete> paquetes = gson.fromJson(respuestaAPI.getContenido(), tipoLista);
+            respuesta.put(Constantes.KEY_ERROR, false);
+            respuesta.put(Constantes.KEY_LISTA, paquetes);
+        } else {
+            respuesta.put(Constantes.KEY_ERROR, true);
+            switch (respuestaAPI.getCodigo()) {
+                case Constantes.ERROR_MALFORMED_URL:
+                    respuesta.put("mensaje", Constantes.MSJ_ERROR_PETICION);
+                    break;
+                case Constantes.ERROR_PETICION:
+                    respuesta.put("mensaje", Constantes.MSJ_ERROR_PETICION);
+                    break;
+                default:
+                    respuesta.put("mensaje", "Lo sentimos hay problemas para obtener la informacíon en este momento, porfavor intentelo más tarde");
+            }
+        }
+        return respuesta;
+    }
 
 }

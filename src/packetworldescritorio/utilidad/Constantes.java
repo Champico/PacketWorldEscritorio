@@ -52,6 +52,7 @@ public class Constantes {
     public static final String WS_PAQUETE_REGISTRAR = "paquete/registrar";
     public static final String WS_PAQUETE_EDITAR = "paquete/editar";
     public static final String WS_PAQUETE_ELIMINAR = "paquete/eliminar";
+    public static final String WS_PAQUETE_DE_ENVIO = "paquete/obtener-por-envio";
 
     //Peticiones
     public static final String PETICION_GET = "GET";
