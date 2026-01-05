@@ -46,8 +46,9 @@ public class Constantes {
     public static final String WS_ENVIO_CAMBIAR_CLIENTE = "envio/cambiarCliente";
     public static final String WS_ENVIO_CAMBIAR_ESTATUS = "envio/actualizar-estatus";
     public static final String WS_ENVIO_HISTORIAL_ESTATUS = "envio/obtenerHistorialEstatus";
+    public static final String WS_ENVIO_ASIGNAR_CONDUCTOR = "envio/asignar-conductor";
     public static final String WS_PAQUETE_OBTENER_CARACTERISTICAS = "paquete/obtenerCaracteristicas";
-
+   
     
     //Peticiones
     public static final String PETICION_GET = "GET";
@@ -98,7 +99,8 @@ public class Constantes {
     public static final String MODAL_ASIGNAR_CONDUCTOR = "FXMLModalAsignarConductor.fxml";
     public static final String MODAL_SELECCIONAR_CONDUCTOR = "FXMLModalSeleccionarConductor.fxml";
     public static final String MODAL_SELECCIONAR_CLIENTE = "FXMLModalSeleccionarCliente.fxml";
-
+    public static final String  MODAL_ASIGNAR_ENVIO_CONDUCTOR = "FXMLModalAsignarEnvio.fxml";
+    
     //Roles
     public static final String ROL_CONDUCTOR = "Conductor";
     public static final int ID_ROL_CONDUCTOR = 3;

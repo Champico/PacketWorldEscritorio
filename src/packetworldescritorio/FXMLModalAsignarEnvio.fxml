@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="428.0" prefWidth="986.0" stylesheets="@/estilos/CSSModal.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="packetworldescritorio.FXMLModalAsignarEnvioController">
+   <children>
+      <HBox fx:id="hbMenu" layoutX="14.0" layoutY="378.0" prefHeight="31.0" prefWidth="525.0" styleClass="hb_crud_menu">
+         <children>
+            <Button mnemonicParsing="false" onAction="#clickGuardar" prefHeight="31.0" prefWidth="150.0" text="Guardar" textFill="WHITE">
+               <styleClass>
+                  <String fx:value="btn_general" />
+                  <String fx:value="btn_aceptar" />
+               </styleClass>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#clickCancelar" prefHeight="31.0" prefWidth="150.0" text="Cancelar" textFill="WHITE">
+               <styleClass>
+                  <String fx:value="btn_general" />
+                  <String fx:value="btn_cancelar" />
+               </styleClass>
+            </Button>
+         </children>
+      </HBox>
+      <Label layoutX="32.0" layoutY="10.0" prefHeight="51.0" prefWidth="440.0" text="Asignar conductor">
+         <font>
+            <Font name="System Bold" size="35.0" />
+         </font>
+      </Label>
+      <AnchorPane fx:id="apEnvio" layoutX="32.0" layoutY="138.0" prefHeight="234.0" prefWidth="440.0" visible="false">
+         <children>
+            <Label fx:id="lbDestinatarioColonia" layoutX="75.0" layoutY="130.0" maxHeight="26.0" maxWidth="191.0" prefHeight="26.0" prefWidth="191.0" text="Colonia Carolino">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Label>
+            <Label layoutY="130.0" text="Colonia:">
+               <font>
+                  <Font name="System Bold" size="17.0" />
+               </font>
+            </Label>
+            <Label fx:id="lbDestinatarioDireccion" layoutX="91.0" layoutY="105.0" maxHeight="26.0" maxWidth="211.0" prefHeight="26.0" prefWidth="211.0" text="Av. Sin nombre #4">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Label>
+            <Label layoutY="105.0" text="Direccion:">
+               <font>
+                  <Font name="System Bold" size="17.0" />
+               </font>
+            </Label>
+            <Label fx:id="lbDestinatarioNombre" layoutX="110.0" layoutY="80.0" text="nombre apPaterno apMaterno">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Label>
+            <Label layoutY="80.0" text="Destinatario:">
+               <font>
+                  <Font name="System Bold" size="17.0" />
+               </font>
+            </Label>
+            <Label layoutX="1.0" layoutY="33.0" text="Guia:">
+               <font>
+                  <Font name="System Bold" size="17.0" />
+               </font>
+            </Label>
+            <Label fx:id="lbGuia" layoutX="50.0" layoutY="33.0" text="guia">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Label>
+            <Label layoutY="1.0" text="Envío seleccionado">
+               <font>
+                  <Font name="System Bold" size="22.0" />
+               </font>
+            </Label>
+            <Label fx:id="lbDestinatarioCodigoPostal" layoutX="119.0" layoutY="155.0" maxHeight="26.0" maxWidth="53.0" prefHeight="26.0" prefWidth="53.0" text="91158">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Label>
+            <Label layoutY="155.0" text="Codigo Postal:">
+               <font>
+                  <Font name="System Bold" size="17.0" />
+               </font>
+            </Label>
+            <Label layoutY="56.0" text="Conductor actual:">
+               <font>
+                  <Font name="System Bold" size="17.0" />
+               </font>
+            </Label>
+            <Label fx:id="lbConductorActual" layoutX="152.0" layoutY="56.0" text="ninguno">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Label>
+            <Label fx:id="lbDestinatarioCiudad" layoutX="67.0" layoutY="178.0" maxHeight="26.0" maxWidth="211.0" prefHeight="26.0" prefWidth="211.0" text="Ciudad">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Label>
+            <Label layoutY="178.0" text="Ciudad:">
+               <font>
+                  <Font name="System Bold" size="17.0" />
+               </font>
+            </Label>
+            <Label fx:id="lbDestinatarioEstado" layoutX="64.0" layoutY="203.0" maxHeight="26.0" maxWidth="191.0" prefHeight="26.0" prefWidth="191.0" text="Estado">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Label>
+            <Label layoutY="201.0" text="Estado:">
+               <font>
+                  <Font name="System Bold" size="17.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="32.0" layoutY="74.0" prefHeight="43.0" prefWidth="385.0">
+         <children>
+            <TextField fx:id="tfBuscarGuia" layoutX="57.0" prefHeight="43.0" prefWidth="235.0" promptText="Ingrese una guia para buscar">
+               <styleClass>
+                  <String fx:value="input_general" />
+                  <String fx:value="input_busqueda" />
+               </styleClass>
+            </TextField>
+            <Label layoutY="8.0" text="Envió:">
+               <font>
+                  <Font name="System Bold" size="17.0" />
+               </font>
+            </Label>
+            <Button layoutX="292.0" mnemonicParsing="false" onAction="#clickBuscarEnvio" prefHeight="43.0" prefWidth="91.0" text="Buscar" />
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="450.0" layoutY="74.0" prefHeight="43.0" prefWidth="481.0">
+         <children>
+            <Button layoutX="391.0" mnemonicParsing="false" onAction="#clickBuscarConductor" prefHeight="43.0" prefWidth="91.0" text="Buscar" />
+            <Label layoutY="9.0" text="Nuevo conductor:">
+               <font>
+                  <Font name="System Bold" size="17.0" />
+               </font>
+            </Label>
+            <TextField fx:id="tfConductor" editable="false" layoutX="156.0" prefHeight="43.0" prefWidth="235.0">
+               <styleClass>
+                  <String fx:value="input_general" />
+                  <String fx:value="input_busqueda" />
+               </styleClass>
+            </TextField>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="apConductor" layoutX="471.0" layoutY="138.0" prefHeight="125.0" prefWidth="440.0" visible="false">
+         <children>
+            <Label fx:id="lbConductorSucursal" layoutX="80.0" layoutY="100.0" text="sucursal">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Label>
+            <Label layoutY="100.0" text="Sucursal:">
+               <font>
+                  <Font name="System Bold" size="17.0" />
+               </font>
+            </Label>
+            <Label layoutX="1.0" layoutY="30.0" text="Nombre:">
+               <font>
+                  <Font name="System Bold" size="17.0" />
+               </font>
+            </Label>
+            <Label layoutY="1.0" text="Conductor seleccionado">
+               <font>
+                  <Font name="System Bold" size="22.0" />
+               </font>
+            </Label>
+            <Label layoutY="76.0" text="Correo:">
+               <font>
+                  <Font name="System Bold" size="17.0" />
+               </font>
+            </Label>
+            <Label fx:id="lbConductorNombre" layoutX="83.0" layoutY="30.0" text="nombre apPaterno apMaterno">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Label>
+            <Label layoutY="54.0" text="Numero personal:">
+               <font>
+                  <Font name="System Bold" size="17.0" />
+               </font>
+            </Label>
+            <Label fx:id="lbConductorNoPersonal" layoutX="152.0" layoutY="54.0" text="noPersonal">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Label>
+            <Label fx:id="lbConductorCorreo" layoutX="68.0" layoutY="76.0" text="noPersonal">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <Label fx:id="lbErrorGuia" layoutX="89.0" layoutY="117.0" text="Campo obligatorio" textFill="RED" visible="false" />
+   </children>
+</AnchorPane>

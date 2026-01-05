@@ -233,9 +233,6 @@ public class FXMLFormularioEnvioController implements Initializable, INavegableC
     private boolean verificarCampos() {
         boolean camposCorrectos = true;
 
-        if (verificarCliente() == false) {
-            camposCorrectos = false;
-        }
         if (verificarNombre() == false) {
             camposCorrectos = false;
         }
@@ -248,6 +245,11 @@ public class FXMLFormularioEnvioController implements Initializable, INavegableC
         if (formularioDireccionController.verificarCampos() == false) {
             camposCorrectos = false;
         }
+
+        if (verificarCliente() == false) {
+            camposCorrectos = false;
+        }
+
         return camposCorrectos;
     }
 
@@ -290,7 +292,8 @@ public class FXMLFormularioEnvioController implements Initializable, INavegableC
 
     private boolean verificarCliente() {
         if (clienteSeleccionado == null) {
-            return false;
+            Utilidades.mostrarAlertaSimple("Seleccione un cliente", "Seleccione un cliente", Alert.AlertType.WARNING);
+                    return false;
         }
 
         return true;
@@ -335,13 +338,13 @@ public class FXMLFormularioEnvioController implements Initializable, INavegableC
         Respuesta respuesta = EnvioImp.registrar(envio);
         if (!respuesta.isError()) {
             Utilidades.mostrarAlertaSimple("Éxito", "Se ha creado el nuevo envío con éxito", Alert.AlertType.INFORMATION);
-             envio = EnvioImp.obtenerEnvioPorGuia(respuesta.getMensaje());
-             if(envio != null){
-                 irPaginaPerfilEnvio(envio);
-             }else{
-                 regresar();
-             }
-             
+            envio = EnvioImp.obtenerEnvioPorGuia(respuesta.getMensaje());
+            if (envio != null) {
+                irPaginaPerfilEnvio(envio);
+            } else {
+                regresar();
+            }
+
         } else {
             Utilidades.mostrarAlertaSimple("Ocurrio un error", respuesta.getMensaje(), Alert.AlertType.ERROR);
             return;
