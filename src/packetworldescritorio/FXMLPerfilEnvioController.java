@@ -21,7 +21,10 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -37,6 +40,7 @@ import packetworldescritorio.pojo.Cliente;
 import packetworldescritorio.pojo.Colaborador;
 import packetworldescritorio.pojo.Envio;
 import packetworldescritorio.pojo.EstatusEnvio;
+import packetworldescritorio.pojo.HistorialEstatus;
 import packetworldescritorio.pojo.Paquete;
 import packetworldescritorio.pojo.Rol;
 import packetworldescritorio.pojo.Session;
@@ -147,6 +151,7 @@ public class FXMLPerfilEnvioController implements Initializable, INavegableChild
 
     private ObservableList<Paquete> paquetes;
     private ObservableList<EstatusEnvio> estatusEnvio;
+    private List<HistorialEstatus> historialEstatus;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -256,6 +261,17 @@ public class FXMLPerfilEnvioController implements Initializable, INavegableChild
         cargarDatosDestinatario(envioActualizado);
         cargarDatosSucursal(sucursalOrigen);
         cargarDatosPaquetes(envioActualizado.getPaquetes());
+
+        recargarHistorialEstatus(envioActualizado);
+    }
+
+    private void recargarHistorialEstatus(Envio envio) {
+        HashMap<String, Object> respuesta = EnvioImp.obtenerHistorialEstatus(envio.getIdEnvio());
+        boolean esError = (boolean) respuesta.get(Constantes.KEY_ERROR);
+        if (!esError) {
+            historialEstatus = (List<HistorialEstatus>) respuesta.get(Constantes.KEY_LISTA);
+            cargarDatosHistorialEstatus(historialEstatus);
+        }
     }
 
     private void cargarDatosGeneralesEnvio(Envio envio) {
@@ -751,10 +767,90 @@ public class FXMLPerfilEnvioController implements Initializable, INavegableChild
         Respuesta respuesta = EnvioImp.cambiarEstatus(envio);
         if (!respuesta.isError()) {
             Utilidades.mostrarAlertaSimple("Exito", "Se cambio el estatus con exito", Alert.AlertType.INFORMATION);
-
+            recargarHistorialEstatus(envioActual);
         } else {
             Utilidades.mostrarAlertaSimple("Error", respuesta.getMensaje(), Alert.AlertType.ERROR);
         }
+    }
+
+    private void cargarDatosHistorialEstatus(List<HistorialEstatus> historial) {
+
+        vbHistorialEstatusEnvio.getChildren().clear();
+
+        for (HistorialEstatus h : historial) {
+
+            HBox tarjeta = new HBox(15);
+            tarjeta.setStyle(
+                    "-fx-background-color: white;"
+                    + "-fx-padding: 12;"
+                    + "-fx-background-radius: 10;"
+                    + "-fx-border-radius: 10;"
+                    + "-fx-border-color: #E0E0E0;"
+            );
+
+            ImageView ivIcono = new ImageView();
+            ivIcono.setFitWidth(32);
+            ivIcono.setFitHeight(32);
+            ivIcono.setPreserveRatio(true);
+
+            try {
+                String rutaImagen = obtenerImagenPorIdEstatus(h.getIdEstatus());
+                ivIcono.setImage(new Image(getClass().getResourceAsStream(rutaImagen)));
+            } catch (Exception ex) {
+
+            }
+
+            VBox contenido = new VBox(4);
+
+            Label lblFecha = new Label(h.getFechaCambio());
+            lblFecha.setStyle("-fx-text-fill: #9E9E9E; -fx-font-size: 12px;");
+
+            Label lblEstatus = new Label(h.getNombreEstatus());
+            lblEstatus.setStyle(
+                    "-fx-font-family: System;"
+                    + "-fx-font-size: 17px;"
+                    + "-fx-font-weight: bold;"
+            );
+
+            contenido.getChildren().addAll(lblFecha, lblEstatus);
+
+            if (h.getComentario() != null && !h.getComentario().trim().isEmpty()) {
+                Label lblComentario = new Label(h.getComentario());
+                lblComentario.setWrapText(true);
+                lblComentario.setStyle("-fx-text-fill: #616161;");
+                contenido.getChildren().add(lblComentario);
+            }
+
+            Label lblColaborador = new Label(h.getColaborador());
+            lblColaborador.setStyle("-fx-text-fill: #424242; -fx-font-size: 13px;");
+            contenido.getChildren().add(lblColaborador);
+
+            tarjeta.getChildren().addAll(ivIcono, contenido);
+            vbHistorialEstatusEnvio.getChildren().add(tarjeta);
+        }
+
+    }
+
+    //('Recibido en sucursal'), ('Procesado'), ('En tránsito'), ('Detenido'), ('Entregado'), ('Cancelado');
+    private String obtenerImagenPorIdEstatus(Integer idEstatus) {
+
+        switch (idEstatus) {
+            case 1:
+                return "/images/historial_estatus_1.png";
+            case 2:
+                return "/images/historial_estatus_2.png";
+            case 3:
+                return "/images/historial_estatus_3.png";
+            case 4:
+                return "/images/historial_estatus_4.png";
+            case 5:
+                return "/images/historial_estatus_5.png";
+            case 6:
+                return "/images/historial_estatus_6.png";
+            default:
+                return "/images/historial_estatus_1.png";
+        }
+
     }
 
 }
