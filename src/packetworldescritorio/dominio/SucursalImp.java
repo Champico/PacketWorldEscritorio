@@ -10,6 +10,7 @@ import java.util.List;
 import packetworldescritorio.conexion.ConexionAPI;
 import packetworldescritorio.dto.Respuesta;
 import packetworldescritorio.pojo.Colaborador;
+import packetworldescritorio.pojo.Envio;
 import packetworldescritorio.pojo.RespuestaHTTP;
 import packetworldescritorio.pojo.Sucursal;
 import packetworldescritorio.pojo.Unidad;
@@ -133,6 +134,22 @@ public class SucursalImp {
         }
 
         return respuesta;
+    }
+    
+    
+     public static Sucursal obtenerPorId(Integer idSucursal) {
+        Sucursal sucursal = new Sucursal();
+        String URL = Constantes.URL_WS + Constantes.WS_SUCURSAL_OBTENER_POR_ID + "/" + idSucursal;
+        RespuestaHTTP respuestaAPI = ConexionAPI.peticionGET(URL);
+
+        if (respuestaAPI.getCodigo() == HttpURLConnection.HTTP_OK) {
+            Gson gson = new Gson();
+            sucursal = gson.fromJson(respuestaAPI.getContenido(), Sucursal.class);
+        } else {
+            sucursal = null;
+        }
+
+        return sucursal;
     }
 
 }

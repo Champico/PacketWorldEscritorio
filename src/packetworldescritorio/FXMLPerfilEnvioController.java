@@ -14,12 +14,15 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import packetworldescritorio.dominio.ClienteImp;
 import packetworldescritorio.dominio.EnvioImp;
+import packetworldescritorio.dominio.SucursalImp;
 import packetworldescritorio.interfaz.INavegableChild;
 import packetworldescritorio.interfaz.INavegacion;
 import packetworldescritorio.pojo.Cliente;
 import packetworldescritorio.pojo.Envio;
 import packetworldescritorio.pojo.Paquete;
+import packetworldescritorio.pojo.Sucursal;
 import packetworldescritorio.utilidad.Constantes;
+import packetworldescritorio.utilidad.PdfCreator;
 
 public class FXMLPerfilEnvioController implements Initializable, INavegableChild {
 
@@ -100,6 +103,20 @@ public class FXMLPerfilEnvioController implements Initializable, INavegableChild
     private Label lbCosto;
     @FXML
     private Label lbEstatusActual;
+    @FXML
+    private AnchorPane apDatosCliente2;
+    @FXML
+    private Label lbSucursalNombre;
+    @FXML
+    private Label lbSucursalDireccion;
+    @FXML
+    private Label lbSucursalCodigoPostal;
+    @FXML
+    private Label lbSucursalColonia;
+    @FXML
+    private Label lbSucursalCiudad;
+    @FXML
+    private Label lbSucursalEstado;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -130,20 +147,27 @@ public class FXMLPerfilEnvioController implements Initializable, INavegableChild
     }
 
     private void recargarDatos(Envio envio) {
+        //Orden: Envio
+        
+        
         Envio envioActualizado = obtenerEnvio(envio.getIdEnvio());
-        Cliente clienteActualizado = obtenerCliente(envio.getIdCliente());
-        if (envio == null) {
+         if (envio == null) {
             return;
         }
-        envioActual = envio;
-
+         envioActual = envio; 
+        
+        Cliente clienteActualizado = obtenerCliente(envio.getIdCliente());
+       
         if (clienteActualizado != null) {
             clienteSeleccionado = clienteActualizado;
         }
+        
+        Sucursal sucursalOrigen = obtenerSucursal(envio.getIdSucursalOrigen());
 
         cargarDatosGeneralesEnvio(envioActualizado);
         cargarDatosCliente(clienteActualizado);
         cargarDatosDestinatario(envioActualizado);
+        cargarDatosSucursal(sucursalOrigen);
         cargarDatosPaquetes(envioActualizado.getPaquetes());
     }
 
@@ -192,6 +216,17 @@ public class FXMLPerfilEnvioController implements Initializable, INavegableChild
             lbDestinatarioCodigoPostal.setText(envio.getCodigoPostal());
             lbDestinatarioCiudad.setText(envio.getCiudad());
             lbDestinatarioEstado.setText(envio.getEstado());
+        }
+    }
+    
+        private void cargarDatosSucursal(Sucursal sucursal) {
+        if (sucursal != null) {
+            lbSucursalNombre.setText(sucursal.getNombre());
+            lbSucursalDireccion.setText(sucursal.getCalle() + " " + sucursal.getNumero());
+            lbSucursalColonia.setText(sucursal.getColonia());
+            lbSucursalCodigoPostal.setText(sucursal.getCodigoPostal());
+            lbSucursalCiudad.setText(sucursal.getCiudad());
+            lbSucursalEstado.setText(sucursal.getEstado());
         }
     }
 
@@ -272,8 +307,19 @@ public class FXMLPerfilEnvioController implements Initializable, INavegableChild
         return envio;
     }
 
+    private Sucursal obtenerSucursal(int idSucursal) {
+        Sucursal sucursal = null;
+        try {
+            sucursal = SucursalImp.obtenerPorId(idSucursal);
+        } catch (Exception ex) {
+        }
+        return sucursal;
+    }
+
     @FXML
     private void clickImprimirComprobante(ActionEvent event) {
+        Sucursal sucursal = obtenerSucursal(envioActual.getIdSucursalOrigen());
+        PdfCreator.generarTicket(envioActual, clienteSeleccionado, sucursal);
     }
 
 }

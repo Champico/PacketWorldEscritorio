@@ -24,6 +24,7 @@ public class Constantes {
     public static final String WS_SUCURSAL_REGISTRAR = "sucursal/registrar";
     public static final String WS_SUCURSAL_EDITAR = "sucursal/editar";
     public static final String WS_SUCURSAL_DAR_DE_BAJA = "sucursal/darBaja";
+     public static final String WS_SUCURSAL_OBTENER_POR_ID = "sucursal/obtener";
     public static final String WS_UNIDAD_OBTENER_TODOS = "unidad/obtener";
     public static final String WS_UNIDAD_REGISTRAR = "unidad/registrar";
     public static final String WS_UNIDAD_EDITAR = "unidad/editar";

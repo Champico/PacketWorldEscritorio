@@ -12,7 +12,7 @@
    <children>
       <ScrollPane fitToWidth="true" hbarPolicy="NEVER" pannable="true" prefHeight="627.0" prefWidth="1280.0" vbarPolicy="AS_NEEDED" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <content>
-            <AnchorPane prefHeight="1222.0" prefWidth="1103.0">
+            <AnchorPane prefHeight="1357.0" prefWidth="1278.0">
                <children>
                   <Button layoutX="21.0" layoutY="14.0" mnemonicParsing="false" onAction="#clickRegresar" prefHeight="40.0" prefWidth="139.0" styleClass="btn_regresar">
                      <graphic>
@@ -105,17 +105,17 @@
                                           <Font name="System Bold" size="17.0" />
                                        </font>
                                     </Label>
-                                    <Label fx:id="lbClienteTelefono" layoutX="81.0" layoutY="26.0" maxHeight="26.0" maxWidth="219.0" prefHeight="26.0" prefWidth="219.0" text="+52 22-00-00-00-00">
+                                    <Label fx:id="lbClienteTelefono" layoutX="81.0" layoutY="26.0" maxHeight="26.0" maxWidth="219.0" prefHeight="26.0" prefWidth="200.0" text="+52 22-00-00-00-00">
                                        <font>
                                           <Font size="17.0" />
                                        </font>
                                     </Label>
-                                    <Label layoutX="310.0" layoutY="26.0" text="Correo:">
+                                    <Label layoutX="324.0" layoutY="26.0" text="Correo:">
                                        <font>
                                           <Font name="System Bold" size="17.0" />
                                        </font>
                                     </Label>
-                                    <Label fx:id="lbClienteCorreo" layoutX="375.0" layoutY="26.0" prefHeight="26.0" prefWidth="210.0" text="ejemplo@midominio.com">
+                                    <Label fx:id="lbClienteCorreo" layoutX="389.0" layoutY="26.0" prefHeight="26.0" prefWidth="210.0" text="ejemplo@midominio.com">
                                        <font>
                                           <Font size="17.0" />
                                        </font>
@@ -125,7 +125,7 @@
                                           <Font name="System Bold" size="17.0" />
                                        </font>
                                     </Label>
-                                    <Label fx:id="lbClienteDireccion" layoutX="92.0" layoutY="51.0" maxHeight="26.0" maxWidth="211.0" prefHeight="26.0" prefWidth="211.0" text="Av. Sin nombre #4">
+                                    <Label fx:id="lbClienteDireccion" layoutX="92.0" layoutY="51.0" maxHeight="26.0" maxWidth="226.0" prefHeight="26.0" prefWidth="223.0" text="Av. Sin nombre #4">
                                        <font>
                                           <Font size="17.0" />
                                        </font>
@@ -140,12 +140,12 @@
                                           <Font size="17.0" />
                                        </font>
                                     </Label>
-                                    <Label layoutX="308.0" layoutY="51.0" text="Colonia:">
+                                    <Label layoutX="324.0" layoutY="51.0" text="Colonia:">
                                        <font>
                                           <Font name="System Bold" size="17.0" />
                                        </font>
                                     </Label>
-                                    <Label fx:id="lbClienteColonia" layoutX="381.0" layoutY="51.0" maxHeight="26.0" maxWidth="191.0" prefHeight="26.0" prefWidth="191.0" text="Colonia Carolino">
+                                    <Label fx:id="lbClienteColonia" layoutX="397.0" layoutY="51.0" maxHeight="26.0" maxWidth="191.0" prefHeight="26.0" prefWidth="191.0" text="Colonia Carolino">
                                        <font>
                                           <Font size="17.0" />
                                        </font>
@@ -160,12 +160,12 @@
                                           <Font size="17.0" />
                                        </font>
                                     </Label>
-                                    <Label layoutX="307.0" layoutY="77.0" text="Estado:">
+                                    <Label layoutX="324.0" layoutY="77.0" text="Estado:">
                                        <font>
                                           <Font name="System Bold" size="17.0" />
                                        </font>
                                     </Label>
-                                    <Label fx:id="lbClienteEstado" layoutX="369.0" layoutY="77.0" maxHeight="26.0" maxWidth="191.0" prefHeight="26.0" prefWidth="191.0" text="Estado">
+                                    <Label fx:id="lbClienteEstado" layoutX="386.0" layoutY="77.0" maxHeight="26.0" maxWidth="191.0" prefHeight="26.0" prefWidth="191.0" text="Estado">
                                        <font>
                                           <Font size="17.0" />
                                        </font>
@@ -184,7 +184,7 @@
                               <String fx:value="vb_tarjeta_formulario" />
                            </styleClass>
                         </VBox>
-                        <VBox prefHeight="200.0" prefWidth="100.0" styleClass="tarjeta_formulario">
+                        <VBox prefHeight="200.0" prefWidth="100.0">
                            <children>
                               <Label prefHeight="32.0" prefWidth="262.0" text="Datos del destinatario">
                                  <font>
@@ -315,6 +315,87 @@
                                  </children>
                               </AnchorPane>
                            </children>
+                           <styleClass>
+                              <String fx:value="tarjeta_formulario" />
+                              <String fx:value="vb_tarjeta_formulario" />
+                           </styleClass>
+                        </VBox>
+                        <VBox prefHeight="200.0" prefWidth="100.0">
+                           <children>
+                              <Label prefHeight="32.0" prefWidth="363.0" text="Datos de la sucursal de origen">
+                                 <font>
+                                    <Font name="System Bold" size="22.0" />
+                                 </font>
+                              </Label>
+                              <AnchorPane fx:id="apDatosCliente2" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="81.0" prefWidth="846.0">
+                                 <children>
+                                    <Label text="Sucursal:">
+                                       <font>
+                                          <Font name="System Bold" size="17.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="lbSucursalNombre" layoutX="76.0" text="nombre sucursal">
+                                       <font>
+                                          <Font size="17.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutY="26.0" text="Direccion:">
+                                       <font>
+                                          <Font name="System Bold" size="17.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="lbSucursalDireccion" layoutX="92.0" layoutY="26.0" maxHeight="26.0" maxWidth="211.0" prefHeight="26.0" prefWidth="211.0" text="Av. Sin nombre #4">
+                                       <font>
+                                          <Font size="17.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="591.0" layoutY="26.0" text="Codigo Postal:">
+                                       <font>
+                                          <Font name="System Bold" size="17.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="lbSucursalCodigoPostal" layoutX="716.0" layoutY="26.0" maxHeight="26.0" maxWidth="53.0" prefHeight="26.0" prefWidth="53.0" text="91158">
+                                       <font>
+                                          <Font size="17.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="308.0" layoutY="26.0" text="Colonia:">
+                                       <font>
+                                          <Font name="System Bold" size="17.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="lbSucursalColonia" layoutX="381.0" layoutY="26.0" maxHeight="26.0" maxWidth="191.0" prefHeight="26.0" prefWidth="191.0" text="Colonia Carolino">
+                                       <font>
+                                          <Font size="17.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="1.0" layoutY="52.0" text="Ciudad:">
+                                       <font>
+                                          <Font name="System Bold" size="17.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="lbSucursalCiudad" layoutX="71.0" layoutY="52.0" maxHeight="26.0" maxWidth="211.0" prefHeight="26.0" prefWidth="211.0" text="Ciudad">
+                                       <font>
+                                          <Font size="17.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="307.0" layoutY="52.0" text="Estado:">
+                                       <font>
+                                          <Font name="System Bold" size="17.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="lbSucursalEstado" layoutX="369.0" layoutY="52.0" maxHeight="26.0" maxWidth="191.0" prefHeight="26.0" prefWidth="191.0" text="Estado">
+                                       <font>
+                                          <Font size="17.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                           <styleClass>
+                              <String fx:value="tarjeta_formulario" />
+                              <String fx:value="vb_tarjeta_formulario" />
+                           </styleClass>
                         </VBox>
                         <VBox prefHeight="47.0" prefWidth="1000.0">
                            <children>
