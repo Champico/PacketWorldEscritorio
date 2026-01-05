@@ -268,6 +268,10 @@ public class Envio {
         return datosEnvio + datosPaquetes + '}';
     }
 
-   
+       public String getNombreDestinatarioCompleto() {
+        return (destinatarioNombre != null ? destinatarioNombre + " " : "")
+                + (destinatarioApellidoP != null ? destinatarioApellidoP + " " : "")
+                + (destinatarioApellidoM != null ? destinatarioApellidoM : "");
+    }
 
 }

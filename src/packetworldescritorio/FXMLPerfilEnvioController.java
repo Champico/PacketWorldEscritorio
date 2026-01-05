@@ -4,6 +4,8 @@ package packetworldescritorio;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -11,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import packetworldescritorio.dominio.ClienteImp;
 import packetworldescritorio.dominio.EnvioImp;
@@ -18,8 +21,10 @@ import packetworldescritorio.dominio.SucursalImp;
 import packetworldescritorio.interfaz.INavegableChild;
 import packetworldescritorio.interfaz.INavegacion;
 import packetworldescritorio.pojo.Cliente;
+import packetworldescritorio.pojo.Colaborador;
 import packetworldescritorio.pojo.Envio;
 import packetworldescritorio.pojo.Paquete;
+import packetworldescritorio.pojo.Rol;
 import packetworldescritorio.pojo.Sucursal;
 import packetworldescritorio.utilidad.Constantes;
 import packetworldescritorio.utilidad.PdfCreator;
@@ -118,9 +123,11 @@ public class FXMLPerfilEnvioController implements Initializable, INavegableChild
     @FXML
     private Label lbSucursalEstado;
 
+    private ObservableList<Paquete> paquetes;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
+        configurarSeccionPaquetes();
     }
 
     @Override
@@ -148,20 +155,19 @@ public class FXMLPerfilEnvioController implements Initializable, INavegableChild
 
     private void recargarDatos(Envio envio) {
         //Orden: Envio
-        
-        
+
         Envio envioActualizado = obtenerEnvio(envio.getIdEnvio());
-         if (envio == null) {
+        if (envio == null) {
             return;
         }
-         envioActual = envio; 
-        
+        envioActual = envio;
+
         Cliente clienteActualizado = obtenerCliente(envio.getIdCliente());
-       
+
         if (clienteActualizado != null) {
             clienteSeleccionado = clienteActualizado;
         }
-        
+
         Sucursal sucursalOrigen = obtenerSucursal(envio.getIdSucursalOrigen());
 
         cargarDatosGeneralesEnvio(envioActualizado);
@@ -209,7 +215,7 @@ public class FXMLPerfilEnvioController implements Initializable, INavegableChild
 
     private void cargarDatosDestinatario(Envio envio) {
         if (envio != null) {
-            lbDestinatarioNombre.setText(envio.getDestinatario());
+            lbDestinatarioNombre.setText(envio.getNombreDestinatarioCompleto());
             lbDestinatarioTelefono.setText(envio.getDestinatarioTelefono());
             lbDestinatarioDireccion.setText(envio.getCalle() + " " + envio.getNumero());
             lbDestinatarioColonia.setText(envio.getColonia());
@@ -218,8 +224,8 @@ public class FXMLPerfilEnvioController implements Initializable, INavegableChild
             lbDestinatarioEstado.setText(envio.getEstado());
         }
     }
-    
-        private void cargarDatosSucursal(Sucursal sucursal) {
+
+    private void cargarDatosSucursal(Sucursal sucursal) {
         if (sucursal != null) {
             lbSucursalNombre.setText(sucursal.getNombre());
             lbSucursalDireccion.setText(sucursal.getCalle() + " " + sucursal.getNumero());
@@ -230,14 +236,12 @@ public class FXMLPerfilEnvioController implements Initializable, INavegableChild
         }
     }
 
-    private void cargarDatosPaquetes(List<Paquete> paquetes) {
-        System.out.println("Los paquetes son ");
-        if (paquetes != null) {
-            for (Paquete p : paquetes) {
-                System.out.println(p);
-            }
-        }
+    private void cargarDatosPaquetes(List<Paquete> paquetesActuales) {
+        paquetes.clear();
 
+        if (paquetesActuales != null && !paquetesActuales.isEmpty()) {
+            paquetes.addAll(paquetesActuales);
+        }
     }
 
     private void borrarDatosCliente() {
@@ -322,4 +326,21 @@ public class FXMLPerfilEnvioController implements Initializable, INavegableChild
         PdfCreator.generarTicket(envioActual, clienteSeleccionado, sucursal);
     }
 
+    private void configurarSeccionPaquetes() {
+        inicializarTablaPaquetesVacia();
+        configurarTabla();
+    }
+
+    private void configurarTabla() {
+        colDescripcion.setCellValueFactory(new PropertyValueFactory("descripcion"));
+        colAlto.setCellValueFactory(new PropertyValueFactory("alto"));
+        colAncho.setCellValueFactory(new PropertyValueFactory("ancho"));
+        colProfundidad.setCellValueFactory(new PropertyValueFactory("profundidad"));
+        colPeso.setCellValueFactory(new PropertyValueFactory("peso"));
+    }
+
+    private void inicializarTablaPaquetesVacia() {
+        paquetes = FXCollections.observableArrayList();
+        tvPaquetes.setItems(paquetes);
+    }
 }
