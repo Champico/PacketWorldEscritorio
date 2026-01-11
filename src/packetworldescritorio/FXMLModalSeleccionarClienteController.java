@@ -78,6 +78,10 @@ public class FXMLModalSeleccionarClienteController implements Initializable {
 
     @FXML
     private void clickBuscar(ActionEvent event) {
+        buscar();
+    }
+
+    private void buscar() {
         if (tfBusqueda.getText() != null && !tfBusqueda.getText().isEmpty()) {
             cargarInformaciónClientes(tfBusqueda.getText());
         }

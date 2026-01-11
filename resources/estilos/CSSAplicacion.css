@@ -7,21 +7,6 @@
     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 10, 0.3, 0, 2);
 }
 
-.btn_cerrar_sesion{
-    -fx-cursor: HAND;
-    -fx-background-color:  #00000000;
-}
-
-
-
-.btn_modulo{
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0.1, 0, 4);
-    -fx-background-radius: 8px;
-    -fx-border-radius: 8px;
-    -fx-background-color: #ffffff;
-    -fx-cursor: HAND;
-}
-
 .gp_menu{
     -fx-hgap: 15;
     -fx-vgap: 28;
@@ -35,13 +20,6 @@
     -fx-spacing: 0;
 }
 
-
-
-.btn_regresar{
-    -fx-cursor: HAND;
-    -fx-background-color:  #00000000;
-}
-
 .hb_crud_menu {
     -fx-spacing: 15;
 }
@@ -51,11 +29,36 @@
 
 
 
+
+/*  =======================================================
+            Estilos de botones
+    ======================================================= */
+
+.btn_modulo{
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0.1, 0, 4);
+    -fx-background-radius: 8px;
+    -fx-border-radius: 8px;
+    -fx-background-color: #ffffff;
+    -fx-cursor: HAND;
+}
+
+.btn_cerrar_sesion{
+    -fx-cursor: HAND;
+    -fx-background-color:  #00000000;
+}
+
+.btn_regresar{
+    -fx-cursor: HAND;
+    -fx-background-color:  #00000000;
+}
+
 .btn_general {
     -fx-background-color: #ffffff;
     -fx-background-radius: 8;
     -fx-padding: 8 15 8 15; /* top right bottom left */
     -fx-cursor: HAND;
+    -fx-focus-color: #039ED3;
+    -fx-faint-focus-color: #039ED322;
 }
 
 .btn_general:hover {
@@ -121,13 +124,25 @@
 }
 
 
+
+
+
+
+
+/*  =======================================================
+            Estilos de los input como TextField, TextArea y ComboBox
+    ======================================================= */
+
 .input_general{
     -fx-background-color: #ffffff;
     -fx-border-color: #9b9b9b;
     -fx-border-radius: 4px;
 }
 
-
+.input_general:focused{
+    -fx-border-color: #3194e0be;
+    -fx-border-width: 1.5px; 
+}
 
 .input_password{
     -fx-padding:  0 30 0 9; /* top right bottom left */
@@ -140,8 +155,11 @@
 .input_error{
     -fx-border-color: #ff3434;
     -fx-border-width: 1.5px; 
-    -fx-focus-color:#ff3434; 
-    -fx-faint-focus-color: #ff52524e
+}
+
+.input_error:focused{
+    -fx-border-color: #ff7700d2;
+    -fx-border-width: 1.5px; 
 }
 
 .input_no_writable:disabled{
@@ -150,6 +168,12 @@
 
 
 
+
+
+
+/*  =======================================================
+            Estilos de tarjetas
+    ======================================================= */
 
 
 .tarjeta_formulario{
@@ -192,9 +216,9 @@
 }
 
 .btn_default{
-        -fx-cursor: HAND;
+    -fx-cursor: HAND;
 }
 
 .vb_historial_envio{
-        -fx-spacing: 15;
+    -fx-spacing: 15;
 }

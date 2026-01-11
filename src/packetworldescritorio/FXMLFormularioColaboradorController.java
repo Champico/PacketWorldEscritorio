@@ -422,23 +422,23 @@ public class FXMLFormularioColaboradorController implements Initializable, INave
 
     private boolean verificarRol() {
         Rol rolSeleccionado = cbRol.getSelectionModel().getSelectedItem();
-        
+
         if (rolSeleccionado == null) {
             UIUtilidad.mostrarLabelMensajeError(lbErrorRol, "Seleccione un rol");
             return false;
         }
-        
+
         UIUtilidad.ocultarLabelMensajeError(lbErrorRol);
         return true;
     }
 
     private boolean verificarSucursal() {
         Sucursal sucursalSeleccionada = cbSucursal.getSelectionModel().getSelectedItem();
-        
+
         if (sucursalSeleccionada == null) {
             UIUtilidad.mostrarLabelMensajeError(lbErrorSucursal, "Seleccione una sucursal");
             return false;
-        } 
+        }
 
         UIUtilidad.ocultarLabelMensajeError(lbErrorSucursal);
         return true;
@@ -447,7 +447,13 @@ public class FXMLFormularioColaboradorController implements Initializable, INave
     private boolean verificarLicencia() {
 
         Rol rolSeleccionado = cbRol.getSelectionModel().getSelectedItem();
-        if (rolSeleccionado.getIdRol() == Constantes.ID_ROL_CONDUCTOR) {
+
+        if (rolSeleccionado == null) {
+            UIUtilidad.limpiarError(tfLicencia, lbErrorLicencia);
+            return true;
+        }
+
+        if (rolSeleccionado.getIdRol() != Constantes.ID_ROL_CONDUCTOR) {
             UIUtilidad.limpiarError(tfLicencia, lbErrorLicencia);
             return true;
         }
@@ -535,7 +541,7 @@ public class FXMLFormularioColaboradorController implements Initializable, INave
 
     private void registrarColaborador(Colaborador colaborador) {
         Respuesta respuesta = ColaboradorImp.registrar(colaborador);
-        
+
         if (!respuesta.isError()) {
             if (fotoEditada == true) {
                 Integer idColaborador = obtenerIdColaboradorPorNumeroPersonal(colaborador.getNoPersonal());

@@ -166,14 +166,11 @@
                                                         <Font size="17.0" />
                                                     </font>
                                                 </Label>
-                                                <TextField fx:id="tfNombre" layoutY="26.0" prefHeight="40.0" prefWidth="233.0" promptText="Jose" styleClass="input_general" />
                                                 <Label layoutX="252.0" text="Apellido Paterno *">
                                                     <font>
                                                         <Font size="17.0" />
                                                     </font>
                                                 </Label>
-                                                <TextField fx:id="tfApPaterno" layoutX="251.0" layoutY="26.0" prefHeight="40.0" prefWidth="233.0" promptText="Garcia" styleClass="input_general" />
-                                                <TextField fx:id="tfApMaterno" layoutX="501.0" layoutY="26.0" prefHeight="40.0" prefWidth="233.0" promptText="Torres" styleClass="input_general" />
                                                 <Label layoutX="499.0" text="Apellido Materno">
                                                     <font>
                                                         <Font size="17.0" />
@@ -184,6 +181,9 @@
                                                         <Font size="17.0" />
                                                     </font>
                                                 </Label>
+                                                <TextField fx:id="tfNombre" layoutY="26.0" prefHeight="40.0" prefWidth="233.0" promptText="Jose" styleClass="input_general" />
+                                                <TextField fx:id="tfApPaterno" layoutX="251.0" layoutY="26.0" prefHeight="40.0" prefWidth="233.0" promptText="Garcia" styleClass="input_general" />
+                                                <TextField fx:id="tfApMaterno" layoutX="501.0" layoutY="26.0" prefHeight="40.0" prefWidth="233.0" promptText="Torres" styleClass="input_general" />
                                                 <TextField fx:id="tfTelefono" layoutY="299.0" prefHeight="40.0" prefWidth="233.0" promptText="5500000000" styleClass="input_general" />
                                                 <Label fx:id="lbErrorNombre" layoutY="66.0" text="Campo obligatorio" textFill="RED" visible="false" />
                                                 <Label fx:id="lbErrorApPaterno" layoutX="251.0" layoutY="66.0" text="Campo obligatorio" textFill="RED" visible="false" />

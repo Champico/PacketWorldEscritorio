@@ -26,7 +26,7 @@
             </Button>
          </children>
       </HBox>
-      <TextField fx:id="tfBusqueda" layoutX="29.0" layoutY="98.0" prefHeight="43.0" prefWidth="372.0" promptText="Buscar cliente">
+      <TextField fx:id="tfBusqueda" layoutX="29.0" layoutY="98.0" onAction="#clickBuscar" prefHeight="43.0" prefWidth="372.0" promptText="Buscar cliente">
          <styleClass>
             <String fx:value="input_general" />
             <String fx:value="input_busqueda" />
