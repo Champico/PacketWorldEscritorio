@@ -143,7 +143,7 @@ public class FXMLModuloColaboradoresController implements Initializable, INavega
                 eliminarColaborador(colaborador.getIdColaborador());
             }
         } else {
-            Utilidades.mostrarAlertaSimple("Selecciona profesor", "Para eliminar un profesor, debe seleccionarlo de la tabla", Alert.AlertType.WARNING);
+            Utilidades.mostrarAlertaSimple("Selecciona colaborador", "Para eliminar un colaborador, debe seleccionarlo de la tabla", Alert.AlertType.WARNING);
         }
     }
 
@@ -168,7 +168,7 @@ public class FXMLModuloColaboradoresController implements Initializable, INavega
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    private void cargarRolesProfesor() {
+    private void cargarRolesColaborador() {
         HashMap<String, Object> respuesta = CatalogoImp.obtenerRolesSistema();
         if (!(boolean) respuesta.get(Constantes.KEY_ERROR)) {
             List<Rol> rolesAPI = (List<Rol>) respuesta.get(Constantes.KEY_LISTA);
@@ -185,7 +185,7 @@ public class FXMLModuloColaboradoresController implements Initializable, INavega
     }
 
     private void configurarComboBoxRoles() {
-        cargarRolesProfesor();
+        cargarRolesColaborador();
         agregarEventoCambioRol();
     }
 

@@ -264,7 +264,7 @@ public class FXMLFormularioUnidadController implements Initializable, INavegable
         }
 
         if (tfVin.getText().trim().length() != 17) {
-            UIUtilidad.marcarError(tfVin, lbErrorVin, "El vin debe tener 7 caracteres");
+            UIUtilidad.marcarError(tfVin, lbErrorVin, "El vin debe tener 17 caracteres");
             return false;
         }
 

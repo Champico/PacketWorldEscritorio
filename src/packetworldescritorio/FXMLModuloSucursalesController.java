@@ -91,7 +91,7 @@ public class FXMLModuloSucursalesController implements Initializable, INavegable
         if (sucursal != null) {
             irFormulario(sucursal);
         } else {
-            Utilidades.mostrarAlertaSimple("Selecciona una sucursal", "Para editar la información de una sucursal, debes seleciconarlo primero de la tabla", Alert.AlertType.WARNING);
+            Utilidades.mostrarAlertaSimple("Selecciona una sucursal", "Para editar la información de una sucursal, debes seleccionarla primero de la tabla", Alert.AlertType.WARNING);
         }
     }
 

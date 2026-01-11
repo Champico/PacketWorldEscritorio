@@ -42,9 +42,8 @@ import packetworldescritorio.utilidad.UIUtilidad;
 
 public class FXMLFormularioColaboradorController implements Initializable, INavegableChild {
 
-    
     private INavegacion nav;
-    
+
     @FXML
     private TextField tfNoPersonal;
     @FXML
@@ -204,6 +203,10 @@ public class FXMLFormularioColaboradorController implements Initializable, INave
             colaborador.setIdRol(rol.getIdRol());
             colaborador.setPassword(password);
 
+            if (rol.getIdRol() == Constantes.ID_ROL_CONDUCTOR) {
+                colaborador.setNumLicencia(tfLicencia.getText());
+            }
+
             if (colaboradorEdicion == null) {
                 registrarColaborador(colaborador);
             } else {
@@ -310,7 +313,6 @@ public class FXMLFormularioColaboradorController implements Initializable, INave
         if (verificarNoPersonal() == false) {
             camposCorrectos = false;
         }
-
         if (verificarNombre() == false) {
             camposCorrectos = false;
         }
@@ -332,6 +334,9 @@ public class FXMLFormularioColaboradorController implements Initializable, INave
         if (verificarSucursal() == false) {
             camposCorrectos = false;
         }
+        if (verificarLicencia() == false) {
+            camposCorrectos = false;
+        }
 
         return camposCorrectos;
     }
@@ -350,6 +355,9 @@ public class FXMLFormularioColaboradorController implements Initializable, INave
         if (verificarCorreo() == false) {
             camposCorrectos = false;
         }
+        if (verificarLicencia() == false) {
+            camposCorrectos = false;
+        }
         return camposCorrectos;
     }
 
@@ -360,7 +368,6 @@ public class FXMLFormularioColaboradorController implements Initializable, INave
         }
 
         UIUtilidad.limpiarError(tfNoPersonal, lbErrorNoPersonal);
-
         return true;
     }
 
@@ -371,7 +378,6 @@ public class FXMLFormularioColaboradorController implements Initializable, INave
         }
 
         UIUtilidad.limpiarError(tfNombre, lbErrorNombre);
-
         return true;
     }
 
@@ -382,7 +388,6 @@ public class FXMLFormularioColaboradorController implements Initializable, INave
         }
 
         UIUtilidad.limpiarError(tfApPaterno, lbErrorApPaterno);
-
         return true;
     }
 
@@ -398,7 +403,6 @@ public class FXMLFormularioColaboradorController implements Initializable, INave
         }
 
         UIUtilidad.limpiarError(tfCurp, lbErrorCurp);
-
         return true;
     }
 
@@ -413,36 +417,46 @@ public class FXMLFormularioColaboradorController implements Initializable, INave
         }
 
         UIUtilidad.limpiarError(tfCorreo, lbErrorCorreo);
-
         return true;
     }
 
     private boolean verificarRol() {
         Rol rolSeleccionado = cbRol.getSelectionModel().getSelectedItem();
+        
         if (rolSeleccionado == null) {
             UIUtilidad.mostrarLabelMensajeError(lbErrorRol, "Seleccione un rol");
             return false;
-        } else {
-            UIUtilidad.ocultarLabelMensajeError(lbErrorRol);
-            if (rolSeleccionado.toString().equals(Constantes.ROL_CONDUCTOR) && UIUtilidad.esInputVacio(tfLicencia, lbErrorLicencia) == true) {
-                return false;
-            }
         }
-
+        
         UIUtilidad.ocultarLabelMensajeError(lbErrorRol);
         return true;
     }
 
     private boolean verificarSucursal() {
         Sucursal sucursalSeleccionada = cbSucursal.getSelectionModel().getSelectedItem();
+        
         if (sucursalSeleccionada == null) {
             UIUtilidad.mostrarLabelMensajeError(lbErrorSucursal, "Seleccione una sucursal");
             return false;
-        } else {
-            UIUtilidad.ocultarLabelMensajeError(lbErrorSucursal);
+        } 
+
+        UIUtilidad.ocultarLabelMensajeError(lbErrorSucursal);
+        return true;
+    }
+
+    private boolean verificarLicencia() {
+
+        Rol rolSeleccionado = cbRol.getSelectionModel().getSelectedItem();
+        if (rolSeleccionado.getIdRol() == Constantes.ID_ROL_CONDUCTOR) {
+            UIUtilidad.limpiarError(tfLicencia, lbErrorLicencia);
+            return true;
         }
 
-        UIUtilidad.ocultarLabelMensajeError(lbErrorRol);
+        if (UIUtilidad.esInputVacio(tfLicencia, lbErrorLicencia) == true) {
+            return false;
+        }
+
+        UIUtilidad.limpiarError(tfLicencia, lbErrorLicencia);
         return true;
     }
 
@@ -457,7 +471,7 @@ public class FXMLFormularioColaboradorController implements Initializable, INave
         }
 
         if (password.length() < 8) {
-            marcarErrorCampoPassword(password, "La contraseña debe ser minimo de 8 caracteres");
+            marcarErrorCampoPassword("password", "La contraseña debe ser minimo de 8 caracteres");
             limpiarErrorCampoPassword("confirmarPassword");
             return false;
         }
@@ -468,14 +482,14 @@ public class FXMLFormularioColaboradorController implements Initializable, INave
             return false;
         }
 
-        limpiarErrorCampoPassword("password"); //La contraseña paso los filtros, esta bien
+        limpiarErrorCampoPassword("password");
 
         if (!confirmarPassword.equals(password)) {
             marcarErrorCampoPassword("confirmarPassword", "La contraseña no coincide");
             return false;
         }
 
-        limpiarErrorCampoPassword("confirmarPassword"); //Coincide la confirmación
+        limpiarErrorCampoPassword("confirmarPassword");
         return true;
     }
 
@@ -521,6 +535,7 @@ public class FXMLFormularioColaboradorController implements Initializable, INave
 
     private void registrarColaborador(Colaborador colaborador) {
         Respuesta respuesta = ColaboradorImp.registrar(colaborador);
+        
         if (!respuesta.isError()) {
             if (fotoEditada == true) {
                 Integer idColaborador = obtenerIdColaboradorPorNumeroPersonal(colaborador.getNoPersonal());
@@ -528,7 +543,7 @@ public class FXMLFormularioColaboradorController implements Initializable, INave
                     Respuesta respuestaFoto = enviarFoto(idColaborador);
                     Utilidades.mostrarAlertaSimple("Colaborador registrado", respuesta.getMensaje(), Alert.AlertType.INFORMATION);
                     if (respuestaFoto.isError()) {
-                         Utilidades.mostrarAlertaSimple("No se pudo guardar la foto", "Ocurrio un error al guardar la foto, intente subirla más tarde", Alert.AlertType.ERROR);
+                        Utilidades.mostrarAlertaSimple("No se pudo guardar la foto", "Ocurrio un error al guardar la foto, intente subirla más tarde", Alert.AlertType.ERROR);
                     }
                 } else {
                     Utilidades.mostrarAlertaSimple("No se pudo guardar la foto", "Ocurrio un error al guardar la foto, intente subirla más tarde", Alert.AlertType.ERROR);
