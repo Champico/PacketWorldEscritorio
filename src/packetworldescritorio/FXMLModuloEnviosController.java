@@ -57,7 +57,9 @@ public class FXMLModuloEnviosController implements Initializable, INavegableChil
     private TableColumn colCodigoPostal;
     @FXML
     private TableColumn colEstatus;
-
+    @FXML
+    private TableColumn colNombreConductor;
+    
     private ObservableList<Envio> envios;
     private FilteredList<Envio> filteredData;
     private SortedList<Envio> sortedData;
@@ -119,6 +121,7 @@ public class FXMLModuloEnviosController implements Initializable, INavegableChil
         colCiudad.setCellValueFactory(new PropertyValueFactory("ciudad"));
         colEstado.setCellValueFactory(new PropertyValueFactory("estado"));
         colEstatus.setCellValueFactory(new PropertyValueFactory("nombreEstatus"));
+        colNombreConductor.setCellValueFactory(new PropertyValueFactory("nombreConductor"));
 
         tvEnvios.setRowFactory(tv -> {
             TableRow<Envio> row = new TableRow<>();
