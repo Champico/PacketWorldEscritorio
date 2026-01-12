@@ -141,6 +141,10 @@ public class FXMLModuloEnviosController implements Initializable, INavegableChil
             idSucursal = Session.getInstance().getUsuarioActual().getIdSucursal();
         } catch (Exception ex) {
         }
+        
+        if(idSucursal == null){
+            return;
+        }
 
         HashMap<String, Object> respuesta = EnvioImp.obtenerConLimite(idSucursal, Constantes.LIMITE_ENVIOS);
         boolean esError = (boolean) respuesta.get(Constantes.KEY_ERROR);
@@ -188,6 +192,8 @@ public class FXMLModuloEnviosController implements Initializable, INavegableChil
             stModal.initStyle(StageStyle.UTILITY);
 
             stModal.showAndWait();
+            
+            cargarInformaciónEnvios();
         } catch (Exception ex) {
 
         }
