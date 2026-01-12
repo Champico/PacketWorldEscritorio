@@ -35,6 +35,7 @@ import packetworldescritorio.interfaz.INavegacion;
 import packetworldescritorio.interfaz.INotificador;
 import packetworldescritorio.pojo.Colaborador;
 import packetworldescritorio.pojo.Rol;
+import packetworldescritorio.pojo.Session;
 import packetworldescritorio.utilidad.Constantes;
 import packetworldescritorio.utilidad.Utilidades;
 
@@ -138,6 +139,11 @@ public class FXMLModuloColaboradoresController implements Initializable, INavega
     private void clickEliminar(ActionEvent event) {
         Colaborador colaborador = tvColaboradores.getSelectionModel().getSelectedItem();
         if (colaborador != null) {
+            if(Session.getInstance().getUsuarioActual() != null && Session.getInstance().getUsuarioActual().getNoPersonal().equals(colaborador.getNoPersonal())  ) {
+                    Utilidades.mostrarAlertaSimple("Error al eliminar", "No puedes eliminar a tu propio usuario", Alert.AlertType.ERROR);
+                    return;
+            }
+            
             Boolean confirmarOperacion = Utilidades.mostrarAlertaConfirmacion("Eliminar colaborador", "¿Estas seguro de que quieres eliminar el registro del colaborador " + (colaborador.getNombre() != null ? colaborador.getNombre() : "") + " " + (colaborador.getApellidoPaterno() != null ? colaborador.getApellidoPaterno() : "") + " " + (colaborador.getApellidoMaterno() != null ? colaborador.getApellidoMaterno() : "") + " ?" + "\n Al eliminar un registro no podras recuperar la información posteriormente");
             if (confirmarOperacion) {
                 eliminarColaborador(colaborador.getIdColaborador());
