@@ -1,17 +1,14 @@
 /** @authores  Pipe, Kevin, champ */
 package packetworldescritorio;
 
-import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.File;
-import java.io.IOException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -20,13 +17,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.control.TextFormatter;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
-import javax.imageio.ImageIO;
 import packetworldescritorio.dominio.CatalogoImp;
 import packetworldescritorio.dominio.ColaboradorImp;
 import packetworldescritorio.dto.Respuesta;
@@ -35,7 +30,6 @@ import packetworldescritorio.interfaz.INavegacion;
 import packetworldescritorio.pojo.Colaborador;
 import packetworldescritorio.utilidad.Constantes;
 import packetworldescritorio.pojo.Rol;
-import packetworldescritorio.pojo.Session;
 import packetworldescritorio.pojo.Sucursal;
 import packetworldescritorio.utilidad.Utilidades;
 import packetworldescritorio.utilidad.UIUtilidad;
@@ -278,12 +272,26 @@ public class FXMLFormularioColaboradorController implements Initializable, INave
     }
 
     private void configurarMaximoNumeroCaracteres() {
-        TextInputControl[] tf = {tfNombre, tfApPaterno, tfApMaterno, tfCurp, tfCorreo, tfNoPersonal, pfPassword, pfConfirmarPassword};
-        Integer maxNumCaracteres[] = {254, 254, 254, 18, 254, 50, 25, 25};
 
-        for (int i = 0; i < tf.length; i++) {
-            UIUtilidad.limitarCaracteres(tf[i], maxNumCaracteres[i]);
+        /* Configurar el número de caracteres de los campos de contraseña */
+        TextInputControl[] camposPassword = {pfPassword, pfConfirmarPassword, tfPassword, tfConfirmarPassword};
+
+        for (TextInputControl campo : camposPassword) {
+            UIUtilidad.limitarCaracteres(campo, 25);
         }
+
+        /* Configurar campos normales */
+        TextInputControl[] camposNormales = {tfNombre, tfApPaterno, tfApMaterno, tfCorreo};
+
+        for (TextInputControl campo : camposNormales) {
+            UIUtilidad.limitarCaracteres(campo, 254);
+        }
+
+        /* Configurar campo de  curp*/
+        UIUtilidad.aplicarFormatoBasicoMayusculasSinEspacios(tfCurp, 18);
+
+        /* Configurar campo numero de personal */
+        UIUtilidad.limitarAlfanumericoBasicoSinEspacios(tfNoPersonal, 20);
     }
 
     private void alternarPassword(TextField tf, PasswordField pf, ImageView iv, ToggleButton tb) {
@@ -319,6 +327,9 @@ public class FXMLFormularioColaboradorController implements Initializable, INave
         if (verificarApellidoPaterno() == false) {
             camposCorrectos = false;
         }
+        if (verificarApellidoMaterno() == false) {
+            camposCorrectos = false;
+        }
         if (verificarCurp() == false) {
             camposCorrectos = false;
         }
@@ -349,6 +360,9 @@ public class FXMLFormularioColaboradorController implements Initializable, INave
         if (verificarApellidoPaterno() == false) {
             camposCorrectos = false;
         }
+        if (verificarApellidoMaterno() == false) {
+            camposCorrectos = false;
+        }
         if (verificarCurp() == false) {
             camposCorrectos = false;
         }
@@ -367,6 +381,16 @@ public class FXMLFormularioColaboradorController implements Initializable, INave
             return false;
         }
 
+        if (tfNoPersonal.getText().trim().length() < 4) {
+            UIUtilidad.marcarError(tfNoPersonal, lbErrorNoPersonal, "El número de personal debe tener al menos 4 caracteres");
+            return false;
+        }
+
+        if (tfNoPersonal.getText().trim().matches(Constantes.REGEX_LETRAS_Y_NUMEROS_BASICOS) == false) {
+            UIUtilidad.marcarError(tfNoPersonal, lbErrorNoPersonal, "Ingrese solo letras (a-z) y números (0-9)");
+            return false;
+        }
+
         UIUtilidad.limpiarError(tfNoPersonal, lbErrorNoPersonal);
         return true;
     }
@@ -374,6 +398,16 @@ public class FXMLFormularioColaboradorController implements Initializable, INave
     private boolean verificarNombre() {
 
         if (UIUtilidad.esInputVacio(tfNombre, lbErrorNombre) == true) {
+            return false;
+        }
+
+        if (tfNombre.getText().trim().matches(Constantes.REGEX_LETRAS_ESPANOL) == false) {
+            UIUtilidad.marcarError(tfNombre, lbErrorNombre, "Ingrese solo letras (a-z)");
+            return false;
+        }
+
+        if (tfNombre.getText().trim().length() < 3) {
+            UIUtilidad.marcarError(tfNombre, lbErrorNombre, "Debe tener mínimo 3 caracteres");
             return false;
         }
 
@@ -387,8 +421,41 @@ public class FXMLFormularioColaboradorController implements Initializable, INave
             return false;
         }
 
+        if (tfApPaterno.getText().trim().matches(Constantes.REGEX_LETRAS_ESPANOL) == false) {
+            UIUtilidad.marcarError(tfApPaterno, lbErrorApPaterno, "Ingrese solo letras (a-z)");
+            return false;
+        }
+
+        if (tfApPaterno.getText().trim().length() < 3) {
+            UIUtilidad.marcarError(tfApPaterno, lbErrorApPaterno, "Debe tener mínimo 3 caracteres");
+            return false;
+        }
+
         UIUtilidad.limpiarError(tfApPaterno, lbErrorApPaterno);
         return true;
+    }
+
+    private boolean verificarApellidoMaterno() {
+        String apellidoMaterno = tfApMaterno.getText() == null ? null : tfApMaterno.getText().trim();
+
+        if (apellidoMaterno == null || apellidoMaterno.isEmpty() == true) {
+            UIUtilidad.limpiarError(tfApMaterno, lbErrorApMaterno);
+            return true;
+        }
+
+        if (apellidoMaterno.matches(Constantes.REGEX_LETRAS_ESPANOL) == false) {
+            UIUtilidad.marcarError(tfApMaterno, lbErrorApMaterno, "Ingrese solo letras (a-z)");
+            return false;
+        }
+
+        if (apellidoMaterno.length() < 3) {
+            UIUtilidad.marcarError(tfApMaterno, lbErrorApMaterno, "Debe tener mínimo 3 caracteres");
+            return false;
+        }
+
+        UIUtilidad.limpiarError(tfApMaterno, lbErrorApMaterno);
+        return true;
+
     }
 
     private boolean verificarCurp() {
@@ -411,7 +478,7 @@ public class FXMLFormularioColaboradorController implements Initializable, INave
             return false;
         }
 
-        if (tfCorreo.getText().trim().matches("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$") == false) {
+        if (tfCorreo.getText().trim().matches(Constantes.REGEX_CORREO) == false) {
             UIUtilidad.marcarError(tfCorreo, lbErrorCorreo, "Formato de correo no valido");
             return false;
         }
@@ -482,8 +549,8 @@ public class FXMLFormularioColaboradorController implements Initializable, INave
             return false;
         }
 
-        if (!password.matches("^(?=.*\\p{Lu})(?=.*\\p{Ll})(?=.*\\d).{8,}$")) {
-            marcarErrorCampoPassword("password", "Debe incluir almenos una letra minuscula, una mayuscula y un número");
+        if (!password.matches(Constantes.REGEX_PASSWORD)) {
+            marcarErrorCampoPassword("password", "Debe incluir almenos una letra minuscula, una mayuscula, un número y uno de los siguientes simbolos: @  #  $  %  ^  &  +  =  ! ");
             limpiarErrorCampoPassword("confirmarPassword");
             return false;
         }

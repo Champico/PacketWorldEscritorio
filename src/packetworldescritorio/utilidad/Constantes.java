@@ -120,12 +120,24 @@ public class Constantes {
     public static final String TIPO_VENTANA_MODAL = "modal";
     public static final String TIPO_VENTANA_MODAL_SELECCION = "modal-selector";
 
-    //Otros
+    //Regex
+    public static final String REGEX_LETRAS_ESPANOL = "^[A-Za-z áéíóúÁÉÍÓÚñÑüÜ]+$";
+    public static final String REGEX_LETRAS_Y_NUMEROS_BASICOS = "^[A-Za-z0-9]+$";
+    public static final String REGEX_CORREO = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$";
+    public static final String REGEX_PASSWORD = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!])(?=\\S+$).{8,}$";
+    public static final String REGEX_NUMERO_LICENCIA = "^[a-zA-Z0-9]{5,20}$";
+    public static final String REGEX_CURP = "^[A-Z]{1}[AEIOU]{1}[A-Z]{2}\\d{6}[HM]{1}[A-Z]{2}[B-DF-HJ-NP-TV-Z]{3}[A-Z\\d]{2}$";
+    public static final String REGEX_NUMERO_PERSONAL = "^[a-zA-Z0-9]{4,20}$";    
+    
+    //Limites
     public static final int MAX_SIZE_MB_IMAGE = 2;
     public static final int LIMITE_ENVIOS = 30;
     public static final int MAX_PAQUETES_POR_ENVIO = 3;
     public static final int LIMITE_PAQUETES = 50;
-
+    public static final int MIN_WIDTH_WINDOW = 1200;
+    public static final int MIN_HEIGHT_WINDOW = 800;
+        
+    //Estatus envios
     public static final int ID_ESTATUS_ENVIO_DETENIDO = 4;
     public static final int ID_ESTATUS_ENVIO_CANCELADO = 6;
 }

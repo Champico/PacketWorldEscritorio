@@ -170,8 +170,8 @@ public class FXMLInicioSesionController implements Initializable {
             Stage stPrincipal = new Stage();
             stPrincipal.setScene(escenaPrincipal);
             stPrincipal.initStyle(StageStyle.DECORATED);
-            stPrincipal.setMinWidth(1000);
-            stPrincipal.setMinHeight(600);
+            stPrincipal.setMinWidth(Constantes.MIN_WIDTH_WINDOW);
+            stPrincipal.setMinHeight(Constantes.MIN_HEIGHT_WINDOW);
             stPrincipal.setTitle("Packet World Admin");
 
             /* Poner icono */

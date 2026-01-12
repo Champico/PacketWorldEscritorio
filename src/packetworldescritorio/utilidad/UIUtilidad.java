@@ -1,17 +1,9 @@
 /** @authores  Pipe, Kevin, champ */
 package packetworldescritorio.utilidad;
 
-import java.awt.AlphaComposite;
-import java.awt.Color;
-import java.awt.Graphics2D;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextFormatter;
 import javafx.scene.control.TextInputControl;
-import javax.imageio.ImageIO;
 
 public class UIUtilidad {
 
@@ -46,7 +38,7 @@ public class UIUtilidad {
         }
 
         String valor = input.getText();
-        
+
         if (valor == null || valor.trim().isEmpty()) {
             marcarError(input, labelError, "Campo obligatorio");
             return true;
@@ -189,6 +181,16 @@ public class UIUtilidad {
         }));
     }
 
+    /**
+     * Configura un campo de texto para escribir numeros decimales configurando
+     * un maximo de numeros para cada lado del punto
+     *
+     * @param field El campo de texto (TextInputControl) al que se aplicará el
+     * la configuración.
+     * @param maxIzquierda número maximo de dígitos del lado izquierdo
+     * @param maxDerecha número maximo de dígitos del lado derecho
+     *
+     */
     public static void aplicarFormatoNumericoDecimal(TextInputControl field, int maxIzquierda, int maxDerecha) {
 
         field.setTextFormatter(new TextFormatter<>(change -> {
@@ -205,6 +207,101 @@ public class UIUtilidad {
             }
 
             return null;
+        }));
+    }
+
+    /**
+     * Limita la cantidad máxima de caracteres permitidos a letras A-Z, a-z y
+     * números del 1 al 9 en un campo de texto de JavaFX.
+     *
+     * No permite ñ, acentos, espacios ni símbolos.
+     *
+     * @param field El campo de texto (TextInputControl) al que se aplicará el
+     * límite.
+     * @param max El número máximo de caracteres permitidos.
+     */
+    public static void limitarAlfanumericoBasicoSinEspacios(TextInputControl field, int max) {
+        field.setTextFormatter(new TextFormatter<>(change -> {
+
+            String nuevoTexto = change.getControlNewText();
+
+            if (nuevoTexto.length() > max) {
+                return null;
+            }
+
+            // Solo letras A-Z, a-z y números 0-9
+            if (!nuevoTexto.matches("[A-Za-z0-9]*")) {
+                return null;
+            }
+
+            return change;
+        }));
+    }
+
+    /**
+     * Limita la cantidad máxima de caracteres permitidos a letras A-Z
+     * (incluyendo Ñ) y números del 0 al 9 en un campo de texto de JavaFX.
+     *
+     * Convierte automáticamente las letras a MAYÚSCULAS. No permite espacios ni
+     * símbolos.
+     *
+     * @param field El campo de texto (TextInputControl) al que se aplicará el
+     * límite.
+     * @param max El número máximo de caracteres permitidos.
+     */
+    public static void aplicarFormatoBasicoMayusculasSinEspacios(TextInputControl field, int max) {
+        field.setTextFormatter(new TextFormatter<>(change -> {
+
+            String nuevoTexto = change.getControlNewText();
+
+            if (nuevoTexto.length() > max) {
+                return null;
+            }
+
+            // Convertir a mayúsculas
+            String textoMayusculas = nuevoTexto.toUpperCase();
+
+            // Solo A-Z, Ñ y números 0-9
+            if (!textoMayusculas.matches("[A-Z0-9]*")) {
+                return null;
+            }
+
+            // Aplicar el texto transformado
+            change.setText(textoMayusculas.substring(
+                    change.getRangeStart(),
+                    change.getRangeStart() + change.getText().length()
+            ));
+
+            return change;
+        }));
+    }
+
+    /**
+     * Aplica un formato que permite letras del español (incluyendo ñ, acentos y
+     * ü) y números del 0 al 9 en un campo de texto de JavaFX.
+     *
+     * No permite espacios ni símbolos.
+     *
+     * @param field El campo de texto (TextInputControl) al que se aplicará el
+     * formato.
+     * @param max El número máximo de caracteres permitidos.
+     */
+    public static void aplicarAlfanumericoEspanolSinEspacios(TextInputControl field, int max) {
+        field.setTextFormatter(new TextFormatter<>(change -> {
+
+            String nuevoTexto = change.getControlNewText();
+
+            // Validar longitud máxima
+            if (nuevoTexto.length() > max) {
+                return null;
+            }
+
+            // Letras españolas + números
+            if (!nuevoTexto.matches("[A-Za-zÁÉÍÓÚáéíóúÑñÜü0-9]*")) {
+                return null;
+            }
+
+            return change;
         }));
     }
 
