@@ -145,7 +145,7 @@ public class FXMLFormularioUnidadController implements Initializable, INavegable
         int anoActual = LocalDate.now().getYear();
 
         ArrayList<Integer> anosTemp = new ArrayList<>();
-        for (int ano = anoActual + 3; ano > anoActual - 50; ano--) {
+        for (int ano = anoActual ; ano > anoActual - 50; ano--) {
             anosTemp.add(ano);
         }
 
